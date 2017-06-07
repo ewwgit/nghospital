@@ -12,9 +12,13 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
+    	'nursinghomes' => [
+    				'class' => 'app\modules\nursinghomes\nursinghomes',
+    		],
         'doctors' => [
             'class' => 'backend\modules\doctors\Module',
         ],
+    		
     ],
     'components' => [
         'request' => [
