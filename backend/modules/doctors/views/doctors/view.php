@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'address:ntext',
             'pinCode',
             'doctorMobile',
-            'doctorImage',
+            
         		[
         		'attribute'=>'doctorImage',
         		'format' => 'html',

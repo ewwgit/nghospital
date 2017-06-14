@@ -64,13 +64,13 @@ class Doctors extends \yii\db\ActiveRecord
             [['stateName', 'countryName','createdDate', 'updatedDate','createdBy', 'updatedBy','name', 'qualification', 'city', 'state',  'country',  'address', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC','userId','doctorUniqueId','username','email','password'], 'safe'],
             [[ 'name', 'city', 'stateName', 'countryName', 'APMC', 'TSMC'], 'string', 'max' => 200],
            // [['pinCode', 'doctorMobile'], 'string', 'max' => 20],
-        		[
+        		/* [
         		'username',
         		'unique',
         		'targetClass' => '\common\models\User',
         		'message' => 'User name already exists try for new',
         		'on' => 'create'
-        				],
+        				], */
         				[
         						'password',
         						'match',

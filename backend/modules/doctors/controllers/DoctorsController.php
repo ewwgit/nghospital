@@ -13,6 +13,7 @@ use yii\web\UploadedFile;
 use app\models\Countries;
 use app\models\States;
 use yii\helpers\Json;
+use backend\models\SignupForm;
 
 /**
  * DoctorsController implements the CRUD actions for Doctors model.
@@ -70,6 +71,7 @@ class DoctorsController extends Controller
     {
         $model = new Doctors();
         $usermodel = new User();
+        $singupModel = new SignupForm();
         $model->scenario = 'create';//password validation only show create  form//
         
         $model->countriesList = Countries::getCountries();
@@ -88,14 +90,14 @@ class DoctorsController extends Controller
 
         if ($model->load(Yii::$app->request->post()))
         { 
-        	
-        	$usermodel->username = $model->username;    
-        	$usermodel->email = $model->email;
-        	$usermodel->password_hash = md5($model->password);
+        	$singupModel->username = $model->username;
+        	$singupModel->email = $model->email;
+        	$singupModel->password = $model->password;
+        	$user = $singupModel->signup();
         	$model->createdDate = date('Y-m-d H:i:s');
         	$model->countryName = Countries::getCountryName($model->country);
-        	$model -> stateName = States::getStateName($model->state);
-        	$model->userId = 1;
+        	$model->stateName = States::getStateName($model->state);
+        	$model->userId = $user->id;
         	$model->doctorUniqueId = 'doctorUniqueId';
         	$model->createdBy = 1;
         	$model->doctorImage = UploadedFile::getInstance($model,'doctorImage');
@@ -110,7 +112,8 @@ class DoctorsController extends Controller
         		$model->doctorImage = 'profileimages/'.$imageName;
         	}
         	$model->save();
-        	$usermodel->save();
+        	//print_r($model->errors);exit();
+        	
             return $this->redirect(['view', 'id' => $model->doctorid]);
         } else {
             return $this->render('create', [
