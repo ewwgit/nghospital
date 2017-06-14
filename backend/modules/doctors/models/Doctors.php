@@ -90,6 +90,12 @@ class Doctors extends \yii\db\ActiveRecord
         				[['confirmpassword'],'compare','compareAttribute' => 'password'],
         				['confirmpassword', 'required', 'on' => 'create'],
         		        ['password', 'required', 'on' => 'create'],
+        		[
+        		'pinCode',
+        		'match',
+        		'pattern' => '/^[0-9\s]{4,8}$/',
+        		'message' => 'PinCode Must be between 4 and 8 numeric only.'
+        				],
         		
         ];
     }
@@ -104,6 +110,7 @@ class Doctors extends \yii\db\ActiveRecord
             'userId' => 'User ID',
             'doctorUniqueId' => 'Doctor Unique ID',
             'name' => 'Name',
+        	'confirmpassword' => 'Confirm Password',
             'qualification' => 'Qualification',
             'city' => 'City',
             'state' => 'State',
@@ -112,11 +119,11 @@ class Doctors extends \yii\db\ActiveRecord
             'countryName' => 'Country Name',
             'address' => 'Address',
             'pinCode' => 'Pin Code',
-            'doctorMobile' => 'Doctor Mobile',
-            'doctorImage' => 'Doctor Image',
+            'doctorMobile' => 'Mobile',
+            'doctorImage' => 'Image',
             'summery' => 'Summery',
-            'APMC' => 'Apmc',
-            'TSMC' => 'Tsmc',
+            'APMC' => 'APMC',
+            'TSMC' => 'TSMC',
             'createdBy' => 'Created By',
             'updatedBy' => 'Updated By',
             'createdDate' => 'Created Date',

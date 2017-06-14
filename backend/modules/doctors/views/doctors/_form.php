@@ -65,10 +65,10 @@ use kartik\depdrop\DepDrop;
             
     </div>
     <div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'address')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'address')->textarea(['rows' => 4]) ?>
 	</div>
     <div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'summery')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'summery')->textarea(['rows' => 4]) ?>
 	</div>
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'APMC')->textInput(['maxlength' => true]) ?>
