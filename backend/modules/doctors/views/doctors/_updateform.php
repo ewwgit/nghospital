@@ -73,7 +73,7 @@ use kartik\depdrop\DepDrop;
 							if($model->doctorImage)
 							{
 								
-								echo isset( $model->doctorImage)? Url::base().$model->doctorImage : '' ;
+								echo isset( $model->doctorImage)? Url::base().'/'.$model->doctorImage : '' ;
 							
 							}else {
 									 echo Url::base()."/images/user-iconnew.png" ;
