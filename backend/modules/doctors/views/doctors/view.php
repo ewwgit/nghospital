@@ -2,9 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+//**********************//
+use common\models\User;
+//**********************//
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\doctors\models\Doctors */
+/* @var $model app\modules\doctors\models\Doctors */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
@@ -24,6 +27,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+      <?php 
+    $usernamedata = User::find()->select(['username','email'])->where(['id'=>$model->doctorid])->one();
+    
+   // print_r($usernamedata);exit;?>
+   <?php if($model->doctorImage != ''){?>
+  <?php $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->doctorImage;?>
+						 		
+						 		<?php  } ?>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -31,17 +42,38 @@ $this->params['breadcrumbs'][] = $this->title;
             'doctorid',
             'userId',
             'doctorUniqueId',
+        		//**********************//
+        		
+        		[
+        		'attribute' => 'username',
+        		//	'value' => User::getUsername($model->username),
+        		'value' =>  $usernamedata['username'],
+        		],
+        		
+        		[
+        				'attribute' => 'email',
+        				//'value' => User::getUsername($model->email),
+        				'value' =>  $usernamedata['email'],
+        		],
+        		//**********************//
             'name',
             'qualification:ntext',
             'city',
-            'state',
+           // 'state',
             'stateName',
-            'country',
+          //  'country',
             'countryName',
             'address:ntext',
             'pinCode',
             'doctorMobile',
-            'doctorImage:ntext',
+            'doctorImage',
+        		[
+        		'attribute'=>'doctorImage',
+        		'format' => 'html',
+        		'value'=>Html::img($model->doctorImage ? $imgeurl : '/@web/images/user-iconnew.png',['width' => '150px','height' => '150px']),
+        		 
+        		//'htmlOptions'=>array('width'=>'40px'),
+        		],
             'summery:ntext',
             'APMC',
             'TSMC',

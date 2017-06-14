@@ -8,8 +8,11 @@ use app\modules\nursinghomes\models\NursinghomesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Countries;
+use app\models\States;
 
 use common\models\User;
+use yii\helpers\Json;
 
 /**
  * NursinghomesController implements the CRUD actions for Nursinghomes model.
@@ -66,8 +69,7 @@ class NursinghomesController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
         	 // 'model' => $model,
-        		
-        ]);
+        		        ]);
     }
 
     /**
@@ -79,19 +81,43 @@ class NursinghomesController extends Controller
     {
         $model = new Nursinghomes();
         $usermodel = new User();
-        $model->scenario = 'create';
-            
+       
+           
+        $model->scenario = 'create';//password validation only show create  form//
+          
+      
+        $model->countriesList = Countries::getCountries();
+        $model->citiesData = [];
+      
+        if($model->country != ''){
+        	
+        	$model->state=States::getCountrysByStatesView($model->country );
+        	
+        }else{
+        	$model->country = $model->country;
+        	$model->statesData =[];
+        	$model->state='';
+           	}
+                 
         if ($model->load(Yii::$app->request->post()))
         {
-        	        	
+        	 	
         	$usermodel->username = $model->username;
         	$usermodel->email = $model->email;
         	$usermodel->password_hash = md5($model->password);
         	$model->createdDate = date('Y-m-d H:i:s');
         	$model->stateName = 'stateName';
-        	$model->countryName = 'countryName';
-        	//$model->updatedBy = Yii::$app->user->userid;
+        	$model->countryName = Countries::getCountryName($model->country);
+        	//$model -> stateName = States::getStateName($model->state);
+        	//$model -> city =  Cities::getCityName($model->city);
+        	//$model->nuserId = 1;
+        	$model->nurshingUniqueId = 1;
+        	$model->country = $model->country;
+        	$model->nuserId = Yii::$app->db->getLastInsertID();
         	
+            //print_r(Yii::$app->db->getLastInsertID());exit;
+            //print_r($usermodel->getPrimaryKey());exit;
+   
         	$model->save();
         	$usermodel->save();
         	
@@ -102,6 +128,7 @@ class NursinghomesController extends Controller
             return $this->render('create', [
                 'model' => $model,
             	'usermodel' => $usermodel,
+                
             ]);
         }
     }
@@ -127,8 +154,12 @@ class NursinghomesController extends Controller
           //if ($model->load(Yii::$app->request->post())){ 
           	if (($model->load ( Yii::$app->request->post () )) && ($model->validate ())) {
           		$model->stateName = 'stateName';
-          		$model->countryName = 'countryName';
+          		$model->countryName = Countries::getCountryName($model->country);
+        	//$model -> stateName = States::getStateName($model->state);
+        	//$model -> city =  Cities::getCityName($model->city);
           		$model->updatedDate = date('Y-m-d H:i:s');
+          		$model->nuserId = Yii::$app->db->getLastInsertID();
+          		$model->nurshingUniqueId = 1;
           		$model->save();
           		
           		if(!(empty($usermodel))){
@@ -179,5 +210,32 @@ class NursinghomesController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    
+  public function actionStates()
+    {
+    
+    	$out = [];
+    	if (isset($_POST['depdrop_parents'])) {
+    		$parents = $_POST['depdrop_parents'];
+    
+    		if ($parents != null) {
+    			$country = $parents[0];
+    			$states = Countries::getStatesByCountry($country);
+    			/* $out = [
+    			 ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+    			 ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+    
+    			 ]; */
+    			echo Json::encode(['output'=>$states, 'selected'=>0]);
+    			return;
+    				
+    				
+    		}
+    	}
+    		
+    	echo Json::encode(['output'=>'', 'selected'=>'']);
+    		
+    		
     }
 }

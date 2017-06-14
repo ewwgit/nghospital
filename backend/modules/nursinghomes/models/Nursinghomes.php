@@ -32,11 +32,17 @@ class Nursinghomes extends \yii\db\ActiveRecord
      public $email;
      public $password;
      public $confirmpassword;
+     
+     public $countriesList;
+     public $statesData;
+     public $citiesData;
+     public $state;
+     public $country;
 	
 	
     /**
      * @inheritdoc
-     */
+     */ 
     public static function tableName()
     {
         return 'nursinghomes';
@@ -49,15 +55,16 @@ class Nursinghomes extends \yii\db\ActiveRecord
     {
         return [
         	['password', 'required', 'on' => 'create'],
-            [['nuserId', 'nurshingUniqueId', 'contactPerson', 'mobile', 'city', 'state',  'country', 'pinCode', 'address', 'description',
+            [[ 'contactPerson', 'mobile', 'city', 'state',  'country', 'pinCode', 'address', 'description',
             		'username','email'], 'required'],
-            [['nuserId', 'state', 'country', 'createdBy', 'updatedBy'], 'integer'],
+            [['nuserId', 'state', 'country', 'createdBy', 'updatedBy','mobile'], 'integer'],
             [['address', 'description'], 'string'],
-            [['updatedDate','createdDate','nuserId', 'nurshingUniqueId', 'contactPerson', 'mobile', 'city', 'state', 'stateName', 'country', 'countryName', 'pinCode', 'address', 'description',
+            [['countriesList','updatedDate','createdDate','nuserId', 'nurshingUniqueId', 'contactPerson', 'mobile', 'city', 'state', 'stateName', 'country', 'countryName', 'pinCode', 'address', 'description',
             		'username','email','password'], 'safe'],
            // [['nurshingUniqueId', 'mobile'], 'string', 'max' => 20],
             [['contactPerson', 'city', 'stateName', 'countryName'], 'string', 'max' => 200],
           //  [['pinCode'], 'string', 'max' => 10],
+        		
         		[
         		'username',
 				'unique',
@@ -81,7 +88,7 @@ class Nursinghomes extends \yii\db\ActiveRecord
         				,
         		
         		['email','email'],
-        		[['confirmpassword'],'compare','compareAttribute' => 'password'],
+      		[['confirmpassword'],'compare','compareAttribute' => 'password'],
         		['confirmpassword', 'required', 'on' => 'create'],
         		
         ];

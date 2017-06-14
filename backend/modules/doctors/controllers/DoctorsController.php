@@ -1,14 +1,15 @@
 <?php
 
-namespace backend\modules\doctors\controllers;
+namespace app\modules\doctors\controllers;
 
 use Yii;
-use backend\modules\doctors\models\Doctors;
-use backend\modules\doctors\models\DoctorsSearch;
+use app\modules\doctors\models\Doctors;
+use app\modules\doctors\models\DoctorsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\User;
+use yii\web\UploadedFile;
 
 /**
  * DoctorsController implements the CRUD actions for Doctors model.
@@ -65,27 +66,40 @@ class DoctorsController extends Controller
     public function actionCreate()
     {
         $model = new Doctors();
-        if ($model->load(Yii::$app->request->post())) {
+        $usermodel = new User();
+        $model->scenario = 'create';//password validation only show create  form//
+        
+
+        if ($model->load(Yii::$app->request->post()))
+        { 
         	
+        	$usermodel->username = $model->username;    
+        	$usermodel->email = $model->email;
+        	$usermodel->password_hash = md5($model->password);
         	$model->createdDate = date('Y-m-d H:i:s');
-        	$model->updatedDate = date('Y-m-d H:i:s');
-        	$model->createdBy = 'admin';
-        	$model->updatedBy = 'admin';
-        	$model->state ='1';
-        	$model->country = '1';
+        	$model->stateName = 'stateName';
+        	$model->countryName = 'countryName';
+        	$model->userId = 1;
+        	$model->doctorUniqueId = 'doctorUniqueId';
+        	$model->createdBy = 1;
+        	$model->doctorImage = UploadedFile::getInstance($model,'doctorImage');
+        	 
+        	if(!(empty($model->doctorImage)))
+        	{
+        		 
+        		$imageName = time().$model->doctorImage->name;
+        			
+        		$model->doctorImage->saveAs('profileimages/'.$imageName );
+        		 
+        		$model->doctorImage = 'profileimages/'.$imageName;
+        	}
         	$model->save();
-        	
-        	$usermodel = new User();
-        	$usermodel->username = $model->username;
-        	$usrmodel->email = $model ->email;
-        	$usermodel->password = $model->password;
         	$usermodel->save();
-        	  
             return $this->redirect(['view', 'id' => $model->doctorid]);
-        	
         } else {
             return $this->render('create', [
                 'model' => $model,
+            	'usermodel' => $usermodel,
             ]);
         }
     }
@@ -99,8 +113,44 @@ class DoctorsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        
+        $usermodel = User::find() ->where(['id' =>$id])->one();
+        
+        if (! (empty ( $usermodel ))) {
+        	$model->username = $usermodel->username;
+        	$model->email = $usermodel->email;
+        }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()))
+        {
+        	
+        	 $model->updatedDate = date('Y-m-d H:i:s');
+        	 $model->updatedBy = 1;
+        	 $model->doctorImage = UploadedFile::getInstance($model,'doctorImage');
+        	 
+        	 if(!(empty($model->doctorImage)))
+        	 {
+        	 	 
+        	 	$imageName = time().$model->doctorImage->name;
+        	 	 
+        	 	$model->doctorImage->saveAs('profileimages/'.$imageName );
+        	 	 
+        	 	$model->doctorImage = 'profileimages/'.$imageName;
+        	 }
+        	 $model->save();
+        	 
+        	 if(!(empty($usermodel))){
+        	 	$usermodel->username = $model->username;
+        	 	$usermodel->email = $model->email;
+        	 	$usermodel->save();
+        	 	 
+        	 }else {
+        	 	$usermodell->username = $model->username;
+        	 	$usermodell->email = $model->email;
+        	 	$usermodell->save();
+        	 	 
+        	 }
+        
             return $this->redirect(['view', 'id' => $model->doctorid]);
         } else {
             return $this->render('update', [

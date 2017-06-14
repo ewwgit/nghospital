@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\modules\doctors\models;
+namespace app\modules\doctors\models;
 
 use Yii;
 use common\models\User;
@@ -21,7 +21,7 @@ use common\models\User;
  * @property string $address
  * @property string $pinCode
  * @property string $doctorMobile
- * @property string $doctorImage
+ * @property resource $doctorImage
  * @property string $summery
  * @property string $APMC
  * @property string $TSMC
@@ -36,10 +36,16 @@ class Doctors extends \yii\db\ActiveRecord
      * @inheritdoc
      */
 	
-	public $username;
-	public $email;
-	public $password;
-	public $confirmpassword;
+	 public $username;
+     public $email;
+     public $password;
+     public $confirmpassword;
+     
+     public $countriesList;
+     public $statesData;
+     public $citiesData;
+     public $state;
+     public $country;
 	
     public static function tableName()
     {
@@ -52,12 +58,39 @@ class Doctors extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['userId', 'doctorUniqueId', 'name', 'qualification', 'city', 'stateName', 'countryName', 'address', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC', 'createdBy', 'updatedBy', 'createdDate', 'updatedDate'], 'required'],
+            [[ 'name', 'qualification', 'city', 'state',  'country',  'address', 'pinCode', 'doctorMobile', 'summery', 'APMC', 'TSMC','username','email'], 'required'],
             [['userId', 'state', 'country', 'createdBy', 'updatedBy'], 'integer'],
-            [['qualification', 'address', 'doctorImage', 'summery'], 'string'],
-            [['createdDate', 'updatedDate'], 'safe'],
-            [['doctorUniqueId', 'name', 'city', 'stateName', 'countryName', 'APMC', 'TSMC'], 'string', 'max' => 200],
-            [['pinCode', 'doctorMobile'], 'string', 'max' => 20],
+            [['qualification', 'address','summery'], 'string'],
+            [['stateName', 'countryName','createdDate', 'updatedDate','createdBy', 'updatedBy','name', 'qualification', 'city', 'state',  'country',  'address', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC','userId','doctorUniqueId','username','email','password'], 'safe'],
+            [[ 'name', 'city', 'stateName', 'countryName', 'APMC', 'TSMC'], 'string', 'max' => 200],
+           // [['pinCode', 'doctorMobile'], 'string', 'max' => 20],
+        		[
+        		'username',
+        		'unique',
+        		'targetClass' => '\common\models\User',
+        		'message' => 'User name already exists try for new',
+        		'on' => 'create'
+        				],
+        				[
+        						'password',
+        						'match',
+        						// char and number and special symbol
+        						'pattern' => '/^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$/',
+        						'message' => 'should contain min 6 char with atleast 1 letter and 1 number'
+        				],
+        				[
+        						'email',
+        						'match',
+        						'pattern' => '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/',
+        						'message' => 'Email can contain @ and .com characters.'
+        				]
+        				,
+        		
+        				['email','email'],
+        				[['confirmpassword'],'compare','compareAttribute' => 'password'],
+        				['confirmpassword', 'required', 'on' => 'create'],
+        		        ['password', 'required', 'on' => 'create'],
+        		
         ];
     }
 
@@ -89,5 +122,9 @@ class Doctors extends \yii\db\ActiveRecord
             'createdDate' => 'Created Date',
             'updatedDate' => 'Updated Date',
         ];
+    }
+    public function getUser()
+    {
+    	return $this->hasOne(User::className(), ['id' => 'doctorid']);
     }
 }

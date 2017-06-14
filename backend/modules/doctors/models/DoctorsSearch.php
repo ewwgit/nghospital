@@ -1,25 +1,28 @@
 <?php
 
-namespace backend\modules\doctors\models;
+namespace app\modules\doctors\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\modules\doctors\models\Doctors;
+use app\modules\doctors\models\Doctors;
 
 /**
- * DoctorsSearch represents the model behind the search form about `backend\modules\doctors\models\Doctors`.
+ * DoctorsSearch represents the model behind the search form about `app\modules\doctors\models\Doctors`.
  */
 class DoctorsSearch extends Doctors
 {
     /**
      * @inheritdoc
      */
+	public $username;
+	public $email;
+	
     public function rules()
     {
         return [
             [['doctorid', 'userId', 'state', 'country', 'createdBy', 'updatedBy'], 'integer'],
-            [['doctorUniqueId', 'name', 'qualification', 'city', 'stateName', 'countryName', 'address', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC', 'createdDate', 'updatedDate'], 'safe'],
+            [['username','email','doctorUniqueId', 'name', 'qualification', 'city', 'stateName', 'countryName', 'address', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC', 'createdDate', 'updatedDate'], 'safe'],
         ];
     }
 
@@ -47,6 +50,9 @@ class DoctorsSearch extends Doctors
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+        		'sort' => ['attributes' => ['username','email','doctorUniqueId', 'name', 'qualification', 'city', 'stateName', 'countryName', 'address', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC', 'createdDate', 'updatedDate']],
+        		
+        		
         ]);
 
         $this->load($params);
@@ -56,8 +62,10 @@ class DoctorsSearch extends Doctors
             // $query->where('0=1');
             return $dataProvider;
         }
-
+        
+        $query->joinWith('user');
         // grid filtering conditions
+        
         $query->andFilterWhere([
             'doctorid' => $this->doctorid,
             'userId' => $this->userId,
@@ -77,6 +85,7 @@ class DoctorsSearch extends Doctors
             ->andFilterWhere(['like', 'countryName', $this->countryName])
             ->andFilterWhere(['like', 'address', $this->address])
             ->andFilterWhere(['like', 'pinCode', $this->pinCode])
+            ->andFilterWhere(['like', 'user.username', $this->username])
             ->andFilterWhere(['like', 'doctorMobile', $this->doctorMobile])
             ->andFilterWhere(['like', 'doctorImage', $this->doctorImage])
             ->andFilterWhere(['like', 'summery', $this->summery])

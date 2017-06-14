@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\modules\doctors\models\DoctorsSearch */
+/* @var $searchModel app\modules\doctors\models\DoctorsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Doctors';
@@ -24,20 +24,25 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'doctorid',
-            'userId',
-            'doctorUniqueId',
+          //  'doctorid',
+          //  'userId',
+         //   'doctorUniqueId',
+        		[
+        		'label' => 'username',
+        		'attribute' => 'username',
+        		'value' => 'user.username',
+        		],
             'name',
             'qualification:ntext',
             // 'city',
             // 'state',
-            // 'stateName',
+             'stateName',
             // 'country',
-            // 'countryName',
+             'countryName',
             // 'address:ntext',
-            // 'pinCode',
-            // 'doctorMobile',
-            // 'doctorImage:ntext',
+             'pinCode',
+             'doctorMobile',
+            // 'doctorImage',
             // 'summery:ntext',
             // 'APMC',
             // 'TSMC',

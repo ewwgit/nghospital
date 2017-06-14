@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\doctors\models\Doctors */
+/* @var $model app\modules\doctors\models\Doctors */
 
 $this->title = 'Update Doctors: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
+    <?= $this->render('_updateform', [
         'model' => $model,
     ]) ?>
 

@@ -59,9 +59,9 @@ $this->params['breadcrumbs'][] = $this->title;
         		//**********************//
             'mobile',
             'city',
-            'state',
+           // 'state',
             'stateName',
-            'country',
+           // 'country',
             'countryName',
             'pinCode',
             'address:ntext',
