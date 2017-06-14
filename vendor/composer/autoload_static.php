@@ -41,6 +41,7 @@ class ComposerStaticInit63818e1034e98dff81652683aa876d42
             'kartik\\plugins\\depdrop\\' => 23,
             'kartik\\file\\' => 12,
             'kartik\\depdrop\\' => 15,
+            'kartik\\date\\' => 12,
             'kartik\\base\\' => 12,
         ),
         'd' => 
@@ -147,6 +148,10 @@ class ComposerStaticInit63818e1034e98dff81652683aa876d42
         'kartik\\depdrop\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-depdrop',
+        ),
+        'kartik\\date\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-datepicker',
         ),
         'kartik\\base\\' => 
         array (
