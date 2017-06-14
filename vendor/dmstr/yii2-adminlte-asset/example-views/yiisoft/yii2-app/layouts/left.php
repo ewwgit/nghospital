@@ -45,7 +45,7 @@
                         ],
                     ],
                 		[
-                		'label' => 'Nusing Homes',
+                		'label' => 'Nursing Homes',
                 		//'class' => 'fa fa-user-md',
                 		'icon' => 'h-square',
                 		'url' => '#',
