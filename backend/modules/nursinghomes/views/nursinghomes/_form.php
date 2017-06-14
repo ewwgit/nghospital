@@ -13,21 +13,30 @@ use kartik\depdrop\DepDrop;
 <div class="nursinghomes-form">
 
     <?php $form = ActiveForm::begin(); ?>
- 
+ 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'contactPerson')->textInput(['maxlength' => true]) ?>
-    
+    </div>
+    <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
-    
+    </div>
+    <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-    
+    </div>
+    <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
-   
+   	</div>
+   	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'confirmpassword')->passwordInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'mobile')->textInput(['maxlength' => 10]) ?>
-        
+    </div>
+	<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'mobile')->textInput(['maxlength' => 10],['clientOptions' => [
+				 'clearIncomplete' => true
+		],]) ?>
+	</div>
+    <div class="form-group col-lg-6 col-sm-12"> 
     <?= $form->field($model, 'country')->dropDownList($model->countriesList,['prompt'=>'Select Countries']);?>
-          
+    </div>
+    <div class="form-group col-lg-6 col-sm-12">
     <?=
     $form->field($model, 'state')->textInput(['maxlength' => true]) 
 //      echo $form->field($model, 'state')->widget(DepDrop::classname(),[
@@ -41,14 +50,19 @@ use kartik\depdrop\DepDrop;
     
       
  ?>  
+ 	</div>
+ 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
-   
+   	</div>
+   	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'pinCode')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'address')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-
+	</div>
+	<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'address')->textarea(['rows' => 4]) ?>
+	</div>
+	<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'description')->textarea(['rows' => 4]) ?>
+	</div>
    
 
     <div class="form-group">
