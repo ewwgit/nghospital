@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\file\FileInput;
 use yii\helpers\Url;
+use kartik\depdrop\DepDrop;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\doctors\models\Doctors */
@@ -26,13 +27,27 @@ use yii\helpers\Url;
     <?= $form->field($model, 'qualification')->textInput(['maxlength' => true]) ?>
 	</div>
 	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
+   <?= $form->field($model, 'country')->dropDownList($model->countriesList,['prompt'=>'Select Countries']);
+   
+   //  $form->field($model, 'country')->textInput() ?>
 	</div>
 	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'state')->textInput() ?>
+   <?php
+ //   $form->field($model, 'state')->textInput(['maxlength' => true]) 
+     echo $form->field($model, 'state')->widget(DepDrop::classname(),[
+                    		'data'=>$model->statesData,
+    'pluginOptions'=>[
+        'depends'=>['doctors-country'],
+        'placeholder'=>'Select States',
+        'url'=>Url::to(['/doctors/doctors/states'])
+    ]
+]);
+    
+      
+ ?>  
 	</div>
     <div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'country')->textInput() ?>
+   <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
 	</div>
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'pinCode')->textInput(['maxlength' => true]) ?>
@@ -65,6 +80,10 @@ use yii\helpers\Url;
 								      }
 								?>"
 							width="100" height="100"> </img> 
+							 <?=$form->field ( $model, 'doctorImage' )->widget ( FileInput::classname (), [ 'options' => [ 'accept' => 'image/*' ],'pluginOptions' =>[[ 'browseLabel' => 'doctorImage', 'allowedFileExtensions'=>['jpg','png','jpeg'] ]] ] )?>
+            
+            
+        
 	</div>
 	
     <div class="form-group col-lg-6 col-sm-12">

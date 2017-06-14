@@ -10,6 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\User;
 use yii\web\UploadedFile;
+use app\models\Countries;
+use app\models\States;
+use yii\helpers\Json;
 
 /**
  * DoctorsController implements the CRUD actions for Doctors model.
@@ -69,6 +72,19 @@ class DoctorsController extends Controller
         $usermodel = new User();
         $model->scenario = 'create';//password validation only show create  form//
         
+        $model->countriesList = Countries::getCountries();
+        $model->citiesData = [];
+        
+        if($model->country != ''){
+        	 
+        	$model->state=States::getCountrysByStatesView($model->country );
+        	 
+        }else{
+        	$model->country = $model->country;
+        	$model->statesData =[];
+        	$model->state='';
+        }
+        
 
         if ($model->load(Yii::$app->request->post()))
         { 
@@ -77,8 +93,8 @@ class DoctorsController extends Controller
         	$usermodel->email = $model->email;
         	$usermodel->password_hash = md5($model->password);
         	$model->createdDate = date('Y-m-d H:i:s');
-        	$model->stateName = 'stateName';
-        	$model->countryName = 'countryName';
+        	$model->countryName = Countries::getCountryName($model->country);
+        	$model -> stateName = States::getStateName($model->state);
         	$model->userId = 1;
         	$model->doctorUniqueId = 'doctorUniqueId';
         	$model->createdBy = 1;
@@ -113,6 +129,20 @@ class DoctorsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $usermodell = new User();
+        
+        $model->countriesList = Countries::getCountries();
+        $model->citiesData = [];
+        
+        if($model->country != ''){
+        
+        	$model->state=States::getCountrysByStatesView($model->country );
+        
+        }else{
+        	$model->country = $model->country;
+        	$model->statesData =[];
+        	$model->state='';
+        }
         
         $usermodel = User::find() ->where(['id' =>$id])->one();
         
@@ -126,6 +156,8 @@ class DoctorsController extends Controller
         	
         	 $model->updatedDate = date('Y-m-d H:i:s');
         	 $model->updatedBy = 1;
+        	 $model->countryName = Countries::getCountryName($model->country);
+        	 $model->stateName = States::getStateName($model->state);
         	 $model->doctorImage = UploadedFile::getInstance($model,'doctorImage');
         	 
         	 if(!(empty($model->doctorImage)))
@@ -186,5 +218,31 @@ class DoctorsController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    public function actionStates()
+    {
+    
+    	$out = [];
+    	if (isset($_POST['depdrop_parents'])) {
+    		$parents = $_POST['depdrop_parents'];
+    
+    		if ($parents != null) {
+    			$country = $parents[0];
+    			$states = Countries::getStatesByCountry($country);
+    			/* $out = [
+    			 ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+    			 ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+    
+    			]; */
+    			echo Json::encode(['output'=>$states, 'selected'=>0]);
+    			return;
+    
+    
+    		}
+    	}
+    
+    	echo Json::encode(['output'=>'', 'selected'=>'']);
+    
+    
     }
 }

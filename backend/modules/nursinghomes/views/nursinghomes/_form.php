@@ -4,6 +4,7 @@ namespace  app\modules\nursinghomes\views;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\depdrop\DepDrop;
+use yii\helpers\Url;
 //use kartik\widgets\DepDrop;
 /* @var $this yii\web\View */
 /* @var $model app\models\Nursinghomes */
@@ -23,30 +24,31 @@ use kartik\depdrop\DepDrop;
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
     </div>
     <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'mobile')->textInput(['maxlength' => 10],['clientOptions' => [
+				 'clearIncomplete' => true
+		],]) ?>
+	</div>
+    <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
    	</div>
    	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'confirmpassword')->passwordInput(['maxlength' => true]) ?>
     </div>
-	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'mobile')->textInput(['maxlength' => 10],['clientOptions' => [
-				 'clearIncomplete' => true
-		],]) ?>
-	</div>
+	
     <div class="form-group col-lg-6 col-sm-12"> 
     <?= $form->field($model, 'country')->dropDownList($model->countriesList,['prompt'=>'Select Countries']);?>
     </div>
     <div class="form-group col-lg-6 col-sm-12">
-    <?=
-    $form->field($model, 'state')->textInput(['maxlength' => true]) 
-//      echo $form->field($model, 'state')->widget(DepDrop::classname(),[
-//                     		'data'=>$model->statesData,
-//     'pluginOptions'=>[
-//         'depends'=>['nursinghomes-country'],
-//         'placeholder'=>'Select States',
-//         'url'=>Url::to(['/nursinghomes/nursinghomes/states'])
-//     ]
-// ]);
+    <?php
+ //   $form->field($model, 'state')->textInput(['maxlength' => true]) 
+     echo $form->field($model, 'state')->widget(DepDrop::classname(),[
+                    		'data'=>$model->statesData,
+    'pluginOptions'=>[
+        'depends'=>['nursinghomes-country'],
+        'placeholder'=>'Select States',
+        'url'=>Url::to(['/nursinghomes/nursinghomes/states'])
+    ]
+]);
     
       
  ?>  
