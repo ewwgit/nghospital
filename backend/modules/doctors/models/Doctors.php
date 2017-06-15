@@ -64,6 +64,26 @@ class Doctors extends \yii\db\ActiveRecord
             [['stateName', 'countryName','createdDate', 'updatedDate','createdBy', 'updatedBy','name', 'qualification', 'city', 'state',  'country',  'address', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC','userId','doctorUniqueId','username','email','password'], 'safe'],
             [[ 'name', 'city', 'stateName', 'countryName', 'APMC', 'TSMC'], 'string', 'max' => 200],
         	[['docimageupdate','status'],'safe'],
+        	['username', 'trim'],
+            ['username', 'required'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'string', 'min' => 2, 'max' => 255],
+
+            ['email', 'trim'],
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'string', 'max' => 255],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+
+            ['password', 'required'],
+            ['password', 'string', 'min' => 6],
+        		[
+        		'email',
+        		'match',
+        		'pattern' => '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/',
+        		'message' => 'Email can contain @ and .com characters.'
+        				]
+        				,
            // [['pinCode', 'doctorMobile'], 'string', 'max' => 20],
         		/* [
         		'username',
@@ -72,7 +92,7 @@ class Doctors extends \yii\db\ActiveRecord
         		'message' => 'User name already exists try for new',
         		'on' => 'create'
         				], */
-        				[
+        				/* [
         						'password',
         						'match',
         						// char and number and special symbol
@@ -87,7 +107,7 @@ class Doctors extends \yii\db\ActiveRecord
         				]
         				,
         		
-        				['email','email'],
+        				['email','email'], */
         				[['confirmpassword'],'compare','compareAttribute' => 'password'],
         				['confirmpassword', 'required', 'on' => 'create'],
         		        ['password', 'required', 'on' => 'create'],
