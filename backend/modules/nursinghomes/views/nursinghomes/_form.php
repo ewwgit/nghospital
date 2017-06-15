@@ -75,8 +75,7 @@ use yii\helpers\Url;
 
 </div>
 <style>
-.form-group {
-margin-bottom:0;
-height:80px;
+.help-block {
+    height: 5px;
 }
 </style>
