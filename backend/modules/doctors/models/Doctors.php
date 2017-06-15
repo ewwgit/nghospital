@@ -45,6 +45,7 @@ class Doctors extends \yii\db\ActiveRecord
      public $statesData;
      public $citiesData;
      public $docimageupdate;
+     public $status;
 	
     public static function tableName()
     {
@@ -62,7 +63,7 @@ class Doctors extends \yii\db\ActiveRecord
             [['qualification', 'address','summery'], 'string'],
             [['stateName', 'countryName','createdDate', 'updatedDate','createdBy', 'updatedBy','name', 'qualification', 'city', 'state',  'country',  'address', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC','userId','doctorUniqueId','username','email','password'], 'safe'],
             [[ 'name', 'city', 'stateName', 'countryName', 'APMC', 'TSMC'], 'string', 'max' => 200],
-        	[['docimageupdate'],'safe'],
+        	[['docimageupdate','status'],'safe'],
            // [['pinCode', 'doctorMobile'], 'string', 'max' => 20],
         		/* [
         		'username',

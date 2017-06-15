@@ -138,11 +138,13 @@ class DoctorsController extends Controller
         $singupModel = new SignupForm();
         
         $model->countriesList = Countries::getCountries();
+        $model->docimageupdate = $model->doctorImage;
+        $model->doctorImage = '';
         $model->citiesData = [];
         
         if($model->country != ''){
         
-        	$model->state=States::getCountrysByStatesView($model->country );
+        	$model->statesData= Countries::getStatesByCountryupdate($model->country );
         
         }else{
         	$model->country = $model->country;
@@ -155,6 +157,7 @@ class DoctorsController extends Controller
         if (! (empty ( $usermodel ))) {
         	$model->username = $usermodel->username;
         	$model->email = $usermodel->email;
+        	$model->status = $usermodel->status;
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate())
@@ -166,6 +169,9 @@ class DoctorsController extends Controller
         	 $model->countryName = Countries::getCountryName($model->country);
         	 $model->stateName = States::getStateName($model->state);
         	 $model->doctorImage = UploadedFile::getInstance($model,'doctorImage');
+        	 $usermodel->status = $model->status;
+        	 $usermodel->save();
+        	 //print_r($model->doctorImage);exit();
         	 
         	 if(!(empty($model->doctorImage)))
         	 {
@@ -176,7 +182,11 @@ class DoctorsController extends Controller
         	 	 
         	 	$model->doctorImage = 'profileimages/'.$imageName;
         	 }
+        	 else {
+        	 	$model->doctorImage = $model->docimageupdate; 
+        	 }
         	 $model->save();
+        	 //print_r($model->errors);exit();
         	 
         	
         
