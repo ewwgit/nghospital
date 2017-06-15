@@ -65,7 +65,7 @@ class DoctorsSearch extends Doctors
         
         $query->joinWith('user');
         // grid filtering conditions
-        
+       // print_r($query);exit();
         $query->andFilterWhere([
             'doctorid' => $this->doctorid,
             'userId' => $this->userId,

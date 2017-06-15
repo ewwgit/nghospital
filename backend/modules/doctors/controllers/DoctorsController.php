@@ -70,7 +70,6 @@ class DoctorsController extends Controller
     public function actionCreate()
     {
         $model = new Doctors();
-        $usermodel = new User();
         $singupModel = new SignupForm();
         $model->scenario = 'create';//password validation only show create  form//
         
@@ -88,18 +87,21 @@ class DoctorsController extends Controller
         }
         
 
-        if ($model->load(Yii::$app->request->post()))
+        if ($model->load(Yii::$app->request->post()) && $model->validate())
         { 
         	$singupModel->username = $model->username;
         	$singupModel->email = $model->email;
         	$singupModel->password = $model->password;
+        	$singupModel->role = 2;
         	$user = $singupModel->signup();
         	$model->createdDate = date('Y-m-d H:i:s');
+        	$model->updatedDate = date('Y-m-d H:i:s');
         	$model->countryName = Countries::getCountryName($model->country);
         	$model->stateName = States::getStateName($model->state);
         	$model->userId = $user->id;
         	$model->doctorUniqueId = 'doctorUniqueId';
-        	$model->createdBy = 1;
+        	$model->createdBy = Yii::$app->user->identity->id;
+        	$model->updatedBy = Yii::$app->user->identity->id;
         	$model->doctorImage = UploadedFile::getInstance($model,'doctorImage');
         	 
         	if(!(empty($model->doctorImage)))
@@ -114,11 +116,12 @@ class DoctorsController extends Controller
         	$model->save();
         	//print_r($model->errors);exit();
         	
-            return $this->redirect(['view', 'id' => $model->doctorid]);
+            //return $this->redirect(['view', 'id' => $model->doctorid]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
-            	'usermodel' => $usermodel,
+            	
             ]);
         }
     }
@@ -132,7 +135,7 @@ class DoctorsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $usermodell = new User();
+        $singupModel = new SignupForm();
         
         $model->countriesList = Countries::getCountries();
         $model->citiesData = [];
@@ -147,18 +150,19 @@ class DoctorsController extends Controller
         	$model->state='';
         }
         
-        $usermodel = User::find() ->where(['id' =>$id])->one();
+        $usermodel = User::find() ->where(['id' =>$model->userId])->one();
         
         if (! (empty ( $usermodel ))) {
         	$model->username = $usermodel->username;
         	$model->email = $usermodel->email;
         }
 
-        if ($model->load(Yii::$app->request->post()))
+        if ($model->load(Yii::$app->request->post()) && $model->validate())
         {
         	
         	 $model->updatedDate = date('Y-m-d H:i:s');
-        	 $model->updatedBy = 1;
+        	 $model->updatedBy = Yii::$app->user->identity->id;
+        	 //echo $model->country;exit();
         	 $model->countryName = Countries::getCountryName($model->country);
         	 $model->stateName = States::getStateName($model->state);
         	 $model->doctorImage = UploadedFile::getInstance($model,'doctorImage');
@@ -174,19 +178,10 @@ class DoctorsController extends Controller
         	 }
         	 $model->save();
         	 
-        	 if(!(empty($usermodel))){
-        	 	$usermodel->username = $model->username;
-        	 	$usermodel->email = $model->email;
-        	 	$usermodel->save();
-        	 	 
-        	 }else {
-        	 	$usermodell->username = $model->username;
-        	 	$usermodell->email = $model->email;
-        	 	$usermodell->save();
-        	 	 
-        	 }
+        	
         
-            return $this->redirect(['view', 'id' => $model->doctorid]);
+            //return $this->redirect(['view', 'id' => $model->doctorid]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

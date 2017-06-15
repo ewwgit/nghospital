@@ -44,8 +44,8 @@ class Doctors extends \yii\db\ActiveRecord
      public $countriesList;
      public $statesData;
      public $citiesData;
-     public $state;
-     public $country;
+     public $docimageupdate;
+     
 	
     public static function tableName()
     {
@@ -63,6 +63,7 @@ class Doctors extends \yii\db\ActiveRecord
             [['qualification', 'address','summery'], 'string'],
             [['stateName', 'countryName','createdDate', 'updatedDate','createdBy', 'updatedBy','name', 'qualification', 'city', 'state',  'country',  'address', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC','userId','doctorUniqueId','username','email','password'], 'safe'],
             [[ 'name', 'city', 'stateName', 'countryName', 'APMC', 'TSMC'], 'string', 'max' => 200],
+        	[['docimageupdate'],'safe'],
            // [['pinCode', 'doctorMobile'], 'string', 'max' => 20],
         		/* [
         		'username',
@@ -90,12 +91,6 @@ class Doctors extends \yii\db\ActiveRecord
         				[['confirmpassword'],'compare','compareAttribute' => 'password'],
         				['confirmpassword', 'required', 'on' => 'create'],
         		        ['password', 'required', 'on' => 'create'],
-        		[
-        		'pinCode',
-        		'match',
-        		'pattern' => '/^[0-9\s]{4,8}$/',
-        		'message' => 'PinCode Must be between 4 and 8 numeric only.'
-        				],
         		
         ];
     }
@@ -110,7 +105,6 @@ class Doctors extends \yii\db\ActiveRecord
             'userId' => 'User ID',
             'doctorUniqueId' => 'Doctor Unique ID',
             'name' => 'Name',
-        	'confirmpassword' => 'Confirm Password',
             'qualification' => 'Qualification',
             'city' => 'City',
             'state' => 'State',
@@ -119,11 +113,11 @@ class Doctors extends \yii\db\ActiveRecord
             'countryName' => 'Country Name',
             'address' => 'Address',
             'pinCode' => 'Pin Code',
-            'doctorMobile' => 'Mobile',
-            'doctorImage' => 'Image',
+            'doctorMobile' => 'Doctor Mobile',
+            'doctorImage' => 'Doctor Image',
             'summery' => 'Summery',
-            'APMC' => 'APMC',
-            'TSMC' => 'TSMC',
+            'APMC' => 'Apmc',
+            'TSMC' => 'Tsmc',
             'createdBy' => 'Created By',
             'updatedBy' => 'Updated By',
             'createdDate' => 'Created Date',
@@ -132,6 +126,6 @@ class Doctors extends \yii\db\ActiveRecord
     }
     public function getUser()
     {
-    	return $this->hasOne(User::className(), ['id' => 'doctorid']);
+    	return $this->hasOne(User::className(), ['id' => 'userId']);
     }
 }
