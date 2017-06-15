@@ -87,3 +87,9 @@ use kartik\depdrop\DepDrop;
     <?php ActiveForm::end(); ?>
 
 </div>
+<style>
+.form-group {
+margin-bottom:0;
+height:80px;
+}
+</style>

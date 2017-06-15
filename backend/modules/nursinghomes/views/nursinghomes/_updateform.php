@@ -64,3 +64,9 @@ use yii\helpers\Url;
     <?php ActiveForm::end(); ?>
 
 </div>
+<style>
+.form-group {
+margin-bottom:0;
+height:80px;
+}
+</style>
