@@ -15,9 +15,13 @@ return [
     	'nursinghomes' => [
     				'class' => 'app\modules\nursinghomes\nursinghomes',
     		],
-    		'doctors' => [
+    	'doctors' => [
     				'class' => 'app\modules\doctors\doctors',
     		],
+    	'specialities' => [
+    				'class' => 'app\modules\specialities\specialities',
+    		],
+    		
     ],
     'components' => [
         'request' => [
