@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use kartik\file\FileInput;
 use yii\helpers\Url;
 use kartik\depdrop\DepDrop;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\doctors\models\Doctors */
@@ -24,8 +25,16 @@ use kartik\depdrop\DepDrop;
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 	</div>
 	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'qualification')->textInput(['maxlength' => true]) ?>
-	</div>
+    <?php echo $form->field($model, 'qualification')->widget(Select2::classname(), [
+    /* 'data' => [], */
+    'maintainOrder' => true,
+    'options' => ['placeholder' => 'Enter Qualification', 'multiple' => true],
+    'pluginOptions' => [
+        'tags' => true,
+        'maximumInputLength' => 10
+    ],
+]); ?>
+    </div>
 	<div class="form-group col-lg-6 col-sm-12">
    <?= $form->field($model, 'country')->dropDownList($model->countriesList,['prompt'=>'Select Countries']);
    

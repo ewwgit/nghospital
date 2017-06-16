@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
         		'value' => 'user.username',
         		],
             'name',
-            'qualification:ntext',
+            //'qualification:ntext',
             // 'city',
             // 'state',
              'stateName',

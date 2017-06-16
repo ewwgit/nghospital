@@ -14,6 +14,7 @@ use app\models\Countries;
 use app\models\States;
 use yii\helpers\Json;
 use backend\models\SignupForm;
+use app\modules\doctors\models\DoctorsQualification;
 
 /**
  * DoctorsController implements the CRUD actions for Doctors model.
@@ -114,6 +115,15 @@ class DoctorsController extends Controller
         		$model->doctorImage = 'profileimages/'.$imageName;
         	}
         	$model->save();
+        	for($i=0; $i<count($model->qualification);$i++)
+        	{
+        		$dqualification = new DoctorsQualification();
+        		$dqualification->docId = $model->userId;
+        		$dqualification->qualification = $model->qualification[$i];
+        		$dqualification->save();
+        	
+        	
+        	}
         	//print_r($model->errors);exit();
         	
             //return $this->redirect(['view', 'id' => $model->doctorid]);
@@ -136,6 +146,16 @@ class DoctorsController extends Controller
     {
         $model = $this->findModel($id);
         $singupModel = new SignupForm();
+        $doctorQulification = DoctorsQualification::find()->where( ['docId' => $model->userId])->all();
+        $dqary = array();
+        if(!empty($doctorQulification))
+        {
+        	foreach ($doctorQulification as $dq)
+        	{
+        		$dqary[] = $dq->qualification;
+        	}
+        }
+        $model->qualification = $dqary;
         
         $model->countriesList = Countries::getCountries();
         $model->docimageupdate = $model->doctorImage;
@@ -186,7 +206,21 @@ class DoctorsController extends Controller
         	 	$model->doctorImage = $model->docimageupdate; 
         	 }
         	 $model->save();
-        	 //print_r($model->errors);exit();
+        	 
+        	 DoctorsQualification::deleteAll( ['docId' => $model->userId]);
+        	 if(!empty($model->qualification))
+        	 {
+        	 	for($i=0; $i<count($model->qualification);$i++)
+        	 	{
+        	 		$dqualification = new DoctorsQualification();
+        	 		$dqualification->docId = $model->userId;
+        	 		$dqualification->qualification = $model->qualification[$i];
+        	 		$dqualification->save();
+        	 		
+        	 		
+        	 	}
+        	 }
+        	 //print_r($model->qualification);exit();
         	 
         	
         

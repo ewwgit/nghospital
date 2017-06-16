@@ -46,6 +46,7 @@ class Doctors extends \yii\db\ActiveRecord
      public $citiesData;
      public $docimageupdate;
      public $status;
+     public $qualification;
 	
     public static function tableName()
     {
@@ -60,23 +61,23 @@ class Doctors extends \yii\db\ActiveRecord
         return [
             [[ 'name', 'qualification', 'city', 'state',  'country',  'address', 'pinCode', 'doctorMobile', 'summery', 'APMC', 'TSMC','username','email'], 'required'],
             [['userId', 'state', 'country', 'createdBy', 'updatedBy'], 'integer'],
-            [['qualification', 'address','summery'], 'string'],
+            [[ 'address','summery'], 'string'],
             [['stateName', 'countryName','createdDate', 'updatedDate','createdBy', 'updatedBy','name', 'qualification', 'city', 'state',  'country',  'address', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC','userId','doctorUniqueId','username','email','password'], 'safe'],
             [[ 'name', 'city', 'stateName', 'countryName', 'APMC', 'TSMC'], 'string', 'max' => 200],
         	[['docimageupdate','status'],'safe'],
         	['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.','on' =>'create'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.','on' =>'create'],
 
-            ['password', 'required'],
-            ['password', 'string', 'min' => 6],
+            ['password', 'required' ,'on' =>'create'],
+            ['password', 'string', 'min' => 6 ,'on' =>'create'],
         		[
         		'email',
         		'match',
@@ -108,7 +109,7 @@ class Doctors extends \yii\db\ActiveRecord
         				,
         		
         				['email','email'], */
-        				[['confirmpassword'],'compare','compareAttribute' => 'password'],
+        				[['confirmpassword'],'compare','compareAttribute' => 'password' ,'on' =>'create'],
         				['confirmpassword', 'required', 'on' => 'create'],
         		        ['password', 'required', 'on' => 'create'],
         		[
