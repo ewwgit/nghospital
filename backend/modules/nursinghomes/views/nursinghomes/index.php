@@ -7,13 +7,14 @@ use common\models\User;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\NursinghomesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
-//$this->title = 'Nursinghomes';
+?>
+<h1 style="margin-left:14px;"><?php $this->title = 'Nursings';?></h1>
+<?php 
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="nursinghomes-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php //Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -31,10 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'nursingId',
+           // 'nursingId',
         		//'username',
         		[
-        		'label' => 'username',
+        		'label' => 'User Name',
         		'attribute' => 'username',
         		'value' => 'user.username',
         		],
@@ -43,11 +44,23 @@ $this->params['breadcrumbs'][] = $this->title;
            // 'nurshingUniqueId',
             'contactPerson',
             'mobile',
+        	//	'countryName',
+        		        		[
+        		        		'attribute'=>'countryName',
+        		        		'label' => 'Country',
+        			
+        		        		],
+        	//	'stateName',
+        		[
+        		'attribute'=>'stateName',
+        		'label' => 'State',
+        		 
+        		],
              'city',
             // 'state',
-             'stateName',
+          
             // 'country',
-             'countryName',
+            
              'pinCode',
             // 'address:ntext',
             // 'description:ntext',

@@ -13,6 +13,7 @@ use app\models\States;
 
 use common\models\User;
 use yii\helpers\Json;
+use backend\models\SignupForm;
 
 /**
  * NursinghomesController implements the CRUD actions for Nursinghomes model.
@@ -80,7 +81,7 @@ class NursinghomesController extends Controller
     public function actionCreate()
     {
         $model = new Nursinghomes();
-        $usermodel = new User();
+        $singupModel = new SignupForm();
        
            
         $model->scenario = 'create';//password validation only show create  form//
@@ -99,48 +100,30 @@ class NursinghomesController extends Controller
         	$model->state='';
            	}
                  
-        if ($model->load(Yii::$app->request->post()))
+        if ($model->load(Yii::$app->request->post()) && $model->validate())
         {
-        	 	
-        	$usermodel->username = $model->username;
-        	$usermodel->email = $model->email;
-        	$usermodel->password_hash = md5($model->password);
-        	//$usermodel->save();
-        	$id=Yii::$app->db->getLastInsertID();
-        //	print_r($id);exit;
-//         	        	if($usermodel->save()){
-//         	        		echo  $usermodel->id;
-//         	        		//$model->nuserId = $usermodel->id;
-        	
-//         	        		
-//         	        	}
-        	$model->createdDate = date('Y-m-d H:i:s');
+        	$singupModel->username = $model->username;
+        	$singupModel->email = $model->email;
+        	$singupModel->password = $model->password;
+        	$singupModel->role = 3;
+        	//$usermodel->password_hash = md5($model->password);
+        	$user = $singupModel->signup();
+        	//$id=Yii::$app->db->getLastInsertID();
+            $model->createdDate = date('Y-m-d H:i:s');
         	$model->countryName = Countries::getCountryName($model->country);
-        	$model -> stateName = States::getStateName($model->state);
-        	//$model -> city =  Cities::getCityName($model->city);
-        	//$model->nuserId = 1;
+        	$model->stateName = States::getStateName($model->state);
+            $model->nuserId = $user->id;
         	$model->nurshingUniqueId = 1;
-        	$model->country = $model->country;
-        	$model->nuserId = 1;
+        	//$model->createdBy = Yii::$app->user->identity->id;
+        	$model->createdBy = 1;
+           	$model->save();
         	
-
-        	
-        	
-            //print_r(Yii::$app->db->getLastInsertID());exit;
-            //print_r($usermodel->getPrimaryKey());exit;
-   
-        	$model->save();
-        	$usermodel->save();
-        	
-        	
-        	
-        
            return $this->redirect(['view', 'id' => $model->nursingId]);
                  
         } else {
             return $this->render('create', [
                 'model' => $model,
-            	'usermodel' => $usermodel,
+            	
                 
             ]);
         }
@@ -155,7 +138,8 @@ class NursinghomesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $usermodell = new User();
+        $singupModel = new SignupForm();
+        
         
         $model->countriesList = Countries::getCountries();
         $model->citiesData = [];

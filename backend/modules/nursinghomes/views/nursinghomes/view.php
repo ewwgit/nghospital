@@ -10,12 +10,13 @@ use common\models\User;
 /* @var $model app\models\Nursinghomes */
 
 //$this->title = $model->nursingId;
-$this->params['breadcrumbs'][] = ['label' => 'Nursinghomes', 'url' => ['index']];
+$this->title = ' Nursings View';
+$this->params['breadcrumbs'][] = ['label' => 'Nursings', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="nursinghomes-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php // Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->nursingId], ['class' => 'btn btn-primary']) ?>
@@ -40,14 +41,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
         		
             'nursingId',
-            'nuserId',
-            'nurshingUniqueId',
+           // 'nuserId',
+//         		[
+//         		'attribute'=>'nuserId',
+//         		'label' => 'UserName',
+        		       		
+//         		],
+           // 'nurshingUniqueId',
             'contactPerson',
         	//**********************//
-        		
         		[
         		'attribute' => 'username',
-        	//	'value' => User::getUsername($model->username),
+        	    //'value' => User::getUsername($model->username),
         		'value' =>  $usernamedata['username'],
         		],
         		
@@ -58,8 +63,15 @@ $this->params['breadcrumbs'][] = $this->title;
         		],
         		//**********************//
             'mobile',
-        		'countryName',
-        		'stateName',
+        		[
+        		        		'attribute'=>'countryName',
+        		        		'label' => 'Country',
+        			   		],
+        		[
+        		'attribute'=>'stateName',
+        		'label' => 'State',
+        		 
+        		],
             'city',
            // 'state',
           

@@ -65,13 +65,14 @@ class Nursinghomes extends \yii\db\ActiveRecord
             [['contactPerson', 'city', 'stateName', 'countryName'], 'string', 'max' => 200],
           //  [['pinCode'], 'string', 'max' => 10],
         		
-        		[
-        		'username',
-				'unique',
-				'targetClass' => '\common\models\User',
-				'message' => 'User name already exists try for new',
-        		'on' => 'create'
-        				],
+//         		[
+//         		'username',
+// 				'unique',
+// 				'targetClass' => '\common\models\User',
+// 				'message' => 'User name already exists try for new',
+//         		'on' => 'create'
+//         				],
+        		['username', 'string', 'min' => 2, 'max' => 255],
         		[
         		'password',
         		'match',
@@ -86,10 +87,17 @@ class Nursinghomes extends \yii\db\ActiveRecord
         		'message' => 'Email can contain @ and .com characters.'
         				]
         				,
+        		['email', 'string', 'max' => 255],
         		
         		['email','email'],
       		[['confirmpassword'],'compare','compareAttribute' => 'password'],
         		['confirmpassword', 'required', 'on' => 'create'],
+        		[
+        		'pinCode',
+        		'match',
+        		'pattern' => '/^[0-9\s]{4,8}$/',
+        		'message' => 'PinCode Must be between 4 and 8 numeric only.'
+        				],
         		
         ];
     }
@@ -104,6 +112,9 @@ class Nursinghomes extends \yii\db\ActiveRecord
             'nuserId' => 'Nuser ID',
             'nurshingUniqueId' => 'Nurshing Unique ID',
             'contactPerson' => 'Contact Person',
+        		'username' => 'User Name',
+        		'password' => 'Password',
+        		'confirmpassword' => 'Confirm Password',
             'mobile' => 'Mobile',
             'city' => 'City',
             'state' => 'State',
