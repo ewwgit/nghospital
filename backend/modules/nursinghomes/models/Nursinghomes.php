@@ -32,12 +32,15 @@ class Nursinghomes extends \yii\db\ActiveRecord
      public $email;
      public $password;
      public $confirmpassword;
+     public $status;
+     
      
      public $countriesList;
      public $statesData;
      public $citiesData;
      public $state;
      public $country;
+   
 	
 	
     /**
@@ -51,19 +54,18 @@ class Nursinghomes extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
+public function rules()
     {
         return [
         	['password', 'required', 'on' => 'create'],
             [[ 'contactPerson', 'mobile', 'city', 'state',  'country', 'pinCode', 'address', 'description',
-            		'username','email'], 'required'],
+            		'username','email','landline'], 'required'],
             [['nuserId', 'state', 'country', 'createdBy', 'updatedBy','mobile'], 'integer'],
             [['address', 'description'], 'string'],
             [['countriesList','updatedDate','createdDate','nuserId', 'nurshingUniqueId', 'contactPerson', 'mobile', 'city', 'state', 'stateName', 'country', 'countryName', 'pinCode', 'address', 'description',
-            		'username','email','password'], 'safe'],
-           // [['nurshingUniqueId', 'mobile'], 'string', 'max' => 20],
+            		'username','email','password','landline'], 'safe'],
             [['contactPerson', 'city', 'stateName', 'countryName'], 'string', 'max' => 200],
-          //  [['pinCode'], 'string', 'max' => 10],
+          
         		
 //         		[
 //         		'username',
@@ -76,7 +78,6 @@ class Nursinghomes extends \yii\db\ActiveRecord
         		[
         		'password',
         		'match',
-        		// char and number and special symbol
         		'pattern' => '/^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$/',
         		'message' => 'should contain min 6 char with atleast 1 letter and 1 number'
         				],
@@ -90,7 +91,7 @@ class Nursinghomes extends \yii\db\ActiveRecord
         		['email', 'string', 'max' => 255],
         		
         		['email','email'],
-      		[['confirmpassword'],'compare','compareAttribute' => 'password'],
+      		    [['confirmpassword'],'compare','compareAttribute' => 'password'],
         		['confirmpassword', 'required', 'on' => 'create'],
         		[
         		'pinCode',

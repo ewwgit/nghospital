@@ -17,13 +17,16 @@ use yii\helpers\Url;
     <?= $form->field($model, 'contactPerson')->textInput(['maxlength' => true]) ?>
     </div>
     <div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'username')->textInput(['maxlength' => true,'readOnly' => true]) ?>
     </div>
     <div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'email')->textInput(['maxlength' => true,'readOnly' => true]) ?>
    	</div>
    	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'mobile')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'mobile')->textInput(['maxlength' => 10]) ?>
+	</div>
+	 <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'landline')->textInput(['maxlength' => 10]) ?>
 	</div>
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'country')->dropDownList($model->countriesList,['prompt'=>'Select Countries']);
@@ -57,6 +60,12 @@ use yii\helpers\Url;
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'description')->textarea(['rows' => 4]) ?>
    	</div>
+   	
+   	<div class="form-group col-lg-6 col-sm-12">
+    <?=$form->field($model, 'status')->dropDownList(['10' => 'Active','0' => 'In-Active'],['prompt' => 'Status'],
+											['itemOptions' => ['class' =>'radio-inline']])?>
+	</div>    
+   
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

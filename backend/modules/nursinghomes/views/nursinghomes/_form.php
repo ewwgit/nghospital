@@ -28,6 +28,9 @@ use yii\helpers\Url;
 				 'clearIncomplete' => true
 		],]) ?>
 	</div>
+	 <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'landline')->textInput(['maxlength' => 10]) ?>
+	</div>
     <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
    	</div>
@@ -65,9 +68,13 @@ use yii\helpers\Url;
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'description')->textarea(['rows' => 4]) ?>
 	</div>
-   
+		<div class="form-group col-lg-6 col-sm-12">
+    <?=$form->field($model, 'status')->dropDownList(['10' => 'Active','0' => 'In-Active'],['prompt' => 'Status'],
+											['itemOptions' => ['class' =>'radio-inline']])?>
+	</div>   
+	   
 
-    <div class="form-group">
+    <div class="form-group ">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
@@ -76,6 +83,6 @@ use yii\helpers\Url;
 </div>
 <style>
 .help-block {
-    height: 5px;
+  height: 5px; 
 }
 </style>

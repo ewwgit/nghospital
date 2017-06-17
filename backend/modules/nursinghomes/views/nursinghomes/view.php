@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
     <?php 
-    $usernamedata = User::find()->select(['username','email'])->where(['id'=>$model->nursingId])->one();
+    $usernamedata = User::find()->select(['username','email'])->where(['id'=>$model->nuserId])->one();
     
    // print_r($usernamedata);exit;?>
     

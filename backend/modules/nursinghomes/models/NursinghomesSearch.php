@@ -17,13 +17,15 @@ class NursinghomesSearch extends Nursinghomes
      */
 	public $username;
 	public $email;
+	public $role;
+	
 	
     public function rules()
     {
         return [
-            [['nursingId', 'nuserId', 'state', 'country', 'createdBy', 'updatedBy'], 'integer'],
+            [['nursingId', 'nuserId', 'state', 'country', 'createdBy', 'updatedBy','role'], 'integer'],
             [['username','email','nurshingUniqueId', 'contactPerson', 'mobile', 'city', 'stateName', 'countryName', 'pinCode', 'address', 'description',
-            		'createdDate', 'updatedDate'
+            		'createdDate', 'updatedDate','role'
             		
             ], 'safe'],
         ];
@@ -45,11 +47,14 @@ class NursinghomesSearch extends Nursinghomes
      *
      * @return ActiveDataProvider
      */
+   
+    	
+    	
     public function search($params)
     {
         $query = Nursinghomes::find();
-
-        // add conditions that should always apply here
+        
+     
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -64,6 +69,7 @@ class NursinghomesSearch extends Nursinghomes
             // $query->where('0=1');
             return $dataProvider;
         }
+        
         
         $query->joinWith('user');
 

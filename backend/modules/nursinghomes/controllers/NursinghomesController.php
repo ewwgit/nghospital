@@ -1,7 +1,6 @@
 <?php
 namespace app\modules\nursinghomes\controllers;
 
-
 use Yii;
 use app\modules\nursinghomes\models\Nursinghomes;
 use app\modules\nursinghomes\models\NursinghomesSearch;
@@ -41,13 +40,16 @@ class NursinghomesController extends Controller
      */
     public function actionIndex()
     {
+    	
         $searchModel = new NursinghomesSearch();
+//         $params = Yii::$app->request->queryParams;
+//         $params['role'] = 3;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
+        		         ]);
     }
 
     /**
@@ -78,7 +80,7 @@ class NursinghomesController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+ public function actionCreate()
     {
         $model = new Nursinghomes();
         $singupModel = new SignupForm();
@@ -106,9 +108,8 @@ class NursinghomesController extends Controller
         	$singupModel->email = $model->email;
         	$singupModel->password = $model->password;
         	$singupModel->role = 3;
-        	//$usermodel->password_hash = md5($model->password);
         	$user = $singupModel->signup();
-        	//$id=Yii::$app->db->getLastInsertID();
+        	
             $model->createdDate = date('Y-m-d H:i:s');
         	$model->countryName = Countries::getCountryName($model->country);
         	$model->stateName = States::getStateName($model->state);
@@ -118,7 +119,8 @@ class NursinghomesController extends Controller
         	$model->createdBy = 1;
            	$model->save();
         	
-           return $this->redirect(['view', 'id' => $model->nursingId]);
+          // return $this->redirect(['view', 'id' => $model->nuserId]);
+           return $this->redirect(['index']);
                  
         } else {
             return $this->render('create', [
@@ -139,8 +141,7 @@ class NursinghomesController extends Controller
     {
         $model = $this->findModel($id);
         $singupModel = new SignupForm();
-        
-        
+   
         $model->countriesList = Countries::getCountries();
         $model->citiesData = [];
         
@@ -154,38 +155,27 @@ class NursinghomesController extends Controller
         	$model->state='';
         }
     
-       $usermodel = User::find() ->where(['id' =>$id])->one();
-        
+       $usermodel = User::find() ->where(['id' =>$model->nuserId])->one();
         if (! (empty ( $usermodel ))) {
             $model->username = $usermodel->username;
         	$model->email = $usermodel->email;
-        	        }
-      
-          //if ($model->load(Yii::$app->request->post())){ 
-          	if (($model->load ( Yii::$app->request->post () )) && ($model->validate ())) {
-          			$model->countryName = Countries::getCountryName($model->country);
-        	        $model -> stateName = States::getStateName($model->state);
-        	//$model -> city =  Cities::getCityName($model->city);
-          		$model->updatedDate = date('Y-m-d H:i:s');
-          		$model->nuserId = Yii::$app->db->getLastInsertID();
-          		$model->nurshingUniqueId = 1;
-          		$model->save();
-          		
-          		if(!(empty($usermodel))){
-          			$usermodel->username = $model->username;
-          			$usermodel->email = $model->email;
-          			$usermodel->save();
-          			
-          		}else {
-          			$usermodell->username = $model->username;
-          			$usermodell->email = $model->email;
-          			$usermodell->save();
-          			
-          		}
-          	
-            return $this->redirect(['view', 'id' => $model->nursingId]);
+        	$model->status = $usermodel->status;
+        	}
+        	        	
+        if (($model->load ( Yii::$app->request->post () )) && ($model->validate ())) {
+          	$model->countryName = Countries::getCountryName($model->country);
+        	$model->stateName = States::getStateName($model->state);
+        	$model->updatedDate = date('Y-m-d H:i:s');
+        	$model->updatedBy = 1;
+        	$usermodel->status = $model->status;
+        	$usermodel->save();
+            $model->nurshingUniqueId = 'nurshingUniqueId';
+            $model->save();
+          	        
+           // return $this->redirect(['view', 'id' => $model->nursingId]);
+          	  return $this->redirect(['index']);
         } else {
-            return $this->render('update', [
+              return $this->render('update', [
                 'model' => $model,
 
             ]);
