@@ -65,7 +65,9 @@ class SpecialitiesController extends Controller
     {
         $model = new Specialities();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+        	$model->createdDate =  date("Y-m-d H:i:s");
+        	$model->save();
             return $this->redirect(['view', 'id' => $model->spId]);
         } else {
             return $this->render('create', [
@@ -84,7 +86,9 @@ class SpecialitiesController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+        	$model->updatedDate =  date("Y-m-d H:i:s");
+        	$model->save();
             return $this->redirect(['view', 'id' => $model->spId]);
         } else {
             return $this->render('update', [

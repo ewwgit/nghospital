@@ -24,12 +24,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'updatedBy')->textInput() ?>
 	</div>
 	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'createdDate')->textInput() ?>
-	</div>
-	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'updatedDate')->textInput() ?>
-	</div>
-	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'description')->textarea(['rows' => 4]) ?>
 	</div>
 	<div class="form-group col-lg-6 col-sm-12">

@@ -45,6 +45,17 @@
                         ],
                     ],
                 		[
+                		'label' => 'Speicialities',
+                		//'class' => 'fa fa-user-md',
+                		'icon' => 'id-badge',
+                		'url' => '#',
+                		'items' => [
+                				['label' => 'Create', 'icon' => 'circle-o', 'url' => ['/specialities/specialities/create'],],
+                				['label' => 'View', 'icon' => 'circle-o', 'url' => ['/specialities/specialities'],],
+                		
+                		],
+                		],
+                		[
                 		'label' => 'Nursing Homes',
                 		//'class' => 'fa fa-user-md',
                 		'icon' => 'h-square',
