@@ -59,10 +59,10 @@ class Doctors extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'name', 'qualification', 'city', 'state',  'country',  'address', 'pinCode', 'doctorMobile', 'summery', 'APMC', 'TSMC','username','email'], 'required'],
+            [[ 'name', 'qualification', 'city', 'state',  'country',  'address', 'permanentAddress', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC','username','email'], 'required'],
             [['userId', 'state', 'country', 'createdBy', 'updatedBy'], 'integer'],
-            [[ 'address','summery'], 'string'],
-            [['stateName', 'countryName','createdDate', 'updatedDate','createdBy', 'updatedBy','name', 'qualification', 'city', 'state',  'country',  'address', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC','userId','doctorUniqueId','username','email','password'], 'safe'],
+            [[ 'address','summery','permanentAddress'], 'string'],
+            [['stateName', 'countryName','createdDate', 'updatedDate','createdBy', 'updatedBy','name', 'qualification', 'city', 'state',  'country',  'address', 'permanentAddress', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC','userId','doctorUniqueId','username','email','password'], 'safe'],
             [[ 'name', 'city', 'stateName', 'countryName', 'APMC', 'TSMC'], 'string', 'max' => 200],
         	[['docimageupdate','status'],'safe'],
         	['username', 'trim'],
@@ -118,6 +118,7 @@ class Doctors extends \yii\db\ActiveRecord
         		'pattern' => '/^[0-9\s]{4,8}$/',
         		'message' => 'PinCode Must be between 4 and 8 numeric only.'
         				],
+        		['doctorMobile','integer'],
         		
         ];
     }
@@ -139,7 +140,8 @@ class Doctors extends \yii\db\ActiveRecord
             'stateName' => 'State Name',
             'country' => 'Country',
             'countryName' => 'Country Name',
-            'address' => 'Address',
+            'address' => 'Present Address',
+        	'permanentAddress' => 'Permanent Address',
             'pinCode' => 'Pin Code',
             'doctorMobile' => 'Mobile',
             'doctorImage' => 'Image',
