@@ -77,8 +77,8 @@ use kartik\select2\Select2;
     <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'address')->textarea(['rows' => 4]) ?>
 	</div>
-    <div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'summery')->textarea(['rows' => 4]) ?>
+	<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'permanentAddress')->textarea(['rows' => 4]) ?>
 	</div>
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'APMC')->textInput(['maxlength' => true]) ?>
@@ -90,7 +90,9 @@ use kartik\select2\Select2;
     <?=$form->field($model, 'status')->dropDownList(['10' => 'Active','0' => 'In-Active'],['prompt' => 'Status'],
 											['itemOptions' => ['class' =>'radio-inline']])?>
 	</div>  
-	
+	<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'summery')->textarea(['rows' => 4]) ?>
+	</div>
 	<div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

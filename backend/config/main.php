@@ -21,6 +21,9 @@ return [
     	'specialities' => [
     				'class' => 'app\modules\specialities\specialities',
     		],
+    	'qualifications' => [
+    				'class' => 'app\modules\qualifications\qualifications',
+    		],
     		
     ],
     'components' => [

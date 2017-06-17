@@ -37,6 +37,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+        		[
+        		'attribute'=>'doctorImage',
+        		'format' => 'html',
+        		'value'=>Html::img($model->doctorImage ? $imgeurl : '/@web/images/user-iconnew.png',['width' => '150px','height' => '150px']),
+        		 
+        		//'htmlOptions'=>array('width'=>'40px'),
+        		],
             'doctorid',
             'userId',
             'doctorUniqueId',
@@ -66,14 +73,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'address:ntext',
             'pinCode',
             'doctorMobile',
-            
-        		[
-        		'attribute'=>'doctorImage',
-        		'format' => 'html',
-        		'value'=>Html::img($model->doctorImage ? $imgeurl : '/@web/images/user-iconnew.png',['width' => '150px','height' => '150px']),
-        		 
-        		//'htmlOptions'=>array('width'=>'40px'),
-        		],
             'summery:ntext',
             'APMC',
             'TSMC',

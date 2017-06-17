@@ -45,6 +45,17 @@
                         ],
                     ],
                 		[
+                		'label' => 'Qualifications',
+                		//'class' => 'fa fa-user-md',
+                		'icon' => 'sun-o',
+                		'url' => '#',
+                		'items' => [
+                				['label' => 'Create', 'icon' => 'circle-o', 'url' => ['/qualifications/qualifications/create'],],
+                				['label' => 'View', 'icon' => 'circle-o', 'url' => ['/qualifications/qualifications'],],
+                		
+                		],
+                		],
+                		[
                 		'label' => 'Speicialities',
                 		//'class' => 'fa fa-user-md',
                 		'icon' => 'id-badge',
