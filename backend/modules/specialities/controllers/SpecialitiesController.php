@@ -67,6 +67,7 @@ class SpecialitiesController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
         	$model->createdDate =  date("Y-m-d H:i:s");
+        	$model->updatedDate = date('Y-m-d H:i:s');
         	$model->save();
             return $this->redirect(['view', 'id' => $model->spId]);
         } else {

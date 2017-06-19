@@ -66,8 +66,10 @@ class QualificationsController extends Controller
         $model = new Qualifications();
 
         if ($model->load(Yii::$app->request->post())) {
-        	$model->createdDate =  date("Y-m-d H:i:s");
-        	$model->save();
+        	$model->createdDate = date('Y-m-d H:i:s');
+        	$model->updatedDate = date('Y-m-d H:i:s');
+        	$model->createdBy = 1;
+           	$model->save();
             return $this->redirect(['view', 'id' => $model->qlid]);
         } else {
             return $this->render('create', [
@@ -87,7 +89,7 @@ class QualificationsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-        	$model->updatedDate =  date("Y-m-d H:i:s");
+        	$model->updatedDate = date('Y-m-d H:i:s');
         	$model->save();
             return $this->redirect(['view', 'id' => $model->qlid]);
         } else {
