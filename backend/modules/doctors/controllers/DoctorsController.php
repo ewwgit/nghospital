@@ -15,6 +15,7 @@ use app\models\States;
 use yii\helpers\Json;
 use backend\models\SignupForm;
 use app\modules\doctors\models\DoctorsQualification;
+use app\modules\qualifications\models\Qualifications;
 
 /**
  * DoctorsController implements the CRUD actions for Doctors model.
@@ -87,7 +88,39 @@ class DoctorsController extends Controller
         	$model->state='';
         }
         
-
+       
+       //$qualificationData = Qualifications::find()->select('qualification')->asArray()->where(['status' => 'Active'])->all();
+       //$model ->allquali = $qualificationData;
+       //print_r($model ->allquali);exit();
+       
+       
+       
+       $qualificationData = Qualifications::find()
+       ->select('qualification')->where(['status' => 'Active'])
+       ->all();
+        
+       $qualiInfo = array();
+       if(!empty($qualificationData))
+       {
+       	foreach ($qualificationData as $qualinew)
+       	{
+       		//echo rtrim($skillnew->skills,",");
+       		$aryconvertquali = explode(",",rtrim($qualinew->qualification,","));
+       		for($m=0; $m < count($aryconvertquali); $m++)
+       		{
+       			$qualiInfo["$aryconvertquali[$m]"] = $aryconvertquali[$m];
+       		}
+       	}
+       }
+       else {
+       	$qualiInfo =[''];
+       }
+       $model ->allQuali = $qualiInfo;
+       
+       
+       
+       
+        
         if ($model->load(Yii::$app->request->post()) && $model->validate())
         { 
         	$singupModel->username = $model->username;
@@ -171,6 +204,29 @@ class DoctorsController extends Controller
         	$model->statesData =[];
         	$model->state='';
         }
+        
+        
+        $qualificationData = Qualifications::find()
+        ->select('qualification')->where(['status' => 'Active'])
+        ->all();
+        
+        $qualiInfo = array();
+        if(!empty($qualificationData))
+        {
+        	foreach ($qualificationData as $qualinew)
+        	{
+        		//echo rtrim($skillnew->skills,",");
+        		$aryconvertquali = explode(",",rtrim($qualinew->qualification,","));
+        		for($m=0; $m < count($aryconvertquali); $m++)
+        		{
+        			$qualiInfo["$aryconvertquali[$m]"] = $aryconvertquali[$m];
+        		}
+        	}
+        }
+        else {
+        	$qualiInfo =[''];
+        }
+        $model ->allQuali = $qualiInfo;
         
         $usermodel = User::find() ->where(['id' =>$model->userId])->one();
         

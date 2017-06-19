@@ -34,9 +34,9 @@ use kartik\select2\Select2;
 	</div>
 	<div class="form-group col-lg-6 col-sm-12">
     <?php echo $form->field($model, 'qualification')->widget(Select2::classname(), [
-    'data' => [],
+    'data' => $model ->allQuali,
     'maintainOrder' => true,
-    'options' => ['placeholder' => 'Enter Qualification', 'multiple' => true],
+    'options' => ['placeholder' => 'Select Qualification', 'multiple' => true],
     'pluginOptions' => [
         'tags' => true,
         'maximumInputLength' => 10

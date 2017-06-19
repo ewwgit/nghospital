@@ -47,6 +47,7 @@ class Doctors extends \yii\db\ActiveRecord
      public $docimageupdate;
      public $status;
      public $qualification;
+     public $allQuali;
 	
     public static function tableName()
     {
