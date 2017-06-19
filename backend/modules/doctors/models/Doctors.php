@@ -59,7 +59,7 @@ class Doctors extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'name', 'qualification', 'city', 'state',  'country',  'address', 'permanentAddress', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC','username','email'], 'required'],
+            [[ 'name', 'qualification', 'city', 'state',  'country',  'address', 'permanentAddress', 'pinCode', 'doctorMobile',  'summery', 'APMC', 'TSMC','username','email'], 'required'],
             [['userId', 'state', 'country', 'createdBy', 'updatedBy'], 'integer'],
             [[ 'address','summery','permanentAddress'], 'string'],
             [['stateName', 'countryName','createdDate', 'updatedDate','createdBy', 'updatedBy','name', 'qualification', 'city', 'state',  'country',  'address', 'permanentAddress', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC','userId','doctorUniqueId','username','email','password'], 'safe'],
@@ -67,14 +67,14 @@ class Doctors extends \yii\db\ActiveRecord
         	[['docimageupdate','status'],'safe'],
         	['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.','on' =>'create'],
+            //['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.','on' =>'create'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.','on' =>'create'],
+           // ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.','on' =>'create'],
 
             ['password', 'required' ,'on' =>'create'],
             ['password', 'string', 'min' => 6 ,'on' =>'create'],
