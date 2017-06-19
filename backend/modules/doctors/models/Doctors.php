@@ -119,6 +119,7 @@ class Doctors extends \yii\db\ActiveRecord
         		'message' => 'PinCode Must be between 4 and 8 numeric only.'
         				],
         		['doctorMobile','integer'],
+        		['doctorImage','file','skipOnEmpty' => false],
         		
         ];
     }
