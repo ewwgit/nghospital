@@ -12,7 +12,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="qualifications-view">
 
-
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->qlid], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->qlid], [

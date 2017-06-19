@@ -12,7 +12,6 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="qualifications-update">
 
-
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
