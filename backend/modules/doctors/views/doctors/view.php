@@ -71,6 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
           //  'country',
           
             'address:ntext',
+        	'permanentAddress:ntext',
             'pinCode',
             'doctorMobile',
             'summery:ntext',
