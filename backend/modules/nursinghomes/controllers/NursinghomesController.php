@@ -84,11 +84,8 @@ class NursinghomesController extends Controller
     {
         $model = new Nursinghomes();
         $singupModel = new SignupForm();
-       
-           
-        $model->scenario = 'create';//password validation only show create  form//
-          
-      
+        $model->scenario = 'create';
+               
         $model->countriesList = Countries::getCountries();
         $model->citiesData = [];
       
@@ -114,7 +111,8 @@ class NursinghomesController extends Controller
         	$model->countryName = Countries::getCountryName($model->country);
         	$model->stateName = States::getStateName($model->state);
             $model->nuserId = $user->id;
-        	$model->nurshingUniqueId = 1;
+        	//$model->nurshingUniqueId = 1;
+        	$model->nurshingUniqueId = 'nurshingUniqueId';
         	//$model->createdBy = Yii::$app->user->identity->id;
         	$model->createdBy = 1;
            	$model->save();

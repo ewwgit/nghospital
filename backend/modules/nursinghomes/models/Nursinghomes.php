@@ -60,7 +60,7 @@ public function rules()
         	['password', 'required', 'on' => 'create'],
             [[ 'contactPerson', 'mobile', 'city', 'state',  'country', 'pinCode', 'address', 'description',
             		'username','email','landline'], 'required'],
-            [['nuserId', 'state', 'country', 'createdBy', 'updatedBy','mobile'], 'integer'],
+            [['nuserId', 'state', 'country', 'createdBy', 'updatedBy','mobile','landline'], 'integer'],
             [['address', 'description'], 'string'],
             [['countriesList','updatedDate','createdDate','nuserId', 'nurshingUniqueId', 'contactPerson', 'mobile', 'city', 'state', 'stateName', 'country', 'countryName', 'pinCode', 'address', 'description',
             		'username','email','password','landline'], 'safe'],
