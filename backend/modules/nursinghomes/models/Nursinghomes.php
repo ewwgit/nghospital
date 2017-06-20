@@ -74,12 +74,18 @@ public function rules()
 //         				],
 
         		['username', 'string', 'min' => 2, 'max' => 255],
+        		[
+        		'mobile',
+        		'match',
+        		'pattern'=>'/^[0-9]{10}$/',
+        		'message' => 'should contain  max 10  number',
+        		],
         		
         		[
         		'landline',
         		'match',
         		'pattern'=>'/^[0-9]{8,10}$/',
-        		'message' => 'should contain min 8 max 10  number'
+        		'message' => 'should contain min 8 max 10  number',
         		],
 
         		['password',
