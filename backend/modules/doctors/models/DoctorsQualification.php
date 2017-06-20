@@ -29,7 +29,7 @@ class DoctorsQualification extends \yii\db\ActiveRecord
         return [
             [['docId', 'qualification'], 'required'],
             [['docId'], 'integer'],
-            [['qualification'], 'string', 'max' => 200],
+            //[['qualification'], 'string', 'max' => 200],
         ];
     }
 

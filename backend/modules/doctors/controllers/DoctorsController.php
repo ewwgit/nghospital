@@ -181,29 +181,33 @@ class DoctorsController extends Controller
         	$model->save();
         	for($i=0; $i<count($model->qualification);$i++)
         	{
+        		$qulificationInfo = Qualifications::find()->select(['qlid'])->where(['qualification' => $model->qualification[$i]])->one();
+        		if(!empty($qulificationInfo))
+        		{
         		$dqualification = new DoctorsQualification();
         		$dqualification->docId = $model->userId;
-        		$dqualification->qualification = $model->qualification[$i];
+        		$dqualification->qualification = $qulificationInfo->qlid;
         		$dqualification->save();
+        		}
         	
         	
         	}
         	
         	
-        	for($k=0; $k<count($model->specialities);$k++)
-        	{
-        		$specid = Specialities::find()->select('spId')->where(['specialityName' =>$model->specialities[$k]])->asArray()->one();
-        		
-        	  for($i=0; $i<count($specid);$i++)
-        	  {
-        		$dspeciality = new DoctorsSpecialities();
-        		$dspeciality->rdoctorId = $model->userId;
-        		$dspeciality->rspId =$specid[$i];		
-        		$dspeciality->save();
-        		 
-        		 
-        	  }
-        	}
+             for($k=0; $k<count($model->specialities);$k++)
+        	 {
+        	 	$specid = Specialities::find()->select('spId')->where(['specialityName' =>$model->specialities[$k]])->asArray()->one();
+        	 	if(!empty($specid))
+        	 	{
+        	 		$dspeciality = new DoctorsSpecialities();
+        	 		$dspeciality->rdoctorId = $model->userId;
+        	 		$dspeciality->rspId =$specid['spId'];
+        	 		$dspeciality->save();
+        	 	}
+        	 		 
+        	 		 
+        	 	
+        	 }
         	
         	
         	
@@ -340,13 +344,34 @@ class DoctorsController extends Controller
         	 {
         	 	for($i=0; $i<count($model->qualification);$i++)
         	 	{
-        	 		$dqualification = new DoctorsQualification();
-        	 		$dqualification->docId = $model->userId;
-        	 		$dqualification->qualification = $model->qualification[$i];
-        	 		$dqualification->save();
+        	 	$qulificationInfo = Qualifications::find()->select(['qlid'])->where(['qualification' => $model->qualification[$i]])->one();
+        		if(!empty($qulificationInfo))
+        		{
+        		$dqualification = new DoctorsQualification();
+        		$dqualification->docId = $model->userId;
+        		$dqualification->qualification = $qulificationInfo->qlid;
+        		$dqualification->save();
+        		}
         	 		
         	 		
         	 	}
+        	 }
+        	 
+        	 
+        	 DoctorsSpecialities::deleteAll( ['rdoctorId' => $model->userId]);
+        	 for($k=0; $k<count($model->specialities);$k++)
+        	 {
+        	 	$specid = Specialities::find()->select('spId')->where(['specialityName' =>$model->specialities[$k]])->asArray()->one();
+        	 	if(!empty($specid))
+        	 	{
+        	 		$dspeciality = new DoctorsSpecialities();
+        	 		$dspeciality->rdoctorId = $model->userId;
+        	 		$dspeciality->rspId =$specid['spId'];
+        	 		$dspeciality->save();
+        	 	}
+        	 		 
+        	 		 
+        	 	
         	 }
         	 //print_r($model->qualification);exit();
         	 
