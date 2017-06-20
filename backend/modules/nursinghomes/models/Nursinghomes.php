@@ -38,8 +38,7 @@ class Nursinghomes extends \yii\db\ActiveRecord
      public $countriesList;
      public $statesData;
      public $citiesData;
-     public $state;
-     public $country;
+     
    
 	
 	

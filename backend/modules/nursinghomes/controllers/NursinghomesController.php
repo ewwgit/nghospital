@@ -110,12 +110,14 @@ class NursinghomesController extends Controller
 //         	print_r($model->country);
 //         	print_r($model->state);exit;
             $model->createdDate = date('Y-m-d H:i:s');
+            $model->updatedDate = date('Y-m-d H:i:s');
         	$model->countryName = Countries::getCountryName($model->country);
         	$model->stateName = States::getStateName($model->state);
             $model->nuserId = $user->id;
         	//$model->nurshingUniqueId = 1;
         	$model->nurshingUniqueId = 'nurshingUniqueId';
         	$model->createdBy = Yii::$app->user->identity->id;
+        	$model->updatedBy = Yii::$app->user->identity->id;
         	$model->save();
         	//print_r($model);exit;
         	
