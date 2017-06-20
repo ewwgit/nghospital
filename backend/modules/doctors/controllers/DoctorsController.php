@@ -16,6 +16,8 @@ use yii\helpers\Json;
 use backend\models\SignupForm;
 use app\modules\doctors\models\DoctorsQualification;
 use app\modules\qualifications\models\Qualifications;
+use app\modules\doctors\models\DoctorsSpecialities;
+use app\modules\specialities\models\Specialities;
 
 /**
  * DoctorsController implements the CRUD actions for Doctors model.
@@ -115,7 +117,36 @@ class DoctorsController extends Controller
        else {
        	$qualiInfo =[''];
        }
+       
        $model ->allQuali = $qualiInfo;
+       //print_r($qualiInfo);exit();
+       
+       
+       
+       $specialityData = Specialities::find()
+       ->select('specialityName')->where(['status' => 'Active'])
+       ->all();
+       
+       $speciInfo = array();
+       if(!empty($specialityData))
+       {
+       	foreach ($specialityData as $specinew)
+       	{
+       		//echo rtrim($skillnew->skills,",");
+       		$aryconvertspeci = explode(",",rtrim($specinew->specialityName,","));
+       		for($m=0; $m < count($aryconvertspeci); $m++)
+       		{
+       			$speciInfo["$aryconvertspeci[$m]"] = $aryconvertspeci[$m];
+       		}
+       	}
+       }
+       else {
+       	$speciInfo =[''];
+       }
+       $model ->allSpeci = $speciInfo;
+       
+       
+       
        
        
        
@@ -157,7 +188,24 @@ class DoctorsController extends Controller
         	
         	
         	}
-        	//print_r($model->errors);exit();
+        	
+        	
+        	for($k=0; $k<count($model->specialities);$k++)
+        	{
+        		$specid = Specialities::find()->select('spId')->where(['specialityName' =>$model->specialities[$k]])->asArray()->one();
+        		
+        	  for($i=0; $i<count($specid);$i++)
+        	  {
+        		$dspeciality = new DoctorsSpecialities();
+        		$dspeciality->rdoctorId = $model->userId;
+        		$dspeciality->rspId =$specid[$i];		
+        		$dspeciality->save();
+        		 
+        		 
+        	  }
+        	}
+        	
+        	
         	
             //return $this->redirect(['view', 'id' => $model->doctorid]);
             return $this->redirect(['index']);
@@ -227,6 +275,30 @@ class DoctorsController extends Controller
         	$qualiInfo =[''];
         }
         $model ->allQuali = $qualiInfo;
+        
+        
+        $specialityData = Specialities::find()
+        ->select('specialityName')->where(['status' => 'Active'])
+        ->all();
+         
+        $speciInfo = array();
+        if(!empty($specialityData))
+        {
+        	foreach ($specialityData as $specinew)
+        	{
+        		//echo rtrim($skillnew->skills,",");
+        		$aryconvertspeci = explode(",",rtrim($specinew->specialityName,","));
+        		for($m=0; $m < count($aryconvertspeci); $m++)
+        		{
+        			$speciInfo["$aryconvertspeci[$m]"] = $aryconvertspeci[$m];
+        		}
+        	}
+        }
+        else {
+        	$speciInfo =[''];
+        }
+        $model ->allSpeci = $speciInfo;
+        
         
         $usermodel = User::find() ->where(['id' =>$model->userId])->one();
         

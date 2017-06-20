@@ -48,6 +48,9 @@ class Doctors extends \yii\db\ActiveRecord
      public $status;
      public $qualification;
      public $allQuali;
+     public $specialities;
+     public $allSpeci;
+     
 	
     public static function tableName()
     {
@@ -60,7 +63,7 @@ class Doctors extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'name', 'qualification', 'city', 'state',  'country',  'address', 'permanentAddress', 'pinCode', 'doctorMobile',  'summery', 'APMC', 'TSMC','username','email'], 'required'],
+            [[ 'name', 'qualification','specialities', 'city', 'state',  'country',  'address', 'permanentAddress', 'pinCode', 'doctorMobile',  'summery', 'APMC', 'TSMC','username','email'], 'required'],
             [['userId', 'state', 'country', 'createdBy', 'updatedBy'], 'integer'],
             [[ 'address','summery','permanentAddress'], 'string'],
             [['stateName', 'countryName','createdDate', 'updatedDate','createdBy', 'updatedBy','name', 'qualification', 'city', 'state',  'country',  'address', 'permanentAddress', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC','userId','doctorUniqueId','username','email','password'], 'safe'],
@@ -137,6 +140,7 @@ class Doctors extends \yii\db\ActiveRecord
             'name' => 'Name',
         	'confirmpassword' => 'Confirm Password',
             'qualification' => 'Qualification',
+        	'specialities' => 'Specialities',	
             'city' => 'City',
             'state' => 'State',
             'stateName' => 'State Name',
