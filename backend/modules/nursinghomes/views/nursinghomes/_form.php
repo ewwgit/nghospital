@@ -24,7 +24,7 @@ use yii\helpers\Url;
     <?= $form->field($model, 'mobile')->textInput(['maxlength' => 10],['clientOptions' => [ 'clearIncomplete' => true],]) ?>
 	</div>
 	 <div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'landline')->textInput(['maxlength' => 10]) ?>
+    <?= $form->field($model, 'landline')->textInput(['maxlength' => true ]) ?>
 	</div>
 	 <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
