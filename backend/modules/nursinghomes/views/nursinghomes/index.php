@@ -8,7 +8,7 @@ use common\models\User;
 /* @var $searchModel app\models\NursinghomesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 ?>
-<h1 ><?php $this->title = 'Nursings';?></h1>
+<h1 ><?php $this->title = 'Nursing Homes';?></h1>
 <?php 
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -44,8 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
         	[
         		'attribute'=>'countryName',
         		 'label' => 'Country',
-        			
-        		],
+        			],
         	//	'stateName',
         		[
         		'attribute'=>'stateName',

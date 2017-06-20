@@ -65,8 +65,7 @@ public function rules()
             [['countriesList','updatedDate','createdDate','nuserId', 'nurshingUniqueId', 'contactPerson', 'mobile', 'city', 'state', 'stateName', 'country', 'countryName', 'pinCode', 'address', 'description',
             		'username','email','password','landline'], 'safe'],
             [['contactPerson', 'city', 'stateName', 'countryName'], 'string', 'max' => 200],
-          
-        		
+                 		
 //         		[
 //         		'username',
 // 				'unique',

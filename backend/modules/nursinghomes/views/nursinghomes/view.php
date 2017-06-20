@@ -10,8 +10,8 @@ use common\models\User;
 /* @var $model app\models\Nursinghomes */
 
 //$this->title = $model->nursingId;
-$this->title = ' Nursings View';
-$this->params['breadcrumbs'][] = ['label' => 'Nursings', 'url' => ['index']];
+$this->title = ' Nursing Homes View';
+$this->params['breadcrumbs'][] = ['label' => 'Nursing Homes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="nursinghomes-view">
@@ -62,7 +62,8 @@ $this->params['breadcrumbs'][] = $this->title;
         		'value' =>  $usernamedata['email'],
         		],
         		//**********************//
-            'mobile',
+                'mobile',
+        		'landline',
         		[
         		        		'attribute'=>'countryName',
         		        		'label' => 'Country',

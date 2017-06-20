@@ -85,6 +85,7 @@ class NursinghomesController extends Controller
         $model = new Nursinghomes();
         $singupModel = new SignupForm();
         $model->scenario = 'create';
+       // print_r( Yii::$app->user->identity->id);exit;
                
         $model->countriesList = Countries::getCountries();
         $model->citiesData = [];
@@ -106,16 +107,17 @@ class NursinghomesController extends Controller
         	$singupModel->password = $model->password;
         	$singupModel->role = 3;
         	$user = $singupModel->signup();
-        	
+//         	print_r($model->country);
+//         	print_r($model->state);exit;
             $model->createdDate = date('Y-m-d H:i:s');
         	$model->countryName = Countries::getCountryName($model->country);
         	$model->stateName = States::getStateName($model->state);
             $model->nuserId = $user->id;
         	//$model->nurshingUniqueId = 1;
         	$model->nurshingUniqueId = 'nurshingUniqueId';
-        	//$model->createdBy = Yii::$app->user->identity->id;
-        	$model->createdBy = 1;
-           	$model->save();
+        	$model->createdBy = Yii::$app->user->identity->id;
+        	$model->save();
+        	//print_r($model);exit;
         	
           // return $this->redirect(['view', 'id' => $model->nuserId]);
            return $this->redirect(['index']);
@@ -143,15 +145,19 @@ class NursinghomesController extends Controller
         $model->countriesList = Countries::getCountries();
         $model->citiesData = [];
         
-        if($model->country != ''){
-        	 
-        	$model->state=States::getCountrysByStatesView($model->country );
-        	 
+    //  print_r($model->country);exit;
+        
+      
+     if($model->country != ''){
+        
+        	$model->statesData= Countries::getStatesByCountryupdate($model->country );
+        
         }else{
         	$model->country = $model->country;
         	$model->statesData =[];
         	$model->state='';
         }
+   
     
        $usermodel = User::find() ->where(['id' =>$model->nuserId])->one();
         if (! (empty ( $usermodel ))) {
@@ -164,7 +170,7 @@ class NursinghomesController extends Controller
           	$model->countryName = Countries::getCountryName($model->country);
         	$model->stateName = States::getStateName($model->state);
         	$model->updatedDate = date('Y-m-d H:i:s');
-        	$model->updatedBy = 1;
+            $model->updatedBy = Yii::$app->user->identity->id;
         	$usermodel->status = $model->status;
         	$usermodel->save();
             $model->nurshingUniqueId = 'nurshingUniqueId';
@@ -175,7 +181,7 @@ class NursinghomesController extends Controller
         } else {
               return $this->render('update', [
                 'model' => $model,
-
+              	
             ]);
         }
     }

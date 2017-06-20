@@ -20,23 +20,24 @@ use yii\helpers\Url;
     <?= $form->field($model, 'username')->textInput(['maxlength' => true,'readOnly' => true]) ?>
     </div>
     <div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true,'readOnly' => true]) ?>
-   	</div>
-   	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'mobile')->textInput(['maxlength' => 10]) ?>
 	</div>
-	 <div class="form-group col-lg-6 col-sm-12">
+	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'landline')->textInput(['maxlength' => 10]) ?>
 	</div>
+     <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'email')->textInput(['maxlength' => true,'readOnly' => true]) ?>
+   	</div>
+   	<div class="form-group col-lg-6 col-sm-12">   
+    <?= $form->field($model, 'pinCode')->textInput(['maxlength' => true]) ?>
+	</div>
+    
 	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'country')->dropDownList($model->countriesList,['prompt'=>'Select Countries']);
-   
-   //  $form->field($model, 'country')->textInput() ?>
+    <?= $form->field($model, 'country')->dropDownList($model->countriesList,['prompt'=>'Select Countries']);?>
 	</div>
 	<div class="form-group col-lg-6 col-sm-12">
     <?php
- //   $form->field($model, 'state')->textInput(['maxlength' => true]) 
-     echo $form->field($model, 'state')->widget(DepDrop::classname(),[
+      echo $form->field($model, 'state')->widget(DepDrop::classname(),[
                     		'data'=>$model->statesData,
     'pluginOptions'=>[
         'depends'=>['nursinghomes-country'],
@@ -44,22 +45,19 @@ use yii\helpers\Url;
         'url'=>Url::to(['/nursinghomes/nursinghomes/states'])
     ]
 ]);
-    
-      
+  
  ?>  
    	</div>
    	<div class="form-group col-lg-6 col-sm-12">
    <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
 	</div>
-	<div class="form-group col-lg-6 col-sm-12">   
-    <?= $form->field($model, 'pinCode')->textInput(['maxlength' => true]) ?>
-	</div>
-	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'address')->textarea(['rows' => 4]) ?>
-	</div>
-	<div class="form-group col-lg-6 col-sm-12">
+		<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'description')->textarea(['rows' => 4]) ?>
    	</div>
+	<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'address')->textarea(['rows' => 3]) ?>
+	</div>
+
    	
    	<div class="form-group col-lg-6 col-sm-12">
     <?=$form->field($model, 'status')->dropDownList(['10' => 'Active','0' => 'In-Active'],['prompt' => 'Status'],

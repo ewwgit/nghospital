@@ -45,7 +45,7 @@ class Qualifications extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'qlid' => 'Qlid',
+            'qlid' => 'Qualification Id',
             'qualification' => 'Qualification',
             'status' => 'Status',
             'createdBy' => 'Created By',

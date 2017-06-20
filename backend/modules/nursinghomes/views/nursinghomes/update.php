@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $model app\models\Nursinghomes */
 
 //$this->title = 'Update Nursings: ' . $model->nursingId;
-$this->title = 'Update Nursings';
-$this->params['breadcrumbs'][] = ['label' => 'Nursings', 'url' => ['index']];
+$this->title = 'Update Nursing Homes';
+$this->params['breadcrumbs'][] = ['label' => 'Nursing Homes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->nuserId, 'url' => ['view', 'id' => $model->nursingId]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
