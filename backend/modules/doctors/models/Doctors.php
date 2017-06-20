@@ -89,6 +89,13 @@ class Doctors extends \yii\db\ActiveRecord
         		'message' => 'Email can contain @ and .com characters.'
         				]
         				,
+        		
+        		
+        		['username',
+        		'match', 'not' => true, 'pattern' => '/[^a-zA-Z0-9]/',
+        		'message' => 'Invalid username pattern.',
+        		],
+ 
            // [['pinCode', 'doctorMobile'], 'string', 'max' => 20],
         		/* [
         		'username',
@@ -123,6 +130,11 @@ class Doctors extends \yii\db\ActiveRecord
         		'message' => 'PinCode Must be between 4 and 8 numeric only.'
         				],
         		['doctorMobile','integer'],
+        		['doctorMobile',
+        				'match',
+        				'pattern' => '/^[0-9]{10}$/',
+        				'message' => 'mobile number must contain exactly 10 numbers.',
+        		]
         		//['doctorImage','file','skipOnEmpty' => false],
         		
         ];
