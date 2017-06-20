@@ -72,13 +72,21 @@ public function rules()
 // 				'message' => 'User name already exists try for new',
 //         		'on' => 'create'
 //         				],
+
         		['username', 'string', 'min' => 2, 'max' => 255],
+        		
         		[
-        		'password',
+        		'landline',
         		'match',
-        		'pattern' => '/^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$/',
-        		'message' => 'should contain min 6 char with atleast 1 letter and 1 number'
-        				],
+        		'pattern'=>'/^[0-9]{8,10}$/',
+        		'message' => 'should contain min 8 max 10  number'
+        		],
+
+        		['password',
+        		'match', 'not' => true, 'pattern' => '/[^a-zA-Z0-9]/',
+        		'message' => 'password Must be alphabates and numerics only.',
+        		],
+        		
         		[
         		'email',
         		'match',
