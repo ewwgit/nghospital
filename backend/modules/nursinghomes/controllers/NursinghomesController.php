@@ -102,6 +102,17 @@ class NursinghomesController extends Controller
                  
         if ($model->load(Yii::$app->request->post()) && $model->validate())
         {
+        	$presentDate = date('Y-m-d');
+        	$nursinghomescount = Nursinghomes::find()->where("createdDate LIKE '$presentDate%'")->count();
+        	/* echo $nursinghomescount;
+        	exit(); */
+        	$addnewid = $nursinghomescount+1;
+        	$uniqonlyId = str_pad($addnewid, 5, '0', STR_PAD_LEFT);
+        	$dateInfo = date_parse(date('Y-m-d H:i:s'));
+        	$monthval = str_pad($dateInfo['month'], 2, '0', STR_PAD_LEFT);
+        	$dayval = str_pad($dateInfo['day'], 2, '0', STR_PAD_LEFT);
+        	$overallUniqueId = $uniqonlyId.'NGH'.$dayval.$monthval.$dateInfo['year'];
+        	//echo $uniqonlyId.'NGH'.$dayval.$monthval.$dateInfo['year'];exit();
         	$singupModel->username = $model->username;
         	$singupModel->email = $model->email;
         	$singupModel->password = $model->password;
@@ -115,9 +126,10 @@ class NursinghomesController extends Controller
         	$model->stateName = States::getStateName($model->state);
             $model->nuserId = $user->id;
         	//$model->nurshingUniqueId = 1;
-        	$model->nurshingUniqueId = 'nurshingUniqueId';
+        	
         	$model->createdBy = Yii::$app->user->identity->id;
-        	$model->updatedBy = Yii::$app->user->identity->id;
+        	$model->updatedBy = Yii::$app->user->identity->id;        	
+        	$model->nurshingUniqueId = $overallUniqueId;
         	$model->save();
         	//print_r($model);exit;
         	
@@ -175,7 +187,6 @@ class NursinghomesController extends Controller
             $model->updatedBy = Yii::$app->user->identity->id;
         	$usermodel->status = $model->status;
         	$usermodel->save();
-            $model->nurshingUniqueId = 'nurshingUniqueId';
             $model->save();
           	        
            // return $this->redirect(['view', 'id' => $model->nursingId]);

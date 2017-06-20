@@ -131,6 +131,6 @@ public function rules()
     }
     public function getUser()
     {
-    	return $this->hasOne(User::className(), ['id' => 'nursingId']);
+    	return $this->hasOne(User::className(), ['id' => 'nuserId']);
     }
 }
