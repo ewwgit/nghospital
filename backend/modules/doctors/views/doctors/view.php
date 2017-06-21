@@ -14,16 +14,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="doctors-view">
-<p>
-        <?= Html::a('Update', ['update', 'id' => $model->doctorid], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->doctorid], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
 <div class="container">
     <div class="row">      
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" style="margin-left:0px; padding-left: 0px;">			   
@@ -77,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
 								
 								<div class="right">City</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->countryName; ?></div>
+								<div class="right-second"><?= $model->city; ?></div>
 								
 								<div class="right">State Name</div>								
 								<div class="right-content">:</div>
