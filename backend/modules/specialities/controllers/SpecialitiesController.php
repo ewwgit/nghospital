@@ -68,6 +68,8 @@ class SpecialitiesController extends Controller
         if ($model->load(Yii::$app->request->post())) {
         	$model->createdDate =  date("Y-m-d H:i:s");
         	$model->updatedDate = date('Y-m-d H:i:s');
+        	$model->createdBy = Yii::$app->user->identity->id;
+        	$model->updatedBy = Yii::$app->user->identity->id;
         	$model->save();
             return $this->redirect(['view', 'id' => $model->spId]);
         } else {
@@ -89,6 +91,8 @@ class SpecialitiesController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
         	$model->updatedDate =  date("Y-m-d H:i:s");
+        	$model->createdBy = Yii::$app->user->identity->id;
+        	$model->updatedBy = Yii::$app->user->identity->id;
         	$model->save();
             return $this->redirect(['view', 'id' => $model->spId]);
         } else {

@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\modules\specialities\models\Specialities */
 
-$this->title = $model->spId;
+$this->title = $model->specialityName;
 $this->params['breadcrumbs'][] = ['label' => 'Specialities', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

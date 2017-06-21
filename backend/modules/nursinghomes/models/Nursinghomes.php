@@ -72,6 +72,10 @@ public function rules()
 // 				'message' => 'User name already exists try for new',
 //         		'on' => 'create'
 //         				],
+        		['username',
+        		'match', 'not' => true, 'pattern' => '/[^a-zA-Z0-9]/',
+        		'message' => ' username spacess are not allowed.',
+        		],
 
         		['username', 'string', 'min' => 2, 'max' => 255],
         		[

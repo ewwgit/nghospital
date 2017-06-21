@@ -17,12 +17,7 @@ use yii\widgets\ActiveForm;
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'specialityCode')->textInput(['maxlength' => true]) ?>
 	</div>
-	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'createdBy')->textInput() ?>
-	</div>
-	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'updatedBy')->textInput() ?>
-	</div>
+	
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'description')->textarea(['rows' => 4]) ?>
 	</div>

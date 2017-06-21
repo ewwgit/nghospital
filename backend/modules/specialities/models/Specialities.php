@@ -48,7 +48,7 @@ class Specialities extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'spId' => 'Sp ID',
+            'spId' => 'Speciality ID',
             'specialityName' => 'Speciality Name',
             'specialityCode' => 'Speciality Code',
             'description' => 'Description',
