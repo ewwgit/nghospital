@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\modules\qualifications\models\Qualifications */
 
-$this->title = $model->qlid;
+$this->title = $model->qualification;
 $this->params['breadcrumbs'][] = ['label' => 'Qualifications', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

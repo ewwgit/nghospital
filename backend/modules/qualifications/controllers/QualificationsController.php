@@ -66,9 +66,10 @@ class QualificationsController extends Controller
         $model = new Qualifications();
 
         if ($model->load(Yii::$app->request->post())) {
-        	$model->createdDate = date('Y-m-d H:i:s');
+        	$model->createdDate =  date("Y-m-d H:i:s");
         	$model->updatedDate = date('Y-m-d H:i:s');
-        	$model->createdBy = 1;
+        	$model->createdBy = Yii::$app->user->identity->id;
+        	$model->updatedBy = Yii::$app->user->identity->id;
            	$model->save();
             return $this->redirect(['view', 'id' => $model->qlid]);
         } else {
