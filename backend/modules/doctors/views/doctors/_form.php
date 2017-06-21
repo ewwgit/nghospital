@@ -67,7 +67,7 @@ use kartik\select2\Select2;
     <?= $form->field($model, 'pinCode')->textInput(['maxlength' => true]) ?>
     </div>
 	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'doctorMobile')->textInput(['maxlength' => 10]) ?>
+    <?= $form->field($model, 'doctorMobile')->textInput(['maxlength' => true]) ?>
 	</div>
 	<div class="form-group col-lg-6 col-sm-12">
       <?=$form->field ( $model, 'doctorImage' )->widget ( FileInput::classname (),
@@ -100,7 +100,7 @@ use kartik\select2\Select2;
     'options' => ['placeholder' => 'Select Speciality', 'multiple' => true],
     'pluginOptions' => [
         'tags' => true,
-        'maximumInputLength' => 10
+        'maximumInputLength' => 100,
     ],
 ]); ?>
     </div> 
