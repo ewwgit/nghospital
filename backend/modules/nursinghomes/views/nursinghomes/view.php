@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php 
     $usernamedata = User::find()->select(['username','email'])->where(['id'=>$model->nuserId])->one();
     
-   // print_r($usernamedata);exit;?>
+ //  print_r(Yii::$app->user->identity->username);exit;?>
     
     
 
@@ -81,8 +81,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'pinCode',
             'address:ntext',
             'description:ntext',
-            'createdBy',
-            'updatedBy',
+        		[
+        		'attribute' => 'createdBy',
+        		'value' => Yii::$app->user->identity->username,
+        		],
+        		[
+        		'attribute' => 'updatedBy',
+        		'value' => Yii::$app->user->identity->username,
+        		],
+         
             'createdDate',
             'updatedDate',
         ],

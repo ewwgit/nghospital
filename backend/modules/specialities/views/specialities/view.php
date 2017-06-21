@@ -32,8 +32,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'specialityCode',
             'description:ntext',
             'status',
-            'createdBy',
-            'updatedBy',
+               [
+        		'attribute' => 'createdBy',
+        		'value' => Yii::$app->user->identity->username,
+        		],
+        		[
+        		'attribute' => 'updatedBy',
+        		'value' => Yii::$app->user->identity->username,
+        		],
             'createdDate',
             'updatedDate',
         ],

@@ -26,8 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
            // 'qlid',
             'qualification',
             'status',
-            'createdBy',
-            'updatedBy',
+          //  'createdBy',
+          //  'updatedBy',
             // 'createdDate',
             // 'updatedDate',
 
