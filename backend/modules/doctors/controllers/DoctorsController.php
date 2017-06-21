@@ -61,8 +61,49 @@ class DoctorsController extends Controller
      */
     public function actionView($id)
     {
+    	$model = $this->findModel($id);
+    	$doctorQulification = DoctorsQualification::find()->select('qualification')->where( ['docId' => $model->userId])->all();
+    	//print_r($doctorQulification);exit();
+    	$dqary = array();
+    	$docqualiary = array();
+    	if(!empty($doctorQulification))
+    	{
+    		foreach ($doctorQulification as $dq)
+    		{
+    			$dqary[] = $dq->qualification;
+    	
+    		}
+    	}
+    	for($k=0; $k<count($dqary); $k++)
+    	{
+    		$docquali = Qualifications::find()->select('qualification')->where( ['qlid' => $dqary[$k]])->asArray()->one();
+    		$docqualiary[] = $docquali['qualification'];
+    		 
+    	}
+    	$docSpecialities = DoctorsSpecialities::find()->select('rspId')->where( ['rdoctorId' => $model->userId])->all();
+    	//print_r($docSpecialities);exit();
+    	$dsary = array();
+    	$docspeciary = array();
+    	if(!empty($docSpecialities))
+    	{
+    		foreach ($docSpecialities as $ds)
+    		{
+    			$dsary[] = $ds->rspId;
+    	
+    		}
+    	}
+    	//print_r($dsary);exit();
+    	for($m=0; $m<count($dsary); $m++)
+    	{
+    		$docspeci = Specialities::find()->select('specialityName')->where( ['spId' => $dsary[$m]])->asArray()->one();
+    		$docspeciary[] = $docspeci['specialityName'];
+    	}
+    	
+    	
+    	//$model->qualification = $docqualiary;
+    	
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id),'docqualiary' =>$docqualiary,'docspeciary'=>$docspeciary,
         ]);
     }
 

@@ -59,7 +59,11 @@ $this->params['breadcrumbs'][] = $this->title;
 								
 								<div class="right">Qualification</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?= 'qualification'; ?></div>
+								<div class="right-second"><?php echo implode(" , ",$docqualiary); ?></div>
+								
+								<div class="right">Specialities</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?php echo implode("  , ",$docspeciary); ?></div>
 								
 								<div class="right">Country Name</div>								
 								<div class="right-content">:</div>
@@ -102,21 +106,7 @@ $this->params['breadcrumbs'][] = $this->title;
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->TSMC; ?> </div>
 								
-								<div class="right">Created By</div>								
-								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->createdBy; ?> </div>
-								
-								<div class="right">Updatd By</div>								
-								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->updatedBy; ?> </div>
-								
-								<div class="right">Created Date</div>								
-								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->createdDate; ?> </div>
-								
-								<div class="right">Updated Date</div>								
-								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->updatedDate; ?> </div>								 							
+																 							
 							</div><!---doctor-box closed-->							
 						</div>	<!---main-wrap closed-->							
 					</div><!---row closed-->						
