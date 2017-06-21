@@ -175,7 +175,7 @@ class DoctorsController extends Controller
         	$model->countryName = Countries::getCountryName($model->country);
         	$model->stateName = States::getStateName($model->state);
         	$model->userId = $user->id;
-        	$model->doctorUniqueId = 'doctorUniqueId';
+        	$model->doctorUniqueId = $overallUniqueId;
         	$model->createdBy = Yii::$app->user->identity->id;
         	$model->updatedBy = Yii::$app->user->identity->id;
         	$model->doctorImage = UploadedFile::getInstance($model,'doctorImage');
