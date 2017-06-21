@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 //**********************//
 use common\models\User;
+use app\modules\nursinghomes\models\Nursinghomes;
 //**********************//
 
 /* @var $this yii\web\View */
@@ -81,14 +82,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'pinCode',
             'address:ntext',
             'description:ntext',
-        		[
+        		
+        	[
         		'attribute' => 'createdBy',
-        		'value' => Yii::$app->user->identity->username,
+        		
+        		'value' =>  Nursinghomes::getUsername($model->createdBy),
         		],
+        		
         		[
         		'attribute' => 'updatedBy',
-        		'value' => Yii::$app->user->identity->username,
+        		
+        		'value' =>  Nursinghomes::getUsername($model->updatedBy),
         		],
+//         		'createdBy',
+//         		'updatedBy',
          
             'createdDate',
             'updatedDate',

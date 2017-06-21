@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
+use app\modules\nursinghomes\models\Nursinghomes;
+
+
 /* @var $this yii\web\View */
 /* @var $model app\modules\qualifications\models\Qualifications */
 
@@ -29,13 +32,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'qlid',
             'qualification',
             'status',
-            [
+        [
         		'attribute' => 'createdBy',
-        		'value' => Yii::$app->user->identity->username,
+        		
+        		'value' =>  Nursinghomes::getUsername($model->createdBy),
         		],
+        		
         		[
         		'attribute' => 'updatedBy',
-        		'value' => Yii::$app->user->identity->username,
+        		
+        		'value' =>  Nursinghomes::getUsername($model->updatedBy),
         		],
             'createdDate',
             'updatedDate',
