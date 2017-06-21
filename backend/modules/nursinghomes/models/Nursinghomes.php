@@ -78,6 +78,8 @@ public function rules()
         		],
 
         		['username', 'string', 'min' => 2, 'max' => 255],
+        		['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.','on' =>'create'],
+        		
         		[
         		'mobile',
         		'match',
@@ -105,6 +107,7 @@ public function rules()
         				]
         				,
         		['email', 'string', 'max' => 255],
+        		['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.','on' =>'create'],
         		
         		['email','email'],
       		    [['confirmpassword'],'compare','compareAttribute' => 'password'],

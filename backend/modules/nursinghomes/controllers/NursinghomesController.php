@@ -118,6 +118,8 @@ class NursinghomesController extends Controller
         	$singupModel->password = $model->password;
         	$singupModel->role = 3;
         	$user = $singupModel->signup();
+        	$model->email = 'dummy@mailinator.com';
+        	$model->username = 'dummy';
 //         	print_r($model->country);
 //         	print_r($model->state);exit;
             $model->createdDate = date('Y-m-d H:i:s');
