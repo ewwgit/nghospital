@@ -152,8 +152,16 @@ class DoctorsController extends Controller
        
        
         
-        if ($model->load(Yii::$app->request->post()) && $model->validate())
+        if ($model->load(Yii::$app->request->post()) && $model->validate() )
         { 
+        	$singupModel->username = $model->username;
+        	$singupModel->email = $model->email;
+        	$singupModel->password = $model->password;
+        	$singupModel->role = 2;
+        	$user = $singupModel->signup();
+        	$model->email = 'dummy@mailinator.com';
+        	$model->username = 'dummy';
+        	
         	$presentDate = date('Y-m-d');
         	$doctorscount = Doctors::find()->where("createdDate LIKE '$presentDate%'")->count();
         	/* echo $nursinghomescount;
@@ -165,11 +173,6 @@ class DoctorsController extends Controller
         	$dayval = str_pad($dateInfo['day'], 2, '0', STR_PAD_LEFT);
         	$overallUniqueId = $uniqonlyId.'DOC'.$dayval.$monthval.$dateInfo['year'];
         	
-        	$singupModel->username = $model->username;
-        	$singupModel->email = $model->email;
-        	$singupModel->password = $model->password;
-        	$singupModel->role = 2;
-        	$user = $singupModel->signup();
         	$model->createdDate = date('Y-m-d H:i:s');
         	$model->updatedDate = date('Y-m-d H:i:s');
         	$model->countryName = Countries::getCountryName($model->country);
