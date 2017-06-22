@@ -67,7 +67,7 @@ th {
 					<div class="row">
 						<div class="col-md-12 col-sm-6 col-xs-6 main-wrap">
 							<div class="doctor-box">					        
-								<div class="right">Username</div>								
+								<div class="right">User Name</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $usernamedata['username']; ?> </div>
 								
