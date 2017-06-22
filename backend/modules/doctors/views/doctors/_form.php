@@ -97,16 +97,16 @@ use dosamigos\ckeditor\CKEditor;
       <?=$form->field ( $model, 'doctorImage' )->widget ( FileInput::classname (),
    		[ 'options' => [ 'accept' => 'image/*' ],'pluginOptions' =>[[ 'browseLabel' => 'Profile Image', 'allowedFileExtensions'=>['jpg','png','jpeg'] ]] ] )?>     
     </div>
-	<div class="form-group col-lg-6 col-sm-12">
-    <?=$form->field($model, 'status')->dropDownList(['10' => 'Active','0' => 'In-Active'],['prompt' => 'Status'],
-											['itemOptions' => ['class' =>'radio-inline']])?>
-	</div> 
-    <div class="form-group col-lg-12 col-sm-12">
+    <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'summery')->widget(CKEditor::className(), [
         'options' => ['rows' => 4],
         'preset' => 'basic'
     ]) ?>
     </div>
+	<div class="form-group col-lg-6 col-sm-12">
+    <?=$form->field($model, 'status')->dropDownList(['10' => 'Active','0' => 'In-Active'],['prompt' => 'Status'],
+											['itemOptions' => ['class' =>'radio-inline']])?>
+	</div> 
 	
 	<div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
