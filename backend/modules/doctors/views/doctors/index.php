@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
           //  'userId',
             'doctorUniqueId',
         		[
-        		'label' => 'username',
+        		'label' => 'User Name',
         		'attribute' => 'username',
         		'value' => 'user.username',
         		],
