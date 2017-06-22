@@ -132,8 +132,8 @@ a.desc:after {
 .doctor-box{
 	width:90%;
 	border-bottom:1px solid #f1f2f2;
-	padding:6px;
-	margin:2px;	
+	padding:0px;
+	margin:0px;	
 	text-align:left;	
 	color: #369;	
 }
@@ -146,10 +146,11 @@ a.desc:after {
 	
 .right-second{
 	font-size:15px;
-	width:30%;
+	width:40%;
 	color:#676b6d;	
 	margin:10px;
 	float:left;
+	word-wrap:break-word;
 	}
 .right-content{
 	font-size:15px;

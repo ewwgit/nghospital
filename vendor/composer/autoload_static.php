@@ -47,6 +47,7 @@ class ComposerStaticInit63818e1034e98dff81652683aa876d42
         ),
         'd' => 
         array (
+            'dosamigos\\ckeditor\\' => 19,
             'dmstr\\' => 6,
         ),
         'c' => 
@@ -161,6 +162,10 @@ class ComposerStaticInit63818e1034e98dff81652683aa876d42
         'kartik\\base\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-krajee-base',
+        ),
+        'dosamigos\\ckeditor\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/2amigos/yii2-ckeditor-widget/src',
         ),
         'dmstr\\' => 
         array (

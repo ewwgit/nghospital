@@ -195,14 +195,17 @@ class DoctorsController extends Controller
         
         if ($model->load(Yii::$app->request->post()) )
         { 
+        	
         	$model->doctorImage = UploadedFile::getInstance($model,'doctorImage');
         	if($model->validate())
         	{
+        		
         	$singupModel->username = $model->username;
         	$singupModel->email = $model->email;
         	$singupModel->password = $model->password;
         	$singupModel->role = 2;
         	$user = $singupModel->signup();
+        	
         	$model->email = 'dummy@mailinator.com';
         	$model->username = 'dummy';
         	
@@ -237,6 +240,7 @@ class DoctorsController extends Controller
         		$model->doctorImage = 'profileimages/'.$imageName;
         	}
         	$model->save();
+        	//print_r($model->errors);exit();
         	for($i=0; $i<count($model->qualification);$i++)
         	{
         		$qulificationInfo = Qualifications::find()->select(['qlid'])->where(['qualification' => $model->qualification[$i]])->one();
@@ -271,6 +275,12 @@ class DoctorsController extends Controller
         	
             //return $this->redirect(['view', 'id' => $model->doctorid]);
             return $this->redirect(['index']);
+        	}
+        	else {
+        		 return $this->render('create', [
+                'model' => $model,
+            	
+            ]);
         	}
         } else {
             return $this->render('create', [

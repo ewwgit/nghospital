@@ -6,6 +6,7 @@ use kartik\file\FileInput;
 use yii\helpers\Url;
 use kartik\depdrop\DepDrop;
 use kartik\select2\Select2;
+use dosamigos\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\doctors\models\Doctors */
@@ -101,9 +102,13 @@ use kartik\select2\Select2;
     ],
 ]); ?>
     </div>
-	<div class="form-group col-lg-12 col-sm-12">
-    <?= $form->field($model, 'summery')->textarea(['rows' => 4]) ?>
-	</div> 
+    <div class="form-group col-lg-12 col-sm-12">
+    <?= $form->field($model, 'summery')->widget(CKEditor::className(), [
+        'options' => ['rows' => 4],
+        'preset' => 'basic'
+    ]) ?>
+    </div>
+	
 	<div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
