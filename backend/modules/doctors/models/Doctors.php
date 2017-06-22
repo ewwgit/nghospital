@@ -153,6 +153,7 @@ class Doctors extends \yii\db\ActiveRecord
             'userId' => 'User ID',
             'doctorUniqueId' => 'Doctor Unique ID',
             'name' => 'Name',
+        	'username' => 'User Name',
         	'confirmpassword' => 'Confirm Password',
             'qualification' => 'Qualification',
         	'specialities' => 'Specialities',	
