@@ -91,9 +91,6 @@ use kartik\select2\Select2;
 											['itemOptions' => ['class' =>'radio-inline']])?>
 	</div> 
 	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'summery')->textarea(['rows' => 4]) ?>
-	</div>
-	<div class="form-group col-lg-6 col-sm-12">
     <?php echo $form->field($model, 'specialities')->widget(Select2::classname(), [
     'data' => $model ->allSpeci,
     'maintainOrder' => true,
@@ -103,7 +100,10 @@ use kartik\select2\Select2;
         'maximumInputLength' => 100,
     ],
 ]); ?>
-    </div> 
+    </div>
+	<div class="form-group col-lg-12 col-sm-12">
+    <?= $form->field($model, 'summery')->textarea(['rows' => 4]) ?>
+	</div> 
 	<div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

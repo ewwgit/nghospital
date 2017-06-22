@@ -1,3 +1,12 @@
+<script>
+function printContent(el){
+	var restorepage = document.body.innerHTML;
+	var printcontent = document.getElementById(el).innerHTML;
+	document.body.innerHTML = printcontent;
+	window.print();
+	document.body.innerHTML = restorepage;
+}
+</script>
 <?php
 
 use yii\helpers\Html;
@@ -14,17 +23,26 @@ $this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="doctors-view">
-<div class="container">
+<div class="container" id="print">
+<style>
+th {
+	display: none;
+}
+</style>
     <div class="row">      
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" style="margin-left:0px; padding-left: 0px;">			   
 			<div class="panel panel-info">		
-					<div class="col-md-6">	
-						<div class="box3">
-						<h4>Doctor Name: <?= $model->name; ?></h4>
-						<h4>Unique ID : <?= $model->doctorUniqueId; ?></h4>
+					<div class="col-md-8">	
+						<div class="box4" style="float: left;">
+						<div class="right">Doctor Name</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?= $model->name; ?></div>
+						<div class="right">Unique ID</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?= $model->doctorUniqueId; ?></div>
 						</div>				
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-3" style="float: left;">
 					<?php 
 					$usernamedata = User::find()->select(['username','email'])->where(['id'=>$model->userId])->one();
 					// print_r($usernamedata);exit;?>
@@ -116,5 +134,4 @@ $this->params['breadcrumbs'][] = $this->title;
 	</div><!--row closed-->	
 </div>
 </div>
-
-
+<button onclick="printContent('print')">Print</button>
