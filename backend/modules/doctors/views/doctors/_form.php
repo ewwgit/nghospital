@@ -18,6 +18,9 @@ use dosamigos\ckeditor\CKEditor;
    
     <?php $form = ActiveForm::begin(['options'=>['enctype' =>'multipart/form-data']]); ?>
     
+    <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+	</div>
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
     </div>
@@ -25,14 +28,25 @@ use dosamigos\ckeditor\CKEditor;
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
     </div>
     <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'doctorMobile')->textInput(['maxlength' => true]) ?>
+	</div>
+    <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
     </div>
     <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'confirmpassword')->passwordInput(['maxlength' => true]) ?>
 	</div>
 	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-	</div>
+    <?php echo $form->field($model, 'specialities')->widget(Select2::classname(), [
+    'data' => $model ->allSpeci,
+    'maintainOrder' => true,
+    'options' => ['placeholder' => 'Select Speciality', 'multiple' => true],
+    'pluginOptions' => [
+        'tags' => true,
+        'maximumInputLength' => 100,
+    ],
+]); ?>
+    </div>
 	<div class="form-group col-lg-6 col-sm-12">
     <?php echo $form->field($model, 'qualification')->widget(Select2::classname(), [
     'data' => $model ->allQuali,
@@ -67,14 +81,6 @@ use dosamigos\ckeditor\CKEditor;
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'pinCode')->textInput(['maxlength' => true]) ?>
     </div>
-	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'doctorMobile')->textInput(['maxlength' => 10]) ?>
-	</div>
-	<div class="form-group col-lg-6 col-sm-12">
-      <?=$form->field ( $model, 'doctorImage' )->widget ( FileInput::classname (),
-   		[ 'options' => [ 'accept' => 'image/*' ],'pluginOptions' =>[[ 'browseLabel' => 'Profile Image', 'allowedFileExtensions'=>['jpg','png','jpeg'] ]] ] )?>
-            
-    </div>
     <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'address')->textarea(['rows' => 4]) ?>
 	</div>
@@ -88,20 +94,13 @@ use dosamigos\ckeditor\CKEditor;
     <?= $form->field($model, 'TSMC')->textInput(['maxlength' => true]) ?>
 	</div>
 	<div class="form-group col-lg-6 col-sm-12">
+      <?=$form->field ( $model, 'doctorImage' )->widget ( FileInput::classname (),
+   		[ 'options' => [ 'accept' => 'image/*' ],'pluginOptions' =>[[ 'browseLabel' => 'Profile Image', 'allowedFileExtensions'=>['jpg','png','jpeg'] ]] ] )?>     
+    </div>
+	<div class="form-group col-lg-6 col-sm-12">
     <?=$form->field($model, 'status')->dropDownList(['10' => 'Active','0' => 'In-Active'],['prompt' => 'Status'],
 											['itemOptions' => ['class' =>'radio-inline']])?>
 	</div> 
-	<div class="form-group col-lg-6 col-sm-12">
-    <?php echo $form->field($model, 'specialities')->widget(Select2::classname(), [
-    'data' => $model ->allSpeci,
-    'maintainOrder' => true,
-    'options' => ['placeholder' => 'Select Speciality', 'multiple' => true],
-    'pluginOptions' => [
-        'tags' => true,
-        'maximumInputLength' => 100,
-    ],
-]); ?>
-    </div>
     <div class="form-group col-lg-12 col-sm-12">
     <?= $form->field($model, 'summery')->widget(CKEditor::className(), [
         'options' => ['rows' => 4],

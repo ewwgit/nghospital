@@ -1,3 +1,12 @@
+<script>
+function printContent(el){
+	var restorepage = document.body.innerHTML;
+	var printcontent = document.getElementById(el).innerHTML;
+	document.body.innerHTML = printcontent;
+	window.print();
+	document.body.innerHTML = restorepage;
+}
+</script>
 <?php
 
 use yii\helpers\Html;
@@ -15,92 +24,82 @@ $this->title = ' Nursing Homes View';
 $this->params['breadcrumbs'][] = ['label' => 'Nursing Homes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="nursinghomes-view">
-
-    <h1><?php // Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->nursingId], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->nursingId], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-    <?php 
+<div class="doctors-view">
+<div class="container" id="print">
+<style>
+.doctor-box {
+	border: none;
+}
+</style>
+    <div class="row">      
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" style="margin-left:0px; padding-left: 0px;">			   
+			<div class="panel panel-info">		          
+				<div class="panel-body">		   
+					<!--form section start -->
+	
+					<div class="row">
+					<?php 
     $usernamedata = User::find()->select(['username','email'])->where(['id'=>$model->nuserId])->one();
     
  //  print_r(Yii::$app->user->identity->username);exit;?>
-    
-    
+						<div class="col-md-12 col-sm-6 col-xs-6 main-wrap">
+							<div class="doctor-box">					        
+								<div class="right">Nursing Unique ID</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?= $model->nurshingUniqueId; ?> </div>
+								
+								<div class="right">Contact Person</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?= $model->contactPerson; ?> </div>
+								
+								<div class="right">User Name</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?= $usernamedata['username']; ?></div>
+								
+								<div class="right">Email</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?= $usernamedata['email']; ?></div>
+								
+								<div class="right">Mobile</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?= $model->mobile; ?> </div>
+								
+								<div class="right">Landline</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?= $model->landline; ?></div>
+								
+								<div class="right">Country</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?= $model->countryName; ?> </div>
+								
+								<div class="right">State</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?= $model->stateName; ?> </div>
+								
+								<div class="right">City</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?= $model->city; ?></div>
+								
+								<div class="right">Pin Code</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?= $model->pinCode; ?> </div>
+								
+								<div class="right">Address</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?= $model->address; ?></div>
+								
+								<div class="right">Description</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?= $model->description; ?></div>
 
-    <?= DetailView::widget([
-        'model' => $model,
-    	
-        'attributes' => [
-        		
-            'nursingId',
-           // 'nuserId',
-//         		[
-//         		'attribute'=>'nuserId',
-//         		'label' => 'UserName',
-        		       		
-//         		],
-           // 'nurshingUniqueId',
-            'contactPerson',
-        	//**********************//
-        		[
-        		'attribute' => 'username',
-        	    //'value' => User::getUsername($model->username),
-        		'value' =>  $usernamedata['username'],
-        		],
-        		
-        	    [
-        		'attribute' => 'email',
-        		//'value' => User::getUsername($model->email),
-        		'value' =>  $usernamedata['email'],
-        		],
-        		//**********************//
-                'mobile',
-        		'landline',
-        		[
-        		        		'attribute'=>'countryName',
-        		        		'label' => 'Country',
-        			   		],
-        		[
-        		'attribute'=>'stateName',
-        		'label' => 'State',
-        		 
-        		],
-            'city',
-           // 'state',
-          
-           // 'country',
-           
-            'pinCode',
-            'address:ntext',
-            'description:ntext',
-        		
-        	[
-        		'attribute' => 'createdBy',
-        		
-        		'value' =>  Nursinghomes::getUsername($model->createdBy),
-        		],
-        		
-        		[
-        		'attribute' => 'updatedBy',
-        		
-        		'value' =>  Nursinghomes::getUsername($model->updatedBy),
-        		],
-//         		'createdBy',
-//         		'updatedBy',
-         
-            'createdDate',
-            'updatedDate',
-        ],
-    ]) ?>
-    
-
+																 							
+							</div><!---doctor-box closed-->							
+						</div>	<!---main-wrap closed-->							
+					</div><!---row closed-->						
+				</div><!---panel-body closed-->		
+			</div><!---panel-info closed-->	
+		</div><!---toppad-->
+	</div><!--row closed-->	
 </div>
+</div>
+<button onclick="printContent('print')">Print</button>

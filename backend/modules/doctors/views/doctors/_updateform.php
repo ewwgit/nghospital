@@ -6,6 +6,7 @@ use kartik\file\FileInput;
 use yii\helpers\Url;
 use kartik\depdrop\DepDrop;
 use kartik\select2\Select2;
+use dosamigos\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\doctors\models\Doctors */
@@ -19,14 +20,30 @@ use kartik\select2\Select2;
 				'enctype' => 'multipart/form-data' 
 		] ]); ?>
 	<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+	</div>
+	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'username')->textInput(['maxlength' => true,'readOnly' => true]) ?>
     </div>
     <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'email')->textInput(['maxlength' => true,'readOnly' => true]) ?>
     </div>
-   	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-	</div>
+    <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'doctorMobile')->textInput(['maxlength' => true]) 
+
+    // $form->field($model, 'doctorImage')->textInput() ?>
+    </div>
+    <div class="form-group col-lg-6 col-sm-12">
+    <?php echo $form->field($model, 'specialities')->widget(Select2::classname(), [
+     'data' => $model ->allSpeci,
+    'maintainOrder' => true,
+    'options' => ['placeholder' => 'Enter speciality', 'multiple' => true],
+    'pluginOptions' => [
+        'tags' => true,
+        'maximumInputLength' => 10
+    ],
+]); ?>
+    </div>
 	<div class="form-group col-lg-6 col-sm-12">
     <?php echo $form->field($model, 'qualification')->widget(Select2::classname(), [
      'data' => $model ->allQuali,
@@ -65,10 +82,17 @@ use kartik\select2\Select2;
     <?= $form->field($model, 'pinCode')->textInput(['maxlength' => true]) ?>
 	</div>
 	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'doctorMobile')->textInput(['maxlength' => 10]) 
-
-    // $form->field($model, 'doctorImage')->textInput() ?>
-    </div>
+    <?= $form->field($model, 'address')->textarea(['rows' => 4]) ?>
+	</div>
+	<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'permanentAddress')->textarea(['rows' => 4]) ?>
+	</div>
+	<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'APMC')->textInput(['maxlength' => true]) ?>
+	</div>
+	<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'TSMC')->textInput(['maxlength' => true]) ?>
+	</div>
     <div class="form-group col-lg-6 col-sm-12">
     <?php if($model->doctorImage != ''){?>
     </div>
@@ -78,8 +102,6 @@ use kartik\select2\Select2;
 						 		
 						 		<?php  }
 						 		// print_r($imgeurl);exit;?>
-
-						<h5>Upload Your Profile Image</h5>
 						<img class='image' 
 							src="<?php
 							if($model->docimageupdate)
@@ -96,38 +118,21 @@ use kartik\select2\Select2;
             <?= $form->field($model, 'docimageupdate')->hiddenInput(); ?>
             
         
-	</div>
-	
-    <div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'address')->textarea(['rows' => 4]) ?>
-	</div>
+	</div>   
 	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'permanentAddress')->textarea(['rows' => 4]) ?>
-	</div>
+    <?=$form->field($model, 'status')->dropDownList(['10' => 'Active','0' => 'In-Active'],['prompt' => 'Status'],
+											['itemOptions' => ['class' =>'radio-inline']])?>
+	</div>  
 	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'APMC')->textInput(['maxlength' => true]) ?>
-	</div>
-	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'TSMC')->textInput(['maxlength' => true]) ?>
+	<?= $form->field($model, 'summery')->widget(CKEditor::className(), [
+        'options' => ['rows' => 4],
+        'preset' => 'basic'
+    ]) ?>
 	</div>
 	<div class="form-group col-lg-6 col-sm-12">
     <?=$form->field($model, 'status')->dropDownList(['10' => 'Active','0' => 'In-Active'],['prompt' => 'Status'],
 											['itemOptions' => ['class' =>'radio-inline']])?>
-	</div>     
-	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'summery')->textarea(['rows' => 4]) ?>
-	</div>
-	<div class="form-group col-lg-6 col-sm-12">
-    <?php echo $form->field($model, 'specialities')->widget(Select2::classname(), [
-     'data' => $model ->allSpeci,
-    'maintainOrder' => true,
-    'options' => ['placeholder' => 'Enter speciality', 'multiple' => true],
-    'pluginOptions' => [
-        'tags' => true,
-        'maximumInputLength' => 10
-    ],
-]); ?>
-    </div>
+	</div> 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
