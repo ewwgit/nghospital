@@ -193,8 +193,11 @@ class DoctorsController extends Controller
        
        
         
-        if ($model->load(Yii::$app->request->post()) && $model->validate() )
+        if ($model->load(Yii::$app->request->post()) )
         { 
+        	$model->doctorImage = UploadedFile::getInstance($model,'doctorImage');
+        	if($model->validate())
+        	{
         	$singupModel->username = $model->username;
         	$singupModel->email = $model->email;
         	$singupModel->password = $model->password;
@@ -222,7 +225,7 @@ class DoctorsController extends Controller
         	$model->doctorUniqueId = $overallUniqueId;
         	$model->createdBy = Yii::$app->user->identity->id;
         	$model->updatedBy = Yii::$app->user->identity->id;
-        	$model->doctorImage = UploadedFile::getInstance($model,'doctorImage');
+        	
         	 
         	if(!(empty($model->doctorImage)))
         	{
@@ -268,6 +271,7 @@ class DoctorsController extends Controller
         	
             //return $this->redirect(['view', 'id' => $model->doctorid]);
             return $this->redirect(['index']);
+        	}
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -398,32 +402,37 @@ class DoctorsController extends Controller
         	$model->status = $usermodel->status;
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate())
+        if ($model->load(Yii::$app->request->post()) )
         {
-        	
+        	 $model->doctorImage = UploadedFile::getInstance($model,'doctorImage');
+        	 if($model->validate())
+        	 {
         	 $model->updatedDate = date('Y-m-d H:i:s');
         	 $model->updatedBy = Yii::$app->user->identity->id;
         	 //echo $model->country;exit();
         	 $model->countryName = Countries::getCountryName($model->country);
         	 $model->stateName = States::getStateName($model->state);
-        	 $model->doctorImage = UploadedFile::getInstance($model,'doctorImage');
+        	 
         	 $usermodel->status = $model->status;
         	 $usermodel->save();
         	 //print_r($model->doctorImage);exit();
         	 
         	 if(!(empty($model->doctorImage)))
         	 {
-        	 	 
+        	 	
         	 	$imageName = time().$model->doctorImage->name;
-        	 	 
+        	 	
         	 	$model->doctorImage->saveAs('profileimages/'.$imageName );
         	 	 
         	 	$model->doctorImage = 'profileimages/'.$imageName;
+        	 	
         	 }
         	 else {
         	 	$model->doctorImage = $model->docimageupdate; 
         	 }
+        	 //print_r($model->doctorImage);exit();
         	 $model->save();
+        	 //print_r($model->errors);exit();
         	 
         	 DoctorsQualification::deleteAll( ['docId' => $model->userId]);
         	 if(!empty($model->qualification))
@@ -465,6 +474,8 @@ class DoctorsController extends Controller
         
             //return $this->redirect(['view', 'id' => $model->doctorid]);
             return $this->redirect(['index']);
+        	 }
+            
         } else {
             return $this->render('update', [
                 'model' => $model,

@@ -134,8 +134,11 @@ class Doctors extends \yii\db\ActiveRecord
         				'match',
         				'pattern' => '/^[0-9]{10}$/',
         				'message' => 'mobile number must contain exactly 10 numbers.',
-        		]
+        		],
         		//['doctorImage','file','skipOnEmpty' => false],
+        		[['doctorImage'],'required','on' => 'create'],
+        		 //[['doctorImage'], 'image','skipOnEmpty'=>false,],
+                 //[['doctorImage'], 'required']
         		
         ];
     }

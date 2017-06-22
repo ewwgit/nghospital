@@ -14,7 +14,10 @@ use kartik\select2\Select2;
 
 <div class="doctors-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin( [ 
+		'options' => [ 
+				'enctype' => 'multipart/form-data' 
+		] ]); ?>
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'username')->textInput(['maxlength' => true,'readOnly' => true]) ?>
     </div>
