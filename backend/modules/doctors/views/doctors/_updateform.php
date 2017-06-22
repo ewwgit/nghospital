@@ -29,7 +29,7 @@ use dosamigos\ckeditor\CKEditor;
     <?= $form->field($model, 'email')->textInput(['maxlength' => true,'readOnly' => true]) ?>
     </div>
     <div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'doctorMobile')->textInput(['maxlength' => true]) 
+    <?= $form->field($model, 'doctorMobile')->textInput(['maxlength' => 10]) 
 
     // $form->field($model, 'doctorImage')->textInput() ?>
     </div>
