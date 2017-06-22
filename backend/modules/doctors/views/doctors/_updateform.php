@@ -115,7 +115,7 @@ use dosamigos\ckeditor\CKEditor;
 								?>"
 							width="100" height="100"> </img> 
 							 <?=$form->field ( $model, 'doctorImage' )->widget ( FileInput::classname (), [ 'options' => [ 'accept' => 'image/*' ],'pluginOptions' =>[[ 'browseLabel' => 'doctorImage', 'allowedFileExtensions'=>['jpg','png','jpeg'] ]] ] )?>
-            <?= $form->field($model, 'docimageupdate')->hiddenInput(); ?>
+            <?= $form->field($model, 'docimageupdate')->hiddenInput()->label(false); ?>
             
         
 	</div>   
