@@ -87,13 +87,16 @@ th {
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->countryName; ?> </div>
 								
-								<div class="right">City</div>								
-								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->city; ?></div>
 								
 								<div class="right">State Name</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->stateName; ?> </div>
+								
+								<div class="right">City Name</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?= $model->city; ?></div>
+								
+								
 								
 								<div class="right">Present Address</div>								
 								<div class="right-content">:</div>
