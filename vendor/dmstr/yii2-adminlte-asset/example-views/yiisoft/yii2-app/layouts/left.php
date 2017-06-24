@@ -33,6 +33,36 @@
                     ['label' => 'Dashboard', 'icon' => 'dashboard', 'url' => ['/']],
                     /* ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest], */
+                		[
+                		'label' => 'Roles',
+                		'icon' => 'fa fa-user-secret',
+                		'url' => '#',
+                		'items' => [
+                				['label' => 'Create', 'icon' => 'fa fa-plus', 'url' => ['/role/roles/create'],],
+                				['label' => 'View All', 'icon' => 'fa fa-eye', 'url' => ['/role/roles/index'],],
+                		],
+                		
+                		],
+                		[
+                		'label' => 'Admin Users',
+                		'icon' => 'fa fa-users',
+                		'url' => '#',
+                		'items' => [
+                				['label' => 'Create', 'icon' => 'fa fa-plus', 'url' => ['/user/adminusers/create'],],
+                				['label' => 'View All', 'icon' => 'fa fa-eye', 'url' => ['/user/adminusers/index'],],
+                		],
+                		
+                		],
+                		[
+                				'label' => 'Modules',
+                				'icon' => 'fa fa-users',
+                				'url' => '#',
+                				'items' => [
+                						['label' => 'Create', 'icon' => 'fa fa-plus', 'url' => ['/user/modulemaster/create'],],
+                						['label' => 'View All', 'icon' => 'fa fa-eye', 'url' => ['/user/modulemaster/index'],],
+                				],
+                		
+                		],
                     [
                         'label' => 'Doctors',
                     	//'class' => 'fa fa-user-md',
