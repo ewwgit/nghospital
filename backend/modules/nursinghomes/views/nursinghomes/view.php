@@ -39,9 +39,11 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 					<div class="row">
 					<?php 
-    $usernamedata = User::find()->select(['username','email'])->where(['id'=>$model->nuserId])->one();
+    $usernamedata = User::find()->select(['username','email','status'])->where(['id'=>$model->nuserId])->one();
     
- //  print_r(Yii::$app->user->identity->username);exit;?>
+  //print_r($usernamedata);exit;
+  
+    ?>
 						<div class="col-md-12 col-sm-6 col-xs-6 main-wrap">
 							<div class="doctor-box">					        
 								<div class="right">Nursing Unique ID</div>								
@@ -91,7 +93,10 @@ $this->params['breadcrumbs'][] = $this->title;
 								<div class="right">Description</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->description; ?></div>
-
+								<div class="right">Status</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?php if($usernamedata['status']==10){echo"Active";}else {echo"In-Active";} ?></div>
+								
 																 							
 							</div><!---doctor-box closed-->							
 						</div>	<!---main-wrap closed-->							

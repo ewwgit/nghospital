@@ -36,7 +36,7 @@ use yii\helpers\Url;
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
     </div>
     	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'pinCode')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'pinCode')->textInput(['maxlength' => 8]) ?>
 	</div>
    
 	
