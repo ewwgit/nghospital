@@ -24,6 +24,12 @@ return [
     	'qualifications' => [
     				'class' => 'app\modules\qualifications\qualifications',
     		],
+    		'role' => [
+    				'class' => 'backend\modules\role\Role',
+    		],
+    		'user' => [
+    				'class' => 'backend\modules\user\user',
+    		],
     		
     ],
     'components' => [
