@@ -3,8 +3,8 @@
 namespace backend\modules\user\controllers;
 
 use Yii;
-use app\models\AdminMaster;
-use app\models\AdminMasterSearch;
+/* use app\models\AdminMaster;
+use app\models\AdminMasterSearch; */
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -521,7 +521,7 @@ class AdminusersController extends Controller
      * @return AdminMaster the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+   /*  protected function findModel($id)
     {
         if (($model = AdminMaster::findOne($id)) !== null) {
         	
@@ -529,5 +529,5 @@ class AdminusersController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
+    } */
 }
