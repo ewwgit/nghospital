@@ -71,6 +71,7 @@ class SpecialitiesController extends Controller
         	$model->createdBy = Yii::$app->user->identity->id;
         	$model->updatedBy = Yii::$app->user->identity->id;
         	$model->save();
+        	Yii::$app->session->setFlash('success', " Specialities Created successfully ");
             return $this->redirect(['view', 'id' => $model->spId]);
         } else {
             return $this->render('create', [
@@ -94,6 +95,7 @@ class SpecialitiesController extends Controller
         	$model->createdBy = Yii::$app->user->identity->id;
         	$model->updatedBy = Yii::$app->user->identity->id;
         	$model->save();
+        	Yii::$app->session->setFlash('success', " Specialities Updated successfully ");
             return $this->redirect(['view', 'id' => $model->spId]);
         } else {
             return $this->render('update', [
@@ -110,7 +112,18 @@ class SpecialitiesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+    	
+    	try{
+    		$model = $this->findModel($id)->delete();
+    		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted  Specialities.');
+    		 
+    	}
+    	 
+    	catch(\yii\db\Exception $e){
+    		Yii::$app->getSession()->setFlash('error', 'This Specialitie is not deleted.');
+    		 
+    	}
+        //$this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }

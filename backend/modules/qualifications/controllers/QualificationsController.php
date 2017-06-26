@@ -71,6 +71,7 @@ class QualificationsController extends Controller
         	$model->createdBy = Yii::$app->user->identity->id;
         	$model->updatedBy = Yii::$app->user->identity->id;
            	$model->save();
+           	Yii::$app->session->setFlash('success', " Qualification Created successfully ");
             return $this->redirect(['view', 'id' => $model->qlid]);
         } else {
             return $this->render('create', [
@@ -92,6 +93,7 @@ class QualificationsController extends Controller
         if ($model->load(Yii::$app->request->post())) {
         	$model->updatedDate = date('Y-m-d H:i:s');
         	$model->save();
+        	Yii::$app->session->setFlash('success', " Qualifications Updated successfully ");
             return $this->redirect(['view', 'id' => $model->qlid]);
         } else {
             return $this->render('update', [
@@ -108,7 +110,17 @@ class QualificationsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        //$this->findModel($id)->delete();
+    	try{
+    		$model = $this->findModel($id)->delete();
+    		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted  Qualification.');
+    		 
+    	}
+    	 
+    	catch(\yii\db\Exception $e){
+    		Yii::$app->getSession()->setFlash('error', 'This Qualification is not deleted.');
+    		 
+    	}
 
         return $this->redirect(['index']);
     }

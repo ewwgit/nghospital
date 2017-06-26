@@ -139,8 +139,18 @@ class ModulemasterController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-        Yii::$app->session->setFlash('success', "Modules Masters successfully Deleted");
+    	try{
+    		$model = $this->findModel($id)->delete();
+    		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted  Modules Masters.');
+    		 
+    	}
+    	
+    	catch(\yii\db\Exception $e){
+    		Yii::$app->getSession()->setFlash('error', 'This Modules Masters is not deleted.');
+    		 
+    	}
+      //  $this->findModel($id)->delete();
+       // Yii::$app->session->setFlash('success', "Modules Masters successfully Deleted");
         return $this->redirect(['index']);
     }
 

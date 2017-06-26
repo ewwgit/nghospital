@@ -147,6 +147,7 @@ class AdminusersController extends Controller
         	}
         	//echo $model->profileImage;exit();
          $admininfo->save();
+         Yii::$app->session->setFlash('success', " Adminuser Created successfully ");
          return $this->redirect(['index']);
         	
         	
@@ -240,6 +241,7 @@ class AdminusersController extends Controller
         	}
         	//echo $model->profileImage;exit();
          $adminInfo->save();
+         Yii::$app->session->setFlash('success', " Adminuser Updated successfully ");
             return $this->redirect(['index']);
         } else {
             $Roles = $model->getAllRoles();
@@ -285,6 +287,7 @@ class AdminusersController extends Controller
     		Yii::$app->getSession()->setFlash('error', 'This Admin user is not deleted.');
     		
     	}
+    	
     	return $this->redirect(['index']);
     }
     

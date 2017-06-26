@@ -70,7 +70,7 @@ class IntresteddoctorsController extends Controller
         	$model->role = 2;
         	$model->createdDate = date('Y-m-d H:i:s');
         	$model->save();
-        	
+        	Yii::$app->session->setFlash('success', " InterestedDoctors Created successfully ");
             //return $this->redirect(['view', 'id' => $model->insdocid]);
         	return $this->redirect(['index']);
         } else {
@@ -91,6 +91,7 @@ class IntresteddoctorsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        	Yii::$app->session->setFlash('success', " InterestedDoctors Updated successfully ");
             return $this->redirect(['view', 'id' => $model->insdocid]);
         } else {
             return $this->render('update', [
@@ -107,7 +108,17 @@ class IntresteddoctorsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+       // $this->findModel($id)->delete();
+    	try{
+    		$model = $this->findModel($id)->delete();
+    		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted  Interested Doctor.');
+    		 
+    	}
+    	
+    	catch(\yii\db\Exception $e){
+    		Yii::$app->getSession()->setFlash('error', 'This Interested Doctor is not deleted.');
+    		 
+    	}
 
         return $this->redirect(['index']);
     }

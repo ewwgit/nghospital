@@ -69,6 +69,7 @@ class IntrestednghsController extends Controller
         	    $model->createdDate = date('Y-m-d H:i:s');
         	    $model->role = 3;
         		$model->save() ;
+        		Yii::$app->session->setFlash('success', " InterestedNursingHomes Created successfully ");
             return $this->redirect(['view', 'id' => $model->insnghid]);
         } else {
             return $this->render('create', [
@@ -91,7 +92,7 @@ class IntrestednghsController extends Controller
         	
         	 $model->role = 3;
         	 $model->save();
-        
+        	 Yii::$app->session->setFlash('success', " InterestedNursingHomes Updated successfully ");
             return $this->redirect(['view', 'id' => $model->insnghid]);
         } else {
             return $this->render('update', [
@@ -108,7 +109,17 @@ class IntrestednghsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        //$this->findModel($id)->delete();
+    	try{
+    		$model = $this->findModel($id)->delete();
+    		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted  Interested Nursing Home.');
+    		 
+    	}
+    	 
+    	catch(\yii\db\Exception $e){
+    		Yii::$app->getSession()->setFlash('error', 'This Interested Nursing Home is not deleted.');
+    		 
+    	}
 
         return $this->redirect(['index']);
     }

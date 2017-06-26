@@ -138,9 +138,20 @@ class RolesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+    	
+    	try{
+    		$model = $this->findModel($id)->delete();
+    		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted Role.');
+    		 
+    	}
+    	 
+    	catch(\yii\db\Exception $e){
+    		Yii::$app->getSession()->setFlash('error', 'This Role is not deleted.');
+    		 
+    	}
+        //$this->findModel($id)->delete();
 
-        Yii::$app->session->setFlash('success', "Roloe successfully Deleted");
+        //Yii::$app->session->setFlash('success', "Roloe successfully Deleted");
         return $this->redirect(['index']);
     }
 

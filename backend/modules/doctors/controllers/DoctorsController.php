@@ -272,7 +272,7 @@ class DoctorsController extends Controller
         	 }
         	
         	
-        	
+        	 Yii::$app->session->setFlash('success', " Doctors Created successfully ");
             //return $this->redirect(['view', 'id' => $model->doctorid]);
             return $this->redirect(['index']);
         	}
@@ -481,7 +481,7 @@ class DoctorsController extends Controller
         	 //print_r($model->qualification);exit();
         	 
         	
-        
+        	 Yii::$app->session->setFlash('success', " Doctors Updated successfully ");
             //return $this->redirect(['view', 'id' => $model->doctorid]);
             return $this->redirect(['index']);
         	 }
@@ -501,8 +501,17 @@ class DoctorsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        //$this->findModel($id)->delete();
+    	try{
+    		$model = $this->findModel($id)->delete();
+    		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted Doctors.');
+    		 
+    	}
+    	
+    	catch(\yii\db\Exception $e){
+    		Yii::$app->getSession()->setFlash('error', 'This Doctor is not deleted.');
+    		 
+    	}
         return $this->redirect(['index']);
     }
 
