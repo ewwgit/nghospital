@@ -44,7 +44,7 @@ use yii\widgets\ActiveForm;
 
 				<div class="form-group col-lg-6 col-sm-12"> 
    
-<?= $form->field($model, 'status')->dropDownList([ '10' => 'Active', '0' => 'In-active', ], ['prompt' => ''])?>
+<?= $form->field($model, 'status')->dropDownList([ '10' => 'Active', '0' => 'In-active', ], ['prompt' => 'Select Status'])?>
 
 </div>
 

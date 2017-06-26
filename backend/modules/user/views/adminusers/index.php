@@ -8,7 +8,7 @@ use yii\helpers\Url;
 /* @var $searchModel app\models\AdminMasterSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Admin Masters';
+$this->title = 'Admin Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="admin-master-index">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Admin Master', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Admin User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
