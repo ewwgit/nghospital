@@ -187,6 +187,7 @@ class AdminusersController extends Controller
     public function actionUpdate($id)
     {
     	$model = new SignupFormadmin();
+    	$model->scenario = 'update';
     	$adminInfo = new AdminInformation();
         $adminuser = User::find()->where(['id' => $id])->one();
         

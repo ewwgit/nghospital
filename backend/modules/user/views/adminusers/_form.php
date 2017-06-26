@@ -12,9 +12,9 @@ use yii\widgets\ActiveForm;
 		<div class="box-body"> 
    <?php $form = ActiveForm::begin(['options'=>['enctype'=>'multipart/form-data']]);  ?>
 
-  <div class="form-group col-lg-6 col-sm-12">   <?= $form->field($model, 'username')->textInput(['maxlength' => true ]) ?></div>
+  <div class="form-group col-lg-6 col-sm-12">   <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'readOnly'=>($model->scenario == 'update')? "readonly" : false]) ?></div>
 
-			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?></div>
+			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'readOnly'=>($model->scenario == 'update')? "readonly" : false]) ?></div>
 
 			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'firstName')->textInput(['maxlength' => true]) ?></div>
 

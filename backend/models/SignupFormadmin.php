@@ -24,6 +24,7 @@ class SignupFormadmin extends Model
     public $address;
     public $status;
     public $id;
+    public $scenario;
     
 
 
@@ -35,15 +36,20 @@ class SignupFormadmin extends Model
         return [
             ['username', 'trim'],
             ['username', 'required'],
+        		[['firstName','lastName'] ,'required'],
            // ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
-
+        	['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.','on' =>'create'],
+        	
+        	
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
+        	['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.','on' =>'create'],
          //  ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
         		['password', 'required', 'on' => 'create'],
+        	
            
             ['password', 'string', 'min' => 6],
         		
