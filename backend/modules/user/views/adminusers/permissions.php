@@ -9,7 +9,7 @@ use app\models\UserMain;
 /* @var $searchModel app\models\ModulesMasterSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'User Permissions : '.$adminusername = UserMain::getUsername($model->id);
+$this->title = 'User Permissions > '.$adminusername = UserMain::getUsername($model->id);
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modules-master-index">

@@ -127,7 +127,7 @@ class NursinghomesController extends Controller
         	$model->countryName = Countries::getCountryName($model->country);
         	$model->stateName = States::getStateName($model->state);
             $model->nuserId = $user->id;
-        	//$model->nurshingUniqueId = 1;
+        	//$model->createdBy = 1;
         	
         	$model->createdBy = Yii::$app->user->identity->id;
         	$model->updatedBy = Yii::$app->user->identity->id;        	
@@ -136,6 +136,7 @@ class NursinghomesController extends Controller
         	//print_r($model);exit;
         	
           // return $this->redirect(['view', 'id' => $model->nuserId]);
+        	Yii::$app->session->setFlash('success', " Nursing Homes Created successfully ");
            return $this->redirect(['index']);
                  
         } else {
@@ -192,6 +193,7 @@ class NursinghomesController extends Controller
             $model->save();
           	        
            // return $this->redirect(['view', 'id' => $model->nursingId]);
+            Yii::$app->session->setFlash('success', " Nursing Homes Updated successfully ");
           	  return $this->redirect(['index']);
         } else {
               return $this->render('update', [

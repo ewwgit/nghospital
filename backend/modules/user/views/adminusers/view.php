@@ -30,7 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
         	'phoneNumber',
         	'address',
         	
-            'role.RoleName',
+           // 'role.RoleName',
+        		['attribute'=>'role.RoleName',
+        		'label' => 'Role Name',],
         		[
         		'attribute'=>'status',
         		'value'=> $status,

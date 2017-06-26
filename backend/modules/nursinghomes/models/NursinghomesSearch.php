@@ -17,6 +17,7 @@ class NursinghomesSearch extends Nursinghomes
      */
 	public $username;
 	public $email;
+	public $status;
 	public $role;
 	
 	
@@ -24,7 +25,7 @@ class NursinghomesSearch extends Nursinghomes
     {
         return [
             [['nursingId', 'nuserId', 'state', 'country', 'createdBy', 'updatedBy','role'], 'integer'],
-            [['username','email','nurshingUniqueId', 'contactPerson', 'mobile', 'city', 'stateName', 'countryName', 'pinCode', 'address', 'description',
+            [['status','username','email','nurshingUniqueId', 'contactPerson', 'mobile', 'city', 'stateName', 'countryName', 'pinCode', 'address', 'description',
             		'createdDate', 'updatedDate','role'
             		
             ], 'safe'],
@@ -58,7 +59,7 @@ class NursinghomesSearch extends Nursinghomes
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-        'sort' => ['attributes' => ['username','email','nurshingUniqueId', 'contactPerson', 'mobile', 'city', 'stateName', 'countryName', 'pinCode', 'address', 'description', 'createdDate', 'updatedDate']],
+        'sort' => ['attributes' => ['status','username','email','nurshingUniqueId', 'contactPerson', 'mobile', 'city', 'stateName', 'countryName', 'pinCode', 'address', 'description', 'createdDate', 'updatedDate']],
         		 
         ]);
 
@@ -93,6 +94,7 @@ class NursinghomesSearch extends Nursinghomes
             ->andFilterWhere(['like', 'countryName', $this->countryName])
             ->andFilterWhere(['like', 'pinCode', $this->pinCode])
             ->andFilterWhere(['like', 'user.username', $this->username])
+            ->andFilterWhere(['like', 'user.status', $this->status])
             ->andFilterWhere(['like', 'address', $this->address])
             ->andFilterWhere(['like', 'description', $this->description]);
 
