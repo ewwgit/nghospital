@@ -75,6 +75,17 @@
                         ],
                     ],
                 		[
+                		'label' => 'Interested Doctors',
+                		//'class' => 'fa fa-user-md',
+                		'icon' => 'user-md',
+                		'url' => '#',
+                		'items' => [
+                				['label' => 'Create', 'icon' => 'circle-o', 'url' => ['/intresteddoctors/intresteddoctors/create'],],
+                				['label' => 'View', 'icon' => 'circle-o', 'url' => ['/intresteddoctors/intresteddoctors'],],
+                		
+                		],
+                		],
+                		[
                 		'label' => 'Qualifications',
                 		//'class' => 'fa fa-user-md',
                 		'icon' => 'sun-o',
@@ -108,16 +119,17 @@
                 		],
                 		],
                 		[
-                		'label' => 'Interested Doctors',
+                		'label' => 'Intrested Nursing Homes',
                 		//'class' => 'fa fa-user-md',
-                		'icon' => 'user-md',
+                		'icon' => 'h-square',
                 		'url' => '#',
                 		'items' => [
-                				['label' => 'Create', 'icon' => 'circle-o', 'url' => ['/intresteddoctors/intresteddoctors/create'],],
-                				['label' => 'View', 'icon' => 'circle-o', 'url' => ['/intresteddoctors/intresteddoctors'],],
+                				['label' => 'Create', 'icon' => 'circle-o', 'url' => ['/intrestednursinghomes/intrestednghs/create'],],
+                				['label' => 'View', 'icon' => 'circle-o', 'url' => ['/intrestednursinghomes/intrestednghs'],],
                 		
                 		],
                 		],
+                		
                 ],
             ]
         ) ?>
