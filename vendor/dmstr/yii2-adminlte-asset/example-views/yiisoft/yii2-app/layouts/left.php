@@ -107,6 +107,17 @@
                 		
                 		],
                 		],
+                		[
+                		'label' => 'Interested Doctors',
+                		//'class' => 'fa fa-user-md',
+                		'icon' => 'user-md',
+                		'url' => '#',
+                		'items' => [
+                				['label' => 'Create', 'icon' => 'circle-o', 'url' => ['/intresteddoctors/intresteddoctors/create'],],
+                				['label' => 'View', 'icon' => 'circle-o', 'url' => ['/intresteddoctors/intresteddoctors'],],
+                		
+                		],
+                		],
                 ],
             ]
         ) ?>

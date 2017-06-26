@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
 			   <div class="form-group col-lg-7 col-sm-12">
 					 <?php if(!($model->isNewRecord))
 					{?>
-						<?= $form->field($model, 'status')->dropDownList([ 'Active' => 'Active', 'In-active' => 'In-active'], ['prompt' => '']) ?>
+						<?= $form->field($model, 'status')->dropDownList([ 'Active' => 'Active', 'In-active' => 'In-active'], ['prompt' => 'Select Status']) ?>
 					<?php }?> 
 			   </div>
 				

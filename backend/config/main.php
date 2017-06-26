@@ -30,7 +30,9 @@ return [
     		'user' => [
     				'class' => 'backend\modules\user\user',
     		],
-    		
+    		'intresteddoctors' => [
+    				'class' => 'app\modules\intresteddoctors\intresteddoctors',
+    		],
     ],
     'components' => [
         'request' => [
