@@ -37,7 +37,11 @@ $this->params['breadcrumbs'][] = $this->title;
         		],
 //         		'email',
            //  'nuserId',
-            'nurshingUniqueId',
+          //  'nurshingUniqueId',
+        		[
+        		'attribute'=>'nurshingUniqueId',
+        		'label' => 'UniqueId',
+        		],
             'contactPerson',
             'mobile',
         	//	'countryName',
@@ -57,6 +61,14 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'country',
             
              'pinCode',
+//         		[
+//         		'label' => 'Status',
+//         		'attribute' => 'status',
+//         		'value' => 'user.status',
+//         		'filter' => Html::activeDropDownList($searchModel, 'status', ['Active' => 'Active','In-active' => 'In-active'],['class'=>'form-control','prompt' => 'Status']),
+//         		],
+
+        		//'status',
             // 'address:ntext',
             // 'description:ntext',
             // 'createdBy',

@@ -124,8 +124,9 @@ class AdminusersController extends Controller
     {
         $model = new SignupFormadmin();
         $admininfo = new AdminInformation();
+        $model->scenario = 'create';
 
-      if ($model->load(Yii::$app->request->post()))
+      if ($model->load(Yii::$app->request->post()) && $model->validate())
         {
         	
         	$user = $model->signup();
@@ -205,7 +206,7 @@ class AdminusersController extends Controller
         }
         }
         
-     if ($model->load(Yii::$app->request->post()) )
+     if ($model->load(Yii::$app->request->post()) && $model->validate() )
         	 {
         	 	
         	

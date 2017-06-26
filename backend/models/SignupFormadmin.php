@@ -43,12 +43,13 @@ class SignupFormadmin extends Model
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
          //  ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
-
-            ['password', 'required'],
+        		['password', 'required', 'on' => 'create'],
+           
             ['password', 'string', 'min' => 6],
         		
-        	[['role','firstName','lastName','phoneNumber','profileImage','address','status','id'],'safe']
-        ];
+        	[['role','firstName','lastName','phoneNumber','profileImage','address','status','id'],'safe'],
+        		
+           ];
     }
 
     /**
@@ -56,6 +57,18 @@ class SignupFormadmin extends Model
      *
      * @return User|null the saved model or null if saving fails
      */
+    public function attributeLabels()
+    {
+    	return [
+    			 
+    			'username' => 'User Name',
+    			'file' => 'Profile Image',
+    			'firstName' => 'First Name',
+    			'lastName' => 'Last Name',
+    			'address' => 'Address',
+    			 
+    	];
+    }
     public function signup()
     {
         if (!$this->validate()) {
