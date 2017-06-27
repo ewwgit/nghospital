@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     else {
     	$status = 'In-Active';
     }?>
+    <?php //print_r($model->role); ?>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -36,8 +37,10 @@ $this->params['breadcrumbs'][] = $this->title;
         	'address',
         	
            // 'role.RoleName',
-        		['attribute'=>'role.RoleName',
-        		'label' => 'Role Name',],
+        		['attribute'=>'RoleName',
+        		//'label' => 'Role Name',
+        		'value' => $data,
+        		],
         		[
         		'attribute'=>'status',
         		'value'=> $status,

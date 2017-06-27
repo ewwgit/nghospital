@@ -101,14 +101,14 @@ class AdminusersController extends Controller
     		$model->username = $adminuser->username;
     		$model->email = $adminuser->email;
     		$model->status = $adminuser->status;
-    		$roleName = Role::find()->select('RoleName')->where( ['RoleId' => $adminuser->role])->one();
-    		$data = ArrayHelper::toArray($roleName, [
-    				'RoleName'
-    		]);
-    		$roleary = array_column($data, 'RoleName');
-    		$model->role = $roleary;
-    		//print_r($model->role);exit();
-    	$adminInfo = AdminInformation::find()->where(['aduserId' => $adminuser->id])->one();
+    		$model->role = $adminuser->role;
+    		//print_r($model->role);exit;
+    		$roleName = Role::find()->select('RoleName')->where( ['RoleId' => $model->role])->one();
+    		
+    		$datas = ArrayHelper::toArray($roleName, ['RoleName']);
+    		$data=implode($datas);
+    		$model->role = $data;
+    		$adminInfo = AdminInformation::find()->where(['aduserId' => $adminuser->id])->one();
         if(!empty($adminInfo))
         {
         $model->firstName = $adminInfo->firstName;
@@ -120,6 +120,7 @@ class AdminusersController extends Controller
     	}
         return $this->render('view', [
             'model' => $model,
+        		'data' =>$data,
         ]);
     }
 
