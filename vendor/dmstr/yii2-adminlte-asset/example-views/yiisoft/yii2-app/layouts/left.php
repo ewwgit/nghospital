@@ -129,6 +129,17 @@
                 		
                 		],
                 		],
+                		[
+                		'label' => 'Patients',
+                		//'class' => 'fa fa-user-md',
+                		'icon' => 'user',
+                		'url' => '#',
+                		'items' => [
+                				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/patients/patients/create'],],
+                				['label' => 'View', 'icon' => 'eye', 'url' => ['/patients/patients'],],
+                		
+                		],
+                		],
                 		
                 ],
             ]

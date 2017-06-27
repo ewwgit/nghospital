@@ -36,6 +36,9 @@ return [
     		'intrestednursinghomes' => [
     				'class' => 'app\modules\intrestednursinghomes\Intrestednursinghomes',
     		],
+    		'patients' => [
+    				'class' => 'app\modules\patients\patients',
+    		],
     ],
     'components' => [
         'request' => [
