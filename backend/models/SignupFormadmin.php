@@ -24,7 +24,6 @@ class SignupFormadmin extends Model
     public $address;
     public $status;
     public $id;
-    public $scenario;
     
 
 
