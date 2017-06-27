@@ -8,7 +8,7 @@ use app\modules\nursinghomes\models\Nursinghomes;
 /* @var $this yii\web\View */
 /* @var $model app\models\ModulesMaster */
 
-$this->title = 'Module Master  >  ' . ' ' . $model->moduleName;
+$this->title = $model->moduleName;
 $this->params['breadcrumbs'][] = ['label' => 'Modules Masters', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 //print_r($model->createdBy);exit;

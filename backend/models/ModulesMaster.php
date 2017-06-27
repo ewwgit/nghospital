@@ -42,6 +42,9 @@ class ModulesMaster extends \yii\db\ActiveRecord
             //[['status'], 'string'],
             [['moduleName'], 'required'],
             //[['moduleName', 'type', 'ipAddress'], 'string', 'max' => 200]
+        	['moduleName', 'unique', 
+        	 'message' => 'This module has already been taken.'],
+        		
         ];
     }
 
