@@ -46,7 +46,6 @@ $this->params['breadcrumbs'][] = $this->title;
         		'format' => 'html',
         		'value'=>Html::img($model->profileImage ? $model->profileImage : '@web',['width' => '150px']),
         		
-        		//'htmlOptions'=>array('width'=>'40px'),
         		],
         		 
            

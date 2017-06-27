@@ -142,7 +142,7 @@ class AdminusersController extends Controller
         		$imageName = rand(1000,100000).$model->file->baseName;
         		$model->file->saveAs('profileimages/'.$imageName.'.'.$model->file->extension );
         		 
-        		$model->profileImage = 'backend/web/profileimages/'.$imageName.'.'.$model->file->extension;
+        		$model->profileImage = 'profileimages/'.$imageName.'.'.$model->file->extension;
         		$admininfo->profileImage= $model->profileImage;
         	}
         	//echo $model->profileImage;exit();
@@ -236,7 +236,7 @@ class AdminusersController extends Controller
         		$imageName = rand(1000,100000).$model->file->baseName;
         		$model->file->saveAs('profileimages/'.$imageName.'.'.$model->file->extension );
         		 
-        		$model->profileImage = 'backend/web/profileimages/'.$imageName.'.'.$model->file->extension;
+        		$model->profileImage = 'profileimages/'.$imageName.'.'.$model->file->extension;
         		$adminInfo->profileImage= $model->profileImage;
         	}
         	//echo $model->profileImage;exit();

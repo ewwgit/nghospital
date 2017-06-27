@@ -30,7 +30,7 @@ use yii\widgets\ActiveForm;
 			<div class="form-group col-lg-6 col-sm-12">   <?= $form->field($model, 'file')->fileInput()?>
          <?php if($model->profileImage != ''){?>
           <div class="col-lg-5 col-sm-12 profileimage"> 
-					<img src='../../<?php echo $model->profileImage ; ?>' width="150px"
+					<img src='<?php echo $model->profileImage ; ?>' width="150px"
 						height="50px;">
 		  </div>
       <?php } ?>
