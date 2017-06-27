@@ -35,31 +35,31 @@
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest], */
                 		[
                 		'label' => 'Roles',
-                		'icon' => 'fa fa-user-secret',
+                		'icon' => 'user-secret',
                 		'url' => '#',
                 		'items' => [
-                				['label' => 'Create', 'icon' => 'fa fa-plus', 'url' => ['/role/roles/create'],],
-                				['label' => 'View All', 'icon' => 'fa fa-eye', 'url' => ['/role/roles/index'],],
+                				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/role/roles/create'],],
+                				['label' => 'View All', 'icon' => 'eye', 'url' => ['/role/roles/index'],],
                 		],
                 		
                 		],
                 		[
                 		'label' => 'Admin Users',
-                		'icon' => 'fa fa-users',
+                		'icon' => 'user',
                 		'url' => '#',
                 		'items' => [
-                				['label' => 'Create', 'icon' => 'fa fa-plus', 'url' => ['/user/adminusers/create'],],
-                				['label' => 'View All', 'icon' => 'fa fa-eye', 'url' => ['/user/adminusers/index'],],
+                				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/user/adminusers/create'],],
+                				['label' => 'View All', 'icon' => 'eye', 'url' => ['/user/adminusers/index'],],
                 		],
                 		
                 		],
                 		[
                 				'label' => 'Modules',
-                				'icon' => 'fa fa-users',
+                				'icon' => 'users',
                 				'url' => '#',
                 				'items' => [
-                						['label' => 'Create', 'icon' => 'fa fa-plus', 'url' => ['/user/modulemaster/create'],],
-                						['label' => 'View All', 'icon' => 'fa fa-eye', 'url' => ['/user/modulemaster/index'],],
+                						['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/user/modulemaster/create'],],
+                						['label' => 'View All', 'icon' => 'eye', 'url' => ['/user/modulemaster/index'],],
                 				],
                 		
                 		],
@@ -69,8 +69,8 @@
                         'icon' => 'user-md',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Create', 'icon' => 'circle-o', 'url' => ['/doctors/doctors/create'],],
-                            ['label' => 'View', 'icon' => 'circle-o', 'url' => ['/doctors/doctors'],],
+                            ['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/doctors/doctors/create'],],
+                            ['label' => 'View', 'icon' => 'eye', 'url' => ['/doctors/doctors'],],
                             
                         ],
                     ],
@@ -80,8 +80,8 @@
                 		'icon' => 'user-md',
                 		'url' => '#',
                 		'items' => [
-                				['label' => 'Create', 'icon' => 'circle-o', 'url' => ['/intresteddoctors/intresteddoctors/create'],],
-                				['label' => 'View', 'icon' => 'circle-o', 'url' => ['/intresteddoctors/intresteddoctors'],],
+                				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/intresteddoctors/intresteddoctors/create'],],
+                				['label' => 'View', 'icon' => 'eye', 'url' => ['/intresteddoctors/intresteddoctors'],],
                 		
                 		],
                 		],
@@ -91,8 +91,8 @@
                 		'icon' => 'sun-o',
                 		'url' => '#',
                 		'items' => [
-                				['label' => 'Create', 'icon' => 'circle-o', 'url' => ['/qualifications/qualifications/create'],],
-                				['label' => 'View', 'icon' => 'circle-o', 'url' => ['/qualifications/qualifications'],],
+                				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/qualifications/qualifications/create'],],
+                				['label' => 'View', 'icon' => 'eye', 'url' => ['/qualifications/qualifications'],],
                 		
                 		],
                 		],
@@ -102,8 +102,8 @@
                 		'icon' => 'id-badge',
                 		'url' => '#',
                 		'items' => [
-                				['label' => 'Create', 'icon' => 'circle-o', 'url' => ['/specialities/specialities/create'],],
-                				['label' => 'View', 'icon' => 'circle-o', 'url' => ['/specialities/specialities'],],
+                				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/specialities/specialities/create'],],
+                				['label' => 'View', 'icon' => 'eye', 'url' => ['/specialities/specialities'],],
                 		
                 		],
                 		],
@@ -113,8 +113,8 @@
                 		'icon' => 'h-square',
                 		'url' => '#',
                 		'items' => [
-                				['label' => 'Create', 'icon' => 'circle-o', 'url' => ['/nursinghomes/nursinghomes/create'],],
-                				['label' => 'View', 'icon' => 'circle-o', 'url' => ['/nursinghomes/nursinghomes'],],
+                				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/nursinghomes/nursinghomes/create'],],
+                				['label' => 'View', 'icon' => 'eye', 'url' => ['/nursinghomes/nursinghomes'],],
                 		
                 		],
                 		],
@@ -124,8 +124,8 @@
                 		'icon' => 'h-square',
                 		'url' => '#',
                 		'items' => [
-                				['label' => 'Create', 'icon' => 'circle-o', 'url' => ['/intrestednursinghomes/intrestednghs/create'],],
-                				['label' => 'View', 'icon' => 'circle-o', 'url' => ['/intrestednursinghomes/intrestednghs'],],
+                				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/intrestednursinghomes/intrestednghs/create'],],
+                				['label' => 'View', 'icon' => 'eye', 'url' => ['/intrestednursinghomes/intrestednghs'],],
                 		
                 		],
                 		],
