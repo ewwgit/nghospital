@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
 			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'lastName')->textInput(['maxlength' => true]) ?></div>
 			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'phoneNumber')->textInput(['maxlength' => 10]) ?></div>
 
-			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'role')->dropDownList($model->roles) ?></div>
+			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'role')->dropDownList($model->roles, ['prompt' => 'Select Role']) ?></div>
 
 			<div class="form-group col-lg-6 col-sm-12">   <?= $form->field($model, 'file')->fileInput()?>
          <?php if($model->profileImage != ''){?>

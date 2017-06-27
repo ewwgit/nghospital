@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\AdminMaster */
 
 $this->title = $model->username;
-$this->params['breadcrumbs'][] = ['label' => 'Admin Masters', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Admin Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="admin-master-view">  

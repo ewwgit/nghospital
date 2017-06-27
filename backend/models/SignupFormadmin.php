@@ -52,6 +52,7 @@ class SignupFormadmin extends Model
         	
            
             ['password', 'string', 'min' => 6],
+        	['role','required'],
         		
         	[['role','firstName','lastName','phoneNumber','profileImage','address','status','id'],'safe'],
         		
