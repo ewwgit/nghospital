@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
 </div>
    
 <div class="form-group col-lg-7 col-sm-12">
-    <?= $form->field($model, 'status')->dropDownList([ 'Active' => 'Active', 'In-active' => 'In-active', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'status')->dropDownList([ 'Active' => 'Active', 'In-active' => 'In-active', ], ['prompt' => 'Select Status']) ?>
 </div>
     
 

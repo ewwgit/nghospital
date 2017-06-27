@@ -2,14 +2,16 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use app\models\AdminMaster;
+//use app\models\AdminMaster;
+use app\modules\nursinghomes\models\Nursinghomes;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\ModulesMaster */
 
-$this->title = 'Modules Master: ' . ' ' . $model->moduleName;
+$this->title = 'Module Master  >  ' . ' ' . $model->moduleName;
 $this->params['breadcrumbs'][] = ['label' => 'Modules Masters', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+//print_r($model->createdBy);exit;
 ?>
 <div class="modules-master-view">
 
@@ -18,19 +20,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             //'moduleId',
             'moduleName',
-            'type',
+            //'type',
             'status',
             
-        		[
+        		 [
         		'attribute' => 'createdBy',
         		
-        		'value' =>  AdminMaster::getUsername($model->createdBy),
+        		'value' =>  Nursinghomes::getUsername($model->createdBy),
         		],
         		
         		[
-        				'attribute' => 'UpdatedBy',
+        		'attribute' => 'updatedBy',
         		
-        				'value' =>  AdminMaster::getUsername($model->updatedBy),
+        		'value' =>  Nursinghomes::getUsername($model->updatedBy),
         		],
         		
         		[

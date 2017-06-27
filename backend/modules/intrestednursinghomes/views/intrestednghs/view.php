@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\modules\intrestednursinghomes\models\Intrestednghs */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Interested NursingHomes', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Interested Nursing Homes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="intrestednghs-view">
@@ -28,9 +28,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'insnghid',
+          //'insnghid',
             'name',
-            'email:email',
+            //'email:email',
+        		[
+        		'attribute'=>'email:email',
+        		'value' => $model->email,
+        		//'format' => 'raw',
+        		],
             'role',
             'description:ntext',
             'mobile',

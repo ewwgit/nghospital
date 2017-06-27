@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\intrestednursinghomes\models\Intrestednghs */
 
-$this->title = 'Create Interested NursingHomes';
-$this->params['breadcrumbs'][] = ['label' => 'Interested NursingHomes', 'url' => ['index']];
+$this->title = 'Create Interested Nursing Homes';
+$this->params['breadcrumbs'][] = ['label' => 'Interested Nursing Homes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="intrestednghs-create">

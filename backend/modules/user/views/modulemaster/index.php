@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ModulesMasterSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Modules Masters';
+$this->title = 'Modules';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modules-master-index">

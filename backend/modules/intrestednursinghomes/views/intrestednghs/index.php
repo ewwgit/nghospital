@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\modules\intrestednursinghomes\models\IntrestednghsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Interested NursingHomes';
+$this->title = 'Interested Nursing Homes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="intrestednghs-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Interested NursingHomes', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Interested Nursing Homes', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
