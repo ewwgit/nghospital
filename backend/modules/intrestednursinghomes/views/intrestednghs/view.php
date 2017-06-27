@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             //'email:email',
         		[
-        		'attribute'=>'email:email',
+        		'attribute'=>'email',
         		'value' => $model->email,
         		//'format' => 'raw',
         		],

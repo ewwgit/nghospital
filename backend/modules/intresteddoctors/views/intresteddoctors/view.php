@@ -30,7 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'insdocid',
             'name',
-            'email:email',
+           // 'email:email',
+        		[
+        		'attribute'=>'email',
+        		'value' => $model->email,
+        		//'format' => 'raw',
+        		],
             'role',
             'description:ntext',
             'mobile',
