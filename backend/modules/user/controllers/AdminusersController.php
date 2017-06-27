@@ -16,8 +16,10 @@ use app\models\ModulesMasterSearch;
 use app\models\ModulePermissions;
 use yii\web\UploadedFile;
 use app\models\SignupFormadmin;
+use backend\models\Role;
 use app\models\AdminInformation;
 use app\models\UserMainSearch;
+use yii\helpers\ArrayHelper;
 use common\models\User;
 /**
  * AdminusersController implements the CRUD actions for AdminMaster model.
@@ -99,7 +101,13 @@ class AdminusersController extends Controller
     		$model->username = $adminuser->username;
     		$model->email = $adminuser->email;
     		$model->status = $adminuser->status;
-    		$model->role = $adminuser->role;
+    		$roleName = Role::find()->select('RoleName')->where( ['RoleId' => $adminuser->role])->one();
+    		$data = ArrayHelper::toArray($roleName, [
+    				'RoleName'
+    		]);
+    		$roleary = array_column($data, 'RoleName');
+    		$model->role = $roleary;
+    		//print_r($model->role);exit();
     	$adminInfo = AdminInformation::find()->where(['aduserId' => $adminuser->id])->one();
         if(!empty($adminInfo))
         {

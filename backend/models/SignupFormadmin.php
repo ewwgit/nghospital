@@ -39,8 +39,12 @@ class SignupFormadmin extends Model
            // ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
         	['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.','on' =>'create'],
-        	
-        	
+        		['username',
+        		'match', 'not' => true, 'pattern' => '/[^a-zA-Z0-9]/',
+        		'message' => 'Invalid username pattern.',
+        		],
+        		
+        	['status','required'],
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
