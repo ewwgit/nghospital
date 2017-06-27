@@ -69,7 +69,7 @@ class IntrestednghsController extends Controller
         	    $model->createdDate = date('Y-m-d H:i:s');
         	    $model->role = 3;
         		$model->save() ;
-        		Yii::$app->session->setFlash('success', " InterestedNursingHomes Created successfully ");
+        		Yii::$app->session->setFlash('success', " Interested Nursing Homes Created successfully ");
             return $this->redirect(['view', 'id' => $model->insnghid]);
         } else {
             return $this->render('create', [
@@ -92,7 +92,7 @@ class IntrestednghsController extends Controller
         	
         	 $model->role = 3;
         	 $model->save();
-        	 Yii::$app->session->setFlash('success', " InterestedNursingHomes Updated successfully ");
+        	 Yii::$app->session->setFlash('success', " Interested Nursing Homes Updated successfully ");
             return $this->redirect(['view', 'id' => $model->insnghid]);
         } else {
             return $this->render('update', [

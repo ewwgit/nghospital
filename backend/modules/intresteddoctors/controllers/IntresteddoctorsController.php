@@ -70,7 +70,7 @@ class IntresteddoctorsController extends Controller
         	$model->role = 2;
         	$model->createdDate = date('Y-m-d H:i:s');
         	$model->save();
-        	Yii::$app->session->setFlash('success', " InterestedDoctors Created successfully ");
+        	Yii::$app->session->setFlash('success', " Interested Doctors Created successfully ");
             //return $this->redirect(['view', 'id' => $model->insdocid]);
         	return $this->redirect(['index']);
         } else {
@@ -91,7 +91,7 @@ class IntresteddoctorsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        	Yii::$app->session->setFlash('success', " InterestedDoctors Updated successfully ");
+        	Yii::$app->session->setFlash('success', " Interested Doctors Updated successfully ");
             return $this->redirect(['view', 'id' => $model->insdocid]);
         } else {
             return $this->render('update', [

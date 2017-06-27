@@ -100,7 +100,7 @@ class ModulemasterController extends Controller
         $model = new ModulesMaster();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        	Yii::$app->session->setFlash('success', "Modules Masters successfully Created");
+        	Yii::$app->session->setFlash('success', "Modules  successfully Created");
         	 
             return $this->redirect(['view', 'id' => $model->moduleId]);
         } else {
@@ -121,7 +121,7 @@ class ModulemasterController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        	Yii::$app->session->setFlash('success', "Modules Masters successfully Updated");
+        	Yii::$app->session->setFlash('success', "Modules  successfully Updated");
         	 
             return $this->redirect(['view', 'id' => $model->moduleId]);
         } else {
@@ -141,12 +141,12 @@ class ModulemasterController extends Controller
     {
     	try{
     		$model = $this->findModel($id)->delete();
-    		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted  Modules Masters.');
+    		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted  Modules .');
     		 
     	}
     	
     	catch(\yii\db\Exception $e){
-    		Yii::$app->getSession()->setFlash('error', 'This Modules Masters is not deleted.');
+    		Yii::$app->getSession()->setFlash('error', 'This Modules  is not deleted.');
     		 
     	}
       //  $this->findModel($id)->delete();
