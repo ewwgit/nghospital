@@ -56,7 +56,7 @@ $fieldOptions2 = [
         
         <!-- /.social-auth-links -->
 
-        <a href="../backend/web/index.php?r=site%2Frequest-password-reset">I forgot my password</a><br>
+        <a href="<?php echo Yii::$app->urlManager->createUrl(['site/request-password-reset']);?>">I forgot my password</a><br>
         
 
     </div>
