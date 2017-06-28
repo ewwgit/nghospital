@@ -8,6 +8,9 @@ use app\modules\intresteddoctors\models\IntresteddoctorsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\UserrolesModel;
+use yii\filters\AccessControl;
+use app\models\ModulePermissions;
 
 /**
  * IntresteddoctorsController implements the CRUD actions for Intresteddoctors model.
@@ -17,7 +20,7 @@ class IntresteddoctorsController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    /* public function behaviors()
     {
         return [
             'verbs' => [
@@ -27,7 +30,74 @@ class IntresteddoctorsController extends Controller
                 ],
             ],
         ];
-    }
+    } */
+	
+	public function behaviors()
+	{
+	
+		$permissionsArray = [''];
+		if(UserrolesModel::getRole() == 1)
+		{
+			$permissionsArray = ['index','create','update','view','delete'];
+		}
+		else {
+			$modulePermissions = ModulePermissions::find()->where(['moduleId' =>7,'adminuserId'=> Yii::$app->user->identity->id])->one();
+			if($modulePermissions['permissions_all'] == 1)
+			{
+				$permissionsArray = ['index','create','update','view','delete'];
+			}
+			else {
+				if($modulePermissions['permissions_add'] == 1)
+				{
+					$permissionAdd = ['create'];
+					$permissionsArray = array_merge($permissionsArray,$permissionAdd);
+				}
+				if($modulePermissions['permissions_edit'] == 1)
+				{
+					$permissionEdit = ['update'];
+					$permissionsArray = array_merge($permissionsArray,$permissionEdit);
+				}
+				if($modulePermissions['permissions_delete'] == 1)
+				{
+					$permissionDelete = ['delete'];
+					$permissionsArray = array_merge($permissionsArray,$permissionDelete);
+				}
+				if($modulePermissions['permissions_view'] == 1)
+				{
+					$permissionView = ['index','view'];
+					$permissionsArray = array_merge($permissionsArray,$permissionView);
+				}
+	
+			}
+		}
+		//print_r($permissionsArray);exit();
+		return [
+				'verbs' => [
+						'class' => VerbFilter::className(),
+						'actions' => [
+								'delete' => ['post'],
+						],
+				],
+				'access' => [
+						'class' => AccessControl::className(),
+						'only' => [
+								'index','create','update','view','delete','brandsupload'
+	
+						],
+						'rules' => [
+								[
+										'actions' => $permissionsArray,
+										'allow' => true,
+										'matchCallback' => function ($rule, $action) {
+										return (UserrolesModel::getRole());
+										}
+										],
+	
+										]
+										]
+										];
+	}
+	
 
     /**
      * Lists all Intresteddoctors models.

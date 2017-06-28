@@ -26,7 +26,7 @@ use common\models\User;
  */
 class AdminusersController extends Controller
 {
-    /* public function behaviors()
+    public function behaviors()
     {
     	
         return [
@@ -68,7 +68,7 @@ class AdminusersController extends Controller
         						]
         						]
         ];
-    } */
+    }
 
     /**
      * Lists all AdminMaster models.
