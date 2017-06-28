@@ -43,7 +43,7 @@ class Role extends \yii\db\ActiveRecord
         
 
         return [
-        		[['RoleName'], 'required'],
+        		[['RoleName','status','description'], 'required'],
         		[['status'], 'string'],
         		[['createdDate', 'updatedDate','description'], 'safe'],
         		
