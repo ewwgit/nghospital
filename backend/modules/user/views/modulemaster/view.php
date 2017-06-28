@@ -9,7 +9,7 @@ use app\modules\nursinghomes\models\Nursinghomes;
 /* @var $model app\models\ModulesMaster */
 
 $this->title = $model->moduleName;
-$this->params['breadcrumbs'][] = ['label' => 'Modules Masters', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Modules ', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 //print_r($model->createdBy);exit;
 ?>
