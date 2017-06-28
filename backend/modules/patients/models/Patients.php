@@ -83,6 +83,7 @@ class Patients extends \yii\db\ActiveRecord
             [['age'], 'string', 'max' => 10],
             [['pinCode', 'mobile', 'cardConatctNumber'], 'string', 'max' => 15],
             [['IPNo'], 'string', 'max' => 20],
+        	[['age','mobile','pinCode'],'integer']
         ];
     }
 

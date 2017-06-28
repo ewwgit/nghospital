@@ -67,7 +67,7 @@ use yii\helpers\Url;
     </div>
     
   <div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'mobile')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'mobile')->textInput(['maxlength' => 10]) ?>
     </div>
      <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'caseNo')->textInput(['maxlength' => true]) ?>
