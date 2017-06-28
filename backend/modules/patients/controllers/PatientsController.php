@@ -112,7 +112,7 @@ class PatientsController extends Controller
         	
            // return $this->redirect(['view', 'id' => $model->patientId]);
         	$patmodel->patientId = $model->patientId;
-        	print_r($patmodel->patientId);exit();
+        	//print_r($patmodel->patientId);exit();
         	$patmodel->height = $model->height;
         	$patmodel->weight = $model->weight;
         	$patmodel->BMI = $model->BMI;
