@@ -57,7 +57,7 @@ public function rules()
     {
         return [
         	['password', 'required', 'on' => 'create'],
-            [[ 'contactPerson', 'mobile', 'city', 'state',  'country', 'pinCode', 'address', 'description',
+            [[ 'status','contactPerson', 'mobile', 'city', 'state',  'country', 'pinCode', 'address', 'description',
             		'username','email','landline'], 'required'],
             [['nuserId', 'state', 'country', 'createdBy', 'updatedBy','mobile','landline'], 'integer'],
             [['address', 'description'], 'string'],
