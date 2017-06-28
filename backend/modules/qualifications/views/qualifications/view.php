@@ -43,8 +43,18 @@ $this->params['breadcrumbs'][] = $this->title;
         		
         		'value' =>  Nursinghomes::getUsername($model->updatedBy),
         		],
-            'createdDate',
-            'updatedDate',
+          //  'createdDate',
+        		[
+        		'attribute' => 'createdDate',
+        		
+        		'format' =>  ['date', 'php:m/d/Y H:i:s'],
+        		],
+            //'updatedDate',
+        		[
+        		'attribute' => 'updatedDate',
+        		
+        		'format' =>  ['date', 'php:m/d/Y H:i:s'],
+        		],
         ],
     ]) ?>
 
