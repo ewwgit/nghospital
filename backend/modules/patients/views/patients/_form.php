@@ -147,7 +147,70 @@ use yii\helpers\Url;
       <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'communicationSource')->textInput(['maxlength' => true]) ?>
    </div>
-
+      <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'height')->textInput(['maxlength' => true]) ?>
+   </div>
+       <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'weight')->textInput(['maxlength' => true]) ?>
+   </div>
+      <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'BMI')->textInput(['maxlength' => true]) ?>
+   </div>
+     <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'respirationRate')->textInput(['maxlength' => true]) ?>
+   </div>
+     <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'BPLeftArm')->textInput(['maxlength' => true]) ?>
+   </div>
+     <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'BPRightArm')->textInput(['maxlength' => true]) ?>
+   </div>
+     <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'pulseRate')->textInput(['maxlength' => true]) ?>
+   </div>
+     <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'temparatureType')->dropDownList([ 'Celsius' => 'Celsius', 'Fahrenheit' => 'Fahrenheit', ], ['prompt' => 'Select Temparature Type']) ?>
+   </div>
+     <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'pallor')->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => 'Select']) ?>
+   </div>
+     <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'lymphadenopathy')->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => 'Select']) ?>
+   </div>
+    <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'oedemaInFeet')->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => 'Select'])?>
+   </div>
+    <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'malnutrition')->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => 'Select']) ?>
+   </div>
+    <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'cyanosis')->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => 'Select']) ?>
+   </div>
+    <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'clubbingFingersToes')->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => 'Select']) ?>
+   </div>
+     <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'dehydration')->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => 'Select']) ?>
+   </div>
+     <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'diseases')->textInput(['maxlength' => true]) ?>
+   </div>
+     <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'addictions')->textInput(['maxlength' => true]) ?>
+   </div>
+     <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'allergicMedicine')->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => 'Select']) ?>
+   </div>
+    <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'allergicSubstance')->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => 'Select']) ?>
+   </div>
+    <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'admissionType')->dropDownList([ 'Emergency' => 'Emergency', 'Normal' => 'Normal', ], ['prompt' => 'Select Admission Type']) ?>
+   </div>
+    <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'admissionDate')->widget ( DatePicker::classname (), [ 'options' => [ 'placeholder' => 'Enter Card Issued Date ...' ],'pluginOptions' => [ 'autoclose' => true ] ] )  ?>
+   </div>
+   
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

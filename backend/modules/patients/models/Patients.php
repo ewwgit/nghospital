@@ -63,6 +63,27 @@ class Patients extends \yii\db\ActiveRecord
 	public $countriesList;
 	public $statesData;
 	public $citiesData;
+	public $height;
+	public $weight;
+	public $BMI;
+	public $respirationRate;
+	public $BPLeftArm;
+    public $BPRightArm;
+    public $pulseRate;
+    public $temparatureType;
+    public $pallor;
+    public $lymphadenopathy;
+    public $oedemaInFeet;
+    public $malnutrition;
+    public $cyanosis;
+    public $clubbingFingersToes;
+    public $dehydration;
+    public $diseases;
+    public $addictions;
+    public $allergicMedicine;
+    public $allergicSubstance;
+    public $admissionType;
+    public $admissionDate;
 	
     public static function tableName()
     {
@@ -76,6 +97,7 @@ class Patients extends \yii\db\ActiveRecord
     {
         return [
             [['firstName', 'lastName', 'gender', 'age', 'dateOfBirth', 'patientUniqueId', 'country', 'countryName', 'state', 'stateName', 'district', 'city', 'mandal', 'village', 'pinCode', 'cardNo', 'mobile', 'caseNo', 'claimNo', 'IPNo', 'IPRegistrationDate', 'category', 'patientProcedure', 'caseStatus', 'cardIssuedDate', 'caste', 'occupation', 'relationshipWithFamilyHead', 'cardHouseNo', 'cardStreet', 'cardHamlet', 'cardVillage', 'cardMandal', 'cardDistrict', 'cardConatctNumber', 'cardSourceNumber', 'communicationHouseNo', 'communicationStreet', 'communicationHamlet', 'communicationVillage', 'communicationMandal', 'communicationDistrict', 'communicationSource', 'createdDate', 'updatedDate'], 'required'],
+            [['patientId', 'height', 'weight', 'BMI', 'respirationRate', 'BPLeftArm', 'BPRightArm', 'pulseRate', 'temparatureType', 'pallor', 'lymphadenopathy', 'oedemaInFeet', 'malnutrition', 'cyanosis', 'clubbingFingersToes', 'dehydration', 'diseases', 'addictions', 'allergicMedicine', 'allergicSubstance', 'admissionType', 'admissionDate', 'createdDate'], 'required'],       		
             [['gender', 'patientProcedure', 'caseStatus'], 'string'],
             [['dateOfBirth', 'IPRegistrationDate', 'cardIssuedDate', 'createdDate', 'updatedDate'], 'safe'],
             [['country', 'state'], 'integer'],
@@ -83,7 +105,8 @@ class Patients extends \yii\db\ActiveRecord
             [['age'], 'string', 'max' => 10],
             [['pinCode', 'mobile', 'cardConatctNumber'], 'string', 'max' => 15],
             [['IPNo'], 'string', 'max' => 20],
-        	[['age','mobile','pinCode'],'integer']
+        	[['age','mobile','pinCode'],'integer'],
+        		[['firstName', 'lastName', 'gender', 'age', 'dateOfBirth', 'patientUniqueId', 'country', 'countryName', 'state', 'stateName', 'district', 'city', 'mandal', 'village', 'pinCode', 'cardNo', 'mobile', 'caseNo', 'claimNo', 'IPNo', 'IPRegistrationDate', 'category', 'patientProcedure', 'caseStatus', 'cardIssuedDate', 'caste', 'occupation', 'relationshipWithFamilyHead', 'cardHouseNo', 'cardStreet', 'cardHamlet', 'cardVillage', 'cardMandal', 'cardDistrict', 'cardConatctNumber', 'cardSourceNumber', 'communicationHouseNo', 'communicationStreet', 'communicationHamlet', 'communicationVillage', 'communicationMandal', 'communicationDistrict', 'communicationSource', 'createdDate', 'updatedDate'], 'safe'],
         ];
     }
 
