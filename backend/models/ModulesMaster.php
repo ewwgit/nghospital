@@ -37,10 +37,11 @@ class ModulesMaster extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+        		
             [['moduleId', 'moduleName', 'type', 'status', 'createdBy', 'updatedBy', 'createdDate', 'updatedDate', 'ipAddress'], 'safe'],
            // [['moduleId', 'createdBy', 'updatedBy'], 'integer'],
             //[['status'], 'string'],
-            [['moduleName'], 'required'],
+            [['moduleName','status'], 'required'],
             //[['moduleName', 'type', 'ipAddress'], 'string', 'max' => 200]
         	['moduleName', 'unique', 
         	 'message' => 'This module has already been taken.'],
