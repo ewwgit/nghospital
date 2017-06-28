@@ -7,7 +7,7 @@ use yii\authclient\widgets\AuthChoice;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \common\models\LoginForm */
 
-$this->title = 'Watax | Reset Password';
+$this->title = 'Reset Password';
 $this->params ['breadcrumbs'] [] = $this->title;
 ?>
 
