@@ -56,7 +56,7 @@ class Patients extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['firstName', 'lastName', 'gender', 'age', 'dateOfBirth', 'patientUniqueId', 'country', 'countryName', 'state', 'stateName', 'district', 'city', 'mandal', 'village', 'pinCode', 'mobile', 'createdDate', 'updatedDate'], 'required'],
+            [['firstName', 'lastName', 'gender', 'age', 'dateOfBirth', 'country', 'state',  'district', 'city', 'mandal', 'village', 'pinCode', 'mobile'], 'required'],
              [['height','weight','respirationRate','BPLeftArm','BPRightArm','pulseRate','temparatureType','diseases','allergicMedicine','patientCompliant'],'required'],
             [['gender'], 'string'],
             [['age','mobile','pinCode'],'integer'],
@@ -71,7 +71,7 @@ class Patients extends \yii\db\ActiveRecord
         		'pattern' => '/^[0-9\s]{4,8}$/',
         		'message' => 'PinCode Must be between 4 and 8 numeric only.'
         				],
-        	[['height','weight','respirationRate','BPLeftArm','BPRightArm','pulseRate','temparatureType','diseases','allergicMedicine','createdDate','patientCompliant'],'safe'],
+        	[['height','weight','respirationRate','BPLeftArm','BPRightArm','pulseRate','temparatureType','diseases','allergicMedicine','createdDate','patientCompliant', 'createdDate', 'updatedDate', 'countryName', 'stateName', 'patientUniqueId'],'safe'],
         ];
     }
 

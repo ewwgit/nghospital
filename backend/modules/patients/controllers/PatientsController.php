@@ -87,7 +87,7 @@ class PatientsController extends Controller
         	$model->state='';
         }
 
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
         	
         	
         	$presentDate = date('Y-m-d');
@@ -128,7 +128,7 @@ class PatientsController extends Controller
         	//print_r($patmodel->patientCompliant);exit();
         	$patmodel->createdDate = date('Y-m-d H:i:s');
         	//print_r($patmodel->createdDate);exit();
-        	$patmodel->save(false);
+        	$patmodel->save();
         	
         
         
@@ -139,6 +139,7 @@ class PatientsController extends Controller
             return $this->redirect(['index']);
         
         } else {
+        	//print_r($model->errors);exit();
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -183,7 +184,7 @@ class PatientsController extends Controller
         }
         
 
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
         	
         	$model->updatedDate = date('Y-m-d H:i:s');
         	$model->countryName = Countries::getCountryName($model->country);
