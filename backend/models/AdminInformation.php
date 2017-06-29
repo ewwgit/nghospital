@@ -34,6 +34,7 @@ class AdminInformation extends \yii\db\ActiveRecord
         return [
             [['aduserId', 'firstName', 'lastName', 'address', 'profileImage','phoneNumber'], 'safe'],
         	[['firstName','lastName'] ,'required'],
+        	[['phoneNumber'],'integer'],
             [['aduserId'], 'integer'],
             [['address', 'profileImage'], 'string'],
             [['firstName', 'lastName'], 'string', 'max' => 200],

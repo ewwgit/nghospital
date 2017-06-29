@@ -57,6 +57,12 @@ class SignupFormadmin extends Model
            
             ['password', 'string', 'min' => 6],
         	['role','required'],
+        		[['phoneNumber'],'integer'],
+        		['phoneNumber',
+        		'match',
+        		'pattern' => '/^[0-9]{10}$/',
+        		'message' => 'mobile number must contain exactly 10 numbers.',
+        		],
         		
         	[['role','firstName','lastName','phoneNumber','profileImage','address','status','id'],'safe'],
         		
