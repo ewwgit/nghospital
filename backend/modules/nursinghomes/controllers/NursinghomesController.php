@@ -13,6 +13,7 @@ use app\models\States;
 use common\models\User;
 use yii\helpers\Json;
 use backend\models\SignupForm;
+use yii\web\UploadedFile;
 
 /**
  * NursinghomesController implements the CRUD actions for Nursinghomes model.
@@ -106,6 +107,7 @@ class NursinghomesController extends Controller
         	$nursinghomescount = Nursinghomes::find()->where("createdDate LIKE '$presentDate%'")->count();
         	/* echo $nursinghomescount;
         	exit(); */
+        	$model->nursingImage = UploadedFile::getInstance($model,'nursingImage');
         	$addnewid = $nursinghomescount+1;
         	$uniqonlyId = str_pad($addnewid, 5, '0', STR_PAD_LEFT);
         	$dateInfo = date_parse(date('Y-m-d H:i:s'));
@@ -132,6 +134,15 @@ class NursinghomesController extends Controller
         	$model->createdBy = Yii::$app->user->identity->id;
         	$model->updatedBy = Yii::$app->user->identity->id;        	
         	$model->nurshingUniqueId = $overallUniqueId;
+        	if(!(empty($model->nursingImage)))
+        	{
+        		 
+        		$imageName = time().$model->nursingImage->name;
+        		 
+        		$model->nursingImage->saveAs('profileimages/'.$imageName );
+        		 
+        		$model->nursingImage = 'profileimages/'.$imageName;
+        	}
         	$model->save();
         	//print_r($model);exit;
         	
@@ -161,6 +172,8 @@ class NursinghomesController extends Controller
    
         $model->countriesList = Countries::getCountries();
         $model->citiesData = [];
+        $model->nursingimageupdate = $model->nursingImage;
+        $model->nursingImage = '';
         
     //  print_r($model->country);exit;
         
@@ -171,6 +184,7 @@ class NursinghomesController extends Controller
         
         }else{
         	$model->country = $model->country;
+        	
         	$model->statesData =[];
         	$model->state='';
         }
@@ -184,12 +198,27 @@ class NursinghomesController extends Controller
         	}
         	        	
         if (($model->load ( Yii::$app->request->post () )) && ($model->validate ())) {
+        	
+        	$model->nursingImage = UploadedFile::getInstance($model,'nursingImage');
           	$model->countryName = Countries::getCountryName($model->country);
         	$model->stateName = States::getStateName($model->state);
         	$model->updatedDate = date('Y-m-d H:i:s');
             $model->updatedBy = Yii::$app->user->identity->id;
         	$usermodel->status = $model->status;
         	$usermodel->save();
+        	if(!(empty($model->nursingImage)))
+        	{
+        		 
+        		$imageName = time().$model->nursingImage->name;
+        		 
+        		$model->nursingImage->saveAs('profileimages/'.$imageName );
+        	
+        		$model->nursingImage = 'profileimages/'.$imageName;
+        		 
+        	}
+        	else {
+        		$model->nursingImage = $model->nursingimageupdate;
+        	}
             $model->save();
           	        
            // return $this->redirect(['view', 'id' => $model->nursingId]);

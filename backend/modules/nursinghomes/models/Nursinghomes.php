@@ -33,6 +33,7 @@ class Nursinghomes extends \yii\db\ActiveRecord
      public $password;
      public $confirmpassword;
      public $status;
+     public $nursingimageupdate;
      
      
      public $countriesList;
@@ -61,7 +62,7 @@ public function rules()
             		'username','email','landline'], 'required'],
             [['nuserId', 'state', 'country', 'createdBy', 'updatedBy','mobile','landline'], 'integer'],
             [['address', 'description'], 'string'],
-            [['countriesList','updatedDate','createdDate','nuserId', 'nurshingUniqueId', 'contactPerson', 'mobile', 'city', 'state', 'stateName', 'country', 'countryName', 'pinCode', 'address', 'description',
+            [['countriesList','updatedDate','createdDate','nuserId', 'nurshingUniqueId', 'contactPerson', 'mobile', 'city', 'state', 'stateName', 'country', 'countryName', 'pinCode', 'address', 'description','nursingImage',
             		'username','email','password','landline'], 'safe'],
             [['contactPerson', 'city', 'stateName', 'countryName'], 'string', 'max' => 200],
                  		

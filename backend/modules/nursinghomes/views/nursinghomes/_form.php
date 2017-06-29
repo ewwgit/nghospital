@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\depdrop\DepDrop;
 use yii\helpers\Url;
+use kartik\file\FileInput;
 //use kartik\widgets\DepDrop;
 /* @var $this yii\web\View */
 /* @var $model app\models\Nursinghomes */
@@ -13,7 +14,7 @@ use yii\helpers\Url;
 
 <div class="nursinghomes-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options'=>['enctype' =>'multipart/form-data']]); ?>
  	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'contactPerson')->textInput(['maxlength' => true]) ?>
     </div>
@@ -38,10 +39,11 @@ use yii\helpers\Url;
     	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'pinCode')->textInput(['maxlength' => 8]) ?>
 	</div>
-   
-	
-	
-    
+	<div class="form-group col-lg-6 col-sm-12">
+      <?=$form->field ( $model, 'nursingImage' )->widget ( FileInput::classname (),
+   		[ 'options' => [ 'accept' => 'image/*' ],'pluginOptions' =>[[ 'browseLabel' => 'Profile Image', 'allowedFileExtensions'=>['jpg','png','jpeg'] ]] ] )?>     
+    </div>
+       
 	<div class="form-group col-lg-6 col-sm-12"> 
     <?= $form->field($model, 'country')->dropDownList($model->countriesList,['prompt'=>'Select Countries']);?>
     </div>

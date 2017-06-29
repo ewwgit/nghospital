@@ -30,25 +30,48 @@ $this->params['breadcrumbs'][] = $this->title;
 .doctor-box {
 	border: none;
 }
+th {
+	display: none;
+}
 </style>
     <div class="row">      
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" style="margin-left:0px; padding-left: 0px;">			   
-			<div class="panel panel-info">		          
+			<div class="panel panel-info">	
+			
+			<div class="col-md-8">	
+						<div class="box4" style="float: left;">
+						
+						<div class="right">Nursing Unique ID</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?= $model->nurshingUniqueId; ?></div>
+						</div>				
+					</div>	
+					<div class="col-md-3" style="float: left;">
+								
+					<?php if($model->nursingImage != ''){?>
+					<?php $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->nursingImage;?>
+					<?php  } ?>
+					<?= DetailView::widget([
+							'model' => $model,
+							'attributes' => [
+									[
+											'attribute'=>'nursingImage',
+											'format' => 'html',
+											'value'=>Html::img($model->nursingImage ? $imgeurl : '/@web/images/user-iconnew.png',['width' => '150px','height' => '150px']),
+        		],
+        ],
+    ]) ?>
+					</div>		          
 				<div class="panel-body">		   
 					<!--form section start -->
 	
 					<div class="row">
-					<?php 
-    $usernamedata = User::find()->select(['username','email','status'])->where(['id'=>$model->nuserId])->one();
-    
-  //print_r($usernamedata);exit;
+					<?php $usernamedata = User::find()->select(['username','email','status'])->where(['id'=>$model->nuserId])->one();?>
   
-    ?>
+      
 						<div class="col-md-12 col-sm-6 col-xs-6 main-wrap">
 							<div class="doctor-box">					        
-								<div class="right">Nursing Unique ID</div>								
-								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->nurshingUniqueId; ?> </div>
+															
 								
 								<div class="right">Contact Person</div>								
 								<div class="right-content">:</div>

@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\depdrop\DepDrop;
+use kartik\file\FileInput;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
@@ -12,7 +13,10 @@ use yii\helpers\Url;
 
 <div class="nursinghomes-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+     <?php $form = ActiveForm::begin( [ 
+		'options' => [ 
+				'enctype' => 'multipart/form-data' 
+		] ]); ?>
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'contactPerson')->textInput(['maxlength' => true]) ?>
     </div>
@@ -51,6 +55,32 @@ use yii\helpers\Url;
    	<div class="form-group col-lg-6 col-sm-12">
    <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
 	</div>
+	 <div class="form-group col-lg-6 col-sm-12">
+    <?php if($model->nursingImage != ''){?>
+    </div>
+    <div class="form-group col-lg-6 col-sm-12">
+    <?php $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->nursingImage;?>
+
+						 		
+						 		<?php  }
+						 		// print_r($imgeurl);exit;?>
+						<img class='image' 
+							src="<?php
+							if($model->nursingimageupdate)
+							{
+								
+								echo isset( $model->nursingimageupdate)? Url::base().'/'.$model->nursingimageupdate : '' ;
+							
+							}else {
+									 echo Url::base()."/images/user-iconnew.png" ;
+								      }
+								?>"
+							width="100" height="100"> </img> 
+							 <?=$form->field ( $model, 'nursingImage' )->widget ( FileInput::classname (), [ 'options' => [ 'accept' => 'image/*' ],'pluginOptions' =>[[ 'browseLabel' => 'doctorImage', 'allowedFileExtensions'=>['jpg','png','jpeg'] ]] ] )?>
+            <?= $form->field($model, 'nursingimageupdate')->hiddenInput()->label(false); ?>
+            
+        
+	</div>   
 		<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'description')->textarea(['rows' => 4]) ?>
    	</div>
