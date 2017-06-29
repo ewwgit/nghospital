@@ -302,10 +302,12 @@ class NursinghomesController extends Controller
     public function actionNursinghomes()
     {
     
-    	$model = new SignupForm();
+    	$model = new UserMain();
     	 
     	if ($model->load(Yii::$app->request->post()) ){
-    		//$model->save();
+    		$model->role= 2;
+    		$model->password= '123456';
+    		$model->save();
     		Yii::$app->session->setFlash('success', "Nursing Homes Created successfully ");
     		return $this->redirect(['index']);
     	} else {
