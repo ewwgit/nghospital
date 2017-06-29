@@ -47,61 +47,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'pinCode') ?>
 
-    <?php // echo $form->field($model, 'cardNo') ?>
-
     <?php // echo $form->field($model, 'mobile') ?>
-
-    <?php // echo $form->field($model, 'caseNo') ?>
-
-    <?php // echo $form->field($model, 'claimNo') ?>
-
-    <?php // echo $form->field($model, 'IPNo') ?>
-
-    <?php // echo $form->field($model, 'IPRegistrationDate') ?>
-
-    <?php // echo $form->field($model, 'category') ?>
-
-    <?php // echo $form->field($model, 'patientProcedure') ?>
-
-    <?php // echo $form->field($model, 'caseStatus') ?>
-
-    <?php // echo $form->field($model, 'cardIssuedDate') ?>
-
-    <?php // echo $form->field($model, 'caste') ?>
-
-    <?php // echo $form->field($model, 'occupation') ?>
-
-    <?php // echo $form->field($model, 'relationshipWithFamilyHead') ?>
-
-    <?php // echo $form->field($model, 'cardHouseNo') ?>
-
-    <?php // echo $form->field($model, 'cardStreet') ?>
-
-    <?php // echo $form->field($model, 'cardHamlet') ?>
-
-    <?php // echo $form->field($model, 'cardVillage') ?>
-
-    <?php // echo $form->field($model, 'cardMandal') ?>
-
-    <?php // echo $form->field($model, 'cardDistrict') ?>
-
-    <?php // echo $form->field($model, 'cardConatctNumber') ?>
-
-    <?php // echo $form->field($model, 'cardSourceNumber') ?>
-
-    <?php // echo $form->field($model, 'communicationHouseNo') ?>
-
-    <?php // echo $form->field($model, 'communicationStreet') ?>
-
-    <?php // echo $form->field($model, 'communicationHamlet') ?>
-
-    <?php // echo $form->field($model, 'communicationVillage') ?>
-
-    <?php // echo $form->field($model, 'communicationMandal') ?>
-
-    <?php // echo $form->field($model, 'communicationDistrict') ?>
-
-    <?php // echo $form->field($model, 'communicationSource') ?>
 
     <?php // echo $form->field($model, 'createdDate') ?>
 

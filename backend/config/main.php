@@ -39,6 +39,7 @@ return [
     		'patients' => [
     				'class' => 'app\modules\patients\patients',
     		],
+
     ],
     'components' => [
         'request' => [

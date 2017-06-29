@@ -19,7 +19,7 @@ class PatientsSearch extends Patients
     {
         return [
             [['patientId', 'country', 'state'], 'integer'],
-            [['firstName', 'lastName', 'gender', 'age', 'dateOfBirth', 'patientUniqueId', 'countryName', 'stateName', 'district', 'city', 'mandal', 'village', 'pinCode', 'cardNo', 'mobile', 'caseNo', 'claimNo', 'IPNo', 'IPRegistrationDate', 'category', 'patientProcedure', 'caseStatus', 'cardIssuedDate', 'caste', 'occupation', 'relationshipWithFamilyHead', 'cardHouseNo', 'cardStreet', 'cardHamlet', 'cardVillage', 'cardMandal', 'cardDistrict', 'cardConatctNumber', 'cardSourceNumber', 'communicationHouseNo', 'communicationStreet', 'communicationHamlet', 'communicationVillage', 'communicationMandal', 'communicationDistrict', 'communicationSource', 'createdDate', 'updatedDate'], 'safe'],
+            [['firstName', 'lastName', 'gender', 'age', 'dateOfBirth', 'patientUniqueId', 'countryName', 'stateName', 'district', 'city', 'mandal', 'village', 'pinCode', 'mobile', 'createdDate', 'updatedDate'], 'safe'],
         ];
     }
 
@@ -63,8 +63,6 @@ class PatientsSearch extends Patients
             'dateOfBirth' => $this->dateOfBirth,
             'country' => $this->country,
             'state' => $this->state,
-            'IPRegistrationDate' => $this->IPRegistrationDate,
-            'cardIssuedDate' => $this->cardIssuedDate,
             'createdDate' => $this->createdDate,
             'updatedDate' => $this->updatedDate,
         ]);
@@ -81,32 +79,7 @@ class PatientsSearch extends Patients
             ->andFilterWhere(['like', 'mandal', $this->mandal])
             ->andFilterWhere(['like', 'village', $this->village])
             ->andFilterWhere(['like', 'pinCode', $this->pinCode])
-            ->andFilterWhere(['like', 'cardNo', $this->cardNo])
-            ->andFilterWhere(['like', 'mobile', $this->mobile])
-            ->andFilterWhere(['like', 'caseNo', $this->caseNo])
-            ->andFilterWhere(['like', 'claimNo', $this->claimNo])
-            ->andFilterWhere(['like', 'IPNo', $this->IPNo])
-            ->andFilterWhere(['like', 'category', $this->category])
-            ->andFilterWhere(['like', 'patientProcedure', $this->patientProcedure])
-            ->andFilterWhere(['like', 'caseStatus', $this->caseStatus])
-            ->andFilterWhere(['like', 'caste', $this->caste])
-            ->andFilterWhere(['like', 'occupation', $this->occupation])
-            ->andFilterWhere(['like', 'relationshipWithFamilyHead', $this->relationshipWithFamilyHead])
-            ->andFilterWhere(['like', 'cardHouseNo', $this->cardHouseNo])
-            ->andFilterWhere(['like', 'cardStreet', $this->cardStreet])
-            ->andFilterWhere(['like', 'cardHamlet', $this->cardHamlet])
-            ->andFilterWhere(['like', 'cardVillage', $this->cardVillage])
-            ->andFilterWhere(['like', 'cardMandal', $this->cardMandal])
-            ->andFilterWhere(['like', 'cardDistrict', $this->cardDistrict])
-            ->andFilterWhere(['like', 'cardConatctNumber', $this->cardConatctNumber])
-            ->andFilterWhere(['like', 'cardSourceNumber', $this->cardSourceNumber])
-            ->andFilterWhere(['like', 'communicationHouseNo', $this->communicationHouseNo])
-            ->andFilterWhere(['like', 'communicationStreet', $this->communicationStreet])
-            ->andFilterWhere(['like', 'communicationHamlet', $this->communicationHamlet])
-            ->andFilterWhere(['like', 'communicationVillage', $this->communicationVillage])
-            ->andFilterWhere(['like', 'communicationMandal', $this->communicationMandal])
-            ->andFilterWhere(['like', 'communicationDistrict', $this->communicationDistrict])
-            ->andFilterWhere(['like', 'communicationSource', $this->communicationSource]);
+            ->andFilterWhere(['like', 'mobile', $this->mobile]);
 
         return $dataProvider;
     }

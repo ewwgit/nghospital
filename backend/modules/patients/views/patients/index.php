@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="patients-index">
 
-   
+ 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'gender',
             'age',
             // 'dateOfBirth',
-            // ,
+            // 'patientUniqueId',
             // 'country',
             // 'countryName',
             // 'state',
@@ -40,34 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'mandal',
             // 'village',
             // 'pinCode',
-            // 'cardNo',
             // 'mobile',
-            // 'caseNo',
-            // 'claimNo',
-            // 'IPNo',
-            // 'IPRegistrationDate',
-            // 'category',
-            // 'patientProcedure:ntext',
-            // 'caseStatus',
-            // 'cardIssuedDate',
-            // 'caste',
-            // 'occupation',
-            // 'relationshipWithFamilyHead',
-            // 'cardHouseNo',
-            // 'cardStreet',
-            // 'cardHamlet',
-            // 'cardVillage',
-            // 'cardMandal',
-            // 'cardDistrict',
-            // 'cardConatctNumber',
-            // 'cardSourceNumber',
-            // 'communicationHouseNo',
-            // 'communicationStreet',
-            // 'communicationHamlet',
-            // 'communicationVillage',
-            // 'communicationMandal',
-            // 'communicationDistrict',
-            // 'communicationSource',
             // 'createdDate',
             // 'updatedDate',
 

@@ -12,6 +12,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="patients-view">
 
+   
+
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->patientId], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->patientId], [
@@ -26,53 +28,61 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'patientId',
+            
             'firstName',
             'lastName',
             'gender',
             'age',
             'dateOfBirth',
             'patientUniqueId',
-            'country',
+            
             'countryName',
-            'state',
+            
             'stateName',
             'district',
             'city',
             'mandal',
             'village',
             'pinCode',
-            'cardNo',
             'mobile',
-            'caseNo',
-            'claimNo',
-            'IPNo',
-            'IPRegistrationDate',
-            'category',
-            'patientProcedure:ntext',
-            'caseStatus',
-            'cardIssuedDate',
-            'caste',
-            'occupation',
-            'relationshipWithFamilyHead',
-            'cardHouseNo',
-            'cardStreet',
-            'cardHamlet',
-            'cardVillage',
-            'cardMandal',
-            'cardDistrict',
-            'cardConatctNumber',
-            'cardSourceNumber',
-            'communicationHouseNo',
-            'communicationStreet',
-            'communicationHamlet',
-            'communicationVillage',
-            'communicationMandal',
-            'communicationDistrict',
-            'communicationSource',
             'createdDate',
             'updatedDate',
+        		['attribute'=>'Height',
+        		'value' => $patmodel->height,
+        		],
+        		['attribute'=>'Weight',
+        		'value' => $patmodel->weight,
+        		],
+        		['attribute'=>'Respiration Rate',
+        		'value' => $patmodel->respirationRate,
+        		],
+        		['attribute'=>'BPLeftArm',
+        		'value' => $patmodel->BPLeftArm,
+        		],
+        		['attribute'=>'BPRightArm',
+        		'value' => $patmodel->BPRightArm,
+        		],
+        		['attribute'=>'Pulse Rate',
+        		'value' => $patmodel->pulseRate,
+        		],
+        		['attribute'=>'Temparature Type',
+        		'value' => $patmodel->temparatureType,
+        		],
+        		['attribute'=>'Diseases',
+        		'value' => $patmodel->diseases,
+        		],
+        		['attribute'=>'AllergicMedicine',
+        		'value' => $patmodel->allergicMedicine,
+        		],
+        		['attribute'=>'PatientCompliant',
+        		'value' => $patmodel->patientCompliant,
+        		],
+        		
+        		
+        	
+        		
         ],
     ]) ?>
+    
 
 </div>

@@ -55,8 +55,11 @@ class PatientsController extends Controller
      */
     public function actionView($id)
     {
+    	$model = $this->findModel($id);
+    	$patmodel = PatientInformation::find()->where(['patientId' =>$model->patientId])->one();
+    	
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id),'patmodel' => $patmodel,
         ]);
     }
 
@@ -68,17 +71,19 @@ class PatientsController extends Controller
     public function actionCreate()
     {
         $model = new Patients();
-        
+        $patmodel = new PatientInformation();
         $model->countriesList = Countries::getCountries();
         $model->citiesData = [];
         
         if($model->country != ''){
         
         	$model->state=States::getCountrysByStatesView($model->country );
+        	//print_r($model->state);exit();
         
         }else{
         	$model->country = $model->country;
         	$model->statesData =[];
+        	//print_r($model->statesData);exit();
         	$model->state='';
         }
 
@@ -95,53 +100,44 @@ class PatientsController extends Controller
         	$monthval = str_pad($dateInfo['month'], 2, '0', STR_PAD_LEFT);
         	$dayval = str_pad($dateInfo['day'], 2, '0', STR_PAD_LEFT);
         	$overallUniqueId = $uniqonlyId.'PAT'.$dayval.$monthval.$dateInfo['year'];
-        	 
         	$model->patientUniqueId = $overallUniqueId;
-        	//print_r($model->patientUniqueId);exit();
         	$model->createdDate = date('Y-m-d H:i:s');
         	$model->updatedDate = date('Y-m-d H:i:s');
-        	$model->dateOfBirth = date('Y-m-d', strtotime($model->dateOfBirth));
         	$model->countryName = Countries::getCountryName($model->country);
         	$model->stateName = States::getStateName($model->state);
-        	$model->IPRegistrationDate = date('Y-m-d', strtotime($model->IPRegistrationDate));
-        	$model->cardIssuedDate = date('Y-m-d', strtotime($model->cardIssuedDate));
-        	//print_r($model->cardIssuedDate);exit();
+        	$model->dateOfBirth = date('Y-m-d', strtotime($model->dateOfBirth));
         	$model->save();
         	
-        	$patmodel = new PatientInformation();
+        	//print_r( $model -> patientId);exit();
         	
-           // return $this->redirect(['view', 'id' => $model->patientId]);
         	$patmodel->patientId = $model->patientId;
         	//print_r($patmodel->patientId);exit();
+        	
         	$patmodel->height = $model->height;
+        	//print_r($patmodel->height);exit();
         	$patmodel->weight = $model->weight;
-        	$patmodel->BMI = $model->BMI;
-        	$patmodel->respirationRate = $model->respirationRate;
+        	//print_r($patmodel->weight);exit();
+        	 $patmodel->respirationRate = $model->respirationRate;
         	$patmodel->BPLeftArm = $model->BPLeftArm;
         	$patmodel->BPRightArm = $model->BPRightArm;
         	$patmodel->pulseRate = $model->pulseRate;
         	$patmodel->temparatureType = $model->temparatureType;
-        	$patmodel->pallor = $model->pallor;
-        	$patmodel->lymphadenopathy = $model->lymphadenopathy;
-        	$patmodel->oedemaInFeet = $model->oedemaInFeet;
-        	$patmodel->malnutrition = $model->malnutrition;
-        	$patmodel->cyanosis = $model->cyanosis;
-        	$patmodel->clubbingFingersToes = $model->clubbingFingersToes;
-        	$patmodel->dehydration = $model->dehydration;
         	$patmodel->diseases = $model->diseases;
-        	$patmodel->addictions = $model->addictions;
         	$patmodel->allergicMedicine = $model->allergicMedicine;
-        	$patmodel->allergicSubstance = $model->allergicSubstance;
-        	$patmodel->admissionType = $model->admissionType;
-        	$patmodel->admissionDate =  date('Y-m-d', strtotime($model->admissionDate));;
+        	$patmodel->patientCompliant = $model->patientCompliant; 
+        	//print_r($patmodel->patientCompliant);exit();
         	$patmodel->createdDate = date('Y-m-d H:i:s');
-        	 
-        	$patmodel->save();
+        	//print_r($patmodel->createdDate);exit();
+        	$patmodel->save(false);
+        	
+        
+        
         	
         	
         	
-        	
-        	return $this->redirect(['index']);
+            //return $this->redirect(['view', 'id' => $model->patientId]);
+            return $this->redirect(['index']);
+        
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -158,9 +154,7 @@ class PatientsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        
         $model->countriesList = Countries::getCountries();
-       
         $model->citiesData = [];
         
         if($model->country != ''){
@@ -172,14 +166,49 @@ class PatientsController extends Controller
         	$model->statesData =[];
         	$model->state='';
         }
-        
-        if ($model->load(Yii::$app->request->post())) {
+        $patmodel = PatientInformation::find()->where(['patientId' =>$model->patientId])->one();
+      if (! (empty ( $patmodel )))
+        {
+        	$model->height = $patmodel->height;
+        	$model->weight = $patmodel->weight;
+        	$model->respirationRate = $patmodel->respirationRate;
+        	$model->BPLeftArm = $patmodel->BPLeftArm;
+        	$model->BPRightArm = $patmodel->BPRightArm;
+        	$model->pulseRate = $patmodel->pulseRate;
+        	$model->temparatureType = $patmodel->temparatureType;
+        	$model->diseases = $patmodel->diseases;
+        	$model->allergicMedicine = $patmodel->allergicMedicine;
+        	$model->patientCompliant = $patmodel->patientCompliant;
         	
+        }
+        
+
+        if ($model->load(Yii::$app->request->post())) {
         	
         	$model->updatedDate = date('Y-m-d H:i:s');
         	$model->countryName = Countries::getCountryName($model->country);
         	$model->stateName = States::getStateName($model->state);
+        	$model->dateOfBirth = date('Y-m-d', strtotime($model->dateOfBirth));
         	$model->save();
+        	
+        	
+        	$patmodel->height = $model->height;       
+        	$patmodel->weight = $model->weight;
+        	$patmodel->respirationRate = $model->respirationRate;
+        	$patmodel->BPLeftArm = $model->BPLeftArm;
+        	$patmodel->BPRightArm = $model->BPRightArm;
+        	$patmodel->pulseRate = $model->pulseRate;
+        	$patmodel->temparatureType = $model->temparatureType;
+        	$patmodel->diseases = $model->diseases;
+        	$patmodel->allergicMedicine = $model->allergicMedicine;
+        	$patmodel->patientCompliant = $model->patientCompliant;
+        	//print_r($patmodel->patientCompliant);exit();
+        	//$patmodel->createdDate = date('Y-m-d H:i:s');
+        	//print_r($patmodel->createdDate);exit();
+        	$patmodel->save();
+        	
+        	
+        	
             //return $this->redirect(['view', 'id' => $model->patientId]);
         	return $this->redirect(['index']);
         } else {
