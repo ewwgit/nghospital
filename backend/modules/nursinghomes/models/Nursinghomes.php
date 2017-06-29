@@ -57,9 +57,10 @@ class Nursinghomes extends \yii\db\ActiveRecord
 public function rules()
     {
         return [
-        	['password', 'required', 'on' => 'create'],
+        	
             [[ 'status','contactPerson', 'mobile', 'city', 'state',  'country', 'pinCode', 'address', 'description',
             		'username','email','landline'], 'required'],
+        		[['nursingImage','password'],'required','on' => 'create'],
             [['nuserId', 'state', 'country', 'createdBy', 'updatedBy','mobile','landline'], 'integer'],
             [['address', 'description'], 'string'],
             [['countriesList','updatedDate','createdDate','nuserId', 'nurshingUniqueId', 'contactPerson', 'mobile', 'city', 'state', 'stateName', 'country', 'countryName', 'pinCode', 'address', 'description','nursingImage',
@@ -73,6 +74,8 @@ public function rules()
 // 				'message' => 'User name already exists try for new',
 //         		'on' => 'create'
 //         				],
+
+        		
         		['username',
         		'match', 'not' => true, 'pattern' => '/[^a-zA-Z0-9]/',
         		'message' => ' username spacess are not allowed.',
