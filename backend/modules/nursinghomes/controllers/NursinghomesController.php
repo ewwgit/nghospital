@@ -298,4 +298,21 @@ class NursinghomesController extends Controller
     		
     		
     }
+    
+    public function actionNursinghomes()
+    {
+    
+    	$model = new SignupForm();
+    	 
+    	if ($model->load(Yii::$app->request->post()) ){
+    		//$model->save();
+    		Yii::$app->session->setFlash('success', "Nursing Homes Created successfully ");
+    		return $this->redirect(['index']);
+    	} else {
+    		return $this->render('nursinghomes', [
+    				'model' => $model,
+    		]);
+    	}
+    
+    }
 }
