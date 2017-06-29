@@ -4,6 +4,9 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
 
+use backend\models\Role;
+use app\models\AdminMaster;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\AdminMasterSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -22,20 +25,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        //'filterModel' => $searchModel,
-        'columns' => [
+        'filterModel' => $searchModel,
+    		        'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
         		'attribute'=>'username',
         		'label'=>'User Name',
         		'format'=>'text',
         	],
-        	'email:email',
-        	[
-        		'attribute'=>'role',
-        		'label'=>'Role',
-        		'format'=>'text',
-        	],
+        	//'email:email',
+    		[
+    		'attribute'=>'email',
+    		'value' => $searchModel->email,
+    		//'format' => 'raw',
+    		 ],
+           'role',
+
         	
         		[
         		'attribute'=>'status',
