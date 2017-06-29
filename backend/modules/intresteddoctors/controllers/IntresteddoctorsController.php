@@ -12,6 +12,10 @@ use app\models\UserrolesModel;
 use yii\filters\AccessControl;
 use app\models\ModulePermissions;
 
+use common\models\User;
+use backend\models\Role;
+use yii\helpers\ArrayHelper;
+
 /**
  * IntresteddoctorsController implements the CRUD actions for Intresteddoctors model.
  */
@@ -121,8 +125,20 @@ class IntresteddoctorsController extends Controller
      */
     public function actionView($id)
     {
+    	$model = new Intresteddoctors();
+     	$role_insd = IntrestedDoctors::find()->where(['insdocid' => $id])->one();
+     	if(!empty($role_insd)){
+     		
+     		$model->role = $role_insd->role;
+     		$roleName = Role::find()->select('RoleName')->where( ['RoleId' => $model->role])->one();
+     		$datas = ArrayHelper::toArray($roleName, ['RoleName']);
+     		$data=implode($datas);
+     		$model->role = $data;
+     	
+     	}
         return $this->render('view', [
-            'model' => $this->findModel($id),
+           'model' => $this->findModel($id),
+        		'data' =>$data,
         ]);
     }
 
