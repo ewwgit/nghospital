@@ -59,11 +59,18 @@ class Patients extends \yii\db\ActiveRecord
             [['firstName', 'lastName', 'gender', 'age', 'dateOfBirth', 'patientUniqueId', 'country', 'countryName', 'state', 'stateName', 'district', 'city', 'mandal', 'village', 'pinCode', 'mobile', 'createdDate', 'updatedDate'], 'required'],
              [['height','weight','respirationRate','BPLeftArm','BPRightArm','pulseRate','temparatureType','diseases','allergicMedicine','patientCompliant'],'required'],
             [['gender'], 'string'],
+            [['age','mobile','pinCode'],'integer'],
             [['dateOfBirth', 'createdDate', 'updatedDate'], 'safe'],
             [['country', 'state'], 'integer'],
             [['firstName', 'lastName', 'patientUniqueId', 'countryName', 'stateName', 'district', 'city', 'mandal', 'village'], 'string', 'max' => 200],
             [['age'], 'string', 'max' => 10],
             [['pinCode', 'mobile'], 'string', 'max' => 15],
+        		[
+        		'pinCode',
+        		'match',
+        		'pattern' => '/^[0-9\s]{4,8}$/',
+        		'message' => 'PinCode Must be between 4 and 8 numeric only.'
+        				],
         	[['height','weight','respirationRate','BPLeftArm','BPRightArm','pulseRate','temparatureType','diseases','allergicMedicine','createdDate','patientCompliant'],'safe'],
         ];
     }

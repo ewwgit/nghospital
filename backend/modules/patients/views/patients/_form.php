@@ -61,7 +61,7 @@ use kartik\date\DatePicker;
     <?= $form->field($model, 'pinCode')->textInput(['maxlength' => true]) ?>
     </div>
     <div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'mobile')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'mobile')->textInput(['maxlength' => 10]) ?>
     </div>
     <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'height')->textInput(['maxlength' => true]) ?>
