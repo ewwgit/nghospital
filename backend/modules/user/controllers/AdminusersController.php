@@ -116,6 +116,7 @@ class AdminusersController extends Controller
         $model->address = $adminInfo->address;
         $model->profileImage = $adminInfo->profileImage;
         $model->phoneNumber = $adminInfo->phoneNumber;
+        $model->idproofs = $adminInfo->idproofs;
         }
     	}
         return $this->render('view', [
@@ -144,6 +145,7 @@ class AdminusersController extends Controller
         	$admininfo->lastName = $model->lastName;      	
         	$admininfo->phoneNumber = $model->phoneNumber;
         	$admininfo->address = $model->address ;
+        	$admininfo->idproofs = $adminInfo->idproofs;
         	$model->file = UploadedFile::getInstance($model,'file');
         	
         	if($model->file != '')
@@ -213,6 +215,7 @@ class AdminusersController extends Controller
         $model->address = $adminInfo->address;
         $model->profileImage = $adminInfo->profileImage;
         $model->phoneNumber = $adminInfo->phoneNumber;
+        $model->idproofs = $adminInfo->idproofs;
         }
         }
         
@@ -236,6 +239,7 @@ class AdminusersController extends Controller
         	$adminInfo->firstName = $model->firstName;
         	$adminInfo->lastName = $model->lastName; 
         	$adminInfo->phoneNumber = $model->phoneNumber;
+        	$adminInfo->idproofs = $model->idproofs;
         	
         	$adminInfo->address = $model->address ;
         	$model->file = UploadedFile::getInstance($model,'file');

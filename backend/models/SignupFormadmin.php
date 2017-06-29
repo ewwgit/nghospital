@@ -17,6 +17,7 @@ class SignupFormadmin extends Model
     public $role;
     public $file;
     public $roles;
+    public $idproofs;
     public $firstName;
     public $lastName;
     public $phoneNumber;
@@ -35,7 +36,7 @@ class SignupFormadmin extends Model
         return [
             ['username', 'trim'],
             ['username', 'required'],
-        		[['firstName','lastName'] ,'required'],
+        		[['firstName','lastName','phoneNumber','address','file','idproofs'] ,'required'],
            // ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
         	['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.','on' =>'create'],
@@ -76,6 +77,7 @@ class SignupFormadmin extends Model
     			'firstName' => 'First Name',
     			'lastName' => 'Last Name',
     			'address' => 'Address',
+    			'idproofs' => 'Id proofs',
     			 
     	];
     }

@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\AdminMaster */
@@ -26,39 +27,46 @@ use yii\widgets\ActiveForm;
 			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'phoneNumber')->textInput(['maxlength' => 10]) ?></div>
 
 			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'role')->dropDownList($model->roles, ['prompt' => 'Select Role']) ?></div>
-
-			<div class="form-group col-lg-6 col-sm-12">   <?= $form->field($model, 'file')->fileInput()?>
-         <?php if($model->profileImage != ''){?>
-          <div class="col-lg-5 col-sm-12 profileimage"> 
-					<img src='<?php echo $model->profileImage ; ?>' width="150px"
-						height="50px;">
-		  </div>
-      <?php } ?>
-     
- 
-         </div>
-         
-
-<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'address')->textArea([]) ?></div>
-
-
-
-				<div class="form-group col-lg-6 col-sm-12"> 
+	        <div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'idproofs')->textArea([]) ?></div>
+            
+            <div class="form-group col-lg-6 col-sm-12"> 
    
 <?= $form->field($model, 'status')->dropDownList([ '10' => 'Active', '0' => 'In-active', ], ['prompt' => 'Select Status'])?>
 
 </div>
+			
+			<div class="form-group col-lg-6 col-sm-12">
+			
+			  <?=$form->field ( $model, 'file' )->widget ( FileInput::classname (),
+   		[ 'options' => [ 'accept' => 'image/*' ],'pluginOptions' =>[[ 'browseLabel' => 'Profile Image', 'allowedFileExtensions'=>['jpg','png','jpeg'] ]] ] )?>  
+         <?php if($model->profileImage != ''){?>
+         <div class="col-lg-5 col-sm-12 profileimage"> 
+					<img src='<?php echo $model->profileImage ; ?>' width="100px"
+						height="100px;">
+		  </div>
+      <?php } ?>
+         </div>
+         <div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'address')->textArea([]) ?></div>
+        	
 
-
-				<div class="form-group col-lg-6 col-sm-12"> 
+<div class="form-group  col-lg-7  col-sm-12" style="margin-top: 100px;"> 
         <?= Html::submitButton( 'Submit', ['class' =>  'btn btn-primary'])?>
     </div>
-    <?php ActiveForm::end(); ?>
+			
+    
 
 </div>
 		</div>
+			
+		<?php ActiveForm::end(); ?>
 	</div>
+
 	<style>
+	
+.help-block {
+    height: 1px;
+}
+
 .form-control {
 	width: 100%;
 }
@@ -68,12 +76,12 @@ use yii\widgets\ActiveForm;
 }
 
 .form-group {
-	height: 85px;
+	height: 100px;
 	margin-bottom: 0;
 }
 
 .profileimage {
-	margin-left: 259px;
-	margin-top: -75px;
+	margin-left: 382px;
+	margin-top: 1px;
 }
 </style>

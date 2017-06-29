@@ -60,7 +60,7 @@ class AdminMaster extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'email', 'firstName', 'lastName', 'roleId'], 'required'],
+            [['username', 'email', 'firstName', 'lastName', 'roleId','idproofs'], 'required'],
             [['roleId','status'], 'integer'],
             [['createdDate', 'updatedDate', 'password_reset_token','password', 'auth_key','phoneNumber','roles','file','address','repOptions','oldPaidAmount','paidAmount'], 'safe'],
         	
@@ -86,6 +86,7 @@ class AdminMaster extends \yii\db\ActiveRecord
             'email' => 'Email',
             'firstName' => 'First Name',
             'lastName' => 'Last Name',
+        	'idproofs' => 'Id proofs',
             'file' => 'profile Image',
             'roleId' => 'Role Name',
             'status' => 'Status',

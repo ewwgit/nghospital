@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     	$status = 'In-Active';
     }?>
     <?php //print_r($model->role); ?>
-
+    
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'lastName',
         	'phoneNumber',
         	'address',
+        	'idproofs',
         	
            // 'role.RoleName',
         		['attribute'=>'RoleName',
@@ -50,6 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
         		'value'=>Html::img($model->profileImage ? $model->profileImage : '@web',['width' => '150px']),
         		
         		],
+
         		 
            
            // 'createdBy',
