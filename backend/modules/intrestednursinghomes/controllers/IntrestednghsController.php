@@ -8,6 +8,8 @@ use app\modules\intrestednursinghomes\models\IntrestednghsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\models\Role;
+use yii\helpers\ArrayHelper;
 
 /**
  * IntrestednghsController implements the CRUD actions for Intrestednghs model.
@@ -51,8 +53,21 @@ class IntrestednghsController extends Controller
      */
     public function actionView($id)
     {
+    	$model = new Intrestednghs();
+    	$role_insn = IntrestedNghs::find()->where(['insnghid' => $id])->one();
+    	
+    	if(!empty($role_insn)){
+    		
+    		$model->role = $role_insn->role;
+    		$roleName = Role::find()->select('RoleName')->where( ['RoleId' => $model->role])->one();
+    		$datas = ArrayHelper::toArray($roleName, ['RoleName']);
+    		$data=implode($datas);
+    		$model->role = $data;
+    	
+    	}
         return $this->render('view', [
             'model' => $this->findModel($id),
+        		'data' =>$data,
         ]);
     }
 
