@@ -13,6 +13,7 @@ use app\models\States;
 use common\models\User;
 use yii\helpers\Json;
 use backend\models\SignupForm;
+use app\models\UserMain;
 use yii\web\UploadedFile;
 
 /**
@@ -299,22 +300,4 @@ class NursinghomesController extends Controller
     		
     }
     
-    public function actionNursinghomes()
-    {
-    
-    	$model = new UserMain();
-    	 
-    	if ($model->load(Yii::$app->request->post()) ){
-    		$model->role= 2;
-    		$model->password= '123456';
-    		$model->save();
-    		Yii::$app->session->setFlash('success', "Nursing Homes Created successfully ");
-    		return $this->redirect(['index']);
-    	} else {
-    		return $this->render('nursinghomes', [
-    				'model' => $model,
-    		]);
-    	}
-    
-    }
 }

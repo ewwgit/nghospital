@@ -154,4 +154,23 @@ class IntrestednghsController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    
+    public function actionNursinghomes()
+    {
+    
+    	$model = new UserMain();
+    
+    	if ($model->load(Yii::$app->request->post()) ){
+    		$model->role= 2;
+    		//$model->password= '123456';
+    		$model->save();
+    		Yii::$app->session->setFlash('success', "Nursing Homes Created successfully ");
+    		return $this->redirect(['index']);
+    	} else {
+    		return $this->render('nursinghomes', [
+    				'model' => $model,
+    		]);
+    	}
+    
+    }
 }
