@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use backend\models\Role;
 use yii\helpers\ArrayHelper;
+use app\models\UserMain;
 
 /**
  * IntrestednghsController implements the CRUD actions for Intrestednghs model.
