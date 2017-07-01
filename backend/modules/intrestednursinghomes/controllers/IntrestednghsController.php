@@ -10,7 +10,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use backend\models\Role;
 use yii\helpers\ArrayHelper;
-use app\models\UserMain;
+use backend\models\SignupConvertForm;
+use app\modules\nursinghomes\models\Nursinghomes;
 
 /**
  * IntrestednghsController implements the CRUD actions for Intrestednghs model.
@@ -156,16 +157,42 @@ class IntrestednghsController extends Controller
         }
     }
     
-    public function actionNursinghomes()
+    public function actionConvertNursinghomes($id)
     {
+        $interestednghInfo = Intrestednghs::find()->where(['insnghid' => $id])->one();
+    	$model = new SignupConvertForm();
+    	$model->email =  $interestednghInfo->email;
+    	$nursinghomeModel = new Nursinghomes();
+    	$nursinghomeModel->scenario = 'convertsneed';
     
-    	$model = new UserMain();
-    
-    	if ($model->load(Yii::$app->request->post()) ){
+    	if ($model->load(Yii::$app->request->post()) && $model->validate()){
     		$model->role= 2;
-    		//$model->password= '123456';
-    		$model->save();
-    		Yii::$app->session->setFlash('success', "Nursing Homes Created successfully ");
+    		$userData = $model->signup();
+    		$presentDate = date('Y-m-d');
+    		$nursinghomescount = Nursinghomes::find()->where("createdDate LIKE '$presentDate%'")->count();
+    		/* echo $nursinghomescount;
+    		 exit(); */
+    		
+    		$addnewid = $nursinghomescount+1;
+    		$uniqonlyId = str_pad($addnewid, 5, '0', STR_PAD_LEFT);
+    		$dateInfo = date_parse(date('Y-m-d H:i:s'));
+    		$monthval = str_pad($dateInfo['month'], 2, '0', STR_PAD_LEFT);
+    		$dayval = str_pad($dateInfo['day'], 2, '0', STR_PAD_LEFT);
+    		$overallUniqueId = $uniqonlyId.'NGH'.$dayval.$monthval.$dateInfo['year'];
+    		$nursinghomeModel->nurshingUniqueId = $overallUniqueId;
+    		$nursinghomeModel->nuserId = $userData->id;
+    		$nursinghomeModel->description = $interestednghInfo->description;
+    		$nursinghomeModel->createdDate = date('Y-m-d H:i:s');
+    		$nursinghomeModel->updatedDate = date('Y-m-d H:i:s');
+    		$nursinghomeModel->createdBy = Yii::$app->user->identity->id;
+    		$nursinghomeModel->updatedBy = Yii::$app->user->identity->id;
+    		$nursinghomeModel->save();
+    		if($nursinghomeModel)
+    		{
+    			Intrestednghs::deleteAll(['insnghid'=> $id]);
+    		}
+    		//print_r($nursinghomeModel->errors);exit();
+    		Yii::$app->session->setFlash('success', "Converted User to Nursing Homes Successfully ");
     		return $this->redirect(['index']);
     	} else {
     		return $this->render('nursinghomes', [

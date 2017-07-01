@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\intrestednursinghomes\models\IntrestednghsSearch */
@@ -32,7 +33,19 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'mobile',
             // 'createdDate',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+            		'template' => '{view} {update} {delete}{convert}',
+            		'buttons' => [
+            				'convert' => function ($url,$data) {
+            				$url = Url::to(['/intrestednursinghomes/intrestednghs/convert-nursinghomes','id'=>$data->insnghid]);
+            				return Html::a(
+            						'<span class="glyphicon glyphicon-arrow-right"></span>',
+            						$url);
+            				},
+            		
+            				],
+            		
+            ],
         ],
     ]); ?>
 </div>

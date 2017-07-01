@@ -59,7 +59,7 @@ public function rules()
         return [
         	
             [[ 'status','contactPerson', 'mobile', 'city', 'state',  'country', 'pinCode', 'address', 'description',
-            		'username','email','landline'], 'required'],
+            		'username','email','landline'], 'required','on' => ['create','update']],
         		[['nursingImage','password'],'required','on' => 'create'],
             [['nuserId', 'state', 'country', 'createdBy', 'updatedBy','mobile','landline'], 'integer'],
             [['address', 'description'], 'string'],
@@ -122,6 +122,7 @@ public function rules()
         		'pattern' => '/^[0-9\s]{4,8}$/',
         		'message' => 'PinCode Must be between 4 and 8 numeric only.'
         				],
+        		[['nuserId','nurshingUniqueId'],'required','on' => 'convertsneed']
         		
         ];
     }

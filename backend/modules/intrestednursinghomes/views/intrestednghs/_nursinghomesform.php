@@ -16,13 +16,20 @@ use dosamigos\ckeditor\CKEditor;
 <div class="doctors-form">
 
    
-    <?php $form = ActiveForm::begin(['options'=>['enctype' =>'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(); ?>
     
     <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
     </div>
     <div class="form-group col-lg-6 col-sm-12">    
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>	
+    </div>
+    
+    <div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+    </div>
+    <div class="form-group col-lg-6 col-sm-12">    
+    <?= $form->field($model, 'confirmpassword')->passwordInput(['maxlength' => true]) ?>	
     </div>
     
     	
