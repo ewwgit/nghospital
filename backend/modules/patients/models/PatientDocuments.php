@@ -3,6 +3,7 @@
 namespace app\modules\patients\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "patient_documents".
@@ -13,6 +14,7 @@ use Yii;
  */
 class PatientDocuments extends \yii\db\ActiveRecord
 {
+	public $file;
     /**
      * @inheritdoc
      */
@@ -27,9 +29,9 @@ class PatientDocuments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['pdocumentId', 'patientInfoId', 'documentUrl'], 'required'],
-            [['pdocumentId', 'patientInfoId'], 'integer'],
-            [['documentUrl'], 'string'],
+            [['pdocumentId', 'patientInfoId', 'documentUrl','file'], 'safe'],
+            /* [['pdocumentId', 'patientInfoId'], 'integer'],
+            [['documentUrl'], 'string'], */
         ];
     }
 
@@ -43,5 +45,23 @@ class PatientDocuments extends \yii\db\ActiveRecord
             'patientInfoId' => 'Patient Info ID',
             'documentUrl' => 'Document Url',
         ];
+    }
+    
+    public function upload()
+    {
+    	 
+    	foreach ($this->file as $file) {
+    		 
+    		$patientdoc = new PatientDocuments();
+    		$patientdoc->patientInfoId= $this->patientInfoId;
+    		$imageName = rand(1000,100000).$file->baseName;
+    		$patientdoc->documentUrl = 'patientdocuments/'.$imageName.'.'.$file->extension;
+    		//$patientdoc->file = $patientdoc->imageUrl;
+    		$patientdoc->save();
+    		 
+    		$file->saveAs('patientdocuments/' . $imageName . '.' . $file->extension);
+    	}
+    	return true;
+    
     }
 }

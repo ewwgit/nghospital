@@ -12,6 +12,8 @@ use app\models\Countries;
 use app\models\States;
 use yii\helpers\Json;
 use app\modules\patients\models\PatientInformation;
+use app\modules\patients\models\PatientDocuments;
+use yii\web\UploadedFile;
 
 /**
  * PatientsController implements the CRUD actions for Patients model.
@@ -155,6 +157,7 @@ class PatientsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $newModel = new PatientDocuments();
         $model->countriesList = Countries::getCountries();
         $model->citiesData = [];
         
@@ -208,7 +211,9 @@ class PatientsController extends Controller
         	//print_r($patmodel->createdDate);exit();
         	$patmodel->save();
         	
-        	
+        	$newModel->file = UploadedFile::getInstances($model, 'documentUrl');
+        	$newModel->patientInfoId = $patmodel->patientInfoId;
+        	$response = $newModel->upload();
         	
             //return $this->redirect(['view', 'id' => $model->patientId]);
         	return $this->redirect(['index']);
