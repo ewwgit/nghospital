@@ -11,6 +11,7 @@ use common\models\User;
 class ResetPasswordForm extends Model
 {
     public $password;
+    public $confirmpassword;
 
     /**
      * @var \common\models\User
@@ -45,6 +46,13 @@ class ResetPasswordForm extends Model
         return [
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+        		[['confirmpassword'], 'compare', 'compareAttribute' => 'password'],
+        		[['password'],'safe'],
+        		
+        		[
+        				'confirmpassword',
+        				'required',
+        		],
         ];
     }
 

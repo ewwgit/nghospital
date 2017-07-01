@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
             data-html="true" placeholder="password" required >
         	
                 <?= $form->field($model, 'password')->passwordInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'confirmpassword')->passwordInput(['autofocus' => true]) ?>
        		 
         </div>
           <div class="clearfix"></div>
