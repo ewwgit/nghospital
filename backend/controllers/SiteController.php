@@ -139,6 +139,7 @@ class SiteController extends Controller
     
     public function actionResetPassword($token)
     {
+    	$this->layout= 'main-login';
     	try {
     		$model = new ResetPasswordForm($token);
     	} catch (InvalidParamException $e) {
