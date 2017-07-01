@@ -36,15 +36,16 @@ use kartik\file\FileInput;
 </div>
 			
 			<div class="form-group col-lg-6 col-sm-12">
-			
-			  <?=$form->field ( $model, 'file' )->widget ( FileInput::classname (),
-   		[ 'options' => [ 'accept' => 'image/*' ],'pluginOptions' =>[[ 'browseLabel' => 'Profile Image', 'allowedFileExtensions'=>['jpg','png','jpeg'] ]] ] )?>  
-         <?php if($model->profileImage != ''){?>
+			 <?php if($model->profileImage != ''){?>
          <div class="col-lg-5 col-sm-12 profileimage"> 
 					<img src='<?php echo $model->profileImage ; ?>' width="100px"
 						height="100px;">
 		  </div>
       <?php } ?>
+			
+			  <?=$form->field ( $model, 'file' )->widget ( FileInput::classname (),
+   		[ 'options' => [ 'accept' => 'image/*' ],'pluginOptions' =>[[ 'browseLabel' => 'Profile Image', 'allowedFileExtensions'=>['jpg','png','jpeg'] ]] ] )?>  
+        
          </div>
          <div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'address')->textArea([]) ?></div>
         	
@@ -76,7 +77,7 @@ use kartik\file\FileInput;
 }
 
 .form-group {
-	height: 100px;
+	height: 120px;
 	margin-bottom: 0;
 }
 
