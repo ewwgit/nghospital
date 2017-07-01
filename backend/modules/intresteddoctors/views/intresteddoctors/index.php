@@ -31,7 +31,19 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'mobile',
             // 'createdDate',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+            		'template' => '{view} {update} {delete}{convert}',
+            		'buttons' => [
+            				'convert' => function ($url,$data) {
+            				$url = Url::to(['/intresteddoctors/intresteddoctors/convert-doctors','id'=>$data->insdocid]);
+            				return Html::a(
+            						'<span class="glyphicon glyphicon-arrow-right"></span>',
+            						$url);
+            				},
+            		
+            				],
+            		
+            ],
         ],
     ]); ?>
 </div>

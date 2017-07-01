@@ -63,19 +63,19 @@ class Doctors extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'name', 'qualification','specialities', 'city', 'state',  'country',  'address', 'permanentAddress', 'pinCode', 'doctorMobile',  'summery', 'APMC', 'TSMC','username','email','status'], 'required'],
+            [[ 'name', 'qualification','specialities', 'city', 'state',  'country',  'address', 'permanentAddress', 'pinCode', 'doctorMobile',  'summery', 'APMC', 'TSMC','username','email','status'], 'required','on' => ['create','update']],
             [['userId', 'state', 'country', 'createdBy', 'updatedBy'], 'integer'],
             [[ 'address','summery','permanentAddress'], 'string'],
             [['stateName', 'countryName','createdDate', 'updatedDate','createdBy', 'updatedBy','name', 'qualification', 'city', 'state',  'country',  'address', 'permanentAddress', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC','userId','doctorUniqueId','username','email','password'], 'safe'],
             [[ 'name', 'city', 'stateName', 'countryName', 'APMC', 'TSMC'], 'string', 'max' => 200],
         	[['docimageupdate','status'],'safe'],
         	['username', 'trim'],
-            ['username', 'required'],
+            ['username', 'required','on' => ['create','update']],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.','on' =>'create'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
-            ['email', 'required'],
+            ['email', 'required','on' => ['create','update']],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.','on' =>'create'],
@@ -139,6 +139,7 @@ class Doctors extends \yii\db\ActiveRecord
         		[['doctorImage'],'required','on' => 'create'],
         		 //[['doctorImage'], 'image','skipOnEmpty'=>false,],
                  //[['doctorImage'], 'required']
+        		[['userId','doctorUniqueId'],'required','on' => 'convertsneed']
         		
         ];
     }

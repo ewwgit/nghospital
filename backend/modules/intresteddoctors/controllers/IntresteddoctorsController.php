@@ -15,6 +15,8 @@ use app\models\ModulePermissions;
 use common\models\User;
 use backend\models\Role;
 use yii\helpers\ArrayHelper;
+use backend\models\SignupConvertForm;
+use app\modules\doctors\models\Doctors;
 
 /**
  * IntresteddoctorsController implements the CRUD actions for Intresteddoctors model.
@@ -223,5 +225,49 @@ class IntresteddoctorsController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    
+    public function actionConvertDoctors($id)
+    {
+    	$interesteddocInfo = IntrestedDoctors::find()->where(['insdocid' => $id])->one();
+    	$model = new SignupConvertForm();
+    	$model->email =  $interesteddocInfo->email;
+    	$docModel = new Doctors();
+    	$docModel->scenario = 'convertsneed';
+    
+    	if ($model->load(Yii::$app->request->post()) && $model->validate()){
+    		$model->role= 2;
+    		$userData = $model->signup();
+    		$presentDate = date('Y-m-d');
+        	$doctorscount = Doctors::find()->where("createdDate LIKE '$presentDate%'")->count();
+        	/* echo $nursinghomescount;
+        	 exit(); */
+        	$addnewid = $doctorscount+1;
+        	$uniqonlyId = str_pad($addnewid, 5, '0', STR_PAD_LEFT);
+        	$dateInfo = date_parse(date('Y-m-d H:i:s'));
+        	$monthval = str_pad($dateInfo['month'], 2, '0', STR_PAD_LEFT);
+        	$dayval = str_pad($dateInfo['day'], 2, '0', STR_PAD_LEFT);
+        	$overallUniqueId = $uniqonlyId.'DOC'.$dayval.$monthval.$dateInfo['year'];
+    		$docModel->doctorUniqueId = $overallUniqueId;
+    		$docModel->userId = $userData->id;
+    		$docModel->summery = $interesteddocInfo->description;
+    		$docModel->createdDate = date('Y-m-d H:i:s');
+    		$docModel->updatedDate = date('Y-m-d H:i:s');
+    		$docModel->createdBy = Yii::$app->user->identity->id;
+    		$docModel->updatedBy = Yii::$app->user->identity->id;
+    		$docModel->save();
+    		if($docModel)
+    		{
+    			IntrestedDoctors::deleteAll(['insdocid'=> $id]);
+    		}
+    		//print_r($docModel->errors);exit();
+    		Yii::$app->session->setFlash('success', "Converted User to Doctors Successfully ");
+    		return $this->redirect(['index']);
+    	} else {
+    		return $this->render('convertdoctors', [
+    				'model' => $model,
+    		]);
+    	}
+    
     }
 }
