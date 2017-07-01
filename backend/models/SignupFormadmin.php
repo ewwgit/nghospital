@@ -52,7 +52,7 @@ class SignupFormadmin extends Model
             ['email', 'string', 'max' => 255],
         	['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.','on' =>'create'],
          //  ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
-        		[['profileImage','password'], 'required', 'on' => 'create'],
+        		[['password'], 'required', 'on' => 'create'],
         	
         	
            
