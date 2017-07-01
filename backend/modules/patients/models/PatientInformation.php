@@ -41,7 +41,7 @@ class PatientInformation extends \yii\db\ActiveRecord
             [['patientId'], 'integer'],
             [['createdDate'], 'safe'],
             [['patientCompliant'], 'string'],
-            [['height', 'weight', 'respirationRate', 'pulseRate'], 'string', 'max' => 5],
+            //[['height', 'weight', 'respirationRate', 'pulseRate'], 'string', 'max' => 5],
             [['BPLeftArm', 'BPRightArm', 'temparatureType', 'diseases', 'allergicMedicine'], 'string', 'max' => 200],
 
         ];

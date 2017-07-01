@@ -117,7 +117,7 @@ class PatientsController extends Controller
         	//print_r($patmodel->height);exit();
         	$patmodel->weight = $model->weight;
         	//print_r($patmodel->weight);exit();
-        	 $patmodel->respirationRate = $model->respirationRate;
+        	$patmodel->respirationRate = $model->respirationRate;
         	$patmodel->BPLeftArm = $model->BPLeftArm;
         	$patmodel->BPRightArm = $model->BPRightArm;
         	$patmodel->pulseRate = $model->pulseRate;
@@ -130,7 +130,7 @@ class PatientsController extends Controller
         	//print_r($patmodel->createdDate);exit();
         	$patmodel->save();
         	
-        
+        	//print_r($patmodel->errors);exit();
         
         	
         	
