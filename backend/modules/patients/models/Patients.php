@@ -45,6 +45,7 @@ class Patients extends \yii\db\ActiveRecord
 	public $diseases;
 	public $allergicMedicine;
 	public $patientCompliant;
+	public $documentUrl;
     public static function tableName()
     {
         return 'patients';
@@ -100,6 +101,7 @@ class Patients extends \yii\db\ActiveRecord
             'mobile' => 'Mobile',
             'createdDate' => 'Created Date',
             'updatedDate' => 'Updated Date',
+        		'documentUrl' => 'Patient Documents',
         ];
     }
 }

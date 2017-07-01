@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 use kartik\depdrop\DepDrop;
 use kartik\date\DatePicker;
+use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\patients\models\Patients */
@@ -13,7 +14,7 @@ use kartik\date\DatePicker;
 
 <div class="patients-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+     <?php $form = ActiveForm::begin(['options'=>['enctype' =>'multipart/form-data']]); ?>
     <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'firstName')->textInput(['maxlength' => true]) ?>
     </div>
@@ -93,7 +94,14 @@ use kartik\date\DatePicker;
     <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'allergicMedicine')->textInput(['maxlength' => true]) ?>
     </div>
-      
+     <div class="form-group col-lg-6 col-sm-12">
+    
+   <?= $form->field($model, 'documentUrl[]')->widget(FileInput::classname(), [
+    'options' => ['multiple' => true],
+    'pluginOptions' => ['previewFileType' => 'any']
+]); ?>
+    
+        </div>
     
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
