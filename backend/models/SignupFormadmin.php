@@ -36,7 +36,7 @@ class SignupFormadmin extends Model
         return [
             ['username', 'trim'],
             ['username', 'required'],
-        		[['firstName','lastName','phoneNumber','address','file','idproofs'] ,'required'],
+        		[['firstName','lastName','phoneNumber','address','idproofs'] ,'required'],
            // ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
         	['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.','on' =>'create'],
@@ -52,7 +52,7 @@ class SignupFormadmin extends Model
             ['email', 'string', 'max' => 255],
         	['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.','on' =>'create'],
          //  ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
-        		[['password'], 'required', 'on' => 'create'],
+        		[['password','file'], 'required', 'on' => 'create'],
         	
         	
            
