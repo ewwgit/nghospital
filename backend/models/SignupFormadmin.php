@@ -52,7 +52,8 @@ class SignupFormadmin extends Model
             ['email', 'string', 'max' => 255],
         	['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.','on' =>'create'],
          //  ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
-        		['password', 'required', 'on' => 'create'],
+        		[['profileImage','password'], 'required', 'on' => 'create'],
+        	
         	
            
             ['password', 'string', 'min' => 6],
@@ -103,6 +104,7 @@ class SignupFormadmin extends Model
         
         return $user->save() ? $user : null;
     }
+    
     public function getAllRoles()
     {
     
@@ -118,4 +120,5 @@ class SignupFormadmin extends Model
     	$RolesData = array_combine($roleIdCol, $RoleNameCol);
     	return $RolesData;
     }
+   
 }

@@ -81,4 +81,9 @@ class UserMain extends \yii\db\ActiveRecord
     	return $usernamedata['username'];
     }
     
+    public function getRole()
+    {
+    	return $this->hasMany(Role::className(), ['RoleId' => 'role']);
+    }
+    
 }

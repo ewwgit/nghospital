@@ -21,6 +21,8 @@ use app\models\AdminInformation;
 use app\models\UserMainSearch;
 use yii\helpers\ArrayHelper;
 use common\models\User;
+
+use app\models\AdminMaster;
 /**
  * AdminusersController implements the CRUD actions for AdminMaster model.
  */
@@ -78,10 +80,14 @@ class AdminusersController extends Controller
     {
         $searchModel = new UserMainSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+      
+        
+    	
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            
+        		
         ]);
     }
 
@@ -136,17 +142,19 @@ class AdminusersController extends Controller
         $admininfo = new AdminInformation();
         $model->scenario = 'create';
 
-      if ($model->load(Yii::$app->request->post()) && $model->validate())
+      if ($model->load(Yii::$app->request->post()) )
         {
-        	
+        	$model->file = UploadedFile::getInstance($model,'file');
+        	if($model->validate())
+        	{
         	$user = $model->signup();
         	$admininfo->aduserId = $user->id;
         	$admininfo->firstName = $model->firstName;
         	$admininfo->lastName = $model->lastName;      	
         	$admininfo->phoneNumber = $model->phoneNumber;
         	$admininfo->address = $model->address ;
-        	$admininfo->idproofs = $adminInfo->idproofs;
-        	$model->file = UploadedFile::getInstance($model,'file');
+        	$admininfo->idproofs = $model->idproofs;
+        	
         	
         	if($model->file != '')
         	{
@@ -160,6 +168,28 @@ class AdminusersController extends Controller
          $admininfo->save();
          Yii::$app->session->setFlash('success', " Adminuser Created successfully ");
          return $this->redirect(['index']);
+        	}
+        	else {
+
+        		$Roles = $model->getAllRoles();
+        		$newroles = array();
+        		foreach ($Roles as $key => $val)
+        		{
+        			if(($val != 'Super Admin')&& ($val != 'Doctor')&& ($val != 'Nursing Home') ){
+        				$newroles [$key] = $val;
+        			}
+        			 
+        		
+        		}
+        		
+        		 
+        		$model->roles = $newroles;
+        		return $this->render('create', [
+        				'model' => $model,
+        		]);
+        		
+        	}
+         
         	
         	
         } else {
@@ -167,7 +197,7 @@ class AdminusersController extends Controller
             $newroles = array();
             foreach ($Roles as $key => $val)
             {
-            	if(($val != 'super admin')&& ($val != 'user')&& ($val != 'vendor') ){
+            	if(($val != 'Super Admin')&& ($val != 'Doctor')&& ($val != 'Nursing Home') ){
             	$newroles [$key] = $val;
             	}
             	
@@ -219,10 +249,11 @@ class AdminusersController extends Controller
         }
         }
         
-     if ($model->load(Yii::$app->request->post()) && $model->validate() )
+     if ($model->load(Yii::$app->request->post()))
         	 {
-        	 	
-        	
+        	$model->file = UploadedFile::getInstance($model,'file');
+        	 	if($model->validate())
+        	 	{
         	
         	$adminuser->username = $model->username;
         	$adminuser->email = $model->email;
@@ -242,7 +273,7 @@ class AdminusersController extends Controller
         	$adminInfo->idproofs = $model->idproofs;
         	
         	$adminInfo->address = $model->address ;
-        	$model->file = UploadedFile::getInstance($model,'file');
+        	
         	
         	if($model->file != '')
         	{
@@ -256,13 +287,38 @@ class AdminusersController extends Controller
          $adminInfo->save();
          Yii::$app->session->setFlash('success', " Adminuser Updated successfully ");
             return $this->redirect(['index']);
+        	 	}
+        	 	else {
+        	 		$Roles = $model->getAllRoles();
+        	 		$newroles = array();
+        	 		 
+        	 		foreach ($Roles as $key => $val)
+        	 		{
+        	 			if(($val != 'Super Admin')&& ($val != 'Doctor')&& ($val != 'Nursing Home') ){
+        	 				$newroles [$key] = $val;
+        	 			}
+        	 			 
+        	 		}
+        	 		/* for ($i=1;$i<=count($Roles);$i++)
+        	 		 {
+        	 		 if(($Roles[$i] != 'super admin')&& ($Roles[$i] != 'user') )
+        	 		 {
+        	 		 $newroles [$i] = $Roles[$i];
+        	 		 }
+        	 		 } */
+        	 		 
+        	 		$model->roles = $newroles;
+        	 		return $this->render('update', [
+        	 				'model' => $model,
+        	 		]);
+        	 	}
         } else {
             $Roles = $model->getAllRoles();
             $newroles = array();
            
             foreach ($Roles as $key => $val)
             {
-            if(($val != 'super admin')&& ($val != 'user')&& ($val != 'vendor') ){
+            	if(($val != 'Super Admin')&& ($val != 'Doctor')&& ($val != 'Nursing Home') ){
             	$newroles [$key] = $val;
             	}
             	

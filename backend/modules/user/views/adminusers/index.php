@@ -3,9 +3,9 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
-
 use backend\models\Role;
 use app\models\AdminMaster;
+use app\models\UserMain;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\AdminMasterSearch */
@@ -22,10 +22,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Admin User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    
+    <?php //print_r($roledata);exit; ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+    		//'data' => $data,
     		        'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
@@ -33,15 +36,20 @@ $this->params['breadcrumbs'][] = $this->title;
         		'label'=>'User Name',
         		'format'=>'text',
         	],
-        	//'email:email',
-    		[
+            [
     		'attribute'=>'email',
     		'value' => $searchModel->email,
-    		//'format' => 'raw',
-    		 ],
-           'role',
-
-        	
+    		    		 ],
+      
+    		[
+    		 'attribute'=>'role',
+    		  'value' => function ($data) { 
+    		  $roleData = Role::find()->where(['RoleId' => $data->role])->one();
+    		       return $roleData->RoleName;
+    		        },
+    		        	
+    		       ],
+    		
         		[
         		'attribute'=>'status',
         		'label'=>'status',
