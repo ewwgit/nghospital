@@ -74,6 +74,7 @@ class PatientsController extends Controller
     {
         $model = new Patients();
         $patmodel = new PatientInformation();
+        $newModel = new PatientDocuments();
         $model->countriesList = Countries::getCountries();
         $model->citiesData = [];
         
@@ -131,6 +132,10 @@ class PatientsController extends Controller
         	$patmodel->createdDate = date('Y-m-d H:i:s');
         	//print_r($patmodel->createdDate);exit();
         	$patmodel->save();
+        	
+        	$newModel->file = UploadedFile::getInstances($model, 'documentUrl');
+        	$newModel->patientInfoId = $patmodel->patientInfoId;
+        	$response = $newModel->upload();
         	
         	//print_r($patmodel->errors);exit();
         
