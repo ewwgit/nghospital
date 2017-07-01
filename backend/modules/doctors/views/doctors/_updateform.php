@@ -141,4 +141,7 @@ use dosamigos\ckeditor\CKEditor;
 .help-block {
     height: 5px;
 }
+.select2-search__field {
+	display: none;
+}
 </style>

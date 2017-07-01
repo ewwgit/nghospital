@@ -41,10 +41,7 @@ use dosamigos\ckeditor\CKEditor;
     'data' => $model ->allSpeci,
     'maintainOrder' => true,
     'options' => ['placeholder' => 'Select Speciality', 'multiple' => true],
-    'pluginOptions' => [
-        'tags' => true,
-        'maximumInputLength' => 100,
-    ],
+    
 ]); ?>
     </div>
 	<div class="form-group col-lg-6 col-sm-12">
@@ -117,5 +114,8 @@ use dosamigos\ckeditor\CKEditor;
 <style>
 .help-block {
     height: 5px;
+}
+.select2-search__field {
+	display: none;
 }
 </style>
