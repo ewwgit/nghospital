@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\modules\intresteddoctors\models\Intresteddoctors */
 
 $this->title = 'Create Interested Doctors';
-$this->params['breadcrumbs'][] = ['label' => 'Interesteddoctors', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Interested Doctors', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="intresteddoctors-create">
