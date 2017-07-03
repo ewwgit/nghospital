@@ -18,6 +18,9 @@ use app\modules\doctors\models\DoctorsQualification;
 use app\modules\qualifications\models\Qualifications;
 use app\modules\doctors\models\DoctorsSpecialities;
 use app\modules\specialities\models\Specialities;
+use app\modules\doctors\models\DoctorSlots;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 /**
  * DoctorsController implements the CRUD actions for Doctors model.
@@ -556,5 +559,50 @@ class DoctorsController extends Controller
     	echo Json::encode(['output'=>'', 'selected'=>'']);
     
     
+    }
+    public function actionSlots()
+    {
+    	$model = new DoctorSlots();
+    	$model->slotsInfo = DoctorSlots::getSlotsInfo(Yii::$app->user->identity->id);
+    	//print_r($model->slotsInfo);exit();
+    	if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+    		Yii::$app->response->format = Response::FORMAT_JSON;
+    		if (!$model->validate()) {
+    			return ActiveForm::validate($model);
+    		}
+    		else
+    		{
+    			//print_r($model->slotsInfo);exit();
+    			for($k =0 ; $k < count($model->slotsInfo); $k++)
+    			{
+    				if($model->slotsInfo[$k]['docslotId'] != '')
+    				{
+    					$slotId = $model->slotsInfo[$k]['docslotId'];
+    					$updateSlotInfo = DoctorSlots::find()->where(['docslotId' => $slotId])->one();
+    					$updateSlotInfo->day = $model->slotsInfo[$k]['day'];
+    					$updateSlotInfo->startTime = $model->slotsInfo[$k]['startTime'];
+    					$updateSlotInfo->endTime = $model->slotsInfo[$k]['endTime'];
+    					$updateSlotInfo->dsDoctorId =  Yii::$app->user->identity->id;
+    					$updateSlotInfo->save();
+    				}
+    				else{
+    				$slotInfoModel = new DoctorSlots();
+    				$slotInfoModel->day = $model->slotsInfo[$k]['day'];
+    				$slotInfoModel->startTime = $model->slotsInfo[$k]['startTime'];
+    				$slotInfoModel->endTime = $model->slotsInfo[$k]['endTime'];
+    				$slotInfoModel->dsDoctorId =  Yii::$app->user->identity->id;
+    				$slotInfoModel->save();
+    				}
+    			}
+    			return $this->redirect(['slots']);
+//     			/exit();
+    		}
+    		
+    	} else {
+    	return $this->render('slots', [
+    			'model' => $model,
+    	]);
+    	}
+    	
     }
 }

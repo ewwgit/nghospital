@@ -15,6 +15,7 @@ use Yii;
  */
 class DoctorSlots extends \yii\db\ActiveRecord
 {
+	public $slotsInfo;
     /**
      * @inheritdoc
      */
@@ -29,9 +30,10 @@ class DoctorSlots extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['dsDoctorId', 'day', 'startTime', 'endTime'], 'required'],
+            /* [['dsDoctorId', 'day', 'startTime', 'endTime'], 'required'],
             [['dsDoctorId'], 'integer'],
-            [['day', 'startTime', 'endTime'], 'string', 'max' => 20],
+            [['day', 'startTime', 'endTime'], 'string', 'max' => 20], */
+        	[['slotsInfo'],'safe']
         ];
     }
 
@@ -47,5 +49,11 @@ class DoctorSlots extends \yii\db\ActiveRecord
             'startTime' => 'Start Time',
             'endTime' => 'End Time',
         ];
+    }
+    
+    public static function getSlotsInfo($docId) {
+    
+    	$SlotData = DoctorSlots::find()->asArray(true)->where(['dsDoctorId' => $docId ])->all();
+    	return $SlotData;
     }
 }
