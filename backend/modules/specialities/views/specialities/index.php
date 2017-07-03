@@ -28,7 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'specialityName',
             'specialityCode',
             'description:ntext',
-            'status',
+           // 'status',
+        		[
+        		'attribute' => 'status',
+        		'value' => 'status',
+        		'filter' => Html::activeDropDownList($searchModel, 'status', ['Active' => 'Active','In-active' => 'In-active'],['class'=>'form-control','prompt' => 'Status']),
+        		],
             // 'createdBy',
             // 'updatedBy',
             // 'createdDate',

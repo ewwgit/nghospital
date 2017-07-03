@@ -25,7 +25,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
            // 'qlid',
             'qualification',
-            'status',
+           [
+        		'attribute' => 'status',
+        		'value' => 'status',
+        		'filter' => Html::activeDropDownList($searchModel, 'status', ['Active' => 'Active','In-active' => 'In-active'],['class'=>'form-control','prompt' => 'Status']),
+        		],
           //  'createdBy',
           //  'updatedBy',
             // 'createdDate',

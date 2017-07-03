@@ -42,6 +42,7 @@ class UserMain extends \yii\db\ActiveRecord
             [['username', 'password_hash', 'password_reset_token', 'email', 'auth_key', 'status', 'created_at', 'updated_at', 'password', 'roleId', 'createdDate', 'modifiedDate'], 'safe'],
             //[['status', 'created_at', 'updated_at', 'roleId'], 'integer'],
             [['createdDate', 'modifiedDate'], 'safe'],
+        		['password', 'string', 'min' => 6],
            // [['username', 'password_hash', 'password_reset_token', 'email', 'auth_key', 'password'], 'string', 'max' => 200]
         ];
     }

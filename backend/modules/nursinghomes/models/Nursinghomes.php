@@ -102,6 +102,7 @@ public function rules()
         		'match', 'not' => true, 'pattern' => '/[^a-zA-Z0-9]/',
         		'message' => 'password Must be alphabates and numerics only.',
         		],
+        		  ['password', 'string', 'min' => 6],
         		
         		[
         		'email',
