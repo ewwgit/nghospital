@@ -15,6 +15,10 @@ use dosamigos\ckeditor\CKEditor;
 
 <div class="doctors-form">
 
+<div class="box box-primary">
+<div class="box-body"> 
+
+
    
     <?php $form = ActiveForm::begin(['options'=>['enctype' =>'multipart/form-data']]); ?>
     
@@ -96,20 +100,22 @@ use dosamigos\ckeditor\CKEditor;
     </div>
     <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'summery')->widget(CKEditor::className(), [
-        'options' => ['rows' => 4],
+        'options' => ['rows' => 2],
         'preset' => 'basic'
     ]) ?>
     </div>
-	<div class="form-group col-lg-6 col-sm-12">
+	<div class="form-group col-lg-6 col-sm-12" >
     <?=$form->field($model, 'status')->dropDownList(['10' => 'Active','0' => 'In-Active'],['prompt' => 'Status'],
 											['itemOptions' => ['class' =>'radio-inline']])?>
 	</div> 
 	
-	<div class="form-group">
+	<div class="form-group col-lg-6 col-sm-12 " >
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
     <?php ActiveForm::end(); ?>
 
+</div>
+</div>
 </div>
 <style>
 .help-block {

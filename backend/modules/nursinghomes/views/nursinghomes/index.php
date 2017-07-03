@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
           //  'nurshingUniqueId',
         		[
         		'attribute'=>'nurshingUniqueId',
-        		'label' => 'UniqueId',
+        		'label' => 'Unique Id',
         		],
             'contactPerson',
             'mobile',
