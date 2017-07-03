@@ -57,7 +57,7 @@ th {
 									[
 											'attribute'=>'nursingImage',
 											'format' => 'html',
-											'value'=>Html::img($model->nursingImage ? $imgeurl : '/@web/images/user-iconnew.png',['width' => '150px','height' => '150px']),
+											'value'=>Html::img($model->nursingImage ? $imgeurl : 'images/user-iconnew.png',['width' => '150px','height' => '150px']),
         		],
         ],
     ]) ?>
@@ -75,11 +75,17 @@ th {
 								
 								<div class="right">Contact Person</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->contactPerson; ?> </div>
+								<div class="right-second"><?php if($model->contactPerson != ''){
+									
+															echo 	$model->contactPerson;
+								}else{
+									echo 'Not Mentioned';
+								}?> </div>
 								
 								<div class="right">User Name</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?= $usernamedata['username']; ?></div>
+								<div class="right-second"><?= $usernamedata['username']; ?>
+								</div>
 								
 								<div class="right">Email</div>								
 								<div class="right-content">:</div>
@@ -87,35 +93,71 @@ th {
 								
 								<div class="right">Mobile</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->mobile; ?> </div>
+								<div class="right-second">
+								<?php if(!empty($model->mobile)){
+									echo $model->mobile;
+								}else{
+									echo 'Not Mentioned';
+								}?> </div>
 								
 								<div class="right">Landline</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->landline; ?></div>
+								<div class="right-second">
+								<?php if(!empty($model->landline)){
+									echo $model->landline;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 								
 								<div class="right">Country</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->countryName; ?> </div>
+								<div class="right-second">
+								<?php if(!empty($model->countryName)){
+									echo $model->countryName;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 								
 								<div class="right">State</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->stateName; ?> </div>
+								<div class="right-second">
+								<?php if(!empty($model->stateName)){
+									echo $model->stateName;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 								
 								<div class="right">City</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->city; ?></div>
+								<div class="right-second">
+								<?php if(!empty($model->city)){
+									echo $model->city;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 								
 								<div class="right">Pin Code</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->pinCode; ?> </div>
+								<div class="right-second">
+								<?php if(!empty($model->pinCode)){
+									echo $model->pinCode;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 								
 								<div class="right">Address</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->address; ?></div>
+								<div class="right-second">
+								<?php if(!empty($model->address)){
+									echo $model->address;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 								
 								<div class="right">Description</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->description; ?></div>
+								<div class="right-second"><?= $model->description; ?>
+							   </div>
 								<div class="right">Status</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?php if($usernamedata['status']==10){echo"Active";}else {echo"In-Active";} ?></div>
