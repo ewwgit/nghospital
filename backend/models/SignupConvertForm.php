@@ -34,7 +34,8 @@ class SignupConvertForm extends Model
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.','on' =>'create'],
 
             ['password', 'required' ,'on' =>'create'],
-            ['password', 'string', 'min' => 6 ,'on' =>'create'],
+           
+        		['password', 'string', 'min' => 6 ],
         		[
         		'email',
         		'match',
