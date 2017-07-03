@@ -102,13 +102,16 @@ class NursinghomesController extends Controller
         	$model->state='';
            	}
                  
-        if ($model->load(Yii::$app->request->post()) && $model->validate())
+        if ($model->load(Yii::$app->request->post()))
         {
+        	$model->nursingImage = UploadedFile::getInstance($model,'nursingImage');
+        	$model->validate();
+        	{
         	$presentDate = date('Y-m-d');
         	$nursinghomescount = Nursinghomes::find()->where("createdDate LIKE '$presentDate%'")->count();
         	/* echo $nursinghomescount;
         	exit(); */
-        	$model->nursingImage = UploadedFile::getInstance($model,'nursingImage');
+        	
         	$addnewid = $nursinghomescount+1;
         	$uniqonlyId = str_pad($addnewid, 5, '0', STR_PAD_LEFT);
         	$dateInfo = date_parse(date('Y-m-d H:i:s'));
@@ -151,13 +154,18 @@ class NursinghomesController extends Controller
         	Yii::$app->session->setFlash('success', " Nursing Homes Created successfully ");
            return $this->redirect(['index']);
                  
-        } else {
+        }
+       
+        }
+        else {
             return $this->render('create', [
                 'model' => $model,
             	
                 
             ]);
         }
+
+   
     }
 
     /**
