@@ -69,8 +69,9 @@ class SpecialitiesSearch extends Specialities
         $query->andFilterWhere(['like', 'specialityName', $this->specialityName])
             ->andFilterWhere(['like', 'specialityCode', $this->specialityCode])
             ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'status', $this->status]);
-
+            //->andFilterWhere(['like', 'status', $this->status]);
+            ->andFilterWhere(['=', 'status', $this->status]);
+    
         return $dataProvider;
     }
 }

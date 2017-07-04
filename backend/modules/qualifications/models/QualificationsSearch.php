@@ -67,7 +67,8 @@ class QualificationsSearch extends Qualifications
         ]);
 
         $query->andFilterWhere(['like', 'qualification', $this->qualification])
-            ->andFilterWhere(['like', 'status', $this->status]);
+          //  ->andFilterWhere(['like', 'status', $this->status]);
+            ->andFilterWhere(['=', 'status', $this->status]);
 
         return $dataProvider;
     }

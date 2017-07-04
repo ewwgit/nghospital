@@ -94,7 +94,8 @@ class NursinghomesSearch extends Nursinghomes
             ->andFilterWhere(['like', 'countryName', $this->countryName])
             ->andFilterWhere(['like', 'pinCode', $this->pinCode])
             ->andFilterWhere(['like', 'user.username', $this->username])
-            ->andFilterWhere(['like', 'user.status', $this->status])
+           // ->andFilterWhere(['like', 'user.status', $this->status])
+            ->andFilterWhere(['=', 'user.status', $this->status])
             ->andFilterWhere(['like', 'address', $this->address])
             ->andFilterWhere(['like', 'description', $this->description]);
 
