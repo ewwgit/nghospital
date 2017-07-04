@@ -61,6 +61,15 @@ class ResetPasswordForm extends Model
      *
      * @return bool if password was reset.
      */
+    
+    public function attributeLabels()
+    {
+    	return [
+    			'confirmpassword' => 'Confirm Password',
+    			'password' => 'Password',
+    			
+    	];
+    }
     public function resetPassword()
     {
         $user = $this->_user;

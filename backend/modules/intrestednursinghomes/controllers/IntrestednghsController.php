@@ -164,6 +164,7 @@ class IntrestednghsController extends Controller
     	$model->email =  $interestednghInfo->email;
     	$nursinghomeModel = new Nursinghomes();
     	$nursinghomeModel->scenario = 'convertsneed';
+    	$model->scenario = 'convertnursinghomes';
     
     	if ($model->load(Yii::$app->request->post()) && $model->validate()){
     		$model->role= 2;

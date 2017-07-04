@@ -234,6 +234,7 @@ class IntresteddoctorsController extends Controller
     	$model->email =  $interesteddocInfo->email;
     	$docModel = new Doctors();
     	$docModel->scenario = 'convertsneed';
+    	$model->scenario = 'convertdoctors';
     
     	if ($model->load(Yii::$app->request->post()) && $model->validate()){
     		$model->role= 2;

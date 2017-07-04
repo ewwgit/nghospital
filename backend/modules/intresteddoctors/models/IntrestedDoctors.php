@@ -35,8 +35,13 @@ class IntrestedDoctors extends \yii\db\ActiveRecord
             [['role'], 'integer'],
             [['description'], 'string'],
             [['createdDate'], 'safe'],
-            [['name', 'email'], 'string', 'max' => 200],
-            [['mobile'], 'string', 'max' => 20],
+           
+           
+        		['name', 'string', 'min' => 2, 'max' => 255],
+        		['name', 'unique', 'message' => 'This name has already been taken.'],
+        		
+        		
+                [['mobile'], 'string', 'max' => 20],
         		[
         		'email',
         		'match',
@@ -49,6 +54,15 @@ class IntrestedDoctors extends \yii\db\ActiveRecord
         				'pattern' => '/^[0-9]{10}$/',
         				'message' => 'mobile number must contain exactly 10 numbers.',
         		],
+        		[
+        		'email',
+        		'match',
+        		'pattern' => '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/',
+        		'message' => 'Email can contain @ and .com characters.'
+        				],
+        				['email', 'string', 'max' => 255],
+        				['email', 'unique', 'message' => 'This email address has already been taken.'],
+        				['email','email'],
         				
         ];
     }

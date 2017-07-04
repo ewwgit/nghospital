@@ -24,14 +24,15 @@ class SignupConvertForm extends Model
         return [
            ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.','on' =>'create'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.','on' =>'convertdoctors'],
+        	['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.','on' =>'convertnursinghomes'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.','on' =>'create'],
+           // ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.','on' =>'create'],
 
             ['password', 'required' ,'on' =>'create'],
            
@@ -41,10 +42,8 @@ class SignupConvertForm extends Model
         		'match',
         		'pattern' => '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/',
         		'message' => 'Email can contain @ and .com characters.'
-        				]
-        				,
-        		
-        		
+        				],
+
         		['username',
         		'match', 'not' => true, 'pattern' => '/[^a-zA-Z0-9]/',
         		'message' => 'Invalid username pattern.',
