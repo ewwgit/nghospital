@@ -46,9 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
     		[
     		
     		 'attribute'=>'role',
-    		 'filter'=>  $searchData =ArrayHelper::map(Role::find()->asArray()->all(), 'RoleId', 'RoleName'),
+    		 'filter'=> $searchData =ArrayHelper::map(Role::find()->select(['RoleId','RoleName'])->where(('RoleId > 3'))->asArray()->all(), 'RoleId', 'RoleName'),
 
-    		 //'options' => ['placeholder' => 'Choisir une personne'],
+    		 
 //     				'filterWidgetOptions'=>[
 //     						'pluginOptions'=>['allowClear'=>true,
 //     								'placeholder' => 'Choisir une personne'
