@@ -39,26 +39,56 @@ $items = [
 <div class="box box-primary">
 <div class="box-body">
 <?php $form = ActiveForm::begin(['options'=>['enctype' =>'multipart/form-data']]); ?>
-<div class="form-group col-lg-12 col-sm-12" style="border-bottom: 1px solid #ccc;">
-<div class="form-group col-lg-4 col-sm-12" style="padding-left: 0px;">
-    <div class="form-group col-lg-4 col-sm-12">First Name:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    <div class="form-group col-lg-4 col-sm-12">Last Name:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    <div class="form-group col-lg-4 col-sm-12">Gender:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    <div class="form-group col-lg-4 col-sm-12">Age:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    <div class="form-group col-lg-4 col-sm-12">Date of Birth:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+<div class="row">
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">First Name:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
 </div>
-<div class="form-group col-lg-4 col-sm-12" style="padding-left: 0px;">
-    <div class="form-group col-lg-4 col-sm-12">Country:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    <div class="form-group col-lg-4 col-sm-12">State:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    <div class="form-group col-lg-4 col-sm-12">District:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    <div class="form-group col-lg-4 col-sm-12">City:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    <div class="form-group col-lg-4 col-sm-12">Mandal:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">Last Name:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
 </div>
-<div class="form-group col-lg-4 col-sm-12" style="padding-left: 0px;">
-    <div class="form-group col-lg-4 col-sm-12">Village:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    <div class="form-group col-lg-4 col-sm-12">Pin Code:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    <div class="form-group col-lg-4 col-sm-12">Mobile:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    <div class="form-group col-lg-4 col-sm-12">Image:</div> <div class="form-group col-lg-8 col-sm-12"><input type="file" name="Browse"></div>
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">Gender:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+</div>
+</div>
+<div class="row">
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">Age:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+</div>
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">Date of Birth:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+</div>
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">Country:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+</div>
+</div>
+<div class="row">
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">State:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+</div>
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">District:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+</div>
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">City:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+</div>
+</div>
+<div class="row">
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">Mandal:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+</div>
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">Village:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+</div>
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">Pin Code:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+</div>
+</div>
+<div class="row">
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">Mobile:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+</div>
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">Image:</div> <div class="col-lg-8 col-sm-12"><input type="file" name="Browse"></div>
 </div>
 </div>
 <div class="form-group col-lg-12 col-sm-12" style="border-bottom: 1px solid #ccc;">
@@ -71,26 +101,45 @@ echo TabsX::widget([
 ]);
 ?>
 </div>
-<div class="form-group col-lg-12 col-sm-12">
-<div class="form-group col-lg-4 col-sm-12" style="padding-left: 0px;">
-    <div class="form-group col-lg-4 col-sm-12">Height:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    <div class="form-group col-lg-4 col-sm-12">Weight:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    <div class="form-group col-lg-4 col-sm-12">Resp Rate:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    <div class="form-group col-lg-4 col-sm-12">Pulse Rate:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    
+<div class="row">
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">Height:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
 </div>
-<div class="form-group col-lg-4 col-sm-12" style="padding-left: 0px;">
-    <div class="form-group col-lg-4 col-sm-12">BpLeft Arm:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    <div class="form-group col-lg-4 col-sm-12">BPRight Arm:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    <div class="form-group col-lg-4 col-sm-12">Temp Type:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    <div class="form-group col-lg-4 col-sm-12">Diseases:</div> <div class="form-group col-lg-8 col-sm-12"><input type="text"></div>
-    
-    
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">Weight:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
 </div>
-<div class="form-group col-lg-4 col-sm-12" style="padding-left: 0px;">
-<div class="form-group col-lg-4 col-sm-12">Compliant:</div> <div class="form-group col-lg-8 col-sm-12"><textarea></textarea></div>
-    <div class="form-group col-lg-4 col-sm-12">Document:</div> <div class="form-group col-lg-8 col-sm-12"><input type="file" name="Browse"></div>
-    <div class="form-group col-lg-4 col-sm-12">Allergic Medicine:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">Resp Rate:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+</div>
+</div>
+<div class="row">
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">Pulse Rate:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+</div>    
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">BpLeft Arm:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+</div>
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">BPRight Arm:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+</div>
+</div>
+<div class="row">
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">Temp Type:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+</div>
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">Diseases:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+</div> 
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">AllergicMedicine:</div> <div class="col-lg-8 col-sm-12"><input type="text"></div>
+</div>
+</div>
+<div class="row">
+<div class="form-group col-lg-4 col-sm-12">
+	<div class="col-lg-4 col-sm-12">Compliant:</div> <div class="col-lg-8 col-sm-12"><textarea></textarea></div>
+</div>
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">Document:</div> <div class="col-lg-8 col-sm-12"><input type="file"></div>
 </div>
 </div>
 <?php ActiveForm::end(); ?>
