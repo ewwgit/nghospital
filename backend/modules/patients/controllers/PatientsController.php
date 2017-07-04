@@ -283,4 +283,8 @@ class PatientsController extends Controller
     
     
     }
+    public function actionPatientshistorycreate()
+    {
+    	return $this->render('patientshistorycreate');
+    }
 }

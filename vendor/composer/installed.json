@@ -20,7 +20,7 @@
         "require-dev": {
             "composer/composer": "^1.0"
         },
-        "time": "2016-12-20T13:26:02+00:00",
+        "time": "2016-12-20 13:26:02",
         "type": "composer-plugin",
         "extra": {
             "class": "yii\\composer\\Plugin",
@@ -73,7 +73,7 @@
             "mockery/mockery": "~0.9.1",
             "symfony/phpunit-bridge": "~3.2"
         },
-        "time": "2017-05-01T15:54:03+00:00",
+        "time": "2017-05-01 15:54:03",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -230,7 +230,7 @@
             "facebook/xhprof": "*@dev",
             "phpunit/phpunit": "4.1.*"
         },
-        "time": "2016-09-14T20:40:20+00:00",
+        "time": "2016-09-14 20:40:20",
         "bin": [
             "bin/markdown"
         ],
@@ -289,7 +289,7 @@
         "require-dev": {
             "simpletest/simpletest": "^1.1"
         },
-        "time": "2017-03-13T06:30:53+00:00",
+        "time": "2017-03-13 06:30:53",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -406,7 +406,7 @@
             "php": ">=5.4.0",
             "yiisoft/yii2-composer": "~2.0.4"
         },
-        "time": "2017-02-08T09:04:32+00:00",
+        "time": "2017-02-08 09:04:32",
         "bin": [
             "yii"
         ],
@@ -499,7 +499,7 @@
             "swiftmailer/swiftmailer": "~5.0",
             "yiisoft/yii2": "~2.0.4"
         },
-        "time": "2017-05-01T08:29:00+00:00",
+        "time": "2017-05-01 08:29:00",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -602,7 +602,7 @@
             "bower-asset/bootstrap": "3.3.* | 3.2.* | 3.1.*",
             "yiisoft/yii2": ">=2.0.6"
         },
-        "time": "2016-03-17T03:29:28+00:00",
+        "time": "2016-03-17 03:29:28",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -654,7 +654,7 @@
             "yiisoft/yii2": "~2.0.11",
             "yiisoft/yii2-bootstrap": "~2.0.0"
         },
-        "time": "2017-02-21T10:30:50+00:00",
+        "time": "2017-02-21 10:30:50",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -728,7 +728,7 @@
             "reference": "0464787bfa7cd13576c5a1e318709768798bec6a",
             "shasum": ""
         },
-        "time": "2016-04-07T12:29:16+00:00",
+        "time": "2016-04-07 12:29:16",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -774,7 +774,7 @@
             "yiisoft/yii2": ">=2.0.4",
             "yiisoft/yii2-bootstrap": "~2.0"
         },
-        "time": "2016-03-18T14:09:46+00:00",
+        "time": "2016-03-18 14:09:46",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -831,7 +831,7 @@
             "phpunit/phpunit": "~4.0",
             "squizlabs/php_codesniffer": "~1.5"
         },
-        "time": "2016-04-29T12:21:54+00:00",
+        "time": "2016-04-29 12:21:54",
         "type": "library",
         "extra": {
             "branch-alias": []
@@ -877,7 +877,7 @@
             "fzaninotto/faker": "*",
             "yiisoft/yii2": "*"
         },
-        "time": "2015-03-01T06:22:44+00:00",
+        "time": "2015-03-01 06:22:44",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -925,7 +925,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2016-10-10T12:19:37+00:00",
+        "time": "2016-10-10 12:19:37",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -981,7 +981,7 @@
         "require-dev": {
             "symfony/http-kernel": "~2.8|~3.0"
         },
-        "time": "2017-05-27T16:02:27+00:00",
+        "time": "2017-05-27 16:02:27",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1035,7 +1035,7 @@
         "suggest": {
             "ext-mbstring": "For best performance"
         },
-        "time": "2016-11-14T01:06:16+00:00",
+        "time": "2016-11-14 01:06:16",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1112,7 +1112,7 @@
             "symfony/filesystem": "",
             "symfony/process": ""
         },
-        "time": "2017-05-28T14:08:56+00:00",
+        "time": "2017-05-28 14:08:56",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1167,7 +1167,7 @@
         "require-dev": {
             "phpunit/phpunit": "~4.4"
         },
-        "time": "2016-02-24T05:08:54+00:00",
+        "time": "2016-02-24 05:08:54",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1213,7 +1213,7 @@
         "require-dev": {
             "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.0"
         },
-        "time": "2017-05-22T07:24:03+00:00",
+        "time": "2017-05-22 07:24:03",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1267,7 +1267,7 @@
         "require-dev": {
             "phpunit/phpunit": "^6.0"
         },
-        "time": "2017-03-03T06:23:57+00:00",
+        "time": "2017-03-03 06:23:57",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1324,7 +1324,7 @@
             "ext-mbstring": "*",
             "phpunit/phpunit": "^6.0"
         },
-        "time": "2017-04-03T13:19:02+00:00",
+        "time": "2017-04-03 13:19:02",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1393,7 +1393,7 @@
         "require-dev": {
             "phpunit/phpunit": "^6.0"
         },
-        "time": "2017-03-03T06:26:08+00:00",
+        "time": "2017-03-03 06:26:08",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1462,7 +1462,7 @@
         "suggest": {
             "symfony/yaml": "If you want to parse features, represented in YAML files"
         },
-        "time": "2016-10-30T11:50:56+00:00",
+        "time": "2016-10-30 11:50:56",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1522,7 +1522,7 @@
         "suggest": {
             "symfony/css-selector": ""
         },
-        "time": "2017-05-25T23:10:31+00:00",
+        "time": "2017-05-25 23:10:31",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1573,7 +1573,7 @@
         "require": {
             "php": ">=5.5.9"
         },
-        "time": "2017-05-01T15:01:29+00:00",
+        "time": "2017-05-01 15:01:29",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1636,7 +1636,7 @@
         "suggest": {
             "symfony/process": ""
         },
-        "time": "2017-04-12T14:14:56+00:00",
+        "time": "2017-04-12 14:14:56",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1693,7 +1693,7 @@
         "suggest": {
             "symfony/console": "For validating YAML files using the lint command"
         },
-        "time": "2017-05-28T10:56:20+00:00",
+        "time": "2017-05-28 10:56:20",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1758,7 +1758,7 @@
             "symfony/dependency-injection": "",
             "symfony/http-kernel": ""
         },
-        "time": "2017-05-04T12:23:07+00:00",
+        "time": "2017-05-04 12:23:07",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1809,7 +1809,7 @@
         "require": {
             "php": ">=5.5.9"
         },
-        "time": "2017-05-25T23:10:31+00:00",
+        "time": "2017-05-25 23:10:31",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1860,7 +1860,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2016-08-06T14:39:51+00:00",
+        "time": "2016-08-06 14:39:51",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1919,7 +1919,7 @@
         "require-dev": {
             "phpunit/phpunit": "~4.0"
         },
-        "time": "2017-03-20T17:10:46+00:00",
+        "time": "2017-03-20 17:10:46",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1986,7 +1986,7 @@
             "phpunit/phpunit": "~4.0",
             "squizlabs/php_codesniffer": "~2.0"
         },
-        "time": "2015-06-14T21:17:01+00:00",
+        "time": "2015-06-14 21:17:01",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2035,7 +2035,7 @@
         "require": {
             "php": ">=5.3.3"
         },
-        "time": "2015-06-21T13:50:34+00:00",
+        "time": "2015-06-21 13:50:34",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2090,7 +2090,7 @@
         "suggest": {
             "ext-soap": "*"
         },
-        "time": "2017-03-03T06:30:20+00:00",
+        "time": "2017-03-03 06:30:20",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2142,7 +2142,7 @@
             "ext-xmlwriter": "*",
             "php": "^7.0"
         },
-        "time": "2017-04-07T12:08:54+00:00",
+        "time": "2017-04-07 12:08:54",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2181,7 +2181,7 @@
         "require": {
             "php": ">=5.6"
         },
-        "time": "2016-10-03T07:35:21+00:00",
+        "time": "2016-10-03 07:35:21",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2229,7 +2229,7 @@
         "require-dev": {
             "phpunit/phpunit": "^6.1"
         },
-        "time": "2017-05-18T10:10:00+00:00",
+        "time": "2017-05-18 10:10:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2281,7 +2281,7 @@
         "require-dev": {
             "phpunit/phpunit": "^5.7 || ^6.0"
         },
-        "time": "2017-03-04T06:30:41+00:00",
+        "time": "2017-03-04 06:30:41",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2329,7 +2329,7 @@
         "require-dev": {
             "phpunit/phpunit": "~4.2"
         },
-        "time": "2017-02-27T10:12:30+00:00",
+        "time": "2017-02-27 10:12:30",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2376,7 +2376,7 @@
         "require": {
             "php": ">=5.3.3"
         },
-        "time": "2016-10-03T07:40:28+00:00",
+        "time": "2016-10-03 07:40:28",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2441,7 +2441,7 @@
         "suggest": {
             "ext-xdebug": "^2.5.3"
         },
-        "time": "2017-04-21T08:03:57+00:00",
+        "time": "2017-04-21 08:03:57",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2491,7 +2491,7 @@
         "require": {
             "php": ">=5.6.0"
         },
-        "time": "2015-07-28T20:34:47+00:00",
+        "time": "2015-07-28 20:34:47",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2538,7 +2538,7 @@
         "require-dev": {
             "phpunit/phpunit": "^6.0"
         },
-        "time": "2017-03-29T09:07:27+00:00",
+        "time": "2017-03-29 09:07:27",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2587,7 +2587,7 @@
         "require-dev": {
             "phpunit/phpunit": "^6.0"
         },
-        "time": "2017-03-12T15:17:29+00:00",
+        "time": "2017-03-12 15:17:29",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2637,7 +2637,7 @@
         "suggest": {
             "ext-uopz": "*"
         },
-        "time": "2017-04-27T15:39:26+00:00",
+        "time": "2017-04-27 15:39:26",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2687,7 +2687,7 @@
         "require-dev": {
             "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.0"
         },
-        "time": "2017-02-26T11:10:40+00:00",
+        "time": "2017-02-26 11:10:40",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2739,7 +2739,7 @@
             "phpunit/phpunit": "^4.6",
             "sebastian/version": "^1.0.1"
         },
-        "time": "2016-11-23T20:04:58+00:00",
+        "time": "2016-11-23 20:04:58",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2790,7 +2790,7 @@
         "require-dev": {
             "phpunit/phpunit": "^4.6"
         },
-        "time": "2015-12-27T11:43:31+00:00",
+        "time": "2015-12-27 11:43:31",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2848,7 +2848,7 @@
             "mockery/mockery": "^0.9.4",
             "phpunit/phpunit": "^5.2||^4.8.24"
         },
-        "time": "2016-11-25T06:54:22+00:00",
+        "time": "2016-11-25 06:54:22",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2899,7 +2899,7 @@
             "mockery/mockery": "^0.9.4",
             "phpunit/phpunit": "^4.4"
         },
-        "time": "2016-09-30T07:12:33+00:00",
+        "time": "2016-09-30 07:12:33",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2947,7 +2947,7 @@
             "phpspec/phpspec": "^2.5|^3.2",
             "phpunit/phpunit": "^4.8 || ^5.6.5"
         },
-        "time": "2017-03-02T20:05:34+00:00",
+        "time": "2017-03-02 20:05:34",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3004,7 +3004,7 @@
         "require": {
             "php": "^5.6 || ^7.0"
         },
-        "time": "2017-03-05T17:38:23+00:00",
+        "time": "2017-03-05 17:38:23",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -3056,7 +3056,7 @@
             "phar-io/version": "^1.0.1",
             "php": "^5.6 || ^7.0"
         },
-        "time": "2017-03-05T18:14:27+00:00",
+        "time": "2017-03-05 18:14:27",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3114,7 +3114,7 @@
             "doctrine/collections": "1.*",
             "phpunit/phpunit": "~4.1"
         },
-        "time": "2017-04-12T18:52:22+00:00",
+        "time": "2017-04-12 18:52:22",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -3187,7 +3187,7 @@
             "ext-xdebug": "*",
             "phpunit/php-invoker": "^1.1"
         },
-        "time": "2017-05-22T07:45:30+00:00",
+        "time": "2017-05-22 07:45:30",
         "bin": [
             "phpunit"
         ],
@@ -3280,7 +3280,7 @@
             "phpseclib/phpseclib": "for SFTP option in FTP Module",
             "symfony/phpunit-bridge": "For phpunit-bridge support"
         },
-        "time": "2017-05-27T00:59:06+00:00",
+        "time": "2017-05-27 00:59:06",
         "bin": [
             "codecept"
         ],
@@ -3338,7 +3338,7 @@
         "require-dev": {
             "phpunit/phpunit": "~4.0"
         },
-        "time": "2017-01-09T10:58:51+00:00",
+        "time": "2017-01-09 10:58:51",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -3373,7 +3373,7 @@
             "reference": "30389e4022bbd812f4f2bbd9612eebb544a5906f",
             "shasum": ""
         },
-        "time": "2017-05-02T09:44:24+00:00",
+        "time": "2017-05-02 09:44:24",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -3417,7 +3417,7 @@
             "reference": "aa4e1a520cef078922ed2c7c8e3e944d496388f6",
             "shasum": ""
         },
-        "time": "2017-05-25T19:06:59+00:00",
+        "time": "2017-05-25 19:06:59",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3475,7 +3475,7 @@
         "require": {
             "yiisoft/yii2-bootstrap": "@dev"
         },
-        "time": "2017-02-22T05:58:53+00:00",
+        "time": "2017-02-22 05:58:53",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -3529,7 +3529,7 @@
             "kartik-v/bootstrap-fileinput": "~4.4",
             "kartik-v/yii2-krajee-base": "~1.7"
         },
-        "time": "2017-05-25T20:12:30+00:00",
+        "time": "2017-05-25 20:12:30",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -3586,7 +3586,7 @@
             "jekyll": "1.0.2",
             "lessc": "1.4.2"
         },
-        "time": "2016-10-24T15:52:54+00:00",
+        "time": "2016-10-24 15:52:54",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3637,7 +3637,7 @@
             "php": ">=5.4.0",
             "yiisoft/yii2": "2.0.*"
         },
-        "time": "2017-01-11T14:05:47+00:00",
+        "time": "2017-01-11 14:05:47",
         "type": "yii2-extension",
         "extra": {
             "asset-installer-paths": {
@@ -3686,7 +3686,7 @@
             "reference": "2be703222af2edcb87e562d3da2299e4352bff8a",
             "shasum": ""
         },
-        "time": "2017-01-08T21:03:57+00:00",
+        "time": "2017-01-08 21:03:57",
         "type": "library",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -3732,7 +3732,7 @@
         "require": {
             "yiisoft/yii2": "*"
         },
-        "time": "2013-12-10T17:49:58+00:00",
+        "time": "2013-12-10 17:49:58",
         "type": "yii2-extension",
         "installation-source": "dist",
         "autoload": {
@@ -3780,7 +3780,7 @@
             "yiisoft/yii2": "2.*",
             "yiisoft/yii2-bootstrap": "2.*"
         },
-        "time": "2017-03-30T09:04:16+00:00",
+        "time": "2017-03-30 09:04:16",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -3839,7 +3839,7 @@
             "kartik-v/dependent-dropdown": "*",
             "kartik-v/yii2-krajee-base": "*"
         },
-        "time": "2015-05-22T10:15:23+00:00",
+        "time": "2015-05-22 10:15:23",
         "type": "yii2-extension",
         "installation-source": "dist",
         "autoload": {
@@ -3889,7 +3889,7 @@
         "require": {
             "kartik-v/yii2-krajee-base": "~1.7"
         },
-        "time": "2017-04-01T16:03:50+00:00",
+        "time": "2017-04-01 16:03:50",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -3945,7 +3945,7 @@
         "require": {
             "kartik-v/yii2-krajee-base": "~1.7"
         },
-        "time": "2017-04-12T09:00:24+00:00",
+        "time": "2017-04-12 09:00:24",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -3997,7 +3997,7 @@
             "reference": "8edc5545364d3bd2b928852a7c270a044d1b3ea4",
             "shasum": ""
         },
-        "time": "2017-05-25T16:15:26+00:00",
+        "time": "2017-05-25 16:15:26",
         "type": "library",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -4047,7 +4047,7 @@
         "require-dev": {
             "phpunit/phpunit": "4.*"
         },
-        "time": "2017-06-12T18:51:26+00:00",
+        "time": "2017-06-12 18:51:26",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -4106,7 +4106,7 @@
         "require-dev": {
             "phpunit/phpunit": "5.7.*"
         },
-        "time": "2017-04-05T20:32:28+00:00",
+        "time": "2017-04-05 20:32:28",
         "type": "yii2-extension",
         "installation-source": "dist",
         "autoload": {
@@ -4133,6 +4133,107 @@
             "yii2 multiple field",
             "yii2 multiple input",
             "yii2 tabular input"
+        ]
+    },
+    {
+        "name": "kartik-v/bootstrap-tabs-x",
+        "version": "v1.3.2",
+        "version_normalized": "1.3.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kartik-v/bootstrap-tabs-x.git",
+            "reference": "e85a731d79f030fb7f7742e3e2e0ac828c3233a1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kartik-v/bootstrap-tabs-x/zipball/e85a731d79f030fb7f7742e3e2e0ac828c3233a1",
+            "reference": "e85a731d79f030fb7f7742e3e2e0ac828c3233a1",
+            "shasum": ""
+        },
+        "time": "2015-06-26 14:48:16",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "kartik\\plugins\\tabs\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Kartik Visweswaran",
+                "email": "kartikv2@gmail.com",
+                "homepage": "http://www.krajee.com/"
+            }
+        ],
+        "description": "Extended Bootstrap Tabs with ability to align tabs in multiple ways, add borders, rotated titles, and more.",
+        "homepage": "https://github.com/kartik-v/bootstrap-tabs-x",
+        "keywords": [
+            "bootstrap",
+            "extended",
+            "jquery",
+            "modal",
+            "modal-tabs",
+            "tabs",
+            "tabs-x"
+        ]
+    },
+    {
+        "name": "kartik-v/yii2-tabs-x",
+        "version": "v1.2.3",
+        "version_normalized": "1.2.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kartik-v/yii2-tabs-x.git",
+            "reference": "1e35056b49d48d103459be13d812a5cc9bc83b1b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kartik-v/yii2-tabs-x/zipball/1e35056b49d48d103459be13d812a5cc9bc83b1b",
+            "reference": "1e35056b49d48d103459be13d812a5cc9bc83b1b",
+            "shasum": ""
+        },
+        "require": {
+            "kartik-v/bootstrap-tabs-x": "~1.3",
+            "kartik-v/yii2-krajee-base": "~1.7"
+        },
+        "time": "2016-09-09 11:33:18",
+        "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.2.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "kartik\\tabs\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Kartik Visweswaran",
+                "email": "kartikv2@gmail.com",
+                "homepage": "http://www.krajee.com/"
+            }
+        ],
+        "description": "An extended bootstrap 3.0 tabs widget with ability to align tabs in multiple ways, add borders, rotated titles, and more.",
+        "homepage": "https://github.com/kartik-v/yii2-tabs-x",
+        "keywords": [
+            "bootstrap",
+            "extended",
+            "jquery",
+            "modal",
+            "modal-tabs",
+            "tabs",
+            "tabs-x"
         ]
     }
 ]
