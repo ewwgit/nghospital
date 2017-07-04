@@ -7,9 +7,9 @@ use yii\helpers\Html;
 /* @var $model app\models\Nursinghomes */
 
 
-$this->title = 'Create Nursing Homes';
+$this->title = 'Create Doctors';
 
-$this->params['breadcrumbs'][] = ['label' => 'Nursing Homes', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 // Html::encode($this->title)
 ?>
