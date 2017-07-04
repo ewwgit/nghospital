@@ -137,6 +137,7 @@
                 		'items' => [
                 				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/patients/patients/create'],],
                 				['label' => 'View', 'icon' => 'eye', 'url' => ['/patients/patients'],],
+                			['label' => 'History Create', 'icon' => 'plus-circle', 'url' => ['/patients/patients/patientshistorycreate'],],
                 		
                 		],
                 		],
