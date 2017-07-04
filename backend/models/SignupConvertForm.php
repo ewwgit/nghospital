@@ -86,6 +86,18 @@ class SignupConvertForm extends Model
      *
      * @return User|null the saved model or null if saving fails
      */
+    public function attributeLabels()
+    {
+    	return [
+    
+    			'username' => 'User Name',
+    			'email' => 'Email',
+    			'password' => 'Password',
+    			'confirmpassword' => 'Confirm Password',
+    			
+    
+    	];
+    }
     public function signup()
     {
         if (!$this->validate()) {

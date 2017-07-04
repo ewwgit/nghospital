@@ -68,7 +68,8 @@ class ModulesMasterSearch extends ModulesMaster
 
         $query->andFilterWhere(['like', 'moduleName', $this->moduleName])
             ->andFilterWhere(['like', 'type', $this->type])
-            ->andFilterWhere(['like', 'status', $this->status])
+            ->andFilterWhere(['=', 'status', $this->status])
+           // ->andFilterWhere(['like', 'status', $this->status])
             ->andFilterWhere(['like', 'ipAddress', $this->ipAddress]);
 
         return $dataProvider;

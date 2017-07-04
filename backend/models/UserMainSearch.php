@@ -18,6 +18,7 @@ class UserMainSearch extends UserMain
 	public $city;
 	public $stateCode;
 	public $countryName;
+	public $status;
     public function rules()
     {
         return [
@@ -88,6 +89,7 @@ class UserMainSearch extends UserMain
         
         
         $query->joinWith('register');
+
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
@@ -102,7 +104,7 @@ class UserMainSearch extends UserMain
             ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'auth_key', $this->auth_key])
-           ;
+            ->andFilterWhere(['=', 'status', $this->status]);
         
             //print_r($dataProvider->getModels());exit();
 

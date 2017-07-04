@@ -7,6 +7,8 @@ use backend\models\Role;
 use app\models\AdminMaster;
 use app\models\UserMain;
 
+use yii\helpers\ArrayHelper;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\AdminMasterSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -23,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Admin User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     
-    <?php //print_r($roledata);exit; ?>
+    <?php  ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -42,14 +44,23 @@ $this->params['breadcrumbs'][] = $this->title;
     		    		 ],
       
     		[
+    		
     		 'attribute'=>'role',
-    		  'value' => function ($data) { 
-    		  $roleData = Role::find()->where(['RoleId' => $data->role])->one();
+    		 'filter'=>  $searchData =ArrayHelper::map(Role::find()->asArray()->all(), 'RoleId', 'RoleName'),
+
+    		 //'options' => ['placeholder' => 'Choisir une personne'],
+//     				'filterWidgetOptions'=>[
+//     						'pluginOptions'=>['allowClear'=>true,
+//     								'placeholder' => 'Choisir une personne'
+//     						],
+//     				],
+    	      'value' => function ($data) { 
+    		   $roleData = Role::find()->where(['RoleId' => $data->role])->one();
     		       return $roleData->RoleName;
     		        },
     		        	
     		       ],
-    		      
+    		    
     		
         		[
         		'attribute'=>'status',
@@ -60,8 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
         			if($data->status == 10)
         			{
         				$status = 'Active';
-        				
-        			}
+        			 }
         			else
         			{
         				$status = 'In-Active';

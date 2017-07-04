@@ -77,6 +77,7 @@ class AdminMasterSearch extends AdminMaster
             ->andFilterWhere(['like', 'firstName', $this->firstName])
             ->andFilterWhere(['like', 'lastName', $this->lastName])
             ->andFilterWhere(['like', 'role.RoleName', $this->roleId])
+            ->andFilterWhere(['=', 'status', $this->status])
             ->andFilterWhere(['like', 'profileImage', $this->profileImage]);
 
         return $dataProvider;
