@@ -24,8 +24,8 @@ class SignupConvertForm extends Model
         return [
            ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.','on' =>'convertdoctors'],
-        	['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.','on' =>'convertnursinghomes'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.','on' =>'interested'],
+        	//['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.','on' =>'convertnursinghomes'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
@@ -43,6 +43,8 @@ class SignupConvertForm extends Model
         		'pattern' => '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/',
         		'message' => 'Email can contain @ and .com characters.'
         				],
+        		//['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email has already been taken.','on' =>'convertdoctors'],
+        		['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email has already been taken.','on' =>'interested'],
 
         		['username',
         		'match', 'not' => true, 'pattern' => '/[^a-zA-Z0-9]/',
