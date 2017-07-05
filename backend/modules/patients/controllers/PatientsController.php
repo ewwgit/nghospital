@@ -292,6 +292,7 @@ class PatientsController extends Controller
     		$model = Patients::find()->where(['patientUniqueId' => $id])->one();
     		if(!empty($model))
     		{
+    			$model->patientimageupdate = $model->patientImage;
     			$patmodel = PatientInformation::find()->where(['patientId' =>$model->patientId])->orderBy('patientInfoId DESC')->one();
     			if (! (empty ( $patmodel )))
     			{
@@ -335,6 +336,7 @@ class PatientsController extends Controller
         
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        	$model->patientImage = UploadedFile::getInstance($model,'patientImage');
         	
         	if($id != '')
         	{
@@ -342,6 +344,18 @@ class PatientsController extends Controller
         	$model->countryName = Countries::getCountryName($model->country);
         	$model->stateName = States::getStateName($model->state);
         	$model->dateOfBirth = date('Y-m-d', strtotime($model->dateOfBirth));
+        	if(!(empty($model->patientImage)))
+        	{
+        		 
+        		$imageName = time().$model->patientImage->name;
+        		 
+        		$model->patientImage->saveAs('patientimages/'.$imageName );
+        		 
+        		$model->patientImage = 'patientimages/'.$imageName;
+        	}
+        	else{
+        		$model->patientImage = $model->patientimageupdate;
+        	}
         	$model->save();
         	$patmodelnew = new PatientInformation();
         	$patmodelnew->patientId = $model->patientId;
@@ -377,6 +391,18 @@ class PatientsController extends Controller
         	$model->countryName = Countries::getCountryName($model->country);
         	$model->stateName = States::getStateName($model->state);
         	$model->dateOfBirth = date('Y-m-d', strtotime($model->dateOfBirth));
+        	if(!(empty($model->patientImage)))
+        	{
+        		 
+        		$imageName = time().$model->patientImage->name;
+        		 
+        		$model->patientImage->saveAs('patientimages/'.$imageName );
+        		 
+        		$model->patientImage = 'patientimages/'.$imageName;
+        	}
+        	else{
+        		$model->patientImage = $model->patientimageupdate;
+        	}
         	$model->save();
         	//print_r($model->patientId);exit();
         	$patmodelnew = new PatientInformation();
