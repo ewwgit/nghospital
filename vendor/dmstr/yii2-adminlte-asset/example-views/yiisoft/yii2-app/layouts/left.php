@@ -28,7 +28,9 @@ use app\models\UserrolesModel;
             </div>
         </form> -->
         <!-- /.search form -->
-<?php if(UserrolesModel::getRole() == 2){?>
+<?php if(UserrolesModel::getRole() == 2){
+
+	?>
  <?= dmstr\widgets\Menu::widget(
             [
                 'options' => ['class' => 'sidebar-menu'],
@@ -43,8 +45,8 @@ use app\models\UserrolesModel;
                         'icon' => 'user-md',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/doctors/doctors/create'],],
-                            ['label' => 'View', 'icon' => 'eye', 'url' => ['/doctors/doctors'],],
+                            ['label' => 'Profile', 'icon' => 'plus-circle', 'url' => ['/doctors/doctors/profileview','uid'=>Yii::$app->user->identity->id],],
+                            ['label' => 'Profile Update', 'icon' => 'eye', 'url' => ['/doctors/doctors/profileupdate','uid'=>Yii::$app->user->identity->id],],
                             
                         ],
                     ],
@@ -69,8 +71,8 @@ use app\models\UserrolesModel;
                 		'icon' => 'h-square',
                 		'url' => '#',
                 		'items' => [
-                				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/nursinghomes/nursinghomes/create'],],
-                				['label' => 'View', 'icon' => 'eye', 'url' => ['/nursinghomes/nursinghomes'],],
+                				['label' => 'Profile', 'icon' => 'plus-circle', 'url' => ['/nursinghomes/nursinghomes/profileview','uid'=>Yii::$app->user->identity->id],],
+                				['label' => 'Profile Update', 'icon' => 'eye', 'url' => ['/nursinghomes/nursinghomes/profileupdate','uid'=>Yii::$app->user->identity->id],],
                 		
                 		],
                 		],
