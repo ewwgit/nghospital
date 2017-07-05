@@ -444,4 +444,46 @@ class PatientsController extends Controller
             ]);
         }
     }
+    protected function findinfoModel($infoid)
+    {
+    	if (($model = PatientInformation::findOne($infoid)) !== null) {
+    		return $model;
+    	} else {
+    		throw new NotFoundHttpException('The requested page does not exist.');
+    	}
+    }
+
+    public function actionPatientshistoryview($infoid)
+    {
+    	$model = $this->findinfoModel($infoid);
+    	$patmodel = Patients::find()->where(['patientId' =>$model->patientId])->one();
+    	//print_r($model->height);exit();
+    
+    	return $this->render('patientshistoryview', [
+    			'model' => $this->findinfoModel($infoid),'patmodel' => $patmodel,
+    	]);
+    }
+    public function actionPatientshistorydocview($infoid)
+    {
+    	$model = $this->findinfoModel($infoid);
+    	$patmodel = Patients::find()->where(['patientId' =>$model->patientId])->one();
+    	$patdocmodel = PatientDocuments::find()->select('documentUrl')->where(['patientInfoId' =>$model->patientInfoId])->all();
+    	//print_r($patdocmodel);exit();
+    	$docary = array();
+    	if(!empty($patdocmodel))
+    	{
+    		foreach ($patdocmodel as $doc)
+    		{
+    			$docary[] = $doc->documentUrl;
+    			 
+    		}
+    	}
+    	
+    	//print_r($patdocmodel -> documentUrl);exit();
+    	//print_r($patmodel->documentUrl);exit();
+    
+    	return $this->render('patientshistorydocview', ['model' => $this->findinfoModel($infoid),'patmodel' =>$patmodel,
+    			'docary' => $docary,
+    	]);
+    }
 }
