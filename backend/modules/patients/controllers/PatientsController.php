@@ -285,6 +285,134 @@ class PatientsController extends Controller
     }
     public function actionPatientshistorycreate()
     {
-    	return $this->render('patientshistorycreate');
+    	$id = '';
+    	if(isset($_GET['id']) && $_GET['id'] != '')
+    	{
+    		$id = $_GET['id'];
+    		$model = Patients::find()->where(['patientUniqueId' => $id])->one();
+    		if(!empty($model))
+    		{
+    			$patmodel = PatientInformation::find()->where(['patientId' =>$model->patientId])->orderBy('patientInfoId DESC')->one();
+    			if (! (empty ( $patmodel )))
+    			{
+    				$model->height = $patmodel->height;
+    				$model->weight = $patmodel->weight;
+    				$model->respirationRate = $patmodel->respirationRate;
+    				$model->BPLeftArm = $patmodel->BPLeftArm;
+    				$model->BPRightArm = $patmodel->BPRightArm;
+    				$model->pulseRate = $patmodel->pulseRate;
+    				$model->temparatureType = $patmodel->temparatureType;
+    				$model->diseases = $patmodel->diseases;
+    				$model->allergicMedicine = $patmodel->allergicMedicine;
+    				$model->patientCompliant = $patmodel->patientCompliant;
+    				 
+    			}
+    		}
+    		else {
+    			$model = new Patients();
+    			$patmodel = new PatientInformation();
+    		}
+    	}
+    	else{
+    		$model = new Patients();
+    		$patmodel = new PatientInformation();
+    	}
+    	
+        $newModel = new PatientDocuments();
+        $model->countriesList = Countries::getCountries();
+        $model->citiesData = [];
+        
+        if($model->country != ''){
+        
+        	$model->statesData= Countries::getStatesByCountryupdate($model->country );
+        
+        }else{
+        	$model->country = $model->country;
+        	$model->statesData =[];
+        	$model->state='';
+        }
+       
+        
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        	
+        	if($id != '')
+        	{
+        	$model->updatedDate = date('Y-m-d H:i:s');
+        	$model->countryName = Countries::getCountryName($model->country);
+        	$model->stateName = States::getStateName($model->state);
+        	$model->dateOfBirth = date('Y-m-d', strtotime($model->dateOfBirth));
+        	$model->save();
+        	$patmodelnew = new PatientInformation();
+        	$patmodelnew->patientId = $model->patientId;
+        	$patmodelnew->height = $model->height;
+        	$patmodelnew->weight = $model->weight;
+        	$patmodelnew->respirationRate = $model->respirationRate;
+        	$patmodelnew->BPLeftArm = $model->BPLeftArm;
+        	$patmodelnew->BPRightArm = $model->BPRightArm;
+        	$patmodelnew->pulseRate = $model->pulseRate;
+        	$patmodelnew->temparatureType = $model->temparatureType;
+        	$patmodelnew->diseases = $model->diseases;
+        	$patmodelnew->allergicMedicine = $model->allergicMedicine;
+        	$patmodelnew->patientCompliant = $model->patientCompliant;
+        	$patmodelnew->createdDate = date('Y-m-d H:i:s');
+        	$patmodelnew->save();
+        	//print_r($patmodelnew->errors);exit();
+        	}
+        	else{
+        	
+        	$presentDate = date('Y-m-d');
+        	$patientscount = Patients::find()->where("createdDate LIKE '$presentDate%'")->count();
+        	/* echo $nursinghomescount;
+        	 exit(); */
+        	$addnewid = $patientscount+1;
+        	$uniqonlyId = str_pad($addnewid, 5, '0', STR_PAD_LEFT);
+        	$dateInfo = date_parse(date('Y-m-d H:i:s'));
+        	$monthval = str_pad($dateInfo['month'], 2, '0', STR_PAD_LEFT);
+        	$dayval = str_pad($dateInfo['day'], 2, '0', STR_PAD_LEFT);
+        	$overallUniqueId = $uniqonlyId.'PAT'.$dayval.$monthval.$dateInfo['year'];
+        	$model->patientUniqueId = $overallUniqueId;
+        	$model->createdDate = date('Y-m-d H:i:s');
+        	$model->updatedDate = date('Y-m-d H:i:s');
+        	$model->countryName = Countries::getCountryName($model->country);
+        	$model->stateName = States::getStateName($model->state);
+        	$model->dateOfBirth = date('Y-m-d', strtotime($model->dateOfBirth));
+        	$model->save();
+        	//print_r($model->patientId);exit();
+        	$patmodelnew = new PatientInformation();
+        	$patmodelnew->patientId = $model->patientId;
+        	$patmodelnew->height = $model->height;
+        	$patmodelnew->weight = $model->weight;
+        	$patmodelnew->respirationRate = $model->respirationRate;
+        	$patmodelnew->BPLeftArm = $model->BPLeftArm;
+        	$patmodelnew->BPRightArm = $model->BPRightArm;
+        	$patmodelnew->pulseRate = $model->pulseRate;
+        	$patmodelnew->temparatureType = $model->temparatureType;
+        	$patmodelnew->diseases = $model->diseases;
+        	$patmodelnew->allergicMedicine = $model->allergicMedicine;
+        	$patmodelnew->patientCompliant = $model->patientCompliant;
+        	$patmodelnew->createdDate = date('Y-m-d H:i:s');
+        	//print_r($patmodel->patientCompliant);exit();
+        	//$patmodel->createdDate = date('Y-m-d H:i:s');
+        	//print_r($patmodel->createdDate);exit();
+        	$patmodelnew->save();
+        	//print_r($patmodelnew->errors);exit();
+        	}
+        	
+        	
+        	
+        	
+        	$newModel->file = UploadedFile::getInstances($model, 'documentUrl');
+        	$newModel->patientInfoId = $patmodelnew->patientInfoId;
+        	
+        	$response = $newModel->upload();
+        	
+            //return $this->redirect(['view', 'id' => $model->patientId]);
+        	return $this->redirect(['index']);
+        } else {
+            return $this->render('patientshistorycreate', [
+                'model' => $model,
+            ]);
+        }
     }
 }
