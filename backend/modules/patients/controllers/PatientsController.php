@@ -308,6 +308,9 @@ class PatientsController extends Controller
     				$model->patientCompliant = $patmodel->patientCompliant;
     				 
     			}
+    			
+    			$PrevousInfo = PatientInformation::find()->select(['patientInfoId','createdDate'])->where(['patientId' =>$model->patientId])->orderBy('createdDate DESC')->all();
+    			$model->previousRecords= $PrevousInfo;
     		}
     		else {
     			$model = new Patients();

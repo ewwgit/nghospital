@@ -7,9 +7,11 @@ use kartik\depdrop\DepDrop;
 use kartik\date\DatePicker;
 use kartik\file\FileInput;
 use yii\web\View;
+use app\modules\patients\models\PatientDocuments;
 
 $this->title = 'Patients History';
 $this->params['breadcrumbs'][] = $this->title;
+$previousDoc = array();
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <?php $form = ActiveForm::begin(['options'=>['enctype' =>'multipart/form-data']]); ?>
@@ -98,7 +100,28 @@ $items = [
 <div><input type="text" placeholder="Patient Unique Number" value="<?= $model->patientUniqueId;?>" id="uniqunum" /> <input type="button" value="Search" id="searchpatient"></div>
 <div class="box box-primary">
 <div class="box-body">
+<div class="row">
+<?php if(empty($model->previousRecords))
+{?>
+<!-- <div>There is no previous records exist.</div> -->
+<?php }else{
+	
+foreach ($model->previousRecords as $previousRecords)
+{
+	$docInfo = PatientDocuments::find()->where(['patientInfoId'=> $previousRecords->patientInfoId])->all();
+	if(!empty($docInfo))
+	{
+		foreach ($docInfo as $previousdocinof)
+		{
+		$previousDoc[] = $previousdocinof;
+		}
+	}
+	?>
+	<a href="#" target="_blank" ><?= date("d-M-yyyy",strtotime($previousRecords->createdDate));?></a>
+<?php } }?>
 
+<?php //print_r($previousDoc);exit();?>
+</div>
 <div class="row">
 <div class="form-group col-lg-4 col-sm-12">
     <div class="col-lg-4 col-sm-12">First Name:</div> <div class="col-lg-8 col-sm-12"><?= $form->field($model, 'firstName')->textInput(['maxlength' => true])->label(false); ?></div>
