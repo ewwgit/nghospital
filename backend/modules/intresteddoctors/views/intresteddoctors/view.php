@@ -12,7 +12,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="intresteddoctors-view">
 
-    
+<div class="box box-primary">
+<div class="box-body">    
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->insdocid], ['class' => 'btn btn-primary']) ?>
@@ -51,4 +52,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+</div>
+</div>
 </div>

@@ -12,7 +12,8 @@ $this->title = 'Interested Nursing Homes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="intrestednghs-index">
-
+<div class="box box-primary">
+<div class="box-body">
     <h1><?php // Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -53,3 +54,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 </div>
+</div>
+</div>
+

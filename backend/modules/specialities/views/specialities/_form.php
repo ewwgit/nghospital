@@ -9,7 +9,8 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="specialities-form">
-
+<div class="box box-primary">
+<div class="box-body">
     <?php $form = ActiveForm::begin(); ?>
 	<div class="form-group col-lg-7">
     <?= $form->field($model, 'specialityName')->textInput(['maxlength' => true]) ?>
@@ -30,7 +31,8 @@ use yii\widgets\ActiveForm;
     </div>
 
     <?php ActiveForm::end(); ?>
-
+</div>
+</div>
 </div>
 <style>
 .help-block {

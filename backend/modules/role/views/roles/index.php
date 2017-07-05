@@ -11,7 +11,8 @@ $this->title = 'Roles';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="role-index">
-
+<div class="box box-primary">
+<div class="box-body">
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -49,4 +50,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
+</div>
+</div>
 </div>

@@ -11,7 +11,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Interested Nursing Homes', 'url' =
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="intrestednghs-view">
-
+<div class="box box-primary">
+<div class="box-body">
     <h1><?php // Html::encode($this->title) ?></h1>
 
     <p>
@@ -51,4 +52,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+</div>
+</div>
 </div>

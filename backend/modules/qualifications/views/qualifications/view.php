@@ -14,7 +14,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Qualifications', 'url' => ['index'
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="qualifications-view">
-
+<div class="box box-primary">
+<div class="box-body">
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->qlid], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->qlid], [
@@ -58,4 +59,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+</div>
+</div>
 </div>

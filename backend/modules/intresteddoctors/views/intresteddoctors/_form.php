@@ -9,7 +9,8 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="intresteddoctors-form">
-
+<div class="box box-primary">
+<div class="box-body">
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="form-group col-lg-6 col-sm-12">
@@ -32,7 +33,8 @@ use yii\widgets\ActiveForm;
     </div>
 
     <?php ActiveForm::end(); ?>
-
+</div>
+</div>
 </div>
 <style>
 .help-block {

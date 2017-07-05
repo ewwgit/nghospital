@@ -12,7 +12,8 @@ use yii\helpers\Url;
 ?>
 
 <div class="nursinghomes-form">
-
+<div class="box box-primary">
+<div class="box-body">
      <?php $form = ActiveForm::begin( [ 
 		'options' => [ 
 				'enctype' => 'multipart/form-data' 
@@ -99,7 +100,8 @@ use yii\helpers\Url;
     </div>
 
     <?php ActiveForm::end(); ?>
-
+</div>
+</div>
 </div>
 <style>
 .help-block {

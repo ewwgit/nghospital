@@ -29,13 +29,13 @@ $historyform = '<div class="row">
 </div>
 <div class="row">
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-4 col-sm-12">Pulse Rate:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'BPLeftArm')->textInput(['maxlength' => true])->label(false).'</div>
+    <div class="col-lg-4 col-sm-12">Pulse Rate:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'pulseRate')->textInput(['maxlength' => true])->label(false).'</div>
 </div>    
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-4 col-sm-12">BpLeft Arm:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'BPRightArm')->textInput(['maxlength' => true])->label(false).'</div>
+    <div class="col-lg-4 col-sm-12">BpLeft Arm:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'BPLeftArm')->textInput(['maxlength' => true])->label(false).'</div>
 </div>
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-4 col-sm-12">BPRight Arm:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'pulseRate')->textInput(['maxlength' => true])->label(false).'</div>
+    <div class="col-lg-4 col-sm-12">BPRight Arm:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'BPRightArm')->textInput(['maxlength' => true])->label(false).'</div>
 </div>
 </div>
 <div class="row">
@@ -72,6 +72,24 @@ $historyform = '<div class="row">
     <div class="col-lg-4 col-sm-12"></div> <div class="col-lg-8 col-sm-12">'.Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']).'</div>
 </div>
 </div>';
+$previousrecords = '<div class="col-lg-7 col-sm-12">
+    <div class="col-lg-1 col-sm-12">1.</div> <div class="col-lg-8 col-sm-12"><a href="#">05-07-2017</a></div>
+</div>
+		<div class="col-lg-7 col-sm-12">
+    <div class="col-lg-1 col-sm-12">2.</div> <div class="col-lg-8 col-sm-12"><a href="#">05-07-2017</a></div>
+</div>
+		<div class="col-lg-7 col-sm-12">
+    <div class="col-lg-1 col-sm-12">3.</div> <div class="col-lg-8 col-sm-12"><a href="#">05-07-2017</a></div>
+</div>';
+$documents = '<div class="col-lg-7 col-sm-12">
+    <div class="col-lg-1 col-sm-12">1.</div> <div class="col-lg-8 col-sm-12"><a href="#">05-07-2017</a></div>
+</div>
+		<div class="col-lg-7 col-sm-12">
+    <div class="col-lg-1 col-sm-12">2.</div> <div class="col-lg-8 col-sm-12"><a href="#">05-07-2017</a></div>
+</div>
+		<div class="col-lg-7 col-sm-12">
+    <div class="col-lg-1 col-sm-12">3.</div> <div class="col-lg-8 col-sm-12"><a href="#">05-07-2017</a></div>
+</div>';
 ?>
 <?php 
 
@@ -83,11 +101,11 @@ $items = [
 		],
 		[
 				'label'=>'<i class="fa fa-history"></i> Previous Records',
-				'content'=>'Previous Records',
+				'content'=>$previousrecords,
 		],
 		[
 				'label'=>'<i class="fa fa-paperclip"></i> Documents',
-				'content'=>'Documents',
+				'content'=>$documents,
 		],
 		[
 				'label'=>'<i class="fa fa-sticky-note-o"></i> Clinical Notes',
@@ -274,3 +292,14 @@ $( document ).ready(function() {
 	
 });
 </script>
+<style>
+.help-block {
+    height: 10px;
+    margin-bottom: 15px;
+    margin-top: 0px;
+}
+.form-group {
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+</style>

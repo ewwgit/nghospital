@@ -9,7 +9,8 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="intrestednghs-form">
-
+<div class="box box-primary">
+<div class="box-body">
     <?php $form = ActiveForm::begin(); ?>
 <div class="form-group col-lg-6 ">
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
@@ -29,7 +30,8 @@ use yii\widgets\ActiveForm;
     <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
     <?php ActiveForm::end(); ?>
-
+</div>
+</div>
 </div>
 <style>
 .help-block {

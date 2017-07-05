@@ -11,7 +11,8 @@ $this->title = 'Doctors';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="doctors-index">
-
+<div class="box box-primary">
+<div class="box-body">
     
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -54,4 +55,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+</div>
+</div>
 </div>

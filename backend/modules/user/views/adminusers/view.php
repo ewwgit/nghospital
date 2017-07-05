@@ -11,7 +11,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Admin Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="admin-master-view">  
-
+<div class="box box-primary">
+<div class="box-body">
      <?php if($model->status == 10){
     $status = 'Active';
     }
@@ -58,4 +59,6 @@ $this->params['breadcrumbs'][] = $this->title;
            // 'updatedBy',
         ],
     ]) ?>
+</div>
+</div>
 </div>

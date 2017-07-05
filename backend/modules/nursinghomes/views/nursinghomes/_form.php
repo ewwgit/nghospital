@@ -13,7 +13,8 @@ use kartik\file\FileInput;
 ?>
 
 <div class="nursinghomes-form">
-
+<div class="box box-primary">
+<div class="box-body">
     <?php $form = ActiveForm::begin(['options'=>['enctype' =>'multipart/form-data']]); ?>
  	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'contactPerson')->textInput(['maxlength' => true]) ?>
@@ -75,7 +76,8 @@ use kartik\file\FileInput;
     </div>
 
     <?php ActiveForm::end(); ?>
-
+</div>
+</div>
 </div>
 <style>
 .help-block {

@@ -23,6 +23,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="doctors-view">
+<div class="box box-primary">
+<div class="box-body">
 <div class="container" id="print">
 <style>
 th {
@@ -205,5 +207,8 @@ th {
 		</div><!---toppad-->
 	</div><!--row closed-->	
 </div>
-</div>
 <button onclick="printContent('print')">Print</button>
+</div>
+</div>
+</div>
+

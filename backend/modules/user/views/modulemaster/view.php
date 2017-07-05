@@ -14,7 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
 //print_r($model->createdBy);exit;
 ?>
 <div class="modules-master-view">
-
+<div class="box box-primary">
+<div class="box-body">
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -49,5 +50,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'ipAddress',
         ],
     ]) ?>
-
+</div>
+</div>
 </div>

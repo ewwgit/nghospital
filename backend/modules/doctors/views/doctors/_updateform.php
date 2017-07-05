@@ -14,7 +14,8 @@ use dosamigos\ckeditor\CKEditor;
 ?>
 
 <div class="doctors-form">
-
+<div class="box box-primary">
+<div class="box-body">
     <?php $form = ActiveForm::begin( [ 
 		'options' => [ 
 				'enctype' => 'multipart/form-data' 
@@ -135,7 +136,8 @@ use dosamigos\ckeditor\CKEditor;
     </div>
 
     <?php ActiveForm::end(); ?>
-
+</div>
+</div>
 </div>
 <style>
 .help-block {

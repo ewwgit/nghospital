@@ -12,7 +12,8 @@ $this->title = 'Interested Doctors';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="intresteddoctors-index">
-
+<div class="box box-primary">
+<div class="box-body">
    
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -47,4 +48,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
+</div>
+</div>
 </div>

@@ -11,7 +11,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Roles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="role-view">
-
+<div class="box box-primary">
+<div class="box-body">
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -32,5 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'ipAddress',
         ],
     ]) ?>
-
+</div>
+</div>
 </div>
