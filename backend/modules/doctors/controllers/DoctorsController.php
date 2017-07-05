@@ -605,4 +605,264 @@ class DoctorsController extends Controller
     	}
     	
     }
+    protected function finduserModel($uid)
+    {
+    	if (($usermodel = User::findOne($uid)) !== null) {
+    		return $usermodel;
+    	} else {
+    		throw new NotFoundHttpException('The requested page does not exist.');
+    	}
+    }
+    public function actionProfileupdate($uid)
+    {
+    	$usermodel = $this->finduserModel($uid);
+    	//print_r($usermodel->id);exit();
+    	$model = Doctors::find()->where(['userId' =>$usermodel->id])->one();
+    	//print_r($model);exit();
+    	$model->scenario = 'update';
+    	$singupModel = new SignupForm();
+    	$doctorQulification = DoctorsQualification::find()->select('qualification')->where( ['docId' => $model->userId])->all();
+    	//print_r($doctorQulification);exit();
+    	$dqary = array();
+    	$docqualiary = array();
+    	if(!empty($doctorQulification))
+    	{
+    		foreach ($doctorQulification as $dq)
+    		{
+    			$dqary[] = $dq->qualification;
+    
+    		}
+    	}
+    	for($k=0; $k<count($dqary); $k++)
+    	{
+    		$docquali = Qualifications::find()->select('qualification')->where( ['qlid' => $dqary[$k]])->asArray()->one();
+    		$docqualiary[] = $docquali['qualification'];
+    		 
+    	}
+    	$model->qualification = $docqualiary;
+    
+    	$docSpecialities = DoctorsSpecialities::find()->select('rspId')->where( ['rdoctorId' => $model->userId])->all();
+    	//print_r($docSpecialities);exit();
+    	$dsary = array();
+    	$docspeciary = array();
+    	if(!empty($docSpecialities))
+    	{
+    		foreach ($docSpecialities as $ds)
+    		{
+    			$dsary[] = $ds->rspId;
+    
+    		}
+    	}
+    	//print_r($dsary);exit();
+    	for($m=0; $m<count($dsary); $m++)
+    	{
+    		$docspeci = Specialities::find()->select('specialityName')->where( ['spId' => $dsary[$m]])->asArray()->one();
+    		$docspeciary[] = $docspeci['specialityName'];
+    
+    	}
+    	$model->specialities = $docspeciary;
+    
+    
+    	$model->countriesList = Countries::getCountries();
+    	$model->docimageupdate = $model->doctorImage;
+    	$model->doctorImage = '';
+    	$model->citiesData = [];
+    
+    	if($model->country != ''){
+    
+    		$model->statesData= Countries::getStatesByCountryupdate($model->country );
+    
+    	}else{
+    		$model->country = $model->country;
+    		$model->statesData =[];
+    		$model->state='';
+    	}
+    
+    
+    	$qualificationData = Qualifications::find()
+    	->select('qualification')->where(['status' => 'Active'])
+    	->all();
+    
+    	$qualiInfo = array();
+    	if(!empty($qualificationData))
+    	{
+    		foreach ($qualificationData as $qualinew)
+    		{
+    			//echo rtrim($skillnew->skills,",");
+    			$aryconvertquali = explode(",",rtrim($qualinew->qualification,","));
+    			for($m=0; $m < count($aryconvertquali); $m++)
+    			{
+    				$qualiInfo["$aryconvertquali[$m]"] = $aryconvertquali[$m];
+    			}
+    		}
+    	}
+    	else {
+    		$qualiInfo =[''];
+    	}
+    	$model ->allQuali = $qualiInfo;
+    
+    
+    	$specialityData = Specialities::find()
+    	->select('specialityName')->where(['status' => 'Active'])
+    	->all();
+    	 
+    	$speciInfo = array();
+    	if(!empty($specialityData))
+    	{
+    		foreach ($specialityData as $specinew)
+    		{
+    			//echo rtrim($skillnew->skills,",");
+    			$aryconvertspeci = explode(",",rtrim($specinew->specialityName,","));
+    			for($m=0; $m < count($aryconvertspeci); $m++)
+    			{
+    				$speciInfo["$aryconvertspeci[$m]"] = $aryconvertspeci[$m];
+    			}
+    		}
+    	}
+    	else {
+    		$speciInfo =[''];
+    	}
+    	$model ->allSpeci = $speciInfo;
+    
+    
+    	$usermodel = User::find() ->where(['id' =>$model->userId])->one();
+    
+    	if (! (empty ( $usermodel ))) {
+    		$model->username = $usermodel->username;
+    		$model->email = $usermodel->email;
+    		$model->status = $usermodel->status;
+    	}
+    
+    	if ($model->load(Yii::$app->request->post()) )
+    	{
+    		$model->doctorImage = UploadedFile::getInstance($model,'doctorImage');
+    		if($model->validate())
+    		{
+    			$model->updatedDate = date('Y-m-d H:i:s');
+    			$model->updatedBy = Yii::$app->user->identity->id;
+    			//echo $model->country;exit();
+    			$model->countryName = Countries::getCountryName($model->country);
+    			$model->stateName = States::getStateName($model->state);
+    
+    			$usermodel->status = $model->status;
+    			$usermodel->save();
+    			//print_r($model->doctorImage);exit();
+    
+    			if(!(empty($model->doctorImage)))
+    			{
+    				 
+    				$imageName = time().$model->doctorImage->name;
+    				 
+    				$model->doctorImage->saveAs('profileimages/'.$imageName );
+    
+    				$model->doctorImage = 'profileimages/'.$imageName;
+    				 
+    			}
+    			else {
+    				$model->doctorImage = $model->docimageupdate;
+    			}
+    			//print_r($model->doctorImage);exit();
+    			$model->save();
+    			//print_r($model->errors);exit();
+    
+    			DoctorsQualification::deleteAll( ['docId' => $model->userId]);
+    			if(!empty($model->qualification))
+    			{
+    				for($i=0; $i<count($model->qualification);$i++)
+    				{
+    					$qulificationInfo = Qualifications::find()->select(['qlid'])->where(['qualification' => $model->qualification[$i]])->one();
+    					if(!empty($qulificationInfo))
+    					{
+    						$dqualification = new DoctorsQualification();
+    						$dqualification->docId = $model->userId;
+    						$dqualification->qualification = $qulificationInfo->qlid;
+    						$dqualification->save();
+    					}
+    
+    
+    				}
+    			}
+    
+    
+    			DoctorsSpecialities::deleteAll( ['rdoctorId' => $model->userId]);
+    			for($k=0; $k<count($model->specialities);$k++)
+    			{
+    				$specid = Specialities::find()->select('spId')->where(['specialityName' =>$model->specialities[$k]])->asArray()->one();
+    				if(!empty($specid))
+    				{
+    					$dspeciality = new DoctorsSpecialities();
+    					$dspeciality->rdoctorId = $model->userId;
+    					$dspeciality->rspId =$specid['spId'];
+    					$dspeciality->save();
+    				}
+    				 
+    				 
+    				 
+    			}
+    			//print_r($model->qualification);exit();
+    
+    			 
+    			Yii::$app->session->setFlash('success', " Doctors Updated successfully ");
+    			//return $this->redirect(['view', 'id' => $model->doctorid]);
+    			return $this->redirect(['index']);
+    		}
+    
+    	} else {
+    		return $this->render('profileupdate', [
+    				'model' => $model,
+    		]);
+    	}
+    }
+    public function actionProfileview($uid)
+    {
+    	$usermodel = $this->finduserModel($uid);
+    	//print_r($usermodel->id);exit();
+    	$model = Doctors::find()->where(['userId' =>$usermodel->id])->one();
+    	//print_r($model);exit();
+    	$doctorQulification = DoctorsQualification::find()->select('qualification')->where( ['docId' => $model->userId])->all();
+    	//print_r($doctorQulification);exit();
+    	$dqary = array();
+    	$docqualiary = array();
+    	if(!empty($doctorQulification))
+    	{
+    		foreach ($doctorQulification as $dq)
+    		{
+    			$dqary[] = $dq->qualification;
+    			 
+    		}
+    	}
+    	for($k=0; $k<count($dqary); $k++)
+    	{
+    		$docquali = Qualifications::find()->select('qualification')->where( ['qlid' => $dqary[$k]])->asArray()->one();
+    		$docqualiary[] = $docquali['qualification'];
+    		 
+    	}
+    	$docSpecialities = DoctorsSpecialities::find()->select('rspId')->where( ['rdoctorId' => $model->userId])->all();
+    	//print_r($docSpecialities);exit();
+    	$dsary = array();
+    	$docspeciary = array();
+    	if(!empty($docSpecialities))
+    	{
+    		foreach ($docSpecialities as $ds)
+    		{
+    			$dsary[] = $ds->rspId;
+    			 
+    		}
+    	}
+    	//print_r($dsary);exit();
+    	for($m=0; $m<count($dsary); $m++)
+    	{
+    		$docspeci = Specialities::find()->select('specialityName')->where( ['spId' => $dsary[$m]])->asArray()->one();
+    		$docspeciary[] = $docspeci['specialityName'];
+    	}
+    	 
+    	 
+    	//$model->qualification = $docqualiary;
+    	 
+    	return $this->render('profileview', [
+    			'model' => $model,'docqualiary' =>$docqualiary,'docspeciary'=>$docspeciary,
+    	]);
+    }
+    
+    
 }
