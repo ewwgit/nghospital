@@ -72,7 +72,8 @@ $historyform = '<div class="row">
     <div class="col-lg-4 col-sm-12"></div> <div class="col-lg-8 col-sm-12">'.Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']).'</div>
 </div>
 </div>';
-$previousrecords = '<div class="col-lg-7 col-sm-12">
+
+/* $documents = '<div class="col-lg-7 col-sm-12">
     <div class="col-lg-1 col-sm-12">1.</div> <div class="col-lg-8 col-sm-12"><a href="#">05-07-2017</a></div>
 </div>
 		<div class="col-lg-7 col-sm-12">
@@ -80,17 +81,64 @@ $previousrecords = '<div class="col-lg-7 col-sm-12">
 </div>
 		<div class="col-lg-7 col-sm-12">
     <div class="col-lg-1 col-sm-12">3.</div> <div class="col-lg-8 col-sm-12"><a href="#">05-07-2017</a></div>
-</div>';
-$documents = '<div class="col-lg-7 col-sm-12">
-    <div class="col-lg-1 col-sm-12">1.</div> <div class="col-lg-8 col-sm-12"><a href="#">05-07-2017</a></div>
-</div>
-		<div class="col-lg-7 col-sm-12">
-    <div class="col-lg-1 col-sm-12">2.</div> <div class="col-lg-8 col-sm-12"><a href="#">05-07-2017</a></div>
-</div>
-		<div class="col-lg-7 col-sm-12">
-    <div class="col-lg-1 col-sm-12">3.</div> <div class="col-lg-8 col-sm-12"><a href="#">05-07-2017</a></div>
-</div>';
+</div>'; */
+$previousrecords = '';
+$documents = '';
 ?>
+<?php $previousrecordsUrl = Yii::$app->urlManager->createAbsoluteUrl ( [ 
+		'patients/patients/patientshistoryview' 
+] );
+
+ $DocpreviousrecordsUrl = Yii::$app->urlManager->createAbsoluteUrl ( [ 
+		'patients/patients/patientshistorydocview' 
+] );?>
+
+<?php if(empty($model->previousRecords))
+{
+	$previousrecords .='<div class="col-lg-7 col-sm-12">
+    There is no previous records exist.
+</div>';
+	?>
+<!-- <div>There is no previous records exist.</div> -->
+
+
+<?php }else{
+	$pr=1;
+	$k=0;
+foreach ($model->previousRecords as $previousRecords)
+{
+	$docInfo = PatientDocuments::find()->where(['patientInfoId'=> $previousRecords->patientInfoId])->all();
+	if(!empty($docInfo))
+	{
+		$previousDoc[$k]['patientInfoId'] = $previousRecords->patientInfoId;
+		$previousDoc[$k]['createdDate'] = date("d-M-Y",strtotime($previousRecords->createdDate));
+		$k++;
+		
+	}
+	
+	$previousrecords .= '<div class="col-lg-7 col-sm-12">
+    <div class="col-lg-1 col-sm-12">'.$pr.'.</div> <div class="col-lg-8 col-sm-12"><a href="'.$previousrecordsUrl.'&infoid='.$previousRecords->patientInfoId.'" target="_blank">'.date("d-M-Y",strtotime($previousRecords->createdDate)).'</a></div>
+</div>';
+	?>
+	
+<?php 
+$pr++;
+} }?>
+
+<?php if(empty($previousDoc)){
+	$previousrecords .='<div class="col-lg-7 col-sm-12">
+    There is no previous documents exist.
+</div>';
+}else{
+for($m=0; $m<count($previousDoc);$m++)
+{
+	$sno = $m+1;
+	$documents .= '<div class="col-lg-7 col-sm-12">
+    <div class="col-lg-1 col-sm-12">'.$sno.'.</div> <div class="col-lg-8 col-sm-12"><a href="'.$DocpreviousrecordsUrl.'&infoid='.$previousDoc[$m]['patientInfoId'].'" target="_blank">'.$previousDoc[$m]['createdDate'].'</a></div>
+</div>';
+}
+}?>
+
 <?php 
 
 $items = [
@@ -118,28 +166,7 @@ $items = [
 <div><input type="text" placeholder="Patient Unique Number" value="<?= $model->patientUniqueId;?>" id="uniqunum" /> <input type="button" value="Search" id="searchpatient"></div>
 <div class="box box-primary">
 <div class="box-body">
-<div class="row">
-<?php if(empty($model->previousRecords))
-{?>
-<!-- <div>There is no previous records exist.</div> -->
-<?php }else{
-	
-foreach ($model->previousRecords as $previousRecords)
-{
-	$docInfo = PatientDocuments::find()->where(['patientInfoId'=> $previousRecords->patientInfoId])->all();
-	if(!empty($docInfo))
-	{
-		foreach ($docInfo as $previousdocinof)
-		{
-		$previousDoc[] = $previousdocinof;
-		}
-	}
-	?>
-	<a href="#" target="_blank" ><?= date("d-M-yyyy",strtotime($previousRecords->createdDate));?></a>
-<?php } }?>
 
-<?php //print_r($previousDoc);exit();?>
-</div>
 <div class="row">
 <div class="form-group col-lg-4 col-sm-12">
     <div class="col-lg-4 col-sm-12">First Name:</div> <div class="col-lg-8 col-sm-12"><?= $form->field($model, 'firstName')->textInput(['maxlength' => true])->label(false); ?></div>

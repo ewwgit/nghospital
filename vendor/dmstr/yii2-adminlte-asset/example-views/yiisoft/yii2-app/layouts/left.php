@@ -1,3 +1,6 @@
+<?php 
+use app\models\UserrolesModel;
+?>
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -25,7 +28,71 @@
             </div>
         </form> -->
         <!-- /.search form -->
+<?php if(UserrolesModel::getRole() == 2){?>
+ <?= dmstr\widgets\Menu::widget(
+            [
+                'options' => ['class' => 'sidebar-menu'],
+                'items' => [
+                    ['label' => 'Dashboard', 'icon' => 'dashboard', 'url' => ['/']],
+                    /* ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
+                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest], */
+                		
+                    [
+                        'label' => 'Doctors',
+                    	//'class' => 'fa fa-user-md',
+                        'icon' => 'user-md',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/doctors/doctors/create'],],
+                            ['label' => 'View', 'icon' => 'eye', 'url' => ['/doctors/doctors'],],
+                            
+                        ],
+                    ],
+                		
+                		
+                ],
+            ]
+        ) ?>
+<?php }elseif (UserrolesModel::getRole() == 3){?>
 
+<?= dmstr\widgets\Menu::widget(
+            [
+                'options' => ['class' => 'sidebar-menu'],
+                'items' => [
+                    ['label' => 'Dashboard', 'icon' => 'dashboard', 'url' => ['/']],
+                    /* ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
+                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest], */
+                		
+                		[
+                		'label' => 'Nursing Homes',
+                		//'class' => 'fa fa-user-md',
+                		'icon' => 'h-square',
+                		'url' => '#',
+                		'items' => [
+                				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/nursinghomes/nursinghomes/create'],],
+                				['label' => 'View', 'icon' => 'eye', 'url' => ['/nursinghomes/nursinghomes'],],
+                		
+                		],
+                		],
+                		
+                		[
+                		'label' => 'Patients',
+                		//'class' => 'fa fa-user-md',
+                		'icon' => 'user',
+                		'url' => '#',
+                		'items' => [
+                				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/patients/patients/create'],],
+                				['label' => 'View', 'icon' => 'eye', 'url' => ['/patients/patients'],],
+                			['label' => 'History Create', 'icon' => 'plus-circle', 'url' => ['/patients/patients/patientshistorycreate'],],
+                		
+                		],
+                		],
+                		
+                ],
+            ]
+        ) ?>
+
+<?php }else{?>
         <?= dmstr\widgets\Menu::widget(
             [
                 'options' => ['class' => 'sidebar-menu'],
@@ -145,6 +212,7 @@
                 ],
             ]
         ) ?>
+        <?php } ?>
 
     </section>
 
