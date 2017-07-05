@@ -308,5 +308,96 @@ class NursinghomesController extends Controller
     		
     		
     }
+   protected function finduserModel($uid)
+    {
+    	if (($usermodel = User::findOne($uid)) !== null) {
+    		return $usermodel;
+    	} else {
+    		throw new NotFoundHttpException('The requested page does not exist.');
+    	}
+    }
+    public function actionProfileupdate($uid)
+    {
+    	$usermodel = $this->finduserModel($uid);
+    	$model = Nursinghomes::find()->where(['nuserId' =>$usermodel->id])->one();
+    	//print_r($model);exit();
+    	$singupModel = new SignupForm();
+    	$model->scenario = 'update';
+    	 
+    	$model->countriesList = Countries::getCountries();
+    	$model->citiesData = [];
+    	$model->nursingimageupdate = $model->nursingImage;
+    	$model->nursingImage = '';
+    
+    	//  print_r($model->country);exit;
+    
+    
+    	if($model->country != ''){
+    
+    		$model->statesData= Countries::getStatesByCountryupdate($model->country );
+    
+    	}else{
+    		$model->country = $model->country;
+    		 
+    		$model->statesData =[];
+    		$model->state='';
+    	}
+    	 
+    
+    	$usermodel = User::find() ->where(['id' =>$model->nuserId])->one();
+    	if (! (empty ( $usermodel ))) {
+    		$model->username = $usermodel->username;
+    		$model->email = $usermodel->email;
+    		$model->status = $usermodel->status;
+    	}
+    
+    	if (($model->load ( Yii::$app->request->post () )) && ($model->validate ())) {
+    		 
+    		$model->nursingImage = UploadedFile::getInstance($model,'nursingImage');
+    		$model->countryName = Countries::getCountryName($model->country);
+    		$model->stateName = States::getStateName($model->state);
+    		$model->updatedDate = date('Y-m-d H:i:s');
+    		$model->updatedBy = Yii::$app->user->identity->id;
+    		$usermodel->status = $model->status;
+    		$usermodel->save();
+    		if(!(empty($model->nursingImage)))
+    		{
+    			 
+    			$imageName = time().$model->nursingImage->name;
+    			 
+    			$model->nursingImage->saveAs('profileimages/'.$imageName );
+    			 
+    			$model->nursingImage = 'profileimages/'.$imageName;
+    			 
+    		}
+    		else {
+    			$model->nursingImage = $model->nursingimageupdate;
+    		}
+    		$model->save();
+    		 
+    		// return $this->redirect(['view', 'id' => $model->nursingId]);
+    		Yii::$app->session->setFlash('success', " Nursing Homes Updated successfully ");
+    		return $this->redirect(['index']);
+    	} else {
+    		return $this->render('profileupdate', [
+    				'model' => $model,
+    				 
+    		]);
+    	}
+    }
+    public function actionProfileview($uid)
+    {
+    	$usermodel = $this->finduserModel($uid);
+    	$model = Nursinghomes::find()->where(['nuserId' =>$usermodel->id])->one();
+    	if (!$model) {
+    		throw new NotFoundHttpException('model not found');
+    	}
+    	return $this->render('view', [
+    			'model' => $model,
+    			// 'model' => $model,
+    	]);
+    }
+    
+    
     
 }
