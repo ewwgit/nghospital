@@ -164,6 +164,9 @@ th {
 								<div class="right-content">:</div>
 								<div class="right-second"><?php if($usernamedata['status']==10){echo"Active";}else {echo"In-Active";} ?></div>
 								
+									<div class="right">Nursing Home Name</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?= $model->nursingHomeName; ?></div>
 																 							
 							</div><!---doctor-box closed-->							
 						</div>	<!---main-wrap closed-->							

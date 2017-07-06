@@ -38,12 +38,10 @@ use kartik\file\FileInput;
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
     </div>
     	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'pinCode')->textInput(['maxlength' => 8]) ?>
-	</div>
-	<div class="form-group col-lg-6 col-sm-12">
-      <?=$form->field ( $model, 'nursingImage' )->widget ( FileInput::classname (),
-   		[ 'options' => [ 'accept' => 'image/*' ],'pluginOptions' =>[[ 'browseLabel' => 'Profile Image', 'allowedFileExtensions'=>['jpg','png','jpeg'] ]] ] )?>     
-    </div>
+    <?= $form->field($model, 'nursingHomeName')->textInput(['maxlength' => true]) ?>
+   	</div> 
+    
+
        
 	<div class="form-group col-lg-6 col-sm-12"> 
     <?= $form->field($model, 'country')->dropDownList($model->countriesList,['prompt'=>'Select Countries']);?>
@@ -58,19 +56,33 @@ use kartik\file\FileInput;
  	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
    	</div>
+   	
+   		<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'address')->textarea(['rows' => 3]) ?>
+	</div>
+   
+   	<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'pinCode')->textInput(['maxlength' => 8]) ?>
+	</div>
+   
+   	 
     <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'description')->textarea(['rows' => 4]) ?>
 	</div>
 	
    
  	
-   	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'address')->textarea(['rows' => 3]) ?>
-	</div>
    
 	<div class="form-group col-lg-6 col-sm-12">
     <?=$form->field($model, 'status')->dropDownList(['10' => 'Active','0' => 'In-Active'],['prompt' => 'Status'],['itemOptions' => ['class' =>'radio-inline']])?>
-	</div>   
+	</div> 
+	
+		<div class="form-group col-lg-6 col-sm-12">
+      <?=$form->field ( $model, 'nursingImage' )->widget ( FileInput::classname (),
+   		[ 'options' => [ 'accept' => 'image/*' ],'pluginOptions' =>[[ 'browseLabel' => 'Profile Image', 'allowedFileExtensions'=>['jpg','png','jpeg'] ]] ] )?>     
+    </div>
+	
+
 	<div class="form-group ">
     <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
