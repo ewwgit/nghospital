@@ -7,17 +7,13 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <!-- start Sign In -->
- <div class="container login-box">
-      <div class="sign">
-        <h2>Reset Password</h2>
-      </div>
-      <div class="login-box-body">
-        <div class="signup">
+      <div class="box box-primary">
+		<div class="box-body" style="min-height: 500px;">
              <div class="benefits_menus">
 		<p>Please choose your new password:</p>
 		</div>
         <?php $form = ActiveForm::begin(['id' => 'reset-password-form']); ?>
-		 <div class="form-group btnWithTooltip"  data-placement="top" 
+		 <div class="form-group col-lg-4 col-sm-12 btnWithTooltip"  data-placement="top" 
             data-original-title="this is a tooltip that your registered email" 
             data-html="true" placeholder="password" required >
         	
@@ -26,17 +22,12 @@ $this->params['breadcrumbs'][] = $this->title;
        		 
         </div>
           <div class="clearfix"></div>
-          <div class="reg-bwn"> <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?></div>
+          <div class="col-lg-4 col-sm-12 reg-bwn"> <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?></div>
           
           
             <?php ActiveForm ::end();?>
           <div class="clearfix"></div>
         </div>
-        
-        
-        
-        
-      </div>
       
     </div>
 
