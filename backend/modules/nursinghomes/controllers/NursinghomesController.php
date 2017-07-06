@@ -15,6 +15,7 @@ use yii\helpers\Json;
 use backend\models\SignupForm;
 use app\models\UserMain;
 use yii\web\UploadedFile;
+use backend\models\ChangePasswordForm;
 
 /**
  * NursinghomesController implements the CRUD actions for Nursinghomes model.
@@ -105,7 +106,9 @@ class NursinghomesController extends Controller
         if ($model->load(Yii::$app->request->post()))
         {
         	$model->nursingImage = UploadedFile::getInstance($model,'nursingImage');
-        	$model->validate();
+        	if($model->validate())
+        	
+        
         	{
         	$presentDate = date('Y-m-d');
         	$nursinghomescount = Nursinghomes::find()->where("createdDate LIKE '$presentDate%'")->count();
@@ -154,6 +157,12 @@ class NursinghomesController extends Controller
         	Yii::$app->session->setFlash('success', " Nursing Homes Created successfully ");
            return $this->redirect(['index']);
                  
+        }  else {
+            return $this->render('create', [
+                'model' => $model,
+            	
+                
+            ]);
         }
        
         }
@@ -374,10 +383,10 @@ class NursinghomesController extends Controller
     			$model->nursingImage = $model->nursingimageupdate;
     		}
     		$model->save();
+    		 
     		// return $this->redirect(['view', 'id' => $model->nursingId]);
     		Yii::$app->session->setFlash('success', " Nursing Homes Updated successfully ");
-    		return $this->redirect(['profileview','uid' => $usermodel->id]);
-    		
+    		return $this->redirect(['index']);
     	} else {
     		return $this->render('profileupdate', [
     				'model' => $model,
@@ -392,10 +401,36 @@ class NursinghomesController extends Controller
     	if (!$model) {
     		throw new NotFoundHttpException('model not found');
     	}
-    	return $this->render('profileview', [
+    	return $this->render('view', [
     			'model' => $model,
     			// 'model' => $model,
     	]);
+    }
+    
+    /**
+     *  Reset Password
+     */
+    
+    
+    public function actionResetPassword($id)
+    {
+    	 
+    	try {
+    		$model = new ChangePasswordForm();
+    	} catch (InvalidParamException $e) {
+    		throw new BadRequestHttpException($e->getMessage());
+    	}
+    
+    	if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword($id)) {
+    		Yii::$app->getSession()->setFlash('success', 'New password was saved.');
+    
+    		return $this->redirect(['index']);;
+    	}
+    
+    	return $this->render('resetPassword', [
+    			'model' => $model,
+    	]);
+    	
     }
     
     

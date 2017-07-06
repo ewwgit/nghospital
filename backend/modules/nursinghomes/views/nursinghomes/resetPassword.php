@@ -1,14 +1,9 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use yii\authclient\widgets\AuthChoice;
 
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \common\models\LoginForm */
-
-$this->title = 'Reset Password';
-$this->params ['breadcrumbs'] [] = $this->title;
+$this->title = 'Reset password';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <!-- start Sign In -->
@@ -19,18 +14,19 @@ $this->params ['breadcrumbs'] [] = $this->title;
       <div class="login-box-body">
         <div class="signup">
              <div class="benefits_menus">
-		<p>Please fill out your registered email. A link to reset password will be sent there.</p>
+		<p>Please choose your new password:</p>
 		</div>
-        <?php $form = ActiveForm::begin(['id' => 'request-password-reset-form']); ?>
+        <?php $form = ActiveForm::begin(['id' => 'reset-password-form']); ?>
 		 <div class="form-group btnWithTooltip"  data-placement="top" 
             data-original-title="this is a tooltip that your registered email" 
             data-html="true" placeholder="password" required >
         	
-                <?= $form->field($model, 'email') ?>
+                <?= $form->field($model, 'password')->passwordInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'confirmpassword')->passwordInput(['autofocus' => true]) ?>
        		 
         </div>
           <div class="clearfix"></div>
-          <div class="reg-bwn"> <?= Html::submitButton('Send', ['class' => 'btn btn-primary']) ?></div>
+          <div class="reg-bwn"> <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?></div>
           
           
             <?php ActiveForm ::end();?>

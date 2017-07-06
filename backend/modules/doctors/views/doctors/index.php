@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\doctors\models\DoctorsSearch */
@@ -52,7 +53,19 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'createdDate',
             // 'updatedDate',
 
-            ['class' => 'yii\grid\ActionColumn'],
+             ['class' => 'yii\grid\ActionColumn',
+            		'template' => '{view} {update} {delete}{password}',
+            		'buttons' => [
+            				'password' => function ($url,$data) {
+            				$url = Url::to(['/doctors/doctors/reset-password','id'=>$data->userId]);
+            				return Html::a(
+            						'<span class="glyphicon glyphicon-lock"></span>',
+            						$url);
+            				},
+            		
+            				],
+            		
+            ],
         ],
     ]); ?>
 </div>

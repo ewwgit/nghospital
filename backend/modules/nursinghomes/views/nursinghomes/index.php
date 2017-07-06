@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use common\models\User;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\NursinghomesSearch */
@@ -77,7 +78,19 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'createdDate',
             // 'updatedDate',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+            		'template' => '{view} {update} {delete}{password}',
+            		'buttons' => [
+            				'password' => function ($url,$data) {
+            				$url = Url::to(['/nursinghomes/nursinghomes/reset-password','id'=>$data->nuserId]);
+            				return Html::a(
+            						'<span class="glyphicon glyphicon-lock"></span>',
+            						$url);
+            				},
+            		
+            				],
+            		
+            ],
         ],
     ]); ?>
 </div>
