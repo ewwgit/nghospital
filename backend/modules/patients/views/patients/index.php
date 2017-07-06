@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'updatedDate',
 
            ['class' => 'yii\grid\ActionColumn',
-            		'template' => '{view} {update} {delete}',
+            		'template' => ' {update} {delete}',
             		'buttons' => [
             				'update' => function ($url,$data) {
             				$url = Url::to(['/patients/patients/patientshistorycreate','id'=>$data->patientUniqueId]);
