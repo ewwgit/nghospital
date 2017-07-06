@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\modules\patients\models\Patients;
+use app\models\UserrolesModel;
 
 /**
  * PatientsSearch represents the model behind the search form about `app\modules\patients\models\Patients`.
@@ -41,7 +42,12 @@ class PatientsSearch extends Patients
      */
     public function search($params)
     {
-        $query = Patients::find();
+    	if(UserrolesModel::getRole() == 3){
+        $query = Patients::find()->where(['createdBy' => Yii::$app->user->identity->id]);
+    	}
+    	else{
+    		$query = Patients::find();
+    	}
 
         // add conditions that should always apply here
 

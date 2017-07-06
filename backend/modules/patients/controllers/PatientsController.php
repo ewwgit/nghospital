@@ -109,6 +109,8 @@ class PatientsController extends Controller
         	$model->countryName = Countries::getCountryName($model->country);
         	$model->stateName = States::getStateName($model->state);
         	$model->dateOfBirth = date('Y-m-d', strtotime($model->dateOfBirth));
+        	$model->createdBy = Yii::$app->user->identity->id;
+        	$model->updatedBy = Yii::$app->user->identity->id;
         	$model->save();
         	
         	//print_r( $model -> patientId);exit();
@@ -198,6 +200,7 @@ class PatientsController extends Controller
         	$model->countryName = Countries::getCountryName($model->country);
         	$model->stateName = States::getStateName($model->state);
         	$model->dateOfBirth = date('Y-m-d', strtotime($model->dateOfBirth));
+        	$model->updatedBy = Yii::$app->user->identity->id;
         	$model->save();
         	
         	
@@ -358,6 +361,7 @@ class PatientsController extends Controller
         	$model->countryName = Countries::getCountryName($model->country);
         	$model->stateName = States::getStateName($model->state);
         	$model->dateOfBirth = date('Y-m-d', strtotime($model->dateOfBirth));
+        	$model->updatedBy = Yii::$app->user->identity->id;
         	if(!(empty($model->patientImage)))
         	{
         		 
@@ -405,6 +409,8 @@ class PatientsController extends Controller
         	$model->countryName = Countries::getCountryName($model->country);
         	$model->stateName = States::getStateName($model->state);
         	$model->dateOfBirth = date('Y-m-d', strtotime($model->dateOfBirth));
+        	$model->createdBy = Yii::$app->user->identity->id;
+        	$model->updatedBy = Yii::$app->user->identity->id;
         	if(!(empty($model->patientImage)))
         	{
         		 

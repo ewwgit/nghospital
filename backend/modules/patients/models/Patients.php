@@ -63,7 +63,7 @@ class Patients extends \yii\db\ActiveRecord
              [['height','weight','respirationRate','BPLeftArm','BPRightArm','pulseRate','temparatureType','diseases','allergicMedicine','patientCompliant'],'required'],
             [['gender'], 'string'],
             [['age','mobile','pinCode'],'integer'],
-            [['dateOfBirth', 'createdDate', 'updatedDate','patientImage','patientimageupdate','previousRecords'], 'safe'],
+            [['dateOfBirth', 'createdDate', 'updatedDate','patientImage','patientimageupdate','previousRecords','createdBy','updatedBy'], 'safe'],
             [['country', 'state'], 'integer'],
             [['firstName', 'lastName', 'patientUniqueId', 'countryName', 'stateName', 'district', 'city', 'mandal', 'village'], 'string', 'max' => 200],
             [['age'], 'string', 'max' => 10],
