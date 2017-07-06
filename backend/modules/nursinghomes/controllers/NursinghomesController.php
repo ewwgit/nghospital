@@ -105,7 +105,9 @@ class NursinghomesController extends Controller
         if ($model->load(Yii::$app->request->post()))
         {
         	$model->nursingImage = UploadedFile::getInstance($model,'nursingImage');
-        	$model->validate();
+        	if($model->validate())
+        	
+        
         	{
         	$presentDate = date('Y-m-d');
         	$nursinghomescount = Nursinghomes::find()->where("createdDate LIKE '$presentDate%'")->count();
@@ -154,6 +156,12 @@ class NursinghomesController extends Controller
         	Yii::$app->session->setFlash('success', " Nursing Homes Created successfully ");
            return $this->redirect(['index']);
                  
+        }  else {
+            return $this->render('create', [
+                'model' => $model,
+            	
+                
+            ]);
         }
        
         }
