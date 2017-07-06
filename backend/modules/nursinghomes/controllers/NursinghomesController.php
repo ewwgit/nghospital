@@ -105,9 +105,7 @@ class NursinghomesController extends Controller
         if ($model->load(Yii::$app->request->post()))
         {
         	$model->nursingImage = UploadedFile::getInstance($model,'nursingImage');
-        	if($model->validate())
-        	
-        
+        	$model->validate();
         	{
         	$presentDate = date('Y-m-d');
         	$nursinghomescount = Nursinghomes::find()->where("createdDate LIKE '$presentDate%'")->count();
@@ -156,12 +154,6 @@ class NursinghomesController extends Controller
         	Yii::$app->session->setFlash('success', " Nursing Homes Created successfully ");
            return $this->redirect(['index']);
                  
-        }  else {
-            return $this->render('create', [
-                'model' => $model,
-            	
-                
-            ]);
         }
        
         }
@@ -382,10 +374,10 @@ class NursinghomesController extends Controller
     			$model->nursingImage = $model->nursingimageupdate;
     		}
     		$model->save();
-    		 
     		// return $this->redirect(['view', 'id' => $model->nursingId]);
     		Yii::$app->session->setFlash('success', " Nursing Homes Updated successfully ");
-    		return $this->redirect(['index']);
+    		return $this->redirect(['profileview','uid' => $usermodel->id]);
+    		
     	} else {
     		return $this->render('profileupdate', [
     				'model' => $model,
@@ -400,7 +392,7 @@ class NursinghomesController extends Controller
     	if (!$model) {
     		throw new NotFoundHttpException('model not found');
     	}
-    	return $this->render('view', [
+    	return $this->render('profileview', [
     			'model' => $model,
     			// 'model' => $model,
     	]);
