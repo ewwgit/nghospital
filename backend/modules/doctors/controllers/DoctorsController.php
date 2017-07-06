@@ -804,7 +804,7 @@ class DoctorsController extends Controller
     			 
     			Yii::$app->session->setFlash('success', " Doctors Updated successfully ");
     			//return $this->redirect(['view', 'id' => $model->doctorid]);
-    			return $this->redirect(['index']);
+    			return $this->redirect(['profileview','uid' => $usermodel->id]);
     		}
     
     	} else {

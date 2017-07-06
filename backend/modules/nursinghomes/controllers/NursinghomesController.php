@@ -386,7 +386,8 @@ class NursinghomesController extends Controller
     		 
     		// return $this->redirect(['view', 'id' => $model->nursingId]);
     		Yii::$app->session->setFlash('success', " Nursing Homes Updated successfully ");
-    		return $this->redirect(['index']);
+    		return $this->redirect(['profileview','uid' => $usermodel->id]);
+    		
     	} else {
     		return $this->render('profileupdate', [
     				'model' => $model,
