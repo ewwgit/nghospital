@@ -107,6 +107,7 @@ class Patients extends \yii\db\ActiveRecord
             'village' => 'Village',
             'pinCode' => 'Pin Code',
             'mobile' => 'Mobile',
+        	'temparatureType' => 'Temparature',
             'createdDate' => 'Created Date',
             'updatedDate' => 'Updated Date',
         		'documentUrl' => 'Patient Documents',

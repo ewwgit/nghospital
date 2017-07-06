@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
         		['attribute'=>'Pulse Rate',
         		'value' => $patmodel->pulseRate,
         		],
-        		['attribute'=>'Temparature Type',
+        		['attribute'=>'Temparature',
         		'value' => $patmodel->temparatureType,
         		],
         		['attribute'=>'Diseases',

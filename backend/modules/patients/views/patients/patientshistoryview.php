@@ -168,7 +168,7 @@ th {
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->pulseRate; ?></div>
 								
-								<div class="right">Temparature Type</div>								
+								<div class="right">Temparature</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?=  $model->temparatureType; ?> </div>
 								
