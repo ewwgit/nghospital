@@ -22,6 +22,8 @@ use app\modules\doctors\models\DoctorSlots;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 
+use backend\models\PasswordResetRequestForm;
+use backend\models\ResetPasswordForm;
 /**
  * DoctorsController implements the CRUD actions for Doctors model.
  */
