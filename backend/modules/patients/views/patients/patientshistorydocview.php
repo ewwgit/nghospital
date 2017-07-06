@@ -190,17 +190,41 @@ th {
 							  </div> <!---doctor-box closed-->
 						    </div>	<!---main-wrap closed-->
 						    <h3>Patient Documents Information</h3>
-						<div class="col-md-12 col-sm-6 col-xs-6 main-wrap">
-							<div class="doctor-box">
-						    <div class="right">Patient Documents</div>								
-								<div class="right-content">:</div>
-								<div class="right-second"><?php if(!empty($docary)){
-									echo implode(" <br> ",$docary);
+						
+						    
+						    <?php if(!empty($docary)){
+						    	for($k=0;$k< count($docary);$k++)
+						    	{
+						    		$extpos = strpos($docary[$k],'.');
+						    		$exten = substr($docary[$k],$extpos+1);
+						    		$imageary = ['jpg','png','gif'];
+						    		if(in_array($exten,$imageary))
+						    		{
+						    			$imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).'images/pic_img.png';
+						    		
+						    		}
+						    		elseif($exten == 'pdf')
+						    		{
+						    			$imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).'images/pdf_img.png';
+						    		}
+						    		elseif ($exten == 'doc')
+						    		{
+						    			$imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).'images/doc_img.png';
+						    		}
+						    		else{
+						    			$imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).'images/pic_img.png';
+						    		}
+						    		?>
+						    		<a href="<?php echo str_replace("frontend","backend",Yii::getAlias('@web/')).$docary[$k];?>" target="_blank"><img src="<?php echo $imgeurl; ?>" /></a>
+						    		<?php 
+						    		
+						    	}
+									?>
+									<?php 
 								}else{
 									echo 'Not Mentioned';
-								}?></div>
-								  </div> <!---doctor-box closed-->
-						    </div>	<!---main-wrap closed-->
+								}
+								?>
 																			
 												
 					</div><!---row closed-->						
