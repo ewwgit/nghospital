@@ -309,6 +309,11 @@ class PatientsController extends Controller
     		if(!empty($model))
     		{
     			$model->patientimageupdate = $model->patientImage;
+    			$dateString=$model->dateOfBirth;
+    			$years = round((time()-strtotime($dateString))/(3600*24*365.25));
+    			$model->age = $years;
+    			$model->dateOfBirth = date('d-M-Y',strtotime($dateString));
+    			//echo $years;exit();
     			$patmodel = PatientInformation::find()->where(['patientId' =>$model->patientId])->orderBy('patientInfoId DESC')->one();
     			if (! (empty ( $patmodel )))
     			{

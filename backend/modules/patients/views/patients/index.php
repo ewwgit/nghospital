@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\patients\models\PatientsSearch */
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Patients', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Patients', ['patientshistorycreate'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -44,7 +45,19 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'createdDate',
             // 'updatedDate',
 
-            ['class' => 'yii\grid\ActionColumn'],
+           ['class' => 'yii\grid\ActionColumn',
+            		'template' => '{view} {update} {delete}',
+            		'buttons' => [
+            				'update' => function ($url,$data) {
+            				$url = Url::to(['/patients/patients/patientshistorycreate','id'=>$data->patientUniqueId]);
+            				return Html::a(
+            						'<span class="glyphicon glyphicon-pencil"></span>',
+            						$url);
+            				},
+            		
+            				],
+            		
+            ],
         ],
     ]); ?>
 </div>
