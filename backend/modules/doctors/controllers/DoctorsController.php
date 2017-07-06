@@ -864,5 +864,50 @@ class DoctorsController extends Controller
     	]);
     }
     
+    public function actionRequestPasswordReset()
+    {
+    	//$this->layout= 'main-login';
+    	$model = new PasswordResetRequestForm();
+    	if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+    		if ($model->sendEmail()) {
+    			Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+    
+    			return $this->goHome();
+    		} else {
+    			Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
+    		}
+    	}
+    
+    	return $this->render('requestPasswordResetToken', [
+    			'model' => $model,
+    	]);
+    }
+    
+    
+    
+    /**
+     *  Reset Password
+     */
+    
+    
+    public function actionResetPassword($token)
+    {
+    	//$this->layout= 'main-login';
+    	try {
+    		$model = new ResetPasswordForm($token);
+    	} catch (InvalidParamException $e) {
+    		throw new BadRequestHttpException($e->getMessage());
+    	}
+    
+    	if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
+    		Yii::$app->getSession()->setFlash('success', 'New password was saved.');
+    
+    		return $this->goHome();
+    	}
+    
+    	return $this->render('resetPassword', [
+    			'model' => $model,
+    	]);
+    }
     
 }
