@@ -39,6 +39,22 @@ h3 {
 					   <h3>Patient Information</h3>
 						<div class="col-md-12 col-sm-6 col-xs-6 main-wrap">
 							<div class="doctor-box">
+							<div class="right">Patient Image</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?php if($patmodel->patientImage != ''){?>
+					<?php $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$patmodel->patientImage;?>
+					<?php  } ?>
+					<?= DetailView::widget([
+							'model' => $patmodel,
+							'attributes' => [
+									[
+											'attribute'=>'patientImage',
+											'format' => 'html',
+											'value'=>Html::img($patmodel->patientImage ? $imgeurl : 'images/user-iconnew.png',['width' => '200px','height' => '150px']),
+        		],
+        ],
+    ]) ?></div>
+								
 							<div class="right">Patient Name</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $patmodel->firstName; ?>&nbsp;<?= $patmodel->lastName; ?></div>
@@ -169,11 +185,11 @@ h3 {
 								}else{
 									echo 'Not Mentioned';
 								}?> </div>
-								<div class="right">BP LeftArm</div>								
+								<div class="right">BP Left Arm</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->BPLeftArm; ?></div>
 								
-								<div class="right">BP RightArm</div>								
+								<div class="right">BP Right Arm</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->BPRightArm; ?></div>
 													        
@@ -189,11 +205,11 @@ h3 {
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->diseases; ?></div>
 													        
-								<div class="right">AllergicMedicine</div>								
+								<div class="right">Allergic Medicine</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->allergicMedicine; ?></div>
 								
-								<div class="right">PatientCompliant</div>								
+								<div class="right">Patient Compliant</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?=  $model->patientCompliant; ?> </div>
 								
