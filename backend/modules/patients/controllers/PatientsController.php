@@ -237,7 +237,18 @@ class PatientsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        //$this->findModel($id)->delete();
+
+    	try{
+    		$model = $this->findModel($id)->delete();
+    		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted  Patients.');
+    		 
+    	}
+    	
+    	catch(\yii\db\Exception $e){
+    		Yii::$app->getSession()->setFlash('error', 'This Patients is not deleted.');
+    		 
+    	}
 
         return $this->redirect(['index']);
     }
