@@ -13,11 +13,17 @@ $this->title = $patmodel->firstName;
 $this->params['breadcrumbs'][] = ['label' => 'Patients', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="box box-primary">
+<div class="box-body">
 <div class="doctors-view">
 <div class="container" id="print">
 <style>
 th {
 	display: none;
+}
+h3 {
+	margin-top:0px;
+	padding-left: 15px;
 }
 </style>
 
@@ -113,6 +119,13 @@ th {
 								<div class="right-second">
 								 
 									<?= $patmodel->pinCode;?></div>
+									
+								<div class="right">Mobile</div>								
+								<div class="right-content">:</div>
+								<div class="right-second">
+								 
+									<?= $patmodel->mobile;?></div>
+								
 						    </div> <!---doctor-box closed-->
 						    </div>	<!---main-wrap closed-->
 						    <?php 
@@ -215,7 +228,7 @@ th {
 						    			$imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).'images/pic_img.png';
 						    		}
 						    		?>
-						    		<a href="<?php echo str_replace("frontend","backend",Yii::getAlias('@web/')).$docary[$k];?>" target="_blank"><img src="<?php echo $imgeurl; ?>" /></a>
+						    		<div style="width:90px; height:90px; border:1px solid #ddd; margin-left: 15px;"><a href="<?php echo str_replace("frontend","backend",Yii::getAlias('@web/')).$docary[$k];?>" target="_blank"><img style="padding-left: 12px; padding-top: 12px;" src="<?php echo $imgeurl; ?>" /></a></div>
 						    		<?php 
 						    		
 						    	}
@@ -232,5 +245,7 @@ th {
 			</div><!---panel-info closed-->	
 		</div><!---toppad-->
 	</div><!--row closed-->	
+</div>
+</div>
 </div>
 </div>
