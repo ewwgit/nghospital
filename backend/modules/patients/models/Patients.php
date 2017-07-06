@@ -69,6 +69,12 @@ class Patients extends \yii\db\ActiveRecord
             [['age'], 'string', 'max' => 10],
             [['pinCode', 'mobile'], 'string', 'max' => 15],
         		[
+        		'mobile',
+        		'match',
+        		'pattern'=>'/^[0-9]{10}$/',
+        		'message' => 'should contain  max 10  number',
+        		],
+        		[
         		'pinCode',
         		'match',
         		'pattern' => '/^[0-9\s]{4,8}$/',

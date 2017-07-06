@@ -145,6 +145,7 @@ class PatientsController extends Controller
         	
         	
             //return $this->redirect(['view', 'id' => $model->patientId]);
+        	Yii::$app->session->setFlash('success', " Patient Created successfully ");
             return $this->redirect(['index']);
         
         } else {
@@ -224,6 +225,7 @@ class PatientsController extends Controller
         	$response = $newModel->upload();
         	
             //return $this->redirect(['view', 'id' => $model->patientId]);
+        	Yii::$app->session->setFlash('success', " Patients Update successfully ");
         	return $this->redirect(['index']);
         } else {
             return $this->render('update', [
@@ -252,7 +254,7 @@ class PatientsController extends Controller
     		Yii::$app->getSession()->setFlash('error', 'This Patients is not deleted.');
     		 
     	}
-
+    	
         return $this->redirect(['index']);
     }
 
