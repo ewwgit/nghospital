@@ -13,11 +13,17 @@ $this->title = $patmodel->firstName;
 $this->params['breadcrumbs'][] = ['label' => 'Patients', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="box box-primary">
+<div class="box-body">
 <div class="doctors-view">
 <div class="container" id="print">
 <style>
 th {
 	display: none;
+}
+h3 {
+	margin-top:0px;
+	padding-left: 15px;
 }
 </style>
 
@@ -33,6 +39,21 @@ th {
 					   <h3>Patient Information</h3>
 						<div class="col-md-12 col-sm-6 col-xs-6 main-wrap">
 							<div class="doctor-box">
+							<div class="right">Patient Image</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?php if($patmodel->patientImage != ''){?>
+					<?php $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$patmodel->patientImage;?>
+					<?php  } ?>
+					<?= DetailView::widget([
+							'model' => $patmodel,
+							'attributes' => [
+									[
+											'attribute'=>'patientImage',
+											'format' => 'html',
+											'value'=>Html::img($patmodel->patientImage ? $imgeurl : 'images/user-iconnew.png',['width' => '200px','height' => '150px']),
+        		],
+        ],
+    ]) ?></div>
 							<div class="right">Patient Name</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $patmodel->firstName; ?>&nbsp;<?= $patmodel->lastName; ?></div>
@@ -113,6 +134,11 @@ th {
 								<div class="right-second">
 								 
 									<?= $patmodel->pinCode;?></div>
+								<div class="right">Mobile</div>								
+								<div class="right-content">:</div>
+								<div class="right-second">
+								 
+									<?= $patmodel->mobile;?></div>
 						    </div> <!---doctor-box closed-->
 						    </div>	<!---main-wrap closed-->
 						    <?php 
@@ -195,5 +221,7 @@ th {
 			</div><!---panel-info closed-->	
 		</div><!---toppad-->
 	</div><!--row closed-->	
+</div>
+</div>
 </div>
 </div>
