@@ -402,7 +402,7 @@ class NursinghomesController extends Controller
     	if (!$model) {
     		throw new NotFoundHttpException('model not found');
     	}
-    	return $this->render('view', [
+    	return $this->render('profileview', [
     			'model' => $model,
     			// 'model' => $model,
     	]);

@@ -43,9 +43,18 @@ th {
 			<div class="col-md-8">	
 						<div class="box4" style="float: left;">
 						
-						<div class="right">Nursing Unique ID</div>								
-								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->nurshingUniqueId; ?></div>
+						<div class="right" style=" width: 45%"> Unique ID</div>								
+								<div class="right-content" style="  width: 0% ">:</div>
+								<div class="right-second" style=" width:37% "><?= $model->nurshingUniqueId; ?></div>
+								<div class="right" style=" width: 45%">Nursing Home Name</div>								
+								<div class="right-content" style="  width: 0% ">:</div>
+								<div class="right-second" style=" width:37% ">
+								<?php if($model->nursingHomeName != ''){
+									
+							    echo 	$model->nursingHomeName;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 						</div>				
 					</div>	
 					<div class="col-md-3" style="float: left;">
@@ -72,7 +81,7 @@ th {
   
       
 						<div class="col-md-12 col-sm-6 col-xs-6 main-wrap">
-							<div class="doctor-box">					        
+							<div class="nursing-box">					        
 															
 								
 								<div class="right">Contact Person</div>								
@@ -164,9 +173,7 @@ th {
 								<div class="right-content">:</div>
 								<div class="right-second"><?php if($usernamedata['status']==10){echo"Active";}else {echo"In-Active";} ?></div>
 								
-									<div class="right">Nursing Home Name</div>								
-								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->nursingHomeName; ?></div>
+									
 																 							
 							</div><!---doctor-box closed-->							
 						</div>	<!---main-wrap closed-->							
@@ -180,3 +187,15 @@ th {
 </div>
 </div>
 </div>
+<style>
+.nursing-box{
+	width:90%;
+	border-bottom:1px solid #f1f2f2;
+	padding:0px;
+	margin:0px;	
+	text-align:left;	
+	color: #369;	
+}
+</style>
+
+
