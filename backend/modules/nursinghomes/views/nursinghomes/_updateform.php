@@ -33,9 +33,11 @@ use yii\helpers\Url;
      <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'email')->textInput(['maxlength' => true,'readOnly' => true]) ?>
    	</div>
-   	<div class="form-group col-lg-6 col-sm-12">   
-    <?= $form->field($model, 'pinCode')->textInput(['maxlength' => 8]) ?>
-	</div>
+   	
+   		<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'nursingHomeName')->textInput(['maxlength' => true]) ?>
+   	</div>  
+ 
     
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'country')->dropDownList($model->countriesList,['prompt'=>'Select Countries']);?>
@@ -56,7 +58,29 @@ use yii\helpers\Url;
    	<div class="form-group col-lg-6 col-sm-12">
    <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
 	</div>
-	 <div class="form-group col-lg-6 col-sm-12">
+	
+	 
+	
+	<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'address')->textarea(['rows' => 3]) ?>
+	</div>
+	  	<div class="form-group col-lg-6 col-sm-12">   
+    <?= $form->field($model, 'pinCode')->textInput(['maxlength' => 8]) ?>
+	</div>
+	
+	
+		<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'description')->textarea(['rows' => 4]) ?>
+   	</div>
+   	
+   		
+   	<div class="form-group col-lg-6 col-sm-12">
+    <?=$form->field($model, 'status')->dropDownList(['10' => 'Active','0' => 'In-Active'],['prompt' => 'Status'],
+											['itemOptions' => ['class' =>'radio-inline']])?>
+	</div> 
+	
+	
+	<div class="form-group col-lg-6 col-sm-12">
     <?php if($model->nursingImage != ''){?>
     </div>
     <div class="form-group col-lg-6 col-sm-12">
@@ -81,19 +105,10 @@ use yii\helpers\Url;
             <?= $form->field($model, 'nursingimageupdate')->hiddenInput()->label(false); ?>
             
         
-	</div>   
-		<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'description')->textarea(['rows' => 4]) ?>
-   	</div>
-	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'address')->textarea(['rows' => 3]) ?>
-	</div>
+	</div>     
 
-   	
-   	<div class="form-group col-lg-6 col-sm-12">
-    <?=$form->field($model, 'status')->dropDownList(['10' => 'Active','0' => 'In-Active'],['prompt' => 'Status'],
-											['itemOptions' => ['class' =>'radio-inline']])?>
-	</div>    
+   
+	
    
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
