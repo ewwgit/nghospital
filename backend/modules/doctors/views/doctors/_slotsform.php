@@ -52,6 +52,7 @@ use unclead\multipleinput\MultipleInput;
         		],
             'options' => [
                 'class' => 'input-day',
+            	'prompt'=>'Select Day'
             	
             ]
         ],
@@ -70,10 +71,12 @@ use unclead\multipleinput\MultipleInput;
         				'11:30' => '11:30 AM',
         				'12:00' => '12:00 AM',
         				'12:30' => '12:30 PM',
+        				
         		],
         'options' => [
         		'class' => 'input-starttime',
         		'maxlength' => 125,
+        		'prompt'=>'Select Start Time'
         ]
         ],
     		[
@@ -95,6 +98,7 @@ use unclead\multipleinput\MultipleInput;
     		'options' => [
     				'class' => 'input-endtime',
     				'maxlength' => 20,
+    				'prompt'=>'Select End Time'
     		]
     		],
     		
