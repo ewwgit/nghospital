@@ -50,7 +50,9 @@ class Doctors extends \yii\db\ActiveRecord
      public $allQuali;
      public $specialities;
      public $allSpeci;
-     
+     public $startTime;
+     public $endTime;
+     public $day;
 	
     public static function tableName()
     {
@@ -139,7 +141,8 @@ class Doctors extends \yii\db\ActiveRecord
         		[['doctorImage'],'required','on' => 'create'],
         		 //[['doctorImage'], 'image','skipOnEmpty'=>false,],
                  //[['doctorImage'], 'required']
-        		[['userId','doctorUniqueId'],'required','on' => 'convertsneed']
+        		[['userId','doctorUniqueId'],'required','on' => 'convertsneed'],
+        		[['startTime','endTime','day'],'safe'],
         		
         ];
     }

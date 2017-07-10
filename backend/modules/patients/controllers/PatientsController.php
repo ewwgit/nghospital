@@ -14,6 +14,7 @@ use yii\helpers\Json;
 use app\modules\patients\models\PatientInformation;
 use app\modules\patients\models\PatientDocuments;
 use yii\web\UploadedFile;
+use app\modules\doctors\models\Doctors;
 
 /**
  * PatientsController implements the CRUD actions for Patients model.
@@ -509,5 +510,15 @@ class PatientsController extends Controller
     	return $this->render('patientshistorydocview', ['model' => $this->findinfoModel($infoid),'patmodel' =>$patmodel,
     			'docary' => $docary,
     	]);
+    }
+    
+    public function actionRequestDoctor()
+    {
+    	$presentTime = '09:00';
+    	$pDate = date("Y-M-d H:i:s");
+    	$presentDay = date("D", strtotime($pDate));
+    	//echo $presentDay;exit();
+    	$doctorInfo = Doctors::find()->select('doctors.*,user.*,doctor_slots.*')->innerJoin('user','doctors.userId=user.id')->innerJoin('doctor_slots','doctors.userId=doctor_slots.dsDoctorId')->where("user.status = 10 AND (doctor_slots.startTime <= '$presentTime' AND doctor_slots.endTime >= '$presentTime' AND Day LIKE '$presentDay%')")->all();
+    	print_r($doctorInfo);exit();
     }
 }
