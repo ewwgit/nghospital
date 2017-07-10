@@ -28,7 +28,14 @@ $this->params['breadcrumbs'][] = $this->title;
             //'spId',
             'specialityName',
             'specialityCode',
-            'description:ntext',
+        	//	'description',
+//             [
+//             	'attribute' => 'description',
+//             		'value'=>'description',
+//             		'contentOptions' => ['class' => 'text-wrap'],
+          
+//             		],
+        		
            // 'status',
         		[
         		'attribute' => 'status',
@@ -46,3 +53,13 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 </div>
 </div>
+<style>
+.text-wrap{
+	max-width: 100px;
+	height: 0px;
+   /* word-wrap:break-word;*/
+}
+
+
+
+</style>

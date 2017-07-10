@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
         				'value' => $searchModel->email,
         		],
             'role',
-            'description:ntext',
+           // 'description:ntext',
             // 'mobile',
             // 'createdDate',
 

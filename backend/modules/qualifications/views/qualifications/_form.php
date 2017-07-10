@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
 	<div class="form-group col-lg-7 ">
-    <?= $form->field($model, 'qualification')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'qualification')->textInput(['maxlength' => 100]) ?>
 	</div>
 	<div class="form-group col-lg-7 ">
     <?= $form->field($model, 'status')->dropDownList([ 'Active' => 'Active', 'In-active' => 'In-active', ], ['prompt' => 'Select Status']) ?>
