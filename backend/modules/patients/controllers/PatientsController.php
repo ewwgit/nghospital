@@ -15,6 +15,7 @@ use app\modules\patients\models\PatientInformation;
 use app\modules\patients\models\PatientDocuments;
 use yii\web\UploadedFile;
 use app\modules\doctors\models\Doctors;
+use app\modules\patients\models\DoctorNghPatient;
 
 /**
  * PatientsController implements the CRUD actions for Patients model.
@@ -512,13 +513,59 @@ class PatientsController extends Controller
     	]);
     }
     
-    public function actionRequestDoctor()
+    public function actionRequestDoctor($phsId)
     {
+    	$model = new DoctorNghPatient;
+    	$mpatientModel = new Patients();
+    	$mpatientInformationModel = new PatientInformation();
+    	$model->phsId = $phsId;
     	$presentTime = '09:00';
     	$pDate = date("Y-M-d H:i:s");
     	$presentDay = date("D", strtotime($pDate));
+    	$avialableDoctors = array();
     	//echo $presentDay;exit();
     	$doctorInfo = Doctors::find()->select('doctors.*,user.*,doctor_slots.*')->innerJoin('user','doctors.userId=user.id')->innerJoin('doctor_slots','doctors.userId=doctor_slots.dsDoctorId')->where("user.status = 10 AND (doctor_slots.startTime <= '$presentTime' AND doctor_slots.endTime >= '$presentTime' AND Day LIKE '$presentDay%')")->all();
-    	print_r($doctorInfo);exit();
+    	
+    	foreach ($doctorInfo as $doc)
+    	{
+    		$avialableDoctors[$doc->userId] = $doc->name;
+    	}
+    	
+    	$patientId = 0;
+    	$nghId = 0;
+    	$patientInfo = PatientInformation::find()->where(['patientInfoId' => $model->phsId])->one();
+    	$patientId = $patientInfo->patientId;
+    	if($patientId !=0)
+    	{
+    		$mpatientInformationModel = $patientInfo;
+    		$nghInfo = Patients::find()->where(['patientId' => $patientId])->one();
+    		$nghId = $nghInfo->createdBy;
+    		$mpatientModel = $nghInfo;
+    	}
+    	
+    	
+    	if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+    		
+    		if($patientId != 0 && $nghId != 0)
+    		{
+    		$model->doctorId = $model->doctor;
+    		$model->nugrsingId = $nghId;
+    		$model->patientId = $patientId;
+    		$model->patientHistoryId = $model->phsId;
+    		$model->patientRequestStatus = 'PROCESSING';
+    		$model->doctorId = $model->doctor;
+    		$model->createdDate = date('Y-m-d H:i:s');
+    		$model->updatedDate = date('Y-m-d H:i:s');
+    		$model->createdBy = Yii::$app->user->identity->id;
+    		$model->updatedBy = Yii::$app->user->identity->id;
+    		$model->save();
+    		return $this->redirect(['index']);
+    		}
+    		//print_r($nghId);exit();
+    	}
+    	
+    	return $this->render('doctorRequest',
+    			['avialableDoctors' => $avialableDoctors,'model' => $model,'mpatientModel' => $mpatientModel,'mpatientInformationModel' => $mpatientInformationModel]);
+    	//print_r($avialableDoctors);exit();
     }
 }
