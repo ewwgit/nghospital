@@ -75,6 +75,23 @@ a.desc:after {
 /*.grid-view td {
     white-space: nowrap;
    }*/
+.grid-view td {
+    max-width: 100px;
+    overflow: auto; /* optional */
+    word-wrap: break-word;
+}
+   
+.detail-view td {
+   max-width: 50px;
+    overflow: auto; /* optional */
+    word-wrap: break-word;
+}
+.detail-view th {
+   max-width: 10px;
+    overflow: auto; /* optional */
+    word-wrap: break-word;
+}
+   
 
 .grid-view .filters input,
 .grid-view .filters select {
