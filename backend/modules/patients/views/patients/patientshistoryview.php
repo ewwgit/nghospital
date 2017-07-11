@@ -58,7 +58,7 @@ h3 {
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $patmodel->firstName; ?>&nbsp;<?= $patmodel->lastName; ?></div>
 								
-								<div class="right">PatientUnique ID</div>								
+								<div class="right">Patient Unique ID</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $patmodel->patientUniqueId; ?></div>
 													        
@@ -182,11 +182,11 @@ h3 {
 								}else{
 									echo 'Not Mentioned';
 								}?> </div>
-								<div class="right">BP LeftArm</div>								
+								<div class="right">BP Left Arm</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->BPLeftArm; ?></div>
 								
-								<div class="right">BP RightArm</div>								
+								<div class="right">BP Right Arm</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->BPRightArm; ?></div>
 													        
@@ -202,11 +202,11 @@ h3 {
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->diseases; ?></div>
 													        
-								<div class="right">AllergicMedicine</div>								
+								<div class="right">Allergic Medicine</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->allergicMedicine; ?></div>
 								
-								<div class="right">PatientCompliant</div>								
+								<div class="right">Patient Compliant</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?=  $model->patientCompliant; ?> </div>
 								

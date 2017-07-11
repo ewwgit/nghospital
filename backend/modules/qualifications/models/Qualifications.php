@@ -35,7 +35,12 @@ class Qualifications extends \yii\db\ActiveRecord
             [['status'], 'string'],
             [['createdBy', 'updatedBy'], 'integer'],
             [['createdDate', 'updatedDate'], 'safe'],
-            [['qualification'], 'string', 'max' => 50],
+            //[['qualification'], 'string', 'max' => 50],
+        		['qualification',
+        		'match',
+        		'pattern' => '/^[A-Za-z ]+$/  ',
+        		'message' => ' Invalid Qualification Only alphabets are allowed',
+        		],
         ];
     }
 
