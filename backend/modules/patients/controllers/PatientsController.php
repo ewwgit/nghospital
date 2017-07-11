@@ -16,6 +16,10 @@ use app\modules\patients\models\PatientDocuments;
 use yii\web\UploadedFile;
 use app\modules\doctors\models\Doctors;
 use app\modules\patients\models\DoctorNghPatient;
+use app\modules\doctors\models\DoctorsQualification;
+use app\modules\qualifications\models\Qualifications;
+use app\modules\doctors\models\DoctorsSpecialities;
+use app\modules\specialities\models\Specialities;
 
 /**
  * PatientsController implements the CRUD actions for Patients model.
@@ -519,11 +523,11 @@ class PatientsController extends Controller
     	$mpatientModel = new Patients();
     	$mpatientInformationModel = new PatientInformation();
     	$model->phsId = $phsId;
-    	$presentTime = '09:00';
     	$pDate = date("Y-M-d H:i:s");
     	$presentDay = date("D", strtotime($pDate));
+    	$presentTime =  date("H:i", strtotime($pDate));
     	$avialableDoctors = array();
-    	//echo $presentDay;exit();
+    	//echo $presentTime;exit();
     	$doctorInfo = Doctors::find()->select('doctors.*,user.*,doctor_slots.*')->innerJoin('user','doctors.userId=user.id')->innerJoin('doctor_slots','doctors.userId=doctor_slots.dsDoctorId')->where("user.status = 10 AND (doctor_slots.startTime <= '$presentTime' AND doctor_slots.endTime >= '$presentTime' AND Day LIKE '$presentDay%')")->all();
     	
     	foreach ($doctorInfo as $doc)
@@ -567,5 +571,48 @@ class PatientsController extends Controller
     	return $this->render('doctorRequest',
     			['avialableDoctors' => $avialableDoctors,'model' => $model,'mpatientModel' => $mpatientModel,'mpatientInformationModel' => $mpatientInformationModel]);
     	//print_r($avialableDoctors);exit();
+    }
+    
+    public function actionDoctorInfo($docid)
+    {
+    	$doctroInfo = Doctors::find()->where(['userId' => $docid])->one();
+    	$doctos = array();
+    	if(!empty($doctroInfo))
+    	{
+    		$doctos['name'] = $doctroInfo->name;
+    		$qualifications = DoctorsQualification::find()->where(['docId' => $docid])->all();
+    		if(!empty($qualifications))
+    		{
+    			$qulary = array();
+    			foreach ($qualifications as $quali)
+    			{
+    				$qulificatioName = Qualifications::find()->where(['qlid' => $quali->qualification])->one();
+    				$qulary[] = $qulificatioName->qualification;
+    			}
+    			$doctos['qualification'] = implode(",",$qulary);
+    		}
+    		else {
+    			$doctos['qualification'] = '';
+    		}
+    		
+    		
+    		$speciality = DoctorsSpecialities::find()->where(['rdoctorId' => $docid])->all();
+    		if(!empty($speciality))
+    		{
+    			$splary = array();
+    			foreach ($speciality as $splas)
+    			{
+    				$specialityName = Specialities::find()->where(['spId' => $splas->rspId])->one();
+    				$splary[] = $specialityName->specialityName;
+    			}
+    			$doctos['speciality'] = implode(",",$splary);
+    		}
+    		else {
+    			$doctos['speciality'] = '';
+    		}
+    		
+    	}
+    	
+    	print_r(json_encode($doctos));exit();
     }
 }

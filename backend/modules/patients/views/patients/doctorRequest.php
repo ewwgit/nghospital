@@ -8,6 +8,7 @@ use kartik\depdrop\DepDrop;
 use kartik\select2\Select2;
 use dosamigos\ckeditor\CKEditor;
 use yii\widgets\DetailView;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\doctors\models\Doctors */
@@ -34,12 +35,38 @@ use yii\widgets\DetailView;
         <?= Html::submitButton('Request', ['class' => 'btn btn-primary']) ?>
     </div>
     <?php ActiveForm::end(); ?>
+    
+    <div class="form-group col-lg-12 col-sm-12">
+			<div id="content_1" class="inv form-group col-lg-12 col-sm-12 docinfomaincls">
+				<div class="row">
+					<div class="col-md-12 col-sm-6 col-xs-6 main-wrap">
+						<div class="right">Name</div>
+						<div class="right-content">:</div>
+						<div class="right-second docname"></div>
 
-</div>
-</div>
+						<div class="right">Qualification</div>
+						<div class="right-content">:</div>
+						<div class="right-second docquali"></div>
 
+						<div class="right">Specialities</div>
+						<div class="right-content">:</div>
+						<div class="right-second docspec"></div>
 
-<div class="row">      
+						
+					</div>
+					<!---main-wrap closed-->
+				</div>
+			</div>
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		<div class="row">      
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" style="margin-left:0px; padding-left: 0px;">			   
 			<div class="panel panel-info">		
 					
@@ -236,6 +263,21 @@ use yii\widgets\DetailView;
 	
 	
 	
+	
+		
+
+</div>
+
+</div>
+
+
+
+
+
+
+	
+	
+	
 </div>
 <style>
 .help-block {
@@ -245,3 +287,38 @@ use yii\widgets\DetailView;
 	display: none;
 }
 </style>
+
+<?php 
+$doctorInfo = Yii::$app->urlManager->createUrl(['patients/patients/doctor-info']);
+$this->registerJs ( "
+		$('.docinfomaincls').hide();
+		$(document.body).on('change', '#doctornghpatient-doctor' ,function(){
+		var docid = $(this).val();
+		if(docid != ''){
+		$.ajax({
+		url: '$doctorInfo',
+		type: 'get',
+		dataType : 'json',
+		data:{docid:docid},
+		success : function(data){
+		if(jQuery.isEmptyObject(data) == false)
+		{
+		  $('.docinfomaincls').show();
+		  $('.docname').html(data.name);
+		$('.docquali').html(data.qualification);
+		$('.docspec').html(data.speciality);
+		}
+		else{
+		$('.docinfomaincls').hide();
+		}
+		//console.log(jQuery.isEmptyObject(data));
+		
+},
+});
+		}
+});
+
+	
+
+		", View::POS_READY, 'storemaps' );
+?>
