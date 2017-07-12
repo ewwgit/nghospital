@@ -18,7 +18,10 @@ use common\models\User;
 /* @var $this yii\web\View */
 /* @var $model app\modules\doctors\models\Doctors */
 
-$this->title = $model->name;
+$str = $model->name;
+ $rest = substr($str, 0, 20);
+
+$this->title = $rest;
 $this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

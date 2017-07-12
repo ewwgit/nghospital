@@ -6,8 +6,11 @@ use app\modules\nursinghomes\models\Nursinghomes;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\specialities\models\Specialities */
+$str = $model->specialityName;
+$rest = substr($str, 0, 20);
 
-$this->title = $model->specialityName;
+$this->title = $rest;
+//$this->title = $model->specialityName;
 $this->params['breadcrumbs'][] = ['label' => 'Specialities', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -4,10 +4,11 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\ModulesMaster */
-
-$this->title = 'Update Modules : ' . $model->moduleName;
+$str = $model->moduleName;
+$rest = substr($str, 0, 20);
+$this->title = 'Update Modules : ' . $rest;
 $this->params['breadcrumbs'][] = ['label' => 'Modules ', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->moduleName, 'url' => ['view', 'id' => $model->moduleId]];
+$this->params['breadcrumbs'][] = ['label' => $rest, 'url' => ['view', 'id' => $model->moduleId]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="modules-master-update">

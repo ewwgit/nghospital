@@ -6,7 +6,11 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\modules\intresteddoctors\models\Intresteddoctors */
 
-$this->title = $model->name;
+ 
+ $str = $model->name;
+ $rest = substr($str, 0, 20);
+
+$this->title = $rest;
 $this->params['breadcrumbs'][] = ['label' => 'Intrested Doctors', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -4,10 +4,11 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\intrestednursinghomes\models\Intrestednghs */
-
-$this->title = 'Update Interested Nursing Homes: ' . $model->name;
+$str = $model->name;
+$rest = substr($str, 0, 20);
+$this->title = 'Update Interested Nursing Homes: ' . $rest;
 $this->params['breadcrumbs'][] = ['label' => 'Interested Nursing Homes', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->insnghid]];
+$this->params['breadcrumbs'][] = ['label' => $rest, 'url' => ['view', 'id' => $model->insnghid]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="intrestednghs-update">

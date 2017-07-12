@@ -4,10 +4,11 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Role */
-
-$this->title = 'Update Role: ' . ' ' . $model->RoleName;
+$str = $model->RoleName;
+$rest = substr($str, 0, 20);
+$this->title = 'Update Role: ' . ' ' . $rest;
 $this->params['breadcrumbs'][] = ['label' => 'Roles', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->RoleName, 'url' => ['view', 'id' => $model->RoleId]];
+$this->params['breadcrumbs'][] = ['label' => $rest, 'url' => ['view', 'id' => $model->RoleId]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="role-update">

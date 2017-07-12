@@ -5,8 +5,11 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\AdminMaster */
+$str = $model->username;
+$rest = substr($str, 0, 20);
 
-$this->title = $model->username;
+$this->title = $rest;
+//$this->title = $model->username;
 $this->params['breadcrumbs'][] = ['label' => 'Admin Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

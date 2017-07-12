@@ -8,8 +8,11 @@ use app\modules\nursinghomes\models\Nursinghomes;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\qualifications\models\Qualifications */
+$str = $model->qualification;
+$rest = substr($str, 0, 20);
 
-$this->title = $model->qualification;
+$this->title = $rest;
+//$this->title = $model->qualification;
 $this->params['breadcrumbs'][] = ['label' => 'Qualifications', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
