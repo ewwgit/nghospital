@@ -467,7 +467,7 @@ class PatientsController extends Controller
         	$response = $newModel->upload();
         	
             //return $this->redirect(['view', 'id' => $model->patientId]);
-        	return $this->redirect(['index']);
+        	return $this->redirect(['request-doctor','phsId' => $patmodelnew->patientInfoId]);
         } else {
             return $this->render('patientshistorycreate', [
                 'model' => $model,
