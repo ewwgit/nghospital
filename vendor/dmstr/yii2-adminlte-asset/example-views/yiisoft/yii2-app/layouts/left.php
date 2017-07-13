@@ -48,6 +48,7 @@ use app\models\UserrolesModel;
                             ['label' => 'Profile', 'icon' => 'plus-circle', 'url' => ['/doctors/doctors/profileview','uid'=>Yii::$app->user->identity->id],],
                             ['label' => 'Profile Update', 'icon' => 'eye', 'url' => ['/doctors/doctors/profileupdate','uid'=>Yii::$app->user->identity->id],],
                         	['label' => 'Slots', 'icon' => 'eye', 'url' => ['/doctors/doctors/slots'],],
+                            ['label' => 'Patient Requests', 'icon' => 'eye', 'url' => ['/doctors/doctors/patient-requests'],],
                             
                         ],
                     ],

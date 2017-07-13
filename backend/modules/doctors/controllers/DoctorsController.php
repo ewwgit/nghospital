@@ -22,6 +22,11 @@ use app\modules\doctors\models\DoctorSlots;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 use backend\models\ChangePasswordForm;
+
+use app\modules\patients\models\DoctorNghPatient;
+use yii\data\ActiveDataProvider;
+use app\modules\patients\models\Patients;
+use app\modules\patients\models\PatientInformation;
 /**
  * DoctorsController implements the CRUD actions for Doctors model.
  */
@@ -892,6 +897,66 @@ class DoctorsController extends Controller
     			'model' => $model,
     	]);
     	
+    }
+    
+    public function actionPatientRequests()
+    {
+    	$docId = 123;
+    	$patientinfoModel = DoctorNghPatient::find()->select('doctor_ngh_patient.patientRequestStatus,nursinghomes.nursingHomeName,patients.firstName,patients.lastName')->innerJoin('nursinghomes','doctor_ngh_patient.nugrsingId=nursinghomes.nuserId')->innerJoin('patient_information','doctor_ngh_patient.patientHistoryId=patient_information.patientInfoId')->innerJoin('patients','patient_information.patientId=patients.patientId')->where("doctor_ngh_patient.doctorId =".$docId);
+    	$dataProvider = new ActiveDataProvider([
+    			'query' => $patientinfoModel,
+    			'sort' => ['attributes' => ['nursingHomeName','firstName','lastName','patientRequestStatus']],
+    	]);
+    	
+    	return $this->render('patientRequests', [
+    			'dataProvider' => $dataProvider,
+    	]);
+    	
+    	//print_r($patientinfoModel);exit();
+    }
+    
+    public function actionPatientInfo($phsId)
+    {
+    	$model = DoctorNghPatient::find()->where(['patientHistoryId' => $phsId])->one();
+    	$mpatientModel = new Patients();
+    	$mpatientInformationModel = new PatientInformation();
+    	$model->phsId = $phsId;
+    	$model->doctor = 'brahmi';
+    	$pDate = date("Y-M-d H:i:s");
+    	$presentDay = date("D", strtotime($pDate));
+    	$presentTime =  date("H:i", strtotime($pDate));
+    	$avialableDoctors = array();
+    	//echo $presentTime;exit();
+    	
+    	 
+    	$patientId = 0;
+    	$nghId = 0;
+    	$patientInfo = PatientInformation::find()->where(['patientInfoId' => $model->phsId])->one();
+    	$patientId = $patientInfo->patientId;
+    	if($patientId !=0)
+    	{
+    		$mpatientInformationModel = $patientInfo;
+    		$nghInfo = Patients::find()->where(['patientId' => $patientId])->one();
+    		$nghId = $nghInfo->createdBy;
+    		$mpatientModel = $nghInfo;
+    	}
+    	 
+    	 
+    	if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+    		$model->update();
+    
+    		
+    			return $this->redirect(['index']);
+    		
+    		//print_r($nghId);exit();
+    	}
+    	/* else{
+    		print_r($model->errors);exit();
+    	} */
+    	 
+    	return $this->render('patientInfo',
+    			['model' => $model,'mpatientModel' => $mpatientModel,'mpatientInformationModel' => $mpatientInformationModel]);
+    	//print_r($avialableDoctors);exit();
     }
     
 }

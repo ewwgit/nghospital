@@ -210,8 +210,11 @@ h3 {
 								<div class="right-content">:</div>
 								<div class="right-second"><?=  $model->patientCompliant; ?> </div>
 								
+								<?php $DocrequUrl = Yii::$app->urlManager->createAbsoluteUrl ( [ 
+		'patients/patients/request-doctor' ,'phsId' => $model->patientInfoId
+] );?>
 								
-								
+								<a href="<?php echo $DocrequUrl;?>" class="btn btn-info" role="button">Request To Doctor</a>
 																 							
 							  </div> <!---doctor-box closed-->
 						    </div>	<!---main-wrap closed-->							
