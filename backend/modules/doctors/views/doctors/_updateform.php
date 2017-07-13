@@ -146,4 +146,7 @@ use dosamigos\ckeditor\CKEditor;
 .select2-search__field {
 	display: none;
 }
+.cke_button__image {
+	display: none !important;
+}
 </style>
