@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
+use backend\models\Role;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\intrestednursinghomes\models\IntrestednghsSearch */
@@ -33,7 +35,18 @@ $this->params['breadcrumbs'][] = $this->title;
         				'attribute' =>'email',
         				'value' => $searchModel->email,
         		],
-            'role',
+       //     'role',
+//         		[
+        		
+//         		'attribute'=>'role',
+//         		//'filter'=> $searchData =ArrayHelper::map(Role::find()->select(['RoleId','RoleName'])->where(('RoleId < 3'))->asArray()->all(), 'RoleId', 'RoleName'),
+        	
+//         		'value' => function ($data) {
+//         			$roleData = Role::find()->where(['RoleId' => $data->role])->one();
+//         			return $roleData->RoleName;
+//         		},
+        		 
+//         		],
            // 'description:ntext',
             // 'mobile',
             // 'createdDate',

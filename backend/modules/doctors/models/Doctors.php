@@ -83,16 +83,18 @@ class Doctors extends \yii\db\ActiveRecord
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.','on' =>'create'],
 
             ['password', 'required' ,'on' =>'create'],
-            ['password', 'string', 'min' => 6 ,'on' =>'create'],
+        		['password',
+        		'match', 'not' => true, 'pattern' => '/[^a-zA-Z0-9]/',
+        		'message' => 'password Must be alphabates and numerics only.',
+        		],
+                ['password', 'string', 'min' => 6 ,'on' =>'create'],
         		[
         		'email',
         		'match',
         		'pattern' => '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/',
         		'message' => 'Email can contain @ and .com characters.'
-        				]
-        				,
-        		
-        		
+        				],
+
         		['username',
         		'match', 'not' => true, 'pattern' => '/[^a-zA-Z0-9]/',
         		'message' => 'Invalid username pattern.',
