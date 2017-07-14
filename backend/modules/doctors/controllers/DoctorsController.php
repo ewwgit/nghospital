@@ -901,7 +901,7 @@ class DoctorsController extends Controller
     
     public function actionPatientRequests()
     {
-    	$docId = 123;
+    	$docId = Yii::$app->user->identity->id;
     	$patientinfoModel = DoctorNghPatient::find()->select('doctor_ngh_patient.patientRequestStatus,nursinghomes.nursingHomeName,patients.firstName,patients.lastName')->innerJoin('nursinghomes','doctor_ngh_patient.nugrsingId=nursinghomes.nuserId')->innerJoin('patient_information','doctor_ngh_patient.patientHistoryId=patient_information.patientInfoId')->innerJoin('patients','patient_information.patientId=patients.patientId')->where("doctor_ngh_patient.doctorId =".$docId);
     	$dataProvider = new ActiveDataProvider([
     			'query' => $patientinfoModel,
@@ -918,10 +918,10 @@ class DoctorsController extends Controller
     public function actionPatientInfo($phsId)
     {
     	$model = DoctorNghPatient::find()->where(['patientHistoryId' => $phsId])->one();
+    	$model->scenario = 'requesttreatment';
     	$mpatientModel = new Patients();
     	$mpatientInformationModel = new PatientInformation();
     	$model->phsId = $phsId;
-    	$model->doctor = 'brahmi';
     	$pDate = date("Y-M-d H:i:s");
     	$presentDay = date("D", strtotime($pDate));
     	$presentTime =  date("H:i", strtotime($pDate));

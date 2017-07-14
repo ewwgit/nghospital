@@ -520,6 +520,7 @@ class PatientsController extends Controller
     public function actionRequestDoctor($phsId)
     {
     	$model = new DoctorNghPatient;
+    	$model->scenario = 'requestdoctor';
     	$mpatientModel = new Patients();
     	$mpatientInformationModel = new PatientInformation();
     	$model->phsId = $phsId;
