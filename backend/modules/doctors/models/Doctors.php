@@ -71,6 +71,8 @@ class Doctors extends \yii\db\ActiveRecord
             [['stateName', 'countryName','createdDate', 'updatedDate','createdBy', 'updatedBy','name', 'qualification', 'city', 'state',  'country',  'address', 'permanentAddress', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC','userId','doctorUniqueId','username','email','password'], 'safe'],
             [[ 'name', 'city', 'stateName', 'countryName', 'APMC', 'TSMC'], 'string', 'max' => 200],
         	[['docimageupdate','status'],'safe'],
+        	[['availableStatus'],'required'],
+        	[['availableStatus'],'safe'],
         	['username', 'trim'],
             ['username', 'required','on' => ['create','update']],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.','on' =>'create'],
