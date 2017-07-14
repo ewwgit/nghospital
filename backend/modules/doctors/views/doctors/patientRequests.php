@@ -31,7 +31,16 @@ $this->params['breadcrumbs'][] = $this->title;
         		'patientRequestStatus',
 
              ['class' => 'yii\grid\ActionColumn',
-            		'template' => '{view} {update} {delete}',
+            		'template' => '{view} ',
+             		'buttons' => [
+             				'view' => function ($url,$data) {
+             				$url = Url::to(['/doctors/doctors/patient-info','phsId'=>$data->phsId]);
+             				return Html::a(
+             						'<span class="glyphicon glyphicon-lock"></span>',
+             						$url);
+             				},
+             		
+             				],
             		
             		
             ],
