@@ -9,7 +9,7 @@ use app\modules\nursinghomes\models\Nursinghomes;
 /* @var $this yii\web\View */
 /* @var $model app\modules\qualifications\models\Qualifications */
 $str = $model->qualification;
-$rest = substr($str, 0, 20);
+$rest = substr($str, 0, 150);
 
 $this->title = $rest;
 //$this->title = $model->qualification;

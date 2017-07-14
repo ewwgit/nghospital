@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
 
  
  $str = $model->name;
- $rest = substr($str, 0, 20);
+ $rest = substr($str, 0, 150);
 
 $this->title = $rest;
 $this->params['breadcrumbs'][] = ['label' => 'Intrested Doctors', 'url' => ['index']];

@@ -20,7 +20,12 @@ use app\modules\nursinghomes\models\Nursinghomes;
 /* @var $model app\models\Nursinghomes */
 
 //$this->title = $model->nursingId;
-$this->title = ' Nursing Homes View';
+$str = $model->nursingHomeName;
+$rest = substr($str, 0, 150);
+
+$this->title = $rest;
+
+//$this->title = ' Nursing Homes View';
 $this->params['breadcrumbs'][] = ['label' => 'Nursing Homes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

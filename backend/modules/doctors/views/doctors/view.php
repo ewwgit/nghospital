@@ -19,7 +19,7 @@ use common\models\User;
 /* @var $model app\modules\doctors\models\Doctors */
 
 $str = $model->name;
- $rest = substr($str, 0, 20);
+$rest = substr($str, 0, 150);
 
 $this->title = $rest;
 $this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];

@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\modules\intrestednursinghomes\models\Intrestednghs */
 
 $str = $model->name;
- $rest = substr($str, 0, 20);
+$rest = substr($str, 0, 150);
 
 $this->title = $rest;
 $this->params['breadcrumbs'][] = ['label' => 'Interested Nursing Homes', 'url' => ['index']];

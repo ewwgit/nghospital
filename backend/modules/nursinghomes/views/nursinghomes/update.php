@@ -8,7 +8,8 @@ use yii\helpers\Html;
 //$this->title = 'Update Nursings: ' . $model->nursingId;
 $str = $model->nursingHomeName;
 $rest = substr($str, 0, 150);
-$this->title = 'Update Nursing Homes';
+$this->title = 'Update Nursing Homes: ' . $rest;
+
 $this->params['breadcrumbs'][] = ['label' => 'Nursing Homes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $rest, 'url' => ['view', 'id' => $model->nursingId]];
 $this->params['breadcrumbs'][] = 'Update';

@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Role */
 $str = $model->RoleName;
-$rest = substr($str, 0, 20);
+$rest = substr($str, 0, 150);
 
 $this->title = $rest;
 

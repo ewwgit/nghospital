@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\patients\models\Patients */
 $str = $model->firstName;
-$rest = substr($str, 0, 20);
+$rest = substr($str, 0, 150);
 
 $this->title = 'Update Patients: ' . $rest;
 $this->params['breadcrumbs'][] = ['label' => 'Patients', 'url' => ['index']];
