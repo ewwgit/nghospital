@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
         	],
             [
     		'attribute'=>'email',
-    		'value' => $searchModel->email,
+    		'value' =>'email',
     		    		 ],
       
     		[
