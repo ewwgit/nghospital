@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $model app\modules\doctors\models\Doctors */
 
 $this->title = 'Update Doctors: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->doctorid]];
+//$this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['profileview', 'uid' => $model->userId]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="doctors-update">

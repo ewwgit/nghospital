@@ -94,9 +94,6 @@ use dosamigos\ckeditor\CKEditor;
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'TSMC')->textInput(['maxlength' => true]) ?>
 	</div>
-	<div class="form-group col-lg-6 col-sm-12" >
-    <?= $form->field($model, 'availableStatus')->dropDownList([ 'Online' => 'Online', 'Offline' => 'Offline', ], ['prompt' => 'Select Available Status']) ?>
-	</div>
 	
     <div class="form-group col-lg-6 col-sm-12">
     <?php if($model->doctorImage != ''){?>

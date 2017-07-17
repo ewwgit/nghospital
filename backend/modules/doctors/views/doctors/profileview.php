@@ -19,7 +19,7 @@ use common\models\User;
 /* @var $model app\modules\doctors\models\Doctors */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
+//$this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="doctors-view">
@@ -73,7 +73,14 @@ th {
 	
 					<div class="row">
 						<div class="col-md-12 col-sm-6 col-xs-6 main-wrap">
-							<div class="doctor-box">					        
+							<div class="doctor-box">
+								<div class="right">Available Status</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?php  if(!empty($model->availableStatus)){
+									echo $model->availableStatus;;
+								}else{
+									echo 'Not Mentioned';
+								} ?></div>					        
 								<div class="right">User Name</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $usernamedata['username']; ?> </div>
@@ -197,7 +204,7 @@ th {
 								<div class="right-content">:</div>
 								<div class="right-second"><?php if($usernamedata['status']==10){echo"Active";}else {echo"In-Active";} ?></div>
 								
-								
+							
 																 							
 							</div><!---doctor-box closed-->							
 						</div>	<!---main-wrap closed-->							

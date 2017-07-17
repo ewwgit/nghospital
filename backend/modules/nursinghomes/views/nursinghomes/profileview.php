@@ -21,7 +21,7 @@ use app\modules\nursinghomes\models\Nursinghomes;
 
 //$this->title = $model->nursingId;
 $this->title = ' Nursing Homes View';
-$this->params['breadcrumbs'][] = ['label' => 'Nursing Homes', 'url' => ['index']];
+//$this->params['breadcrumbs'][] = ['label' => 'Nursing Homes', 'url' => ['view', 'id' => $model->nursingId]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="doctors-view">

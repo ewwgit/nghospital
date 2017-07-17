@@ -98,9 +98,7 @@ use dosamigos\ckeditor\CKEditor;
       <?=$form->field ( $model, 'doctorImage' )->widget ( FileInput::classname (),
    		[ 'options' => [ 'accept' => 'image/*' ],'pluginOptions' =>[[ 'browseLabel' => 'Profile Image', 'allowedFileExtensions'=>['jpg','png','jpeg'] ]] ] )?>     
     </div>
-    <div class="form-group col-lg-6 col-sm-12" >
-    <?= $form->field($model, 'availableStatus')->dropDownList([ 'Online' => 'Online', 'Offline' => 'Offline', ], ['prompt' => 'Select Available Status']) ?>
-	</div>
+    
     <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'summery')->widget(CKEditor::className(), [
         'options' => ['rows' => 2],

@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\modules\doctors\models\Doctors */
 
 $this->title = 'Create Doctor Slots';
-$this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
+//$this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="doctors-create">

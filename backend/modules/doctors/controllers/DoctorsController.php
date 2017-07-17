@@ -945,8 +945,10 @@ class DoctorsController extends Controller
     	if ($model->load(Yii::$app->request->post()) && $model->validate()) {
     		$model->update();
     
+    		//$prmodel = new PatientRequests();
     		
-    			return $this->redirect(['index']);
+    		
+    			return $this->redirect(['patient-requests']);
     		
     		//print_r($nghId);exit();
     	}
