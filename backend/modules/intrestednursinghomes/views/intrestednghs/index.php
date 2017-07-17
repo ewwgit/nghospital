@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
           //'insnghid',
             'name',
-            'email:email',
+            'email',
 //         		[
 //         				'attribute' =>'email',
 //         				'value' => $searchModel->email,
