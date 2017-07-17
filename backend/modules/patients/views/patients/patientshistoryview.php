@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 //**********************//
 use common\models\User;
+use app\modules\patients\models\DoctorNghPatient;
 //**********************//
 
 /* @var $this yii\web\View */
@@ -12,6 +13,8 @@ use common\models\User;
 $this->title = $patmodel->firstName;
 $this->params['breadcrumbs'][] = ['label' => 'Patients', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+$reqmodel = DoctorNghPatient::find()->where(['patientId' => $patmodel->patientId])->one();
+
 ?>
 <div class="box box-primary">
 <div class="box-body">
@@ -210,11 +213,18 @@ h3 {
 								<div class="right-content">:</div>
 								<div class="right-second"><?=  $model->patientCompliant; ?> </div>
 								
-								<?php $DocrequUrl = Yii::$app->urlManager->createAbsoluteUrl ( [ 
-		'patients/patients/request-doctor' ,'phsId' => $model->patientInfoId
+								<?php 
+								if(empty($reqmodel -> treatment))
+								{
+						
+								 $DocrequUrl = Yii::$app->urlManager->createAbsoluteUrl ( [ 
+		'patients/patients/request-doctor' ,'phsId' => $model->patientInfoId 
 ] );?>
 								
-								<a href="<?php echo $DocrequUrl;?>" class="btn btn-info" role="button">Request To Doctor</a>
+								 <a href="<?php echo $DocrequUrl;?>" class="btn btn-info" role="button">Request To Doctor</a>
+								<?php 
+								}
+								?>
 																 							
 							  </div> <!---doctor-box closed-->
 						    </div>	<!---main-wrap closed-->							
