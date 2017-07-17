@@ -30,17 +30,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
           //'insnghid',
             'name',
-           // 'email:email',
-        		[
-        				'attribute' =>'email',
-        				'value' => $searchModel->email,
-        		],
+            'email:email',
+//         		[
+//         				'attribute' =>'email',
+//         				'value' => $searchModel->email,
+//         		],
        //     'role',
 //         		[
         		
 //         		'attribute'=>'role',
 //         		//'filter'=> $searchData =ArrayHelper::map(Role::find()->select(['RoleId','RoleName'])->where(('RoleId < 3'))->asArray()->all(), 'RoleId', 'RoleName'),
-        	
+        	//$form->field($model, 'center_id')->dropDownList($dataList, ['prompt'=>'-Choose a Course-'])
 //         		'value' => function ($data) {
 //         			$roleData = Role::find()->where(['RoleId' => $data->role])->one();
 //         			return $roleData->RoleName;
