@@ -63,7 +63,7 @@ class DoctorNghPatient extends \yii\db\ActiveRecord
             'patientId' => 'Patient ID',
             'patientHistoryId' => 'Patient History ID',
             'treatment' => 'Treatment',
-            'patientRequestStatus' => 'Patient Request Status',
+            'patientRequestStatus' => 'Status',
             'createdBy' => 'Created By',
             'updatedBy' => 'Updated By',
             'createdDate' => 'Created Date',

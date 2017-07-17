@@ -28,7 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
         		'nursingHomeName',
         		'firstName',
         		'lastName',
-        		'patientRequestStatus',
+        		//'patientRequestStatus',
+        		[
+        		'attribute' => 'patientRequestStatus',
+        		'value' => 'patientRequestStatus',
+        		'filter' => Html::activeDropDownList($searchModel, 'patientRequestStatus', ['Active' => 'Active','In-active' => 'In-active'],['class'=>'form-control','prompt' => 'Status']),
+        		],
 
              ['class' => 'yii\grid\ActionColumn',
             		'template' => '{view} ',
