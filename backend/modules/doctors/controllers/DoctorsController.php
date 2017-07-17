@@ -27,6 +27,8 @@ use app\modules\patients\models\DoctorNghPatient;
 use yii\data\ActiveDataProvider;
 use app\modules\patients\models\Patients;
 use app\modules\patients\models\PatientInformation;
+use app\modules\patients\models\DoctorNghPatientSearch;
+
 /**
  * DoctorsController implements the CRUD actions for Doctors model.
  */
@@ -901,7 +903,7 @@ class DoctorsController extends Controller
     
     public function actionPatientRequests()
     {
-    	$docId = Yii::$app->user->identity->id;
+    	/* $docId = Yii::$app->user->identity->id;
     	$patientinfoModel = DoctorNghPatient::find()->select('doctor_ngh_patient.patientRequestStatus,doctor_ngh_patient.patientHistoryId,nursinghomes.nursingHomeName,patients.firstName,patients.lastName')->innerJoin('nursinghomes','doctor_ngh_patient.nugrsingId=nursinghomes.nuserId')->innerJoin('patient_information','doctor_ngh_patient.patientHistoryId=patient_information.patientInfoId')->innerJoin('patients','patient_information.patientId=patients.patientId')->where("doctor_ngh_patient.doctorId =".$docId);
     	$dataProvider = new ActiveDataProvider([
     			'query' => $patientinfoModel,
@@ -909,6 +911,14 @@ class DoctorsController extends Controller
     	]);
     	
     	return $this->render('patientRequests', [
+    			'dataProvider' => $dataProvider,
+    	]); */
+    	
+    	$searchModel = new DoctorNghPatientSearch();
+    	$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+    	
+    	return $this->render('patientRequests', [
+    			'searchModel' => $searchModel,
     			'dataProvider' => $dataProvider,
     	]);
     	

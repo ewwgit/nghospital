@@ -200,18 +200,7 @@ use app\models\UserrolesModel;
                 		
                 		],
                 		],
-                		[
-                		'label' => 'Patients',
-                		//'class' => 'fa fa-user-md',
-                		'icon' => 'user',
-                		'url' => '#',
-                		'items' => [
-                				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/patients/patients/patientshistorycreate'],],
-                				['label' => 'View', 'icon' => 'eye', 'url' => ['/patients/patients'],],
-                			/* ['label' => 'History Create', 'icon' => 'plus-circle', 'url' => ['/patients/patients/patientshistorycreate'],], */
                 		
-                		],
-                		],
                 		
                 ],
             ]
