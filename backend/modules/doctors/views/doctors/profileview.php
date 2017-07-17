@@ -51,7 +51,7 @@ th {
 					</div>
 					<div class="col-md-3" style="float: left;">
 					<?php 
-					$usernamedata = User::find()->select(['username','email'])->where(['id'=>$model->userId])->one();
+					$usernamedata = User::find()->select(['username','email','status'])->where(['id'=>$model->userId])->one();
 					// print_r($usernamedata);exit;?>
 					<?php if($model->doctorImage != ''){?>
 					<?php $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->doctorImage;?>
