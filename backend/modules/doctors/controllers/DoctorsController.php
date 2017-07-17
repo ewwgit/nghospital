@@ -626,7 +626,7 @@ class DoctorsController extends Controller
     	//print_r($usermodel->id);exit();
     	$model = Doctors::find()->where(['userId' =>$usermodel->id])->one();
     	//print_r($model);exit();
-    	$model->scenario = 'update';
+    	$model->scenario = 'profileupdate';
     	$singupModel = new SignupForm();
     	$doctorQulification = DoctorsQualification::find()->select('qualification')->where( ['docId' => $model->userId])->all();
     	//print_r($doctorQulification);exit();
