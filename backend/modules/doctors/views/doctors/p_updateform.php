@@ -130,10 +130,7 @@ use dosamigos\ckeditor\CKEditor;
 	<div class="form-group col-lg-6 col-sm-12" >
     <?= $form->field($model, 'availableStatus')->dropDownList([ 'Online' => 'Online', 'Offline' => 'Offline', ], ['prompt' => 'Select Available Status']) ?>
 	</div>
-	<div class="form-group col-lg-6 col-sm-12">
-    <?=$form->field($model, 'status')->dropDownList(['10' => 'Active','0' => 'In-Active'],['prompt' => 'Status'],
-											['itemOptions' => ['class' =>'radio-inline']])?>
-	</div> 
+	
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

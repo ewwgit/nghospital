@@ -200,9 +200,9 @@ th {
 								}else{
 									echo 'Not Mentioned';
 								}?> </div>
-								<div class="right">Status</div>								
+							<!--  	<div class="right">Status</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?php if($usernamedata['status']==10){echo"Active";}else {echo"In-Active";} ?></div>
+								<div class="right-second">/**/</div>
 								
 							
 																 							
