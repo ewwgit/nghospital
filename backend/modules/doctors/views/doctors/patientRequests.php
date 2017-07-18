@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
         		[
         		'attribute' => 'patientRequestStatus',
         		'value' => 'patientRequestStatus',
-        		'filter' => Html::activeDropDownList($searchModel, 'patientRequestStatus', ['Active' => 'Active','In-active' => 'In-active'],['class'=>'form-control','prompt' => 'Status']),
+        		'filter' => Html::activeDropDownList($searchModel, 'patientRequestStatus', ['PROCESSING' => 'PROCESSING','COMPLETED' => 'COMPLETED'],['class'=>'form-control','prompt' => 'Status']),
         		],
 
              ['class' => 'yii\grid\ActionColumn',
