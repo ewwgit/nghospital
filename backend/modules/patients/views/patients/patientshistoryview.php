@@ -5,6 +5,7 @@ use yii\widgets\DetailView;
 //**********************//
 use common\models\User;
 use app\modules\patients\models\DoctorNghPatient;
+use app\modules\doctors\models\Doctors;
 //**********************//
 
 /* @var $this yii\web\View */
@@ -14,6 +15,9 @@ $this->title = $patmodel->firstName;
 $this->params['breadcrumbs'][] = ['label' => 'Patients', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $reqmodel = DoctorNghPatient::find()->where(['patientId' => $patmodel->patientId])->one();
+$docid = $reqmodel->doctorId;
+$docnmodel = Doctors::find()->where(['userId' => $reqmodel->doctorId])->one();
+//print_r($docnmodel->name);exit();
 
 ?>
 <div class="box box-primary">
@@ -213,6 +217,9 @@ h3 {
 								<div class="right-content">:</div>
 								<div class="right-second"><?=  $model->patientCompliant; ?> </div>
 								
+								
+								 </div> <!---doctor-box closed-->
+						    </div>	<!---main-wrap closed-->
 								<?php 
 								if(empty($reqmodel -> treatment))
 								{
@@ -224,10 +231,29 @@ h3 {
 								 <a href="<?php echo $DocrequUrl;?>" class="btn btn-info" role="button">Request To Doctor</a>
 								<?php 
 								}
+								else{
+									?>
+									<h3>Treatment Information</h3>
+						<div class="col-md-12 col-sm-6 col-xs-6 main-wrap">
+							<div class="doctor-box">
+									<div class="right">Treatment</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?=  $reqmodel -> treatment; ?> </div>
+								
+								<div class="right">Doctor Name</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?=  $docnmodel -> name; ?> </div>
+						   </div>
+					   </div>	  
+					   
+					   
+					   
+						
+								<?php 	
+								}
 								?>
 																 							
-							  </div> <!---doctor-box closed-->
-						    </div>	<!---main-wrap closed-->							
+							 							
 												
 					</div><!---row closed-->						
 				</div><!---panel-body closed-->		

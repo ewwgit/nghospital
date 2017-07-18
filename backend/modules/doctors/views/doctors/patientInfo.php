@@ -8,24 +8,31 @@ use kartik\select2\Select2;
 use dosamigos\ckeditor\CKEditor;
 use yii\widgets\DetailView;
 use yii\web\View;
+use app\modules\patients\models\DoctorNghPatient;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\doctors\models\Doctors */
 /* @var $form yii\widgets\ActiveForm */
-$this->title = 'Request Doctor';
+$this->title = 'Patient Treatment';
 $this->params ['breadcrumbs'] [] = [
-		'label' => 'Patients',
+		'label' => 'Patient Requests',
 		'url' => [
-				'index'
+				'/doctors/doctors/patient-requests'
 		]
 ];
 $this->params ['breadcrumbs'] [] = $this->title;
+$tremodel = DoctorNghPatient::find()->where(['patientHistoryId' => $mpatientInformationModel->patientInfoId])->one();
+//print_r($tremodel->patientRequestStatus);exit();
 ?>
 
 <div class="doctors-form">
 
 	<div class="box box-primary">
 		<div class="box-body"> 
+		<?php if($tremodel->patientRequestStatus != 'COMPLETED')
+		{
+			
+		?>
 
     <?php $form = ActiveForm::begin(['options'=>['enctype' =>'multipart/form-data']]); ?>
     
@@ -39,6 +46,38 @@ $this->params ['breadcrumbs'] [] = $this->title;
         <?= Html::submitButton('Submit', ['class' => 'btn btn-primary'])?>
     </div>
     <?php ActiveForm::end(); ?>
+   <?php }
+   else {
+   	?>
+   	 <?php 
+						    $cdate = $tremodel->updatedDate;
+						    $yrdata= strtotime($cdate);
+						    $yeardata= date('d-M-Y', $yrdata);
+						    
+						    ?>
+   
+						<div class="form-group col-md-6 col-sm-12 col-xs-6" style="border: 1px solid #bce8f1; border-radius:5px;">
+							<div class="right">Treatment</div>
+							<div class="right-content">:</div>
+							<div class="right-second docname"><?php echo  $tremodel->treatment ?></div>
+							
+							<div class="right">Treatment Date</div>
+							<div class="right-content">:</div>
+							<div class="right-second docname"><?php echo $yeardata;  ?></div>
+							
+
+							
+							
+
+						</div>
+						<!---main-wrap closed-->
+					
+					
+		<?php 
+        }
+		?>
+    
+    
     
     <div class="form-group col-lg-12 col-sm-12">
 				<div id="content_1"	class="inv docinfomaincls">

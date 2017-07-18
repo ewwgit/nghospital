@@ -954,6 +954,7 @@ class DoctorsController extends Controller
     	 
     	 
     	if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+    		$model->patientRequestStatus = 'Completed';
     		$model->update();
     
     		//$prmodel = new PatientRequests();
