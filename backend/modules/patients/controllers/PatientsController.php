@@ -553,6 +553,10 @@ class PatientsController extends Controller
     		
     		if($patientId != 0 && $nghId != 0)
     		{
+    			
+    		$reqeustalready = DoctorNghPatient::find()->where(['doctorId' => $model->doctor,'nugrsingId' => $nghId,'patientId' => $patientId,'patientHistoryId' => $model->phsId])->one();
+    		//print_r($reqeustalready);exit();
+    		if(empty($reqeustalready))	{
     		$model->doctorId = $model->doctor;
     		$model->nugrsingId = $nghId;
     		$model->patientId = $patientId;
@@ -565,6 +569,10 @@ class PatientsController extends Controller
     		$model->updatedBy = Yii::$app->user->identity->id;
     		$model->save();
     		return $this->redirect(['index']);
+    		}
+    		else{
+    			$model->addError('doctor','You are alreade requested to this doctor');
+    		}
     		}
     		//print_r($nghId);exit();
     	}
