@@ -601,7 +601,7 @@ class DoctorsController extends Controller
     				$slotInfoModel->save();
     				}
     			}
-    			Yii::$app->getSession()->setFlash('success', 'cerated New  time slots.');
+    			Yii::$app->getSession()->setFlash('success', 'created New  time slots.');
     			return $this->redirect(['slots']);
 //     			/exit();
     		}
