@@ -126,7 +126,7 @@ $pr++;
 } }?>
 
 <?php if(empty($previousDoc)){
-	$previousrecords .='<div class="col-lg-7 col-sm-12">
+	$documents .='<div class="col-lg-7 col-sm-12">
     There is no previous documents exist.
 </div>';
 }else{
