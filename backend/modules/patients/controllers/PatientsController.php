@@ -434,7 +434,7 @@ class PatientsController extends Controller
         		$model->patientImage = 'patientimages/'.$imageName;
         	}
         	else{
-        		$model->patientImage = $model->patientimageupdate;
+        		$model->patientImage = '';
         	}
         	$model->save();
         	//print_r($model->patientId);exit();
