@@ -214,11 +214,11 @@ $this->params ['breadcrumbs'] [] = $this->title;
 				<div class="right-content">:</div>
 				<div class="right-second">1212</div>
 
-				<div class="right">AllergicMedicine</div>
+				<div class="right">Allergic Medicine</div>
 				<div class="right-content">:</div>
 				<div class="right-second">sfasfasdf</div>
 
-				<div class="right">PatientCompliant</div>
+				<div class="right">Patient Compliant</div>
 				<div class="right-content">:</div>
 				<div class="right-second">adfasf asfas fasf asf</div>
 			</div>

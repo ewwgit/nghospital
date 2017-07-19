@@ -246,11 +246,24 @@ h3 {
 							<div class="doctor-box">
 									<div class="right">Treatment</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?=  $reqmodel -> treatment; ?> </div>
+								<div class="right-second"> <?php if(!empty( $reqmodel -> treatment))
+								{
+									echo  $reqmodel -> treatment;
+								}
+								else {
+									echo 'Not Mentioned';
+								}
+								 ?> </div>
 								
 								<div class="right">Doctor Name</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?=  $docnmodel -> name; ?> </div>
+								<div class="right-second"><?php   if(!empty($docnmodel -> name))
+								{
+									echo $docnmodel -> name ;
+								}else {
+									echo 'Not Mentioned';
+								}
+								?> </div>
 						   </div>
 					   </div>	  
 					   
