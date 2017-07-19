@@ -45,7 +45,7 @@ th {
 						
 						<div class="right" style=" width: 45%"> Unique ID</div>								
 								<div class="right-content" style="  width: 0% ">:</div>
-								<div class="right-second" style=" width:37% "><?= $model->nurshingUniqueId; ?></div>
+								<div class="right-second" style=" width:38% "><?= $model->nurshingUniqueId; ?></div>
 								<div class="right" style=" width: 45%">Nursing Home Name</div>								
 								<div class="right-content" style="  width: 0% ">:</div>
 								<div class="right-second" style=" width:37% ">
