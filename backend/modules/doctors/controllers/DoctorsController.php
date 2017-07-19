@@ -238,6 +238,7 @@ class DoctorsController extends Controller
         	$model->doctorUniqueId = $overallUniqueId;
         	$model->createdBy = Yii::$app->user->identity->id;
         	$model->updatedBy = Yii::$app->user->identity->id;
+        	$model->availableStatus = 'Offline';
         	
         	 
         	if(!(empty($model->doctorImage)))
