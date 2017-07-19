@@ -32,7 +32,7 @@ th {
 }
 </style>
     <div class="row">      
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" style="margin-left:0px; padding-left: 0px;">			   
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" style="margin-left:0px;">			   
 			<div class="panel panel-info">		
 					<div class="col-md-8">	
 						<div class="box4" style="float: left;">
@@ -214,8 +214,8 @@ th {
 		</div><!---toppad-->
 	</div><!--row closed-->	
 </div>
-<button onclick="printContent('print')">Print</button>
 </div>
+<button class="btn btn-primary" onclick="printContent('print')">Print</button>
 </div>
 </div>
 
