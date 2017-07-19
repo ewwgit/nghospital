@@ -35,9 +35,9 @@ th {
 }
 </style>
     <div class="row">      
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" style="margin-left:0px; padding-left: 0px;">			   
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" style="margin-left:0px;">			   
 			<div class="panel panel-info">		
-					<div class="col-md-7">	
+					<div class="col-md-8">	
 						<div class="box4" style="float: left;">
 						<div class="right">Doctor Name</div>								
 								<div class="right-content">:</div>
@@ -52,10 +52,10 @@ th {
 								<div class="right-second"><?= $model->doctorUniqueId; ?></div>
 						</div>				
 					</div>
-					<div class="col-md-5" style="float: left;">
+					<div class="col-md-4" style="float: left;">
 					<?php 
-					$usernamedata = User::find()->select(['username','email','status'])->where(['id'=>$model->userId])->one();
-					// print_r($usernamedata['status']);exit;?>
+					$usernamedata = User::find()->select(['username','email'])->where(['id'=>$model->userId])->one();
+					// print_r($usernamedata);exit;?>
 					<?php if($model->doctorImage != ''){?>
 					<?php $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->doctorImage;?>
 					<?php  } ?>

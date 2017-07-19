@@ -72,24 +72,11 @@ a.desc:after {
     content: "\e156";
 }
 
-/*.grid-view td {
-    white-space: nowrap;
-   }*/
 .grid-view td {
-    max-width: 100px;
-  /*  overflow: auto; /* optional */
-    word-wrap: break-word;
-}  
-.detail-view td {
-   max-width: 50px;
-   /* overflow: auto; /* optional */
+    white-space: pre-wrap;
     word-wrap: break-word;
 }
-.detail-view th {
-   max-width: 10px;
-  /*  overflow: auto; /* optional */
-    word-wrap: break-word;
-}
+
 .grid-view .filters input,
 .grid-view .filters select {
     min-width: 50px;
@@ -154,7 +141,7 @@ a.desc:after {
 .right{
 	font-size:15px;
 	width:30%;	
-	margin:10px;
+	margin:5px;
 	float:left;
 	}
 	
