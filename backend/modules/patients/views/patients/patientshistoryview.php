@@ -227,13 +227,21 @@ h3 {
 								 $DocrequUrl = Yii::$app->urlManager->createAbsoluteUrl ( [ 
 		'patients/patients/request-doctor' ,'phsId' => $model->patientInfoId 
 ] );?>
+
 								
 								 <a href="<?php echo $DocrequUrl;?>" class="btn btn-info" role="button">Request To Doctor</a>
 								<?php 
 								}
 								else{
 									?>
-									<h3>Treatment Information</h3>
+									
+									 <?php 
+						    $udate = $reqmodel->updatedDate;
+						    $uydata= strtotime($udate);
+						    $uuudata= date('d-M-Y', $uydata);
+						    
+						    ?>
+									<h3>Treatment Information on <?php echo $uuudata; ?></h3>
 						<div class="col-md-12 col-sm-6 col-xs-6 main-wrap">
 							<div class="doctor-box">
 									<div class="right">Treatment</div>								
