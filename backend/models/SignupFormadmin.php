@@ -53,6 +53,10 @@ class SignupFormadmin extends Model
         	['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.','on' =>'create'],
          //  ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
         		[['password','file'], 'required', 'on' => 'create'],
+        		['password',
+        		'match', 'not' => true, 'pattern' => '/[^a-zA-Z0-9]/',
+        		'message' => 'password Must be alphabates and numerics only.',
+        		],
         	
         	
            
