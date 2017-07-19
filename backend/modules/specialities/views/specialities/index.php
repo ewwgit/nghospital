@@ -60,6 +60,12 @@ $this->params['breadcrumbs'][] = $this->title;
    /* word-wrap:break-word;*/
 }
 
-
-
+.grid-view td {
+    max-width: 100px;
+    overflow: auto; /* optional */
+    word-wrap: break-word;
+}
 </style>
+
+
+
