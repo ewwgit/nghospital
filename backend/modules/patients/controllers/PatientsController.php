@@ -571,7 +571,7 @@ class PatientsController extends Controller
     		return $this->redirect(['index']);
     		}
     		else{
-    			$model->addError('doctor','You are alreade requested to this doctor');
+    			$model->addError('doctor','You are already requested to this doctor');
     		}
     		}
     		//print_r($nghId);exit();
