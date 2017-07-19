@@ -163,7 +163,7 @@ $items = [
 		
 ];
 ?>
-<div style="margin-bottom: 5px;"><input style="height: 30px; padding-top: 0px;" type="text" placeholder=" Patient Unique Number" value=" <?= $model->patientUniqueId;?>" id="uniqunum" /> <input class="btn btn-primary" type="button" value="Search" id="searchpatient" style="height: 30px; padding-top: 4px;"></div>
+<div style="margin-bottom: 5px;"><input style="height: 30px; padding-top: 0px;" type="text" placeholder="Patient Unique Number" value="<?= $model->patientUniqueId;?>" id="uniqunum" /> <input class="btn btn-primary" type="button" value="Search" id="searchpatient" style="height: 30px; padding-top: 4px;"></div>
 <div class="box box-primary">
 <div class="box-body">
 

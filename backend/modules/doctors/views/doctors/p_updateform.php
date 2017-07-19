@@ -120,6 +120,9 @@ use dosamigos\ckeditor\CKEditor;
             
         
 	</div>   
+	<div class="form-group col-lg-6 col-sm-12" >
+    <?= $form->field($model, 'availableStatus')->dropDownList([ 'Online' => 'Online', 'Offline' => 'Offline', ], ['prompt' => 'Select Available Status']) ?>
+	</div>
 	
 	<div class="form-group col-lg-6 col-sm-12">
 	<?= $form->field($model, 'summery')->widget(CKEditor::className(), [
@@ -127,9 +130,7 @@ use dosamigos\ckeditor\CKEditor;
         'preset' => 'basic'
     ]) ?>
 	</div>
-	<div class="form-group col-lg-6 col-sm-12" >
-    <?= $form->field($model, 'availableStatus')->dropDownList([ 'Online' => 'Online', 'Offline' => 'Offline', ], ['prompt' => 'Select Available Status']) ?>
-	</div>
+	
 	
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
