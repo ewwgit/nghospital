@@ -56,3 +56,17 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 </div>
 </div>
+
+<style>
+.detail-view td {
+   max-width: 50px;
+    
+    word-wrap: break-word;
+}
+
+.detail-view th {
+   max-width: 10px;
+   
+    word-wrap: break-word;
+}
+</style>
