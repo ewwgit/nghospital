@@ -310,7 +310,7 @@ class PatientsController extends Controller
     	$id = '';
     	if(isset($_GET['id']) && $_GET['id'] != '')
     	{
-    		$id = $_GET['id'];
+    		$id = trim($_GET['id']);
     		$model = Patients::find()->where(['patientUniqueId' => $id])->one();
     		if(!empty($model))
     		{
