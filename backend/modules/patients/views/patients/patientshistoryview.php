@@ -15,8 +15,11 @@ $this->title = $patmodel->firstName;
 $this->params['breadcrumbs'][] = ['label' => 'Patients', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $reqmodel = DoctorNghPatient::find()->where(['patientId' => $patmodel->patientId])->one();
+$docid = '';
+if(!empty($reqmodel)){
 $docid = $reqmodel->doctorId;
 $docnmodel = Doctors::find()->where(['userId' => $reqmodel->doctorId])->one();
+}
 //print_r($docnmodel->name);exit();
 
 ?>
