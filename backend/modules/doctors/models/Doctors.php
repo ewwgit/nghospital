@@ -186,6 +186,6 @@ class Doctors extends \yii\db\ActiveRecord
     }
     public function getUser()
     {
-    	return $this->hasOne(User::className(), ['id' => 'userId'])->where(['status' => 10]);
+    	return $this->hasOne(User::className(), ['id' => 'userId']);
     }
 }

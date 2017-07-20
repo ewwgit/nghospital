@@ -159,7 +159,7 @@ public function rules()
     }
     public function getUser()
     {
-    	return $this->hasOne(User::className(), ['id' => 'nuserId'])->where(['status' => 10]);
+    	return $this->hasOne(User::className(), ['id' => 'nuserId']);
     }
     public static function getUsername($uId) {
     	$usernamedata = User::find()->select(['username'])->where(['id'=>$uId])->one();
