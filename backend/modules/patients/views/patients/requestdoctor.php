@@ -135,7 +135,7 @@ $this->params ['breadcrumbs'] [] = $this->title;
 				<div class="right-content">:</div>
 				<div class="right-second">Sareesh&nbsp;N</div>
 
-				<div class="right">PatientUnique ID</div>
+				<div class="right">Patient Unique ID</div>
 				<div class="right-content">:</div>
 				<div class="right-second">00002PAT06072017</div>
 

@@ -232,7 +232,8 @@ h3 {
 ] );?>
 
 								
-								 <a href="<?php echo $DocrequUrl;?>" class="btn btn-info" role="button">Request To Doctor</a>
+								 <a href="<?php echo $DocrequUrl;?>" class="btn btn-info" role="button" style="margin-left:20px">Request To Doctor</a>
+								 
 								<?php 
 								}
 								else{

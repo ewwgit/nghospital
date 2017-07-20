@@ -98,7 +98,7 @@ $this->params ['breadcrumbs'] [] = $this->title;
 											<div class="right-content">:</div>
 											<div class="right-second"><?= $mpatientModel->firstName; ?>&nbsp;<?= $mpatientModel->lastName; ?></div>
 
-											<div class="right">PatientUnique ID</div>
+											<div class="right">Patient Unique ID</div>
 											<div class="right-content">:</div>
 											<div class="right-second"><?= $mpatientModel->patientUniqueId; ?></div>
 
@@ -268,11 +268,11 @@ if (! empty ( $mpatientInformationModel->respirationRate )) {
 											<div class="right-content">:</div>
 											<div class="right-second"><?= $mpatientInformationModel->diseases; ?></div>
 
-											<div class="right">AllergicMedicine</div>
+											<div class="right">Allergic Medicine</div>
 											<div class="right-content">:</div>
 											<div class="right-second"><?= $mpatientInformationModel->allergicMedicine; ?></div>
 
-											<div class="right">PatientCompliant</div>
+											<div class="right">Patient Compliant</div>
 											<div class="right-content">:</div>
 											<div class="right-second"><?=  $mpatientInformationModel->patientCompliant; ?> </div>
 

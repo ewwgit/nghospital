@@ -46,7 +46,7 @@ $historyform = '<div class="row">
     <div class="col-lg-4 col-sm-12">Diseases:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'diseases')->textInput(['maxlength' => true])->label(false).'</div>
 </div> 
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-4 col-sm-12">AllergicMedicine:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'allergicMedicine')->textInput(['maxlength' => true])->label(false).'</div>
+    <div class="col-lg-4 col-sm-12">Allergic Medicine:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'allergicMedicine')->textInput(['maxlength' => true])->label(false).'</div>
 </div>
 </div>
 <div class="row">
