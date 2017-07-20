@@ -515,7 +515,11 @@ class DoctorsController extends Controller
     {
         //$this->findModel($id)->delete();
     	try{
-    		$model = $this->findModel($id)->delete();
+    		//echo 'hello';exit();
+    		//$model = $this->findModel($id)->delete();
+    		$UserInfo = User::find()->where(['id' => $id])->one();
+    		$UserInfo->status = 0;
+    		$UserInfo->update();
     		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted Doctors.');
     		 
     	}

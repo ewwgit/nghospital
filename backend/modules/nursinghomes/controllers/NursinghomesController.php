@@ -261,7 +261,10 @@ class NursinghomesController extends Controller
     {
     	
     	try{
-    		$model = $this->findModel($id)->delete();
+    		//$model = $this->findModel($id)->delete();
+    		$UserInfo = User::find()->where(['id' => $id])->one();
+    		$UserInfo->status = 0;
+    		$UserInfo->update();
     		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted  Nursing Home.');
     	
     	}

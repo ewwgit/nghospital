@@ -62,6 +62,12 @@ $this->params['breadcrumbs'][] = $this->title;
             						'<span class="glyphicon glyphicon-lock"></span>',
             						$url);
             				},
+            				'delete' => function ($url,$data) {
+            				$url = Url::to(['/doctors/doctors/delete','id'=>$data->userId]);
+            				return Html::a(
+            						'<span class="glyphicon glyphicon-trash"></span>',
+            						$url,['title'=>'Delete','aria-label' => 'Delete', 'data-pjax' => '0','data-confirm'=>'Are you sure you want to delete this item?','data-method' => 'post']);
+            				},
             		
             				],
             		
