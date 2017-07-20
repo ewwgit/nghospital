@@ -64,15 +64,15 @@ use yii\helpers\Url;
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'address')->textarea(['rows' => 3]) ?>
 	</div>
+	<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'description')->textarea(['rows' => 4]) ?>
+   	</div>
 	  	<div class="form-group col-lg-6 col-sm-12">   
     <?= $form->field($model, 'pinCode')->textInput(['maxlength' => 8]) ?>
 	</div>
 	
 	
-		<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'description')->textarea(['rows' => 4]) ?>
-   	</div>
-   	
+		
    		
    	 
 	
@@ -102,7 +102,9 @@ use yii\helpers\Url;
             <?= $form->field($model, 'nursingimageupdate')->hiddenInput()->label(false); ?>
             
         
-	</div>     
+	</div>   
+	
+   	  
 
    
 	

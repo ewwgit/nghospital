@@ -28,7 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
         		'patientUniqueId',
             'firstName',
             'lastName',
-            'gender',
+           // 'gender',
+        		[
+        		'attribute' => 'gender',
+        		'value' => 'gender',
+        		'filter' => Html::activeDropDownList($searchModel, 'gender', ['Male' => 'Male','Female' => 'Female'],['class'=>'form-control','prompt' => 'Status']),
+        		],
             'age',
             // 'dateOfBirth',
             // 'patientUniqueId',

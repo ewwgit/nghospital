@@ -75,7 +75,8 @@ class PatientsSearch extends Patients
 
         $query->andFilterWhere(['like', 'firstName', $this->firstName])
             ->andFilterWhere(['like', 'lastName', $this->lastName])
-            ->andFilterWhere(['like', 'gender', $this->gender])
+           // ->andFilterWhere(['like', 'gender', $this->gender])
+            ->andFilterWhere(['=', 'gender', $this->gender])
             ->andFilterWhere(['like', 'age', $this->age])
             ->andFilterWhere(['like', 'patientUniqueId', $this->patientUniqueId])
             ->andFilterWhere(['like', 'countryName', $this->countryName])
