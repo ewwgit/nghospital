@@ -99,10 +99,10 @@ public function rules()
         		'message' => 'should contain min 8 max 10  number',
         		],
 
-        		['password',
-        		'match', 'not' => true, 'pattern' => '/[^a-zA-Z0-9]/',
-        		'message' => 'password Must be alphabates and numerics only.',
-        		],
+//         		['password',
+//         		'match', 'not' => true, 'pattern' => '/[^a-zA-Z0-9]/',
+//         		'message' => 'password Must be alphabates and numerics only.',
+//         		],
         		  ['password', 'string', 'min' => 6],
         		
         		[
