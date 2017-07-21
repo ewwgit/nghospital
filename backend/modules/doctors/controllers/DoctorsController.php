@@ -577,6 +577,14 @@ class DoctorsController extends Controller
     	$model = new DoctorSlots();
     	$model->slotsInfo = DoctorSlots::getSlotsInfo(Yii::$app->user->identity->id);
     	//print_r($model->slotsInfo);exit();
+    	$firstary = array();
+    	$secondary = array();
+    	foreach ($model->slotsInfo as $slot)
+    	{
+    		//print_r($firstary);exit();
+    		$firstary[] = $slot['docslotId'];
+    	}
+    	//print_r($firstary);exit();
     	if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
     		Yii::$app->response->format = Response::FORMAT_JSON;
     		if (!$model->validate()) {
@@ -590,12 +598,24 @@ class DoctorsController extends Controller
     				if($model->slotsInfo[$k]['docslotId'] != '')
     				{
     					$slotId = $model->slotsInfo[$k]['docslotId'];
+    					$secondary[] = $slotId;
     					$updateSlotInfo = DoctorSlots::find()->where(['docslotId' => $slotId])->one();
+    					if(!empty($updateSlotInfo)){
     					$updateSlotInfo->day = $model->slotsInfo[$k]['day'];
     					$updateSlotInfo->startTime = $model->slotsInfo[$k]['startTime'];
     					$updateSlotInfo->endTime = $model->slotsInfo[$k]['endTime'];
     					$updateSlotInfo->dsDoctorId =  Yii::$app->user->identity->id;
     					$updateSlotInfo->save();
+    					}
+    					else{
+    						$slotInfoModel = new DoctorSlots();
+    						$slotInfoModel->day = $model->slotsInfo[$k]['day'];
+    						$slotInfoModel->startTime = $model->slotsInfo[$k]['startTime'];
+    						$slotInfoModel->endTime = $model->slotsInfo[$k]['endTime'];
+    						$slotInfoModel->dsDoctorId =  Yii::$app->user->identity->id;
+    						$slotInfoModel->save();
+    					}
+    					
     				}
     				else{
     				$slotInfoModel = new DoctorSlots();
@@ -606,6 +626,24 @@ class DoctorsController extends Controller
     				$slotInfoModel->save();
     				}
     			}
+    			$delary = array_diff($firstary,$secondary);
+    			if(!empty($delary))
+    			{
+    				$rearray = array_values($delary);
+    				for($i=0; $i<count($rearray);$i++){
+    					$delmodel = $this->findslotsModel($rearray[$i])->delete();
+    					//DoctorSlots::delete('docslotId = 1');
+    				}
+    				//print_r($rearray);exit();
+    				//$model = $this->findModel($id)->delete();
+    				//DoctorSlots::deleteAll()->where(['IN','docslotId',[$delid]]);
+    				//echo 'hello';exit();
+    				/* foreach ($delary as $soltdl)
+    				{
+    					print_r($soltdl);exit();
+    				} */
+    			}
+    			//print_r($delary);exit();
     			Yii::$app->getSession()->setFlash('success', 'created New  time slots.');
     			return $this->redirect(['slots']);
 //     			/exit();
@@ -622,6 +660,14 @@ class DoctorsController extends Controller
     {
     	if (($usermodel = User::findOne($uid)) !== null) {
     		return $usermodel;
+    	} else {
+    		throw new NotFoundHttpException('The requested page does not exist.');
+    	}
+    }
+    protected function findslotsModel($id)
+    {
+    	if (($model = DoctorSlots::findOne($id)) !== null) {
+    		return $model;
     	} else {
     		throw new NotFoundHttpException('The requested page does not exist.');
     	}
