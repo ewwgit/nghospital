@@ -114,7 +114,10 @@ class SpecialitiesController extends Controller
     {
     	
     	try{
-    		$model = $this->findModel($id)->delete();
+    		//$model = $this->findModel($id)->delete();
+    		$speciinfo = Specialities::find()->where(['spId' => $id])->one();
+    		$speciinfo->status ='In-active';
+    		$speciinfo->update();
     		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted  Specialities.');
     		 
     	}

@@ -156,6 +156,7 @@ class IntresteddoctorsController extends Controller
         if ($model->load(Yii::$app->request->post())) {
         	
         	$model->role = 2;
+        	$model->status = 'Active';
         	$model->createdDate = date('Y-m-d H:i:s');
         	$model->save();
         	Yii::$app->session->setFlash('success', " Interested Doctors Created successfully ");
@@ -198,7 +199,11 @@ class IntresteddoctorsController extends Controller
     {
        // $this->findModel($id)->delete();
     	try{
-    		$model = $this->findModel($id)->delete();
+    		//$model = $this->findModel($id)->delete();
+    		$insdocinfo = IntrestedDoctors::find()->where(['insdocid' => $id])->one();
+    		$insdocinfo->status ='In-active';
+    		$insdocinfo->update();
+    		
     		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted  Interested Doctor.');
     		 
     	}

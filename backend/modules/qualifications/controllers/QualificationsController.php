@@ -111,8 +111,13 @@ class QualificationsController extends Controller
     public function actionDelete($id)
     {
         //$this->findModel($id)->delete();
+       
     	try{
-    		$model = $this->findModel($id)->delete();
+    		//echo "hello";exit();
+    		//$model = $this->findModel($id)->delete();
+    		$qualiinfo = Qualifications::find()->where(['qlid' => $id])->one();
+             $qualiinfo->status ='In-active';   
+             $qualiinfo->update();
     		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted  Qualification.');
     		 
     	}

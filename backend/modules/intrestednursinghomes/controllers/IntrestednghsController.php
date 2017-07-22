@@ -84,6 +84,7 @@ class IntrestednghsController extends Controller
 
         if ($model->load(Yii::$app->request->post())&& $model->validate()){
         	    $model->createdDate = date('Y-m-d H:i:s');
+        	    $model->status = 'Active';
         	    $model->role = 3;
         		$model->save() ;
         		Yii::$app->session->setFlash('success', " Interested Nursing Homes Created successfully ");
@@ -128,7 +129,10 @@ class IntrestednghsController extends Controller
     {
         //$this->findModel($id)->delete();
     	try{
-    		$model = $this->findModel($id)->delete();
+    		//$model = $this->findModel($id)->delete();
+    		$insnghinfo = IntrestedNghs::find()->where(['insnghid' => $id])->one();
+    		$insnghinfo->status ='In-active';
+    		$insnghinfo->update();
     		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted  Interested Nursing Home.');
     		 
     	}
