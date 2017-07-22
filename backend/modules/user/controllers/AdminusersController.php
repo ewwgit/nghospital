@@ -347,7 +347,10 @@ class AdminusersController extends Controller
     public function actionDelete($id)
     {
         try{
-    		$model = $this->findModel($id)->delete();
+    		//$model = $this->findModel($id)->delete();
+        	$aduserinfo = User::find()->where(['id' => $id])->one();
+        	$aduserinfo->status ='In-active';
+        	$aduserinfo->update();
     		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted admin user.');
     		
     	}

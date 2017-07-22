@@ -140,7 +140,12 @@ class ModulemasterController extends Controller
     public function actionDelete($id)
     {
     	try{
-    		$model = $this->findModel($id)->delete();
+    		//$model = $this->findModel($id)->delete();
+
+    		$moduleinfo = ModulesMaster::find()->where(['moduleId' => $id])->one();
+    		$moduleinfo->status ='In-active';
+    		$moduleinfo->update();
+    		
     		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted  Modules .');
     		 
     	}

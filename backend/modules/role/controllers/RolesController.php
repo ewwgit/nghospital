@@ -140,7 +140,11 @@ class RolesController extends Controller
     {
     	
     	try{
-    		$model = $this->findModel($id)->delete();
+    		//$model = $this->findModel($id)->delete();
+    		
+    		$roleinfo = Role::find()->where(['RoleId' => $id])->one();
+    		$roleinfo->status ='In-active';
+    		$roleinfo->update();
     		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted Role.');
     		 
     	}
