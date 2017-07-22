@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
         		[
         		'attribute'=>'status',
         		'label'=>'status',
-        		'filter' => Html::activeDropDownList($searchModel, 'status', ['Active' => 'Active','In-active' => 'In-active'],['class'=>'form-control','prompt' => 'Status']),
+        		'filter' => Html::activeDropDownList($searchModel, 'status', ['10' => 'Active','0' => 'In-active'],['class'=>'form-control','prompt' => 'Status']),
         		'value' => function($data)
         				{
         			if($data->status == 10)
