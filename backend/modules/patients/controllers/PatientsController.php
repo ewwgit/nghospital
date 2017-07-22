@@ -490,7 +490,7 @@ class PatientsController extends Controller
     	//print_r($model->height);exit();
     
     	return $this->render('patientshistoryview', [
-    			'model' => $this->findinfoModel($infoid),'patmodel' => $patmodel,
+    			'model' => $this->findinfoModel($infoid),'patmodel' => $patmodel,'infoid'=>$infoid
     	]);
     }
     public function actionPatientshistorydocview($infoid)

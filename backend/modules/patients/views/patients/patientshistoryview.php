@@ -14,13 +14,15 @@ use app\modules\doctors\models\Doctors;
 $this->title = $patmodel->firstName;
 $this->params['breadcrumbs'][] = ['label' => 'Patients', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-$reqmodel = DoctorNghPatient::find()->where(['patientId' => $patmodel->patientId])->one();
+$reqmodel = DoctorNghPatient::find()->where(['patientHistoryId' => $infoid])->one();
+//print_r($reqmodel);exit();
+
 $docid = '';
 if(!empty($reqmodel)){
 $docid = $reqmodel->doctorId;
 $docnmodel = Doctors::find()->where(['userId' => $reqmodel->doctorId])->one();
 }
-//print_r($docnmodel->name);exit();
+//print_r($docnmodel);exit();
 
 ?>
 <div class="box box-primary">
@@ -224,7 +226,8 @@ h3 {
 								 </div> <!---doctor-box closed-->
 						    </div>	<!---main-wrap closed-->
 								<?php 
-								if(empty($reqmodel -> treatment))
+								
+								if($reqmodel->treatment == '')
 								{
 						
 								 $DocrequUrl = Yii::$app->urlManager->createAbsoluteUrl ( [ 
@@ -237,9 +240,7 @@ h3 {
 								<?php 
 								}
 								else{
-									?>
 									
-									 <?php 
 						    $udate = $reqmodel->updatedDate;
 						    $uydata= strtotime($udate);
 						    $uuudata= date('d-M-Y', $uydata);
@@ -250,9 +251,11 @@ h3 {
 							<div class="doctor-box">
 									<div class="right">Treatment</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"> <?php if(!empty( $reqmodel -> treatment))
+								<div class="right-second"> <?php 
+								
+								if($reqmodel->treatment !='')
 								{
-									echo  $reqmodel -> treatment;
+									echo $reqmodel->treatment;
 								}
 								else {
 									echo 'Not Mentioned';
@@ -261,9 +264,9 @@ h3 {
 								
 								<div class="right">Doctor Name</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?php   if(!empty($docnmodel -> name))
+								<div class="right-second"><?php   if($docnmodel->name != '')
 								{
-									echo $docnmodel -> name ;
+									echo $docnmodel->name ;
 								}else {
 									echo 'Not Mentioned';
 								}

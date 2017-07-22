@@ -47,7 +47,7 @@ class DoctorNghPatient extends \yii\db\ActiveRecord
         	[['doctor','phsId'],'required','on' => 'requestdoctor'],
         	[['treatment'],'required','on' => 'requesttreatment'],	
         		
-        		[['nursingHomeName','firstName','lastName'], 'safe'],
+        		[['nursingHomeName','firstName','lastName','treatment'], 'safe'],
         ];
     }
 
