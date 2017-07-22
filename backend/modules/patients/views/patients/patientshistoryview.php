@@ -22,6 +22,9 @@ if(!empty($reqmodel)){
 $docid = $reqmodel->doctorId;
 $docnmodel = Doctors::find()->where(['userId' => $reqmodel->doctorId])->one();
 }
+else{
+	$reqmodel = new DoctorNghPatient();
+}
 //print_r($docnmodel);exit();
 
 ?>
