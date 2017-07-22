@@ -154,7 +154,7 @@ h3 {
 						    </div> <!---doctor-box closed-->
 						    </div>	<!---main-wrap closed-->
 						    <?php 
-						    $cdate = $patmodel->createdDate;
+						    $cdate = $model->createdDate;
 						    $yrdata= strtotime($cdate);
 						    $yeardata= date('d-M-Y', $yrdata);
 						    
