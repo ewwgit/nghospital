@@ -23,6 +23,7 @@ use app\modules\specialities\models\Specialities;
 
 use app\models\UserrolesModel;
 use yii\filters\AccessControl;
+use app\models\ModulePermissions;
 
 /**
  * PatientsController implements the CRUD actions for Patients model.

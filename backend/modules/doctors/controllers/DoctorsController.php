@@ -31,6 +31,7 @@ use app\modules\patients\models\DoctorNghPatientSearch;
 
 use app\models\UserrolesModel;
 use yii\filters\AccessControl;
+use app\models\ModulePermissions;
 
 /**
  * DoctorsController implements the CRUD actions for Doctors model.

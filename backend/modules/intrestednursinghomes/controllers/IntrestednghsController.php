@@ -15,6 +15,7 @@ use app\modules\nursinghomes\models\Nursinghomes;
 
 use app\models\UserrolesModel;
 use yii\filters\AccessControl;
+use app\models\ModulePermissions;
 
 /**
  * IntrestednghsController implements the CRUD actions for Intrestednghs model.

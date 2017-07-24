@@ -19,6 +19,7 @@ use backend\models\ChangePasswordForm;
 
 use app\models\UserrolesModel;
 use yii\filters\AccessControl;
+use app\models\ModulePermissions;
 
 /**
  * NursinghomesController implements the CRUD actions for Nursinghomes model.
