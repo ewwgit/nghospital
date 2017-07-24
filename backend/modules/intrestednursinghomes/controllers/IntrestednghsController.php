@@ -21,17 +21,71 @@ class IntrestednghsController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+public function behaviors()
+	{
+	
+		$permissionsArray = [''];
+		if(UserrolesModel::getRole() == 1)
+		{
+			$permissionsArray = ['index','create','update','view','delete','convert-nursinghomes'];
+		}
+		else {
+			$modulePermissions = ModulePermissions::find()->where(['moduleId' =>4,'adminuserId'=> Yii::$app->user->identity->id])->one();
+			if($modulePermissions['permissions_all'] == 1)
+			{
+				$permissionsArray = ['index','create','update','view','delete'];
+			}
+			else {
+				if($modulePermissions['permissions_add'] == 1)
+				{
+					$permissionAdd = ['create'];
+					$permissionsArray = array_merge($permissionsArray,$permissionAdd);
+				}
+				if($modulePermissions['permissions_edit'] == 1)
+				{
+					$permissionEdit = ['update'];
+					$permissionsArray = array_merge($permissionsArray,$permissionEdit);
+				}
+				if($modulePermissions['permissions_delete'] == 1)
+				{
+					$permissionDelete = ['delete'];
+					$permissionsArray = array_merge($permissionsArray,$permissionDelete);
+				}
+				if($modulePermissions['permissions_view'] == 1)
+				{
+					$permissionView = ['index','view'];
+					$permissionsArray = array_merge($permissionsArray,$permissionView);
+				}
+	
+			}
+		}
+		//print_r($permissionsArray);exit();
+		return [
+				'verbs' => [
+						'class' => VerbFilter::className(),
+						'actions' => [
+								'delete' => ['post'],
+						],
+				],
+				'access' => [
+						'class' => AccessControl::className(),
+						'only' => [
+								'index','create','update','view','delete','convert-doctors'
+	
+						],
+						'rules' => [
+								[
+										'actions' => $permissionsArray,
+										'allow' => true,
+										'matchCallback' => function ($rule, $action) {
+										return (UserrolesModel::getRole());
+										}
+										],
+	
+										]
+										]
+										];
+	}
 
     /**
      * Lists all Intrestednghs models.

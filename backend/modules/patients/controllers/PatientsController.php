@@ -21,6 +21,9 @@ use app\modules\qualifications\models\Qualifications;
 use app\modules\doctors\models\DoctorsSpecialities;
 use app\modules\specialities\models\Specialities;
 
+use app\models\UserrolesModel;
+use yii\filters\AccessControl;
+
 /**
  * PatientsController implements the CRUD actions for Patients model.
  */
@@ -29,17 +32,48 @@ class PatientsController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+public function behaviors()
+	{
+	
+		$permissionsArray = [''];
+		if(UserrolesModel::getRole() == 1)
+		{
+			$permissionsArray = ['index','create','update','view','delete'];
+		}
+		else if(UserrolesModel::getRole() == 3)
+		{
+			$permissionsArray = ['index','patientshistorycreate','patientshistoryview','Patientshistorydocview','request-doctor','doctor-info'];
+		}
+		else {$permissionEdit = [];
+			$permissionsArray = array_merge($permissionsArray,$permissionEdit);
+		}
+		//print_r($permissionsArray);exit();
+		return [
+				'verbs' => [
+						'class' => VerbFilter::className(),
+						'actions' => [
+								'delete' => ['post'],
+						],
+				],
+				'access' => [
+						'class' => AccessControl::className(),
+						'only' => [
+								'index','create','update','view','delete','patientshistorycreate','patientshistoryview','Patientshistorydocview','request-doctor','doctor-info'
+	
+						],
+						'rules' => [
+								[
+										'actions' => $permissionsArray,
+										'allow' => true,
+										'matchCallback' => function ($rule, $action) {
+										return (UserrolesModel::getRole());
+										}
+										],
+	
+										]
+										]
+										];
+	}
 
     /**
      * Lists all Patients models.

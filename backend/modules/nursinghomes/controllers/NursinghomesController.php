@@ -17,6 +17,9 @@ use app\models\UserMain;
 use yii\web\UploadedFile;
 use backend\models\ChangePasswordForm;
 
+use app\models\UserrolesModel;
+use yii\filters\AccessControl;
+
 /**
  * NursinghomesController implements the CRUD actions for Nursinghomes model.
  */
@@ -25,17 +28,75 @@ class NursinghomesController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+public function behaviors()
+	{
+	
+		$permissionsArray = [''];
+		if(UserrolesModel::getRole() == 1)
+		{
+			$permissionsArray = ['index','create','update','view','delete','states'];
+		}
+		else if(UserrolesModel::getRole() == 3)
+		{
+			$permissionsArray = ['profileupdate','profileview','reset-password','states'];
+		}
+		else {
+			$modulePermissions = ModulePermissions::find()->where(['moduleId' =>3,'adminuserId'=> Yii::$app->user->identity->id])->one();
+			if($modulePermissions['permissions_all'] == 1)
+			{
+				$permissionsArray = ['index','create','update','view','delete','states'];
+			}
+			else {
+				if($modulePermissions['permissions_add'] == 1)
+				{
+					$permissionAdd = ['create','states'];
+					$permissionsArray = array_merge($permissionsArray,$permissionAdd);
+				}
+				if($modulePermissions['permissions_edit'] == 1)
+				{
+					$permissionEdit = ['update','states'];
+					$permissionsArray = array_merge($permissionsArray,$permissionEdit);
+				}
+				if($modulePermissions['permissions_delete'] == 1)
+				{
+					$permissionDelete = ['delete','states'];
+					$permissionsArray = array_merge($permissionsArray,$permissionDelete);
+				}
+				if($modulePermissions['permissions_view'] == 1)
+				{
+					$permissionView = ['index','view','states'];
+					$permissionsArray = array_merge($permissionsArray,$permissionView);
+				}
+	
+			}
+		}
+		//print_r($permissionsArray);exit();
+		return [
+				'verbs' => [
+						'class' => VerbFilter::className(),
+						'actions' => [
+								'delete' => ['post'],
+						],
+				],
+				'access' => [
+						'class' => AccessControl::className(),
+						'only' => [
+								'index','create','update','view','delete','profileupdate','profileview','reset-password','states'
+	
+						],
+						'rules' => [
+								[
+										'actions' => $permissionsArray,
+										'allow' => true,
+										'matchCallback' => function ($rule, $action) {
+										return (UserrolesModel::getRole());
+										}
+										],
+	
+										]
+										]
+										];
+	}
 
     /**
      * Lists all Nursinghomes models.

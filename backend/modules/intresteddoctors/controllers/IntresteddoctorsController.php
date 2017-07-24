@@ -44,10 +44,10 @@ class IntresteddoctorsController extends Controller
 		$permissionsArray = [''];
 		if(UserrolesModel::getRole() == 1)
 		{
-			$permissionsArray = ['index','create','update','view','delete'];
+			$permissionsArray = ['index','create','update','view','delete','convert-doctors'];
 		}
 		else {
-			$modulePermissions = ModulePermissions::find()->where(['moduleId' =>7,'adminuserId'=> Yii::$app->user->identity->id])->one();
+			$modulePermissions = ModulePermissions::find()->where(['moduleId' =>2,'adminuserId'=> Yii::$app->user->identity->id])->one();
 			if($modulePermissions['permissions_all'] == 1)
 			{
 				$permissionsArray = ['index','create','update','view','delete'];
@@ -87,7 +87,7 @@ class IntresteddoctorsController extends Controller
 				'access' => [
 						'class' => AccessControl::className(),
 						'only' => [
-								'index','create','update','view','delete','brandsupload'
+								'index','create','update','view','delete','convert-doctors'
 	
 						],
 						'rules' => [

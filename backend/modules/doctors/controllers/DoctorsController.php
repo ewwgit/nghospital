@@ -29,6 +29,9 @@ use app\modules\patients\models\Patients;
 use app\modules\patients\models\PatientInformation;
 use app\modules\patients\models\DoctorNghPatientSearch;
 
+use app\models\UserrolesModel;
+use yii\filters\AccessControl;
+
 /**
  * DoctorsController implements the CRUD actions for Doctors model.
  */
@@ -37,17 +40,75 @@ class DoctorsController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+public function behaviors()
+	{
+	
+		$permissionsArray = [''];
+		if(UserrolesModel::getRole() == 1)
+		{
+			$permissionsArray = ['index','create','update','view','delete','reset-password','states'];
+		}
+		elseif(UserrolesModel::getRole() == 2)
+		{
+			$permissionsArray = ['profileupdate','profileview','patient-requests','reset-password','patient-info','states'];
+		}
+		else {
+			$modulePermissions = ModulePermissions::find()->where(['moduleId' =>1,'adminuserId'=> Yii::$app->user->identity->id])->one();
+			if($modulePermissions['permissions_all'] == 1)
+			{
+				$permissionsArray = ['index','create','update','view','delete','states'];
+			}
+			else {
+				if($modulePermissions['permissions_add'] == 1)
+				{
+					$permissionAdd = ['create','states'];
+					$permissionsArray = array_merge($permissionsArray,$permissionAdd);
+				}
+				if($modulePermissions['permissions_edit'] == 1)
+				{
+					$permissionEdit = ['update','states'];
+					$permissionsArray = array_merge($permissionsArray,$permissionEdit);
+				}
+				if($modulePermissions['permissions_delete'] == 1)
+				{
+					$permissionDelete = ['delete','states'];
+					$permissionsArray = array_merge($permissionsArray,$permissionDelete);
+				}
+				if($modulePermissions['permissions_view'] == 1)
+				{
+					$permissionView = ['index','view','states'];
+					$permissionsArray = array_merge($permissionsArray,$permissionView);
+				}
+	
+			}
+		}
+		//print_r($permissionsArray);exit();
+		return [
+				'verbs' => [
+						'class' => VerbFilter::className(),
+						'actions' => [
+								'delete' => ['post'],
+						],
+				],
+				'access' => [
+						'class' => AccessControl::className(),
+						'only' => [
+								'index','create','update','view','delete','profileupdate','profileview','patient-requests','reset-password','patient-info','states'
+	
+						],
+						'rules' => [
+								[
+										'actions' => $permissionsArray,
+										'allow' => true,
+										'matchCallback' => function ($rule, $action) {
+										return (UserrolesModel::getRole());
+										}
+										],
+	
+										]
+										]
+										];
+	}
 
     /**
      * Lists all Doctors models.
