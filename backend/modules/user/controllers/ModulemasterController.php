@@ -16,7 +16,7 @@ use app\models\UserrolesModel;
  */
 class ModulemasterController extends Controller
 {
-/* public function behaviors()
+ public function behaviors()
     {
     	
     
@@ -61,7 +61,7 @@ class ModulemasterController extends Controller
         	                  ]
         	
         ];
-    } */
+    } 
 
     /**
      * Lists all ModulesMaster models.

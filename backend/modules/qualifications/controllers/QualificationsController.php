@@ -9,6 +9,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use app\models\UserrolesModel;
+use yii\filters\AccessControl;
+
 /**
  * QualificationsController implements the CRUD actions for Qualifications model.
  */
@@ -17,17 +20,45 @@ class QualificationsController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+public function behaviors()
+	{
+	
+		$permissionsArray = [''];
+		if(UserrolesModel::getRole() == 1)
+		{
+			$permissionsArray = ['index','create','update','view','delete'];
+		}
+		else {
+			$permissionsArray = [];
+			
+		}
+		//print_r($permissionsArray);exit();
+		return [
+				'verbs' => [
+						'class' => VerbFilter::className(),
+						'actions' => [
+								'delete' => ['post'],
+						],
+				],
+				'access' => [
+						'class' => AccessControl::className(),
+						'only' => [
+								'index','create','update','view','delete'
+	
+						],
+						'rules' => [
+								[
+										'actions' => $permissionsArray,
+										'allow' => true,
+										'matchCallback' => function ($rule, $action) {
+										return (UserrolesModel::getRole());
+										}
+										],
+	
+										]
+										]
+										];
+	}
 
     /**
      * Lists all Qualifications models.

@@ -16,52 +16,48 @@ use app\models\UserrolesModel;
  */
 class RolesController extends Controller
 {
-   /*  public function behaviors()
-    {
-    	
-    
-   
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        	
-        		
-        		'access' => [
-        				
-				        		'class' => AccessControl::className(),
-				        		'only' => [
-				        		
-				        						'index',
-				        						'create',
-				        						'update',
-				        						'view',
-				        						'delete'
-		        		
-		        				   ],
-		        				  'rules' => [
-		        						       [
-			        								'actions' => [
-			        										'index',
-			        										'create',
-			        										'update',
-			        										'view',
-			        										'delete'
-			        								],
-			        								'allow' => true,
-		        						       		'matchCallback' => function ($rule, $action) {
-		        						       		return (UserrolesModel::getRole() == 1);
-		        						       		}
-			        								
-		        								]
-		        					]
-        	                  ]
-        	
-        ];
-    } */
+  
+	
+	
+	public function behaviors()
+	{
+	
+		$permissionsArray = [''];
+		if(UserrolesModel::getRole() == 1)
+		{
+			$permissionsArray = ['index','create','update','view','delete'];
+		}
+		else {
+			$permissionsArray = [];
+				
+		}
+		//print_r($permissionsArray);exit();
+		return [
+				'verbs' => [
+						'class' => VerbFilter::className(),
+						'actions' => [
+								'delete' => ['post'],
+						],
+				],
+				'access' => [
+						'class' => AccessControl::className(),
+						'only' => [
+								'index','create','update','view','delete'
+	
+						],
+						'rules' => [
+								[
+										'actions' => $permissionsArray,
+										'allow' => true,
+										'matchCallback' => function ($rule, $action) {
+										return (UserrolesModel::getRole());
+										}
+										],
+	
+										]
+										]
+										];
+	}
 
     /**
      * Lists all Role models.
