@@ -229,7 +229,7 @@ public function behaviors()
     	$model->scenario = 'interested';
     
     	if ($model->load(Yii::$app->request->post()) && $model->validate()){
-    		$model->role= 2;
+    		$model->role= 3;
     		$userData = $model->signup();
     		$presentDate = date('Y-m-d');
     		$nursinghomescount = Nursinghomes::find()->where("createdDate LIKE '$presentDate%'")->count();
