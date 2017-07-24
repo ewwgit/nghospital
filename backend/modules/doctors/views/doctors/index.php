@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use common\models\User;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\doctors\models\DoctorsSearch */
@@ -10,6 +11,8 @@ use yii\helpers\Url;
 
 $this->title = 'Doctors';
 $this->params['breadcrumbs'][] = $this->title;
+//$sdata = User::find()->select('status')->all();
+//$data = $sdata->status;
 ?>
 <div class="doctors-index">
 <div class="box box-primary">
@@ -42,8 +45,22 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'country',
              'countryName',
             // 'address:ntext',
-             'pinCode',
+        	
              'doctorMobile',
+        		[
+        		
+        		'label' => 'Status',
+        		'attribute' => 'status',
+        		'value' => 'user.status',
+        				'filter' => Html::activeDropDownList($searchModel, 'status', ['10' => 'Active','0' => 'In-active'],['class'=>'form-control','prompt' => 'Status']),
+        		
+        				
+        				],
+        		
+        		
+        		
+        		
+        		
             // 'doctorImage',
             // 'summery:ntext',
             // 'APMC',

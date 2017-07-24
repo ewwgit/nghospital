@@ -17,12 +17,12 @@ class DoctorsSearch extends Doctors
      */
 	public $username;
 	public $email;
-	
+	public $status;
     public function rules()
     {
         return [
             [['doctorid', 'userId', 'state', 'country', 'createdBy', 'updatedBy'], 'integer'],
-            [['username','email','doctorUniqueId', 'name', 'qualification', 'city', 'stateName', 'countryName', 'address', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC', 'createdDate', 'updatedDate'], 'safe'],
+            [['username','email','doctorUniqueId', 'name', 'qualification', 'city', 'stateName', 'countryName', 'address', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC', 'createdDate', 'updatedDate','status'], 'safe'],
         ];
     }
 
@@ -75,6 +75,7 @@ class DoctorsSearch extends Doctors
             'updatedBy' => $this->updatedBy,
             'createdDate' => $this->createdDate,
             'updatedDate' => $this->updatedDate,
+        		'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'doctorUniqueId', $this->doctorUniqueId])
@@ -90,7 +91,8 @@ class DoctorsSearch extends Doctors
             ->andFilterWhere(['like', 'doctorImage', $this->doctorImage])
             ->andFilterWhere(['like', 'summery', $this->summery])
             ->andFilterWhere(['like', 'APMC', $this->APMC])
-            ->andFilterWhere(['like', 'TSMC', $this->TSMC]);
+            ->andFilterWhere(['like', 'TSMC', $this->TSMC])
+        ->andFilterWhere(['=', 'status', $this->status]);
 
         return $dataProvider;
     }

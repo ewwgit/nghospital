@@ -182,6 +182,7 @@ class Doctors extends \yii\db\ActiveRecord
             'updatedBy' => 'Updated By',
             'createdDate' => 'Created Date',
             'updatedDate' => 'Updated Date',
+        	'status' =>'Status'	
         ];
     }
     public function getUser()
