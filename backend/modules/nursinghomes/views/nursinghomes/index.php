@@ -22,6 +22,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Nursing Homes', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+     <?php  $data = User::find()->select('status')->all (); 
+   
+         //   $var = array($status);
+        //   print_r($data);exit;
+    
+    ?>
  
    
     <?= GridView::widget([
@@ -63,12 +69,34 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'country',
             
              'pinCode',
+        		[
+        		'label' => 'Status',
+        		'attribute' => 'status',
+        		'value' => 'user.status',
+        		'filter' => Html::activeDropDownList($searchModel, 'status', [10 => 'Active',0 => 'In-active'],['class'=>'form-control','prompt' => 'Status']),
+        		],
+
 //         		[
-//         		'label' => 'Status',
-//         		'attribute' => 'status',
-//         		'value' => 'user.status',
-//         		'filter' => Html::activeDropDownList($searchModel, 'status', ['Active' => 'Active','In-active' => 'In-active'],['class'=>'form-control','prompt' => 'Status']),
+//         		'attribute'=>'status',
+//         		'label'=>'status',
+//         		'filter' => Html::activeDropDownList($searchModel, 'status', [10 => 'Active',0 => 'In-active'],['class'=>'form-control','prompt' => 'Status']),
+//         	    'value' => function($data)
+        		
+//         			//print_r($data);exit;
+ 
+//         		{
+//         			if($data->status == 10)
+//         			{
+//         				$status = 'Active';
+//         			}
+//         			else
+//         			{
+//         				$status = 'In-active';
+//         			}
+//         			return $status;
+//         		}
 //         		],
+        		
 
         		//'status',
             // 'address:ntext',
