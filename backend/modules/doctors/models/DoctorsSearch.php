@@ -50,7 +50,7 @@ class DoctorsSearch extends Doctors
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-        		'sort' => ['attributes' => ['username','email','doctorUniqueId', 'name', 'qualification', 'city', 'stateName', 'countryName', 'address', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC', 'createdDate', 'updatedDate']],
+        		'sort' => ['attributes' => ['username','email','doctorUniqueId', 'name', 'qualification', 'city', 'stateName', 'countryName', 'address', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC', 'createdDate', 'updatedDate','status']],
         		
         		
         ]);
@@ -75,7 +75,7 @@ class DoctorsSearch extends Doctors
             'updatedBy' => $this->updatedBy,
             'createdDate' => $this->createdDate,
             'updatedDate' => $this->updatedDate,
-        		'status' => $this->status,
+        	'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'doctorUniqueId', $this->doctorUniqueId])
