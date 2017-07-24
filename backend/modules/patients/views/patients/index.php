@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
         		[
         		'attribute' => 'gender',
         		'value' => 'gender',
-        		'filter' => Html::activeDropDownList($searchModel, 'gender', ['Male' => 'Male','Female' => 'Female'],['class'=>'form-control','prompt' => 'Status']),
+        		'filter' => Html::activeDropDownList($searchModel, 'gender', ['Male' => 'Male','Female' => 'Female'],['class'=>'form-control','prompt' => 'Select Gender']),
         		],
             'age',
             // 'dateOfBirth',
