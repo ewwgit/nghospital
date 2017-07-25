@@ -85,4 +85,7 @@ use kartik\file\FileInput;
 	margin-left: 382px;
 	margin-top: 1px;
 }
+textarea {
+    resize: none;
+}
 </style>

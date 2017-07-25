@@ -121,4 +121,7 @@ use yii\helpers\Url;
 .help-block {
     height: 5px;
 }
+textarea {
+    resize: none;
+}
 </style>

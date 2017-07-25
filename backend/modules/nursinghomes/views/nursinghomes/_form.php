@@ -95,4 +95,7 @@ use kartik\file\FileInput;
 .help-block {
   height: 5px; 
 }
+textarea {
+    resize: none;
+}
 </style>

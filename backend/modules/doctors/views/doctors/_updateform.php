@@ -154,4 +154,7 @@ use dosamigos\ckeditor\CKEditor;
 .cke_button__image {
 	display: none !important;
 }
+textarea {
+    resize: none;
+}
 </style>
