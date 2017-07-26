@@ -1,5 +1,8 @@
 <?php
 use yii\helpers\Html;
+use app\modules\nursinghomes\models\Nursinghomes;
+use app\modules\doctors\models\Doctors;
+use common\models\User;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -229,15 +232,39 @@ use yii\helpers\Html;
 
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                      <?php 
+             $roleiddata = User::find()->select(['role'])->where(['role'=> Yii::$app->user->identity->role])->one();
+             $nursingimage = Nursinghomes::find()->select(['nursingImage'])->where(['nuserId'=>Yii::$app->user->identity->id])->one();
+             $doctorimage = Doctors::find()->select(['doctorImage'])->where(['userId'=>Yii::$app->user->identity->id])->one();
+             
+					   if($roleiddata['role'] == 3){?>
+					   	  <img src="<?= $nursingimage['nursingImage'] ?>" class="user-image" alt="Nursing Image"/>
+               
+					  <?php  }elseif ($roleiddata['role'] == 2){?>
+					     <img src="<?= $doctorimage['doctorImage'] ?>" class="user-image" alt="Doctor Image"/>
+               <?php }else{ ?>
+                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                <?php }?>
+                       
                         <span class="hidden-xs"><?php echo Yii::$app->user->identity->username;?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
-                                 alt="User Image"/>
-
+                         <?php 
+             $roleiddata = User::find()->select(['role'])->where(['role'=> Yii::$app->user->identity->role])->one();
+             $nursingimage = Nursinghomes::find()->select(['nursingImage'])->where(['nuserId'=>Yii::$app->user->identity->id])->one();
+             $doctorimage = Doctors::find()->select(['doctorImage'])->where(['userId'=>Yii::$app->user->identity->id])->one();
+             
+					   if($roleiddata['role'] == 3){?>
+					   	  <img src="<?= $nursingimage['nursingImage'] ?>" class="img-circle" alt="Nursing Image"/>
+               
+					  <?php  }elseif ($roleiddata['role'] == 2){?>
+					     <img src="<?= $doctorimage['doctorImage'] ?>" class="img-circle" alt="Doctor Image"/>
+               <?php }else{ ?>
+                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                <?php }?>
+                       
                             <p>
                                 <?php echo Yii::$app->user->identity->username;?>
                             </p>
