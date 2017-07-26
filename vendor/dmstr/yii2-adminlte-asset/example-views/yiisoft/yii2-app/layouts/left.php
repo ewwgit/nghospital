@@ -67,6 +67,7 @@ use common\models\User;
                             ['label' => 'Profile Update', 'icon' => 'eye', 'url' => ['/doctors/doctors/profileupdate','uid'=>Yii::$app->user->identity->id],],
                         	['label' => 'Slots', 'icon' => 'eye', 'url' => ['/doctors/doctors/slots'],],
                             ['label' => 'Patient Requests', 'icon' => 'eye', 'url' => ['/doctors/doctors/patient-requests'],],
+                        	['label' => 'Nursing Homes List', 'icon' => 'eye', 'url' => ['/doctors/doctors/nghlist'],],
                             
                         ],
                     ],

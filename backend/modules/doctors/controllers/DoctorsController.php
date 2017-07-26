@@ -28,6 +28,8 @@ use yii\data\ActiveDataProvider;
 use app\modules\patients\models\Patients;
 use app\modules\patients\models\PatientInformation;
 use app\modules\patients\models\DoctorNghPatientSearch;
+use app\modules\nursinghomes\models\Nursinghomes;
+use app\modules\nursinghomes\models\NursinghomesSearch;
 
 use app\models\UserrolesModel;
 use yii\filters\AccessControl;
@@ -1084,6 +1086,46 @@ public function behaviors()
     	return $this->render('patientInfo',
     			['model' => $model,'mpatientModel' => $mpatientModel,'mpatientInformationModel' => $mpatientInformationModel]);
     	//print_r($avialableDoctors);exit();
+    }
+    public function actionNghlist()
+    {
+    	/*
+    	 $searchModel = new NursinghomesSearch();
+    	 $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+    
+    	 return $this->render('nghlist', [
+    	 'searchModel' => $searchModel,
+    	 'dataProvider' => $dataProvider,
+    	 ]); */
+    	//$this->layout= '@app/views/layouts/innerpagemain';
+    	//$query = Nursinghomes::find();
+    	//print_r($query);exit();
+    	$dataProvider = new ActiveDataProvider([
+    			'pagination' =>  [
+    					'pageSize' => 100,
+    			],
+    			'query' => Nursinghomes::find(),
+    	]);
+    	 
+    	return $this->render ('nghlist', [
+    			'dataProvider' => $dataProvider,
+    	]);
+    	 
+    	 
+    }
+    public function actionNghdetail($nuid)
+    {
+    	 
+    	$nusermodel =  User::findOne($nuid);
+    	//print_r($nusermodel);exit();
+    	$model = Nursinghomes::find()->where(['nuserId' =>$nusermodel->id])->one();
+    	 
+    	return $this->render('nghdetail', [
+    			'model' => $model,
+    			// 'model' => $model,
+    	]);
+    	 
+    	 
     }
     
 }
