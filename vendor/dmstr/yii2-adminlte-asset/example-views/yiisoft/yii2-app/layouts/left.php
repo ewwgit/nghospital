@@ -86,7 +86,7 @@ use app\models\UserrolesModel;
                 		'url' => '#',
                 		'items' => [
                 				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/patients/patients/patientshistorycreate'],],
-                				['label' => 'View', 'icon' => 'eye', 'url' => ['/patients/patients'],],
+                				['label' => 'View All', 'icon' => 'eye', 'url' => ['/patients/patients'],],
                 			/* ['label' => 'History Create', 'icon' => 'plus-circle', 'url' => ['/patients/patients/patientshistorycreate'],], */
                 		
                 		],
@@ -141,7 +141,7 @@ use app\models\UserrolesModel;
                         'url' => '#',
                         'items' => [
                             ['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/doctors/doctors/create'],],
-                            ['label' => 'View', 'icon' => 'eye', 'url' => ['/doctors/doctors'],],
+                            ['label' => 'View All', 'icon' => 'eye', 'url' => ['/doctors/doctors'],],
                             
                         ],
                     ],
@@ -152,7 +152,7 @@ use app\models\UserrolesModel;
                 		'url' => '#',
                 		'items' => [
                 				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/intresteddoctors/intresteddoctors/create'],],
-                				['label' => 'View', 'icon' => 'eye', 'url' => ['/intresteddoctors/intresteddoctors'],],
+                				['label' => 'View All', 'icon' => 'eye', 'url' => ['/intresteddoctors/intresteddoctors'],],
                 		
                 		],
                 		],
@@ -163,7 +163,7 @@ use app\models\UserrolesModel;
                 		'url' => '#',
                 		'items' => [
                 				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/qualifications/qualifications/create'],],
-                				['label' => 'View', 'icon' => 'eye', 'url' => ['/qualifications/qualifications'],],
+                				['label' => 'View All', 'icon' => 'eye', 'url' => ['/qualifications/qualifications'],],
                 		
                 		],
                 		],
@@ -174,7 +174,7 @@ use app\models\UserrolesModel;
                 		'url' => '#',
                 		'items' => [
                 				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/specialities/specialities/create'],],
-                				['label' => 'View', 'icon' => 'eye', 'url' => ['/specialities/specialities'],],
+                				['label' => 'View All', 'icon' => 'eye', 'url' => ['/specialities/specialities'],],
                 		
                 		],
                 		],
@@ -185,7 +185,7 @@ use app\models\UserrolesModel;
                 		'url' => '#',
                 		'items' => [
                 				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/nursinghomes/nursinghomes/create'],],
-                				['label' => 'View', 'icon' => 'eye', 'url' => ['/nursinghomes/nursinghomes'],],
+                				['label' => 'View All', 'icon' => 'eye', 'url' => ['/nursinghomes/nursinghomes'],],
                 		
                 		],
                 		],
@@ -196,7 +196,7 @@ use app\models\UserrolesModel;
                 		'url' => '#',
                 		'items' => [
                 				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/intrestednursinghomes/intrestednghs/create'],],
-                				['label' => 'View', 'icon' => 'eye', 'url' => ['/intrestednursinghomes/intrestednghs'],],
+                				['label' => 'View All', 'icon' => 'eye', 'url' => ['/intrestednursinghomes/intrestednghs'],],
                 		
                 		],
                 		],
