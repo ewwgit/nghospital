@@ -207,7 +207,7 @@ use unclead\multipleinput\MultipleInput;
 </div>
 <style>
 .help-block {
-    height: 5px;
+    height: 17px;
 }
 .select2-search__field {
 	display: none;
