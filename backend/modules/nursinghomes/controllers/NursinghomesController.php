@@ -545,7 +545,7 @@ public function behaviors()
     {
     	$model = new Doctors();
     	    	
-    	$doctordata = Doctors::find()->select(['userId','name','doctorUniqueId','doctorMobile','qualification','city','state','stateName','country','countryName','address','permanentAddress','pinCode','doctorImage','summery','availableStatus','TSMC','APMC'])->where(['userId'=>$id])->one();
+    	$doctordata = Doctors::find()->select(['userId','name','doctorUniqueId','doctorMobile','city','state','stateName','country','countryName','address','permanentAddress','pinCode','doctorImage','summery','availableStatus','TSMC','APMC'])->where(['userId'=>$id])->one();
         $doctorQulification = DoctorsQualification::find()->select('qualification')->where( ['docId' => $doctordata->userId])->all();
     	
      	$dqary = array();
