@@ -23,11 +23,11 @@ use app\models\ModulePermissions;
 
 use yii\data\ActiveDataProvider;
 use app\modules\specialities\models\Specialities;
-use app\models\DoctorsSpecialities;
+//use app\models\DoctorsSpecialities;
 use app\modules\doctors\models\Doctors;
 use app\modules\doctors\models\DoctorsQualification;
 use app\modules\qualifications\models\Qualifications;
-//use app\modules\doctors\models\DoctorsSpecialities;
+use app\modules\doctors\models\DoctorsSpecialities;
 
 
 /**
