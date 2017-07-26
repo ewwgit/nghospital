@@ -59,4 +59,8 @@ class Specialities extends \yii\db\ActiveRecord
             'updatedDate' => 'Updated Date',
         ];
     }
+    public static function getSpname($uId) {
+    	$specialitiesdata = Specialities::find()->select(['specialityName'])->where(['spId'=>$uId])->one();
+    	return $specialitiesdata['specialityName'];
+    }
 }

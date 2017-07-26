@@ -21,6 +21,15 @@ use app\models\UserrolesModel;
 use yii\filters\AccessControl;
 use app\models\ModulePermissions;
 
+use yii\data\ActiveDataProvider;
+use app\modules\specialities\models\Specialities;
+use app\models\DoctorsSpecialities;
+use app\modules\doctors\models\Doctors;
+use app\modules\doctors\models\DoctorsQualification;
+use app\modules\qualifications\models\Qualifications;
+//use app\modules\doctors\models\DoctorsSpecialities;
+
+
 /**
  * NursinghomesController implements the CRUD actions for Nursinghomes model.
  */
@@ -498,7 +507,92 @@ public function behaviors()
     	]);
     	
     }
+    public function actionDoctorspecialitieslist()
+    {
+    	//$query = new Query();
+    	$dataProvider = new ActiveDataProvider([
+    			'query' => Specialities::find()->where(['status' => 'Active']),
+    			'pagination' => [
+    					'pageSize' => 10,
+    			],
+    	]);
+    	 
+    	$this->view->title = 'Specialities List';
     
+    	return $this->render('doctors_specialities_list', [
+    			'dataProvider' => $dataProvider,
+    			 
+    
+    	]);
+    
+    }
+    public function actionSpecialitibaseddoctorlist($id)
+    {
+    	$model = new DoctorsSpecialities();
+       	$dataProvider = new ActiveDataProvider([
+    			'query' => DoctorsSpecialities::find()->where(['rspId' => $id]),
+    			'pagination' => [
+    					'pageSize' => 10,
+    			],
+    	]);
+    
+    	return $this->render('sp_based_doc_list', [
+    		'dataProvider' => $dataProvider,
+    			    			 
+    	]);
+    }
+    public function actionDoctorview($id)
+    {
+    	$model = new Doctors();
+    	    	
+    	$doctordata = Doctors::find()->select(['userId','name','doctorUniqueId','doctorMobile','qualification','city','state','stateName','country','countryName','address','permanentAddress','pinCode','doctorImage','summery','availableStatus','TSMC','APMC'])->where(['userId'=>$id])->one();
+        $doctorQulification = DoctorsQualification::find()->select('qualification')->where( ['docId' => $doctordata->userId])->all();
+    	
+     	$dqary = array();
+    	$docqualiary = array();
+     	if(!empty($doctorQulification))
+     	{
+     		foreach ($doctorQulification as $dq)
+     		{
+     			$dqary[] = $dq->qualification;
+    	
+     		}
+     	}
+     	for($k=0; $k<count($dqary); $k++)
+     	{
+     		$docquali = Qualifications::find()->select('qualification')->where( ['qlid' => $dqary[$k]])->asArray()->one();
+     		$docqualiary[] = $docquali['qualification'];
+    	}
+     	
+     	$docSpecialities = DoctorsSpecialities::find()->select('rspId')->where( ['rdoctorId' => $doctordata->userId])->all();
+     	$dsary = array();
+     	$docspeciary = array();
+     	if(!empty($docSpecialities))
+     	{
+     		foreach ($docSpecialities as $ds)
+     		{
+     			$dsary[] = $ds->rspId;
+     			 
+     		}
+     	}
+     	 for($m=0; $m<count($dsary); $m++)
+     	{
+     		$docspeci = Specialities::find()->select('specialityName')->where( ['spId' => $dsary[$m]])->asArray()->one();
+     		$docspeciary[] = $docspeci['specialityName'];
+     	}
+    	//print_r($docqualiary);
+    	
+    	return $this->render('doctor_view', [
+    			'model' => $model,
+    			
+    			'doctordata' => $doctordata,
+    			'docqualiary' =>$docqualiary,
+    			'docspeciary'=>$docspeciary,
+    			
+    	]);
+    }
+    
+
     
     
 }

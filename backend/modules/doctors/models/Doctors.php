@@ -32,6 +32,8 @@ use common\models\User;
  */
 class Doctors extends \yii\db\ActiveRecord
 {
+	
+	 public $rdoctorId;
     /**
      * @inheritdoc
      */
@@ -189,4 +191,10 @@ class Doctors extends \yii\db\ActiveRecord
     {
     	return $this->hasOne(User::className(), ['id' => 'userId']);
     }
+    
+    public static function getDoctorname($uId) {
+    	$doctordata = Doctors::find()->select(['name'])->where(['userId'=>$uId])->one();
+    	return $doctordata['name'];
+    }
+    
 }
