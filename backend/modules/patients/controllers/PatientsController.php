@@ -568,7 +568,10 @@ public function behaviors()
     	
     	foreach ($doctorInfo as $doc)
     	{
+    		if($doc->name != '')
+    		{
     		$avialableDoctors[$doc->userId] = $doc->name;
+    		}
     	}
     	
     	$patientId = 0;
