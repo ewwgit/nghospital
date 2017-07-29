@@ -44,7 +44,7 @@ public function behaviors()
 		$permissionsArray = [''];
 		if(UserrolesModel::getRole() == 1)
 		{
-			$permissionsArray = ['index','create','update','view','delete','states'];
+			$permissionsArray = ['index','create','update','view','delete','states','reset-password'];
 		}
 		else if(UserrolesModel::getRole() == 3)
 		{
