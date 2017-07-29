@@ -183,7 +183,7 @@ th {
 		</div><!---toppad-->
 	</div><!--row closed-->	
 </div>
-<button onclick="printContent('print')">Print</button>
+<button class="btn btn-primary" onclick="printContent('print')">Print</button>
 </div>
 </div>
 </div>

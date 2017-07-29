@@ -82,7 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
             				$url = Url::to(['/doctors/doctors/reset-password','id'=>$data->userId]);
             				return Html::a(
             						'<span class="glyphicon glyphicon-lock"></span>',
-            						$url);
+            						$url,['title'=>'Reset Password']);
             				},
             				'delete' => function ($url,$data) {
             				$url = Url::to(['/doctors/doctors/delete','id'=>$data->userId]);

@@ -82,7 +82,7 @@ $tremodel = DoctorNghPatient::find()->where(['patientHistoryId' => $mpatientInfo
     <div class="form-group col-lg-12 col-sm-12">
 				<div id="content_1"	class="inv docinfomaincls">
 					<div class="row">
-						<div class="form-group col-md-6 col-sm-12 col-xs-6" style="border: 1px solid #bce8f1; border-radius:5px;">
+						<div class="form-group col-md-6 col-sm-12 col-xs-6 " style="border: 1px solid #bce8f1; border-radius:5px;">
 							<div class="right">Name</div>
 							<div class="right-content">:</div>
 							<div class="right-second docname"></div>

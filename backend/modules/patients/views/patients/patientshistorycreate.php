@@ -157,7 +157,7 @@ $items = [
 		],
 		[
 				'label'=>'<i class="fa fa-sticky-note-o"></i> Clinical Notes',
-				'content'=>'Clinical Notes',
+				'content'=>'There is no records ',
 		],
 		
 		

@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             				$url = Url::to(['/intresteddoctors/intresteddoctors/convert-doctors','id'=>$data->insdocid]);
             				return Html::a(
             						'<span class="glyphicon glyphicon-arrow-right"></span>',
-            						$url);
+            						$url,['title'=>'Convert doctors']);
             				},
             		
             				],

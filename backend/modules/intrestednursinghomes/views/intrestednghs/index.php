@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
             				$url = Url::to(['/intrestednursinghomes/intrestednghs/convert-nursinghomes','id'=>$data->insnghid]);
             				return Html::a(
             						'<span class="glyphicon glyphicon-arrow-right"></span>',
-            						$url);
+            						$url,['title'=>'Convert nursinghomes']);
             				},
             		
             				],

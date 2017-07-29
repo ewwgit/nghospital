@@ -102,7 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
             				$url = Url::to(['/nursinghomes/nursinghomes/reset-password','id'=>$data->nuserId]);
             				return Html::a(
             						'<span class="glyphicon glyphicon-lock"></span>',
-            						$url);
+            						$url,['title'=>'Reset Password']);
             				},
             				'delete' => function ($url,$data) {
             				$url = Url::to(['/nursinghomes/nursinghomes/delete','id'=>$data->nuserId]);

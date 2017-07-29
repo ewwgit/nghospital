@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
             				$url = Url::to(['/user/adminusers/permissions','id'=>$data->id]);
             				return Html::a(
             						'<span class="glyphicon glyphicon-user"></span>',
-            						$url);
+            						$url,['title'=>'Permissions']);
             				},
             		
             				],
