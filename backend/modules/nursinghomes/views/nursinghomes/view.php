@@ -188,7 +188,7 @@ th {
 		</div><!---toppad-->
 	</div><!--row closed-->	
 </div>
-<div ><button class="btn btn-primary" onclick="printContent('print')">Print</button></div>
+<div ><button class="btn btn-primary" onclick="printContent('print')" style="margin-left: 728px;">Print</button></div>
 </div>
 </div>
 </div>

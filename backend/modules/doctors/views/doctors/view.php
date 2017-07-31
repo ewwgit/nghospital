@@ -210,7 +210,7 @@ th {
 		</div><!---toppad-->
 	</div><!--row closed-->	
 </div>
-<div style="text-align: center;"><button class="btn btn-primary" onclick="printContent('print')">Print</button></div>
+<div style="text-align: center;"><button class="btn btn-primary" onclick="printContent('print')" style="margin-left: 728px;">Print</button></div>
 </div>
 </div>
 </div>
