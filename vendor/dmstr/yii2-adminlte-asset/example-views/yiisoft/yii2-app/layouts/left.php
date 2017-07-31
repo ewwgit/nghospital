@@ -94,7 +94,7 @@ use common\models\User;
                 		'items' => [
                 				['label' => 'Profile', 'icon' => 'plus-circle', 'url' => ['/nursinghomes/nursinghomes/profileview','uid'=>Yii::$app->user->identity->id],],
                 				['label' => 'Profile Update', 'icon' => 'eye', 'url' => ['/nursinghomes/nursinghomes/profileupdate','uid'=>Yii::$app->user->identity->id],],
-                				['label' => 'Doctors specialities List', 'icon' => 'eye', 'url' => ['nursinghomes/nursinghomes/doctorspecialitieslist'],],
+                				['label' => 'Doctors specialities List', 'icon' => 'eye', 'url' => ['/nursinghomes/nursinghomes/doctorspecialitieslist'],],
                 				
                 		],
                 		],
