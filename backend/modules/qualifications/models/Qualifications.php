@@ -31,10 +31,10 @@ class Qualifications extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['qualification', 'status', 'createdBy', 'updatedBy', 'createdDate', 'updatedDate'], 'required'],
+            [['qualification', 'status'], 'required'],
             [['status'], 'string'],
             [['createdBy', 'updatedBy'], 'integer'],
-            [['createdDate', 'updatedDate'], 'safe'],
+            [['createdDate', 'updatedDate', 'createdBy', 'updatedBy'], 'safe'],
             //[['qualification'], 'string', 'max' => 50],
         		['qualification',
         				'unique',

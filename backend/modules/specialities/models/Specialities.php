@@ -33,10 +33,10 @@ class Specialities extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['specialityName', 'specialityCode', 'description', 'status', 'createdBy', 'updatedBy', 'createdDate', 'updatedDate'], 'required'],
+            [['specialityName', 'specialityCode', 'description', 'status'], 'required'],
             [['description', 'status'], 'string'],
             [['createdBy', 'updatedBy'], 'integer'],
-            [['createdDate', 'updatedDate'], 'safe'],
+            [['createdDate', 'updatedDate', 'createdBy', 'updatedBy'], 'safe'],
             [['specialityName'], 'string', 'max' => 200],
             //[['specialityCode'], 'string', 'max' => 10],
         		['specialityName',
