@@ -290,7 +290,7 @@ use common\models\User;
                                 <?= Html::a(
                                     'Sign out',
                                     ['/site/logout'],
-                                    ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
+                                    ['data-method' => 'post', 'class' => 'btn btn-primary']
                                 ) ?>
                             </div>
                         </li>
