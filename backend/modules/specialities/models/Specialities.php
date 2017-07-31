@@ -38,7 +38,13 @@ class Specialities extends \yii\db\ActiveRecord
             [['createdBy', 'updatedBy'], 'integer'],
             [['createdDate', 'updatedDate'], 'safe'],
             [['specialityName'], 'string', 'max' => 200],
-            [['specialityCode'], 'string', 'max' => 10],
+            //[['specialityCode'], 'string', 'max' => 10],
+        		['specialityName',
+        		'unique',
+        		'message' => 'This specialityName has already been taken.'],
+        		['specialityCode',
+        		'unique',
+        		'message' => 'This specialityCode has already been taken.'],
         ];
     }
 

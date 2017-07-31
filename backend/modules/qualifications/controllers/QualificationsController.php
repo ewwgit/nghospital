@@ -96,7 +96,7 @@ public function behaviors()
     {
         $model = new Qualifications();
 
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post())&& $model->validate()) {
         	$model->createdDate =  date("Y-m-d H:i:s");
         	$model->updatedDate = date('Y-m-d H:i:s');
         	$model->createdBy = Yii::$app->user->identity->id;

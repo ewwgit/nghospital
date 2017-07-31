@@ -238,12 +238,12 @@ use common\models\User;
              $doctorimage = Doctors::find()->select(['doctorImage'])->where(['userId'=>Yii::$app->user->identity->id])->one();
              
 					   if($roleiddata['role'] == 3){?>
-					   	  <img src="<?= $nursingimage['nursingImage'] ?>" class="user-image" alt="Nursing Image"/>
+					   	  <img src="<?= $nursingimage['nursingImage'] ?>" class="user-image" alt="Image"/>
                
 					  <?php  }elseif ($roleiddata['role'] == 2){?>
-					     <img src="<?= $doctorimage['doctorImage'] ?>" class="user-image" alt="Doctor Image"/>
+					     <img src="<?= $doctorimage['doctorImage'] ?>" class="user-image" alt="Image"/>
                <?php }else{ ?>
-                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="Image"/>
                 <?php }?>
                        
                         <span class="hidden-xs"><?php echo Yii::$app->user->identity->username;?></span>
