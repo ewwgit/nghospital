@@ -249,10 +249,10 @@ h3 {
 						    $uuudata= date('d-M-Y', $uydata);
 						    
 						    ?>
-									<h3>Treatment Information on <?php echo $uuudata; ?></h3>
+									<h3>Prescription Information on <?php echo $uuudata; ?></h3>
 						<div class="col-md-12 col-sm-6 col-xs-6 main-wrap">
 							<div class="doctor-box">
-									<div class="right">Treatment</div>								
+									<div class="right">Prescription</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"> <?php 
 								
