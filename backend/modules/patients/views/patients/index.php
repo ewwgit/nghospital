@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
             				$url = Url::to(['/patients/patients/patientshistorycreate','id'=>$data->patientUniqueId]);
             				return Html::a(
             						'<span class="glyphicon glyphicon-pencil"></span>',
-            						$url);
+            						$url,['title'=>'Update']);
             				},
             		
             				],
