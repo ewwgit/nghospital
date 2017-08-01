@@ -17,15 +17,22 @@ use common\models\User;
              $roleiddata = User::find()->select(['role'])->where(['role'=> Yii::$app->user->identity->role])->one();
              $nursingimage = Nursinghomes::find()->select(['nursingImage'])->where(['nuserId'=>Yii::$app->user->identity->id])->one();
              $doctorimage = Doctors::find()->select(['doctorImage'])->where(['userId'=>Yii::$app->user->identity->id])->one();
-             
-					   if($roleiddata['role'] == 3){?>
+          
+             if ($nursingimage['nursingImage'] != '' || $doctorimage['doctorImage'] != '' ){
+					   if($roleiddata['role'] == 3)
+					       {?>
 					   	  <img src="<?= $nursingimage['nursingImage'] ?>" class="img-circle" alt="Nursing Image"/>
-               
-					  <?php  }elseif ($roleiddata['role'] == 2){?>
+					   	 
+					      <?php  }elseif ($roleiddata['role'] == 2){?>
 					     <img src="<?= $doctorimage['doctorImage'] ?>" class="img-circle" alt="Doctor Image"/>
-               <?php }else{ ?>
-                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
-                <?php }?>
+					    
+					   	 
+                        <?php }else{ ?>
+                          <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                        <?php }}else{?>
+                        	 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                       <?php  }?>
+                
             </div>
             <div class="pull-left info">
                 <p><?php echo Yii::$app->user->identity->username;?></p>

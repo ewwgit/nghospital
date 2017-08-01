@@ -236,7 +236,7 @@ use common\models\User;
              $roleiddata = User::find()->select(['role'])->where(['role'=> Yii::$app->user->identity->role])->one();
              $nursingimage = Nursinghomes::find()->select(['nursingImage'])->where(['nuserId'=>Yii::$app->user->identity->id])->one();
              $doctorimage = Doctors::find()->select(['doctorImage'])->where(['userId'=>Yii::$app->user->identity->id])->one();
-             
+             if ($nursingimage['nursingImage'] != '' || $doctorimage['doctorImage'] != '' ){
 					   if($roleiddata['role'] == 3){?>
 					   	  <img src="<?= $nursingimage['nursingImage'] ?>" class="user-image" alt="Image"/>
                
@@ -244,7 +244,9 @@ use common\models\User;
 					     <img src="<?= $doctorimage['doctorImage'] ?>" class="user-image" alt="Image"/>
                <?php }else{ ?>
                 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="Image"/>
-                <?php }?>
+                  <?php }}else{?>
+                        	 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                       <?php  }?>
                        
                         <span class="hidden-xs"><?php echo Yii::$app->user->identity->username;?></span>
                     </a>
@@ -255,7 +257,7 @@ use common\models\User;
              $roleiddata = User::find()->select(['role'])->where(['role'=> Yii::$app->user->identity->role])->one();
              $nursingimage = Nursinghomes::find()->select(['nursingImage'])->where(['nuserId'=>Yii::$app->user->identity->id])->one();
              $doctorimage = Doctors::find()->select(['doctorImage'])->where(['userId'=>Yii::$app->user->identity->id])->one();
-             
+             if ($nursingimage['nursingImage'] != '' || $doctorimage['doctorImage'] != '' ){
 					   if($roleiddata['role'] == 3){?>
 					   	  <img src="<?= $nursingimage['nursingImage'] ?>" class="img-circle" alt="Nursing Image"/>
                
@@ -263,7 +265,9 @@ use common\models\User;
 					     <img src="<?= $doctorimage['doctorImage'] ?>" class="img-circle" alt="Doctor Image"/>
                <?php }else{ ?>
                 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
-                <?php }?>
+                 <?php }}else{?>
+                        	 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                       <?php  }?>
                        
                             <p>
                                 <?php echo Yii::$app->user->identity->username;?>
