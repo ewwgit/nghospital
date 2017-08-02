@@ -53,7 +53,7 @@ public function behaviors()
 		}
 		elseif(UserrolesModel::getRole() == 2)
 		{
-			$permissionsArray = ['profileupdate','profileview','patient-requests','reset-password','patient-info','states'];
+			$permissionsArray = ['profileupdate','profileview','patient-requests','reset-password','patient-info','states','patient-requests-completed'];
 		}
 		else {
 			$modulePermissions = ModulePermissions::find()->where(['moduleId' =>1,'adminuserId'=> Yii::$app->user->identity->id])->one();
@@ -1031,13 +1031,41 @@ public function behaviors()
     	]); */
     	
     	$searchModel = new DoctorNghPatientSearch();
-    	$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+    	$serachparam = Yii::$app->request->queryParams;
+    	$serachparam['DoctorNghPatientSearch']['status'] ='PROCESSING';
+    	$dataProvider = $searchModel->search($serachparam);
     	
     	return $this->render('patientRequests', [
     			'searchModel' => $searchModel,
     			'dataProvider' => $dataProvider,
     	]);
     	
+    	//print_r($patientinfoModel);exit();
+    }
+    public function actionPatientRequestsCompleted()
+    {
+    	/* $docId = Yii::$app->user->identity->id;
+    	 $patientinfoModel = DoctorNghPatient::find()->select('doctor_ngh_patient.patientRequestStatus,doctor_ngh_patient.patientHistoryId,nursinghomes.nursingHomeName,patients.firstName,patients.lastName')->innerJoin('nursinghomes','doctor_ngh_patient.nugrsingId=nursinghomes.nuserId')->innerJoin('patient_information','doctor_ngh_patient.patientHistoryId=patient_information.patientInfoId')->innerJoin('patients','patient_information.patientId=patients.patientId')->where("doctor_ngh_patient.doctorId =".$docId);
+    	 $dataProvider = new ActiveDataProvider([
+    	 'query' => $patientinfoModel,
+    	 'sort' => ['attributes' => ['nursingHomeName','firstName','lastName','patientRequestStatus']],
+    	 ]);
+    	  
+    	 return $this->render('patientRequests', [
+    	 'dataProvider' => $dataProvider,
+    	 ]); */
+    	 
+    	$searchModel = new DoctorNghPatientSearch();
+    	$serachparam = Yii::$app->request->queryParams;
+    	$serachparam['DoctorNghPatientSearch']['status'] ='COMPLETED';
+    	//print_r(Yii::$app->request->queryParams);exit();
+    	$dataProvider = $searchModel->search($serachparam);
+    	 
+    	return $this->render('patientRequests', [
+    			'searchModel' => $searchModel,
+    			'dataProvider' => $dataProvider,
+    	]);
+    	 
     	//print_r($patientinfoModel);exit();
     }
     
