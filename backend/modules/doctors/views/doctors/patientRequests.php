@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\doctors\models\DoctorsSearch */
@@ -29,10 +30,26 @@ $this->params['breadcrumbs'][] = $this->title;
         		'firstName',
         		'lastName',
         		//'patientRequestStatus',
-        		[
+        		/* [
         		'attribute' => 'patientRequestStatus',
         		'value' => 'patientRequestStatus',
         		'filter' => Html::activeDropDownList($searchModel, 'patientRequestStatus', ['PROCESSING' => 'PROCESSING','COMPLETED' => 'COMPLETED'],['class'=>'form-control','prompt' => 'Status']),
+        		], */
+        		
+        		[
+        		'attribute' => 'updatedDate',
+        		'label' => 'Date',
+        		'value' => 'updatedDate',
+        		'filter' => DatePicker::widget([
+        				'model' => $searchModel,
+        				'attribute' => 'updatedDate',
+        				'removeButton' => false,
+        				'options' => ['placeholder' => 'Select Date..'],
+        				'pluginOptions' => [
+        						'autoclose'=>true,
+        						'format' => 'yyyy-mm-dd'
+        				]
+        		]),
         		],
 
              ['class' => 'yii\grid\ActionColumn',

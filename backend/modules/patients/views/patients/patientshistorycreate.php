@@ -186,7 +186,7 @@ $items = [
     <div class="col-lg-4 col-sm-12">Date of Birth:</div> <div class="col-lg-8 col-sm-12"><?= $form->field($model, 'dateOfBirth')->widget ( DatePicker::classname (), [ 'options' => [ 'placeholder' => 'Enter Date Of Birth ...' ],'pluginOptions' => [ 'autoclose' => true , 'format' => 'dd-M-yyyy'] ] )->label(false); ?></div>
 </div>
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-4 col-sm-12">Country:</div> <div class="col-lg-8 col-sm-12"><?= $form->field($model, 'country')->dropDownList($model->countriesList,['prompt'=>'Select Countries'])->label(false);;?></div>
+    <div class="col-lg-4 col-sm-12">Country:</div> <div class="col-lg-8 col-sm-12"><?= $form->field($model, 'country')->dropDownList($model->countriesList,['prompt'=>'Select Countries','disabled' => true])->label(false);;?></div>
 </div>
 </div>
 <div class="row">
@@ -194,6 +194,8 @@ $items = [
     <div class="col-lg-4 col-sm-12">State:</div> <div class="col-lg-8 col-sm-12">
     <?php echo $form->field($model, 'state')->widget(DepDrop::classname(),[
                     		'data'=>$model->statesData,
+    		
+    		
     'pluginOptions'=>[
         'depends'=>['patients-country'],
         'placeholder'=>'Select States',
@@ -312,7 +314,19 @@ $( document ).ready(function() {
 	   dob = new Date(curdob);
 	   var today = new Date();
 	   var age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
-	   $('#patients-age').val(age);
+	   if(curdob == '')
+	   {
+		   $('#patients-age').val('');
+	   }
+	   else{
+		   if(age < 1)
+		   {
+	          $('#patients-age').val(0);
+		   }
+		   else{
+			   $('#patients-age').val(age);  
+		   }
+	   }
 	   //console.log(age);
    });
    

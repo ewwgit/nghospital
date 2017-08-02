@@ -20,7 +20,7 @@ class DoctorNghPatientSearch extends DoctorNghPatient
     public function rules()
     {
         return [
-            [['doctorId', 'nugrsingId', 'patientId', 'patientHistoryId', 'treatment', 'patientRequestStatus', 'createdBy', 'updatedBy', 'createdDate', 'updatedDate','nursingHomeName','firstName','lastName'], 'safe'],
+            [['doctorId', 'nugrsingId', 'patientId', 'patientHistoryId', 'treatment', 'patientRequestStatus', 'createdBy', 'updatedBy', 'createdDate', 'updatedDate','nursingHomeName','firstName','lastName','updatedDate'], 'safe'],
            
         ];
     }
@@ -43,8 +43,17 @@ class DoctorNghPatientSearch extends DoctorNghPatient
      */
     public function search($params)
     {
-        $docId = Yii::$app->user->identity->id;
-    	$query = DoctorNghPatient::find()->select('doctor_ngh_patient.patientRequestStatus,doctor_ngh_patient.patientHistoryId,nursinghomes.nursingHomeName,patients.firstName,patients.lastName')->innerJoin('nursinghomes','doctor_ngh_patient.nugrsingId=nursinghomes.nuserId')->innerJoin('patient_information','doctor_ngh_patient.patientHistoryId=patient_information.patientInfoId')->innerJoin('patients','patient_information.patientId=patients.patientId')->where("doctor_ngh_patient.doctorId =".$docId);
+    	//print_r($params['DoctorNghPatientSearch']['status']);exit();
+    	$docId = Yii::$app->user->identity->id;
+    	if(isset($params['DoctorNghPatientSearch']['status']) && $params['DoctorNghPatientSearch']['status'] != '')
+    	{
+    		
+    	$query = DoctorNghPatient::find()->select('doctor_ngh_patient.updatedDate,doctor_ngh_patient.patientRequestStatus,doctor_ngh_patient.patientHistoryId,nursinghomes.nursingHomeName,patients.firstName,patients.lastName')->innerJoin('nursinghomes','doctor_ngh_patient.nugrsingId=nursinghomes.nuserId')->innerJoin('patient_information','doctor_ngh_patient.patientHistoryId=patient_information.patientInfoId')->innerJoin('patients','patient_information.patientId=patients.patientId')->where("doctor_ngh_patient.doctorId =".$docId." AND patientRequestStatus ='".$params['DoctorNghPatientSearch']['status']."'");
+    	}
+    	else{
+    		$query = DoctorNghPatient::find()->select('doctor_ngh_patient.updatedDate,doctor_ngh_patient.patientRequestStatus,doctor_ngh_patient.patientHistoryId,nursinghomes.nursingHomeName,patients.firstName,patients.lastName')->innerJoin('nursinghomes','doctor_ngh_patient.nugrsingId=nursinghomes.nuserId')->innerJoin('patient_information','doctor_ngh_patient.patientHistoryId=patient_information.patientInfoId')->innerJoin('patients','patient_information.patientId=patients.patientId')->where("doctor_ngh_patient.doctorId =".$docId);
+    	}
+    	
 
         // add conditions that should always apply here
 
@@ -74,7 +83,7 @@ class DoctorNghPatientSearch extends DoctorNghPatient
             'treatment' => $this->treatment,
             'patientRequestStatus' => $this->patientRequestStatus,
             'createdDate' => $this->createdDate,
-            'updatedDate' => $this->updatedDate,
+            //'updatedDate' => $this->updatedDate,
         ]);
 
         $query->andFilterWhere(['like', 'doctorId', $this->doctorId])
@@ -86,11 +95,10 @@ class DoctorNghPatientSearch extends DoctorNghPatient
              ->andFilterWhere(['like', 'patients.firstName', $this->firstName])
              ->andFilterWhere(['like', 'patients.lastName', $this->lastName])
              ->andFilterWhere(['like', 'patientRequestStatus', $this->patientRequestStatus])
-            ->andFilterWhere(['like', 'patientRequestStatus', $this->patientRequestStatus])
-            ->andFilterWhere(['like', 'patientRequestStatus', $this->patientRequestStatus])
-            ->andFilterWhere(['like', 'createdDate', $this->createdDate])
-            ->andFilterWhere(['like', 'updatedDate', $this->updatedDate]);
-
+            ->andFilterWhere(['like', 'doctor_ngh_patient.updatedDate', $this->updatedDate])
+            
+            ;
+//print_r($dataProvider->getModels());exit();
         return $dataProvider;
     }
 }
