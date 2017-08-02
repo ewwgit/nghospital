@@ -292,6 +292,7 @@ if (! empty ( $mpatientInformationModel->respirationRate )) {
 											<div class="right-second"><?= $mpatientInformationModel->BPLeftArm; ?></div>
 
 											<div class="right">BP RightArm</div>
+											
 											<div class="right-content">:</div>
 											<div class="right-second"><?= $mpatientInformationModel->BPRightArm; ?></div>
 
