@@ -56,7 +56,7 @@ $tremodel = DoctorNghPatient::find()->where(['patientHistoryId' => $mpatientInfo
 						    
 						    ?>
    
-						<div class="form-group col-md-6 col-sm-12 col-xs-6" style="border: 1px solid #bce8f1; border-radius:5px;">
+						<div class="form-group col-md-6 col-sm-12 col-xs-6" style="border: 1px solid #bce8f1; border-radius:5px; color:#369">
 							<div class="right">Prescription</div>
 							<div class="right-content">:</div>
 							<div class="right-second docname"><?php echo  $tremodel->treatment ?></div>
