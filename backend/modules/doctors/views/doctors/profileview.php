@@ -36,17 +36,17 @@ th {
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" > 			   
 			<div class="panel ">		
 					<div class="col-md-8">	
-						<div class="box4" style="float: left;">
-						<div class="right">Doctor Name</div>								
-								<div class="right-content">:</div>
+						<div class="box4" style="float: left; color:#389">
+						<div class="right" style=" width: 40%">Doctor Name</div>								
+								<div class="right-content" style="  width: 0% ">:</div>
 								<div class="right-second">
 								<?php if(!empty($model->name)){
 									echo $model->name;
 								}else{
 									echo 'Not Mentioned';
 								}?></div>
-						<div class="right">Unique ID</div>								
-								<div class="right-content">:</div>
+						<div class="right" style=" width: 40%">Unique ID</div>								
+								<div class="right-content" style="  width: 0% ">:</div>
 								<div class="right-second"><?= $model->doctorUniqueId; ?></div>
 						</div>				
 					</div>
