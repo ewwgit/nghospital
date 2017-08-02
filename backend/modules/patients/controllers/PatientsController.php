@@ -382,10 +382,13 @@ public function behaviors()
     	else{
     		$model = new Patients();
     		$patmodel = new PatientInformation();
+    		$model->country = 101;
+    		$model->state = 36;
     	}
     	
         $newModel = new PatientDocuments();
         $model->countriesList = Countries::getCountries();
+        
         $model->citiesData = [];
         
         if($model->country != ''){
@@ -504,6 +507,7 @@ public function behaviors()
             //return $this->redirect(['view', 'id' => $model->patientId]);
         	return $this->redirect(['request-doctor','phsId' => $patmodelnew->patientInfoId]);
         } else {
+        	//print_r($model->errors);exit();
             return $this->render('patientshistorycreate', [
                 'model' => $model,
             ]);

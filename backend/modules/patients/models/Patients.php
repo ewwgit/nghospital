@@ -59,11 +59,11 @@ class Patients extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['firstName', 'lastName', 'gender', 'age', 'dateOfBirth', 'country', 'state',  'district', 'city', 'mandal', 'village', 'pinCode', 'mobile'], 'required'],
-             [['height','weight','respirationRate','BPLeftArm','BPRightArm','pulseRate','temparatureType','diseases','allergicMedicine','patientCompliant'],'required'],
+            [['firstName', 'lastName', 'gender', 'age', 'dateOfBirth', 'country', 'state'], 'required'],
+             [['BPLeftArm','BPRightArm'],'required'],
             [['gender'], 'string'],
             [['age','mobile','pinCode'],'integer'],
-            [['dateOfBirth', 'createdDate', 'updatedDate','patientImage','patientimageupdate','previousRecords','createdBy','updatedBy'], 'safe'],
+            [['dateOfBirth', 'createdDate', 'updatedDate','patientImage','patientimageupdate','previousRecords','createdBy','updatedBy','district', 'city', 'mandal', 'village', 'pinCode', 'mobile'], 'safe'],
             [['country', 'state'], 'integer'],
             [['firstName', 'lastName', 'patientUniqueId', 'countryName', 'stateName', 'district', 'city', 'mandal', 'village'], 'string', 'max' => 200],
            // [['age'], 'string', 'max' => 10],
