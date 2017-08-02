@@ -340,6 +340,33 @@ public function behaviors()
     
     
     }
+    
+    public function actionSpecialitydoctors()
+    {
+    
+    	$out = [];
+    	if (isset($_POST['depdrop_parents'])) {
+    		$parents = $_POST['depdrop_parents'];
+    
+    		if ($parents != null) {
+    			$spcId = $parents[0];
+    			$doctors = Doctors::getDoctorsBySpeciality($spcId);
+    			/* $out = [
+    			 ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+    			 ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+    
+    			 ]; */
+    			echo Json::encode(['output'=>$doctors, 'selected'=>0]);
+    			return;
+    
+    
+    		}
+    	}
+    
+    	echo Json::encode(['output'=>'', 'selected'=>'']);
+    
+    
+    }
     public function actionPatientshistorycreate()
     {
     	$id = '';
@@ -567,8 +594,15 @@ public function behaviors()
     	$presentDay = date("D", strtotime($pDate));
     	$presentTime =  date("H:i", strtotime($pDate));
     	$avialableDoctors = array();
+    	$sepecialities = array();
+    	$specilityInfo = Specialities::find()->where(['status' => 'Active'])->all();
+    	foreach ($specilityInfo as $spec)
+    	{
+    			$sepecialities[$spec->spId] = $spec->specialityName;
+    		
+    	}
     	//echo $presentTime;exit();
-    	$doctorInfo = Doctors::find()->select('doctors.*,user.*,doctor_slots.*')->innerJoin('user','doctors.userId=user.id')->innerJoin('doctor_slots','doctors.userId=doctor_slots.dsDoctorId')->where("user.status = 10 AND (doctor_slots.startTime <= '$presentTime' AND doctor_slots.endTime >= '$presentTime' AND Day LIKE '$presentDay%') OR (doctors.availableStatus= 'Online')")->all();
+    	/* $doctorInfo = Doctors::find()->select('doctors.*,user.*,doctor_slots.*')->innerJoin('user','doctors.userId=user.id')->innerJoin('doctor_slots','doctors.userId=doctor_slots.dsDoctorId')->where("user.status = 10 AND (doctor_slots.startTime <= '$presentTime' AND doctor_slots.endTime >= '$presentTime' AND Day LIKE '$presentDay%') OR (doctors.availableStatus= 'Online')")->all();
     	
     	foreach ($doctorInfo as $doc)
     	{
@@ -576,8 +610,9 @@ public function behaviors()
     		{
     		$avialableDoctors[$doc->userId] = $doc->name;
     		}
-    	}
+    	} */
     	
+    	$doctorInfo = Doctors::find()->select('doctors.*,user.*,doctor_slots.*,doctors_specialities.*')->asArray()->innerJoin('user','doctors.userId=user.id')->innerJoin('doctor_slots','doctors.userId=doctor_slots.dsDoctorId')->innerJoin('doctors_specialities','doctors.userId=doctors_specialities.rdoctorId')->where("(user.status = 10 AND doctors_specialities.rspId = 6) AND (doctor_slots.startTime <= '$presentTime' AND doctor_slots.endTime >= '$presentTime' AND Day LIKE '$presentDay%') OR (doctors.availableStatus= 'Online')")->all();
     	$patientId = 0;
     	$nghId = 0;
     	$patientInfo = PatientInformation::find()->where(['patientInfoId' => $model->phsId])->one();
@@ -620,7 +655,7 @@ public function behaviors()
     	}
     	
     	return $this->render('doctorRequest',
-    			['avialableDoctors' => $avialableDoctors,'model' => $model,'mpatientModel' => $mpatientModel,'mpatientInformationModel' => $mpatientInformationModel]);
+    			['avialableDoctors' => $avialableDoctors,'model' => $model,'mpatientModel' => $mpatientModel,'mpatientInformationModel' => $mpatientInformationModel,'sepecialities' => $sepecialities]);
     	//print_r($avialableDoctors);exit();
     }
     
