@@ -134,13 +134,21 @@ h3 {
 								<div class="right-content">:</div>
 								<div class="right-second">
 								 
-									<?= $patmodel->pinCode;?></div>
+									<?php if(!empty($patmodel->pinCode)){
+									echo $patmodel->pinCode;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 									
 								<div class="right">Mobile</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								 
-									<?= $patmodel->mobile;?></div>
+									<?php if(!empty($patmodel->mobile)){
+									echo $patmodel->mobile;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 								
 						    </div> <!---doctor-box closed-->
 						    </div>	<!---main-wrap closed-->
