@@ -9,7 +9,7 @@ use app\modules\doctors\models\DoctorsQualification;
 use app\modules\qualifications\models\Qualifications;
 
 ?>
-	<?php $doctordata = Doctors::find()->select(['name','doctorMobile','doctorImage','qualification'])->where(['userId'=>$model->rdoctorId])->one();
+	<?php $doctordata = Doctors::find()->select(['name','doctorMobile','doctorImage'])->where(['userId'=>$model->rdoctorId])->one();
 	       if($doctordata->doctorImage != ''){
 					 $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$doctordata->doctorImage;
 					 } 
