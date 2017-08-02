@@ -13,7 +13,7 @@ use app\modules\patients\models\DoctorNghPatient;
 /* @var $this yii\web\View */
 /* @var $model app\modules\doctors\models\Doctors */
 /* @var $form yii\widgets\ActiveForm */
-$this->title = 'Patient Treatment';
+$this->title = 'Patient Request Details';
 $this->params ['breadcrumbs'] [] = [
 		'label' => 'Patient Requests',
 		'url' => [
@@ -57,11 +57,11 @@ $tremodel = DoctorNghPatient::find()->where(['patientHistoryId' => $mpatientInfo
 						    ?>
    
 						<div class="form-group col-md-6 col-sm-12 col-xs-6" style="border: 1px solid #bce8f1; border-radius:5px;">
-							<div class="right">Treatment</div>
+							<div class="right">Prescription</div>
 							<div class="right-content">:</div>
 							<div class="right-second docname"><?php echo  $tremodel->treatment ?></div>
 							
-							<div class="right">Treatment Date</div>
+							<div class="right">Date</div>
 							<div class="right-content">:</div>
 							<div class="right-second docname"><?php echo $yeardata;  ?></div>
 							
