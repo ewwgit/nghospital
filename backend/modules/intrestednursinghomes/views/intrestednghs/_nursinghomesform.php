@@ -36,7 +36,7 @@ use dosamigos\ckeditor\CKEditor;
     </div>
     
     	
-	<div class="form-group">
+	<div class="form-group col-lg-7 col-sm-12">
         <?= Html::submitButton( 'Create' , ['class' => 'btn btn-success']) ?>
     </div>
     <?php ActiveForm::end(); ?>
