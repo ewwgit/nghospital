@@ -41,12 +41,12 @@ th {
 			<div class="panel ">	
 			
 			<div class="col-md-8">	
-						<div class="box4" style="float: left;">
+						<div class="box4" style="float: left; color:#389">
 						
-						<div class="right" style=" width: 45%"> Unique ID</div>								
+						<div class="right" style=" width: 40%"> Unique ID</div>								
 								<div class="right-content" style="  width: 0% ">:</div>
 								<div class="right-second" style=" width:38% "><?= $model->nurshingUniqueId; ?></div>
-								<div class="right" style=" width: 45%">Nursing Home Name</div>								
+								<div class="right" style=" width: 40%">Nursing Home Name</div>								
 								<div class="right-content" style="  width: 0% ">:</div>
 								<div class="right-second" style=" width:37% ">
 								<?php if($model->nursingHomeName != ''){
