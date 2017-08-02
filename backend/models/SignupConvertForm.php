@@ -14,6 +14,7 @@ class SignupConvertForm extends Model
     public $password;
     public $role;
     public $confirmpassword;
+    public $name;
 
 
     /**
@@ -78,7 +79,8 @@ class SignupConvertForm extends Model
         				[['confirmpassword'],'compare','compareAttribute' => 'password' ],
         				['confirmpassword', 'required'],
         		        ['password', 'required'],
-        		[['role','username','password','confirmpassword','email'],'safe'],
+        		[['role','username','password','confirmpassword','email','name'],'safe'],
+        		['name', 'required'],
         ];
     }
 

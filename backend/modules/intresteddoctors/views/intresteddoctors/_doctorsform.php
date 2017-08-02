@@ -24,6 +24,9 @@ use dosamigos\ckeditor\CKEditor;
     <div class="form-group col-lg-6 col-sm-12">    
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>	
     </div>
+     <div class="form-group col-lg-6 col-sm-12">    
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>	
+    </div>
     
     <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>

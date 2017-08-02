@@ -237,6 +237,7 @@ class IntresteddoctorsController extends Controller
     	$interesteddocInfo = IntrestedDoctors::find()->where(['insdocid' => $id])->one();
     	$model = new SignupConvertForm();
     	$model->email =  $interesteddocInfo->email;
+    	$model->name =  $interesteddocInfo->name;
     	$docModel = new Doctors();
     	$docModel->scenario = 'convertsneed';
     	$model->scenario = 'interested';
@@ -261,6 +262,8 @@ class IntresteddoctorsController extends Controller
     		$docModel->updatedDate = date('Y-m-d H:i:s');
     		$docModel->createdBy = Yii::$app->user->identity->id;
     		$docModel->updatedBy = Yii::$app->user->identity->id;
+    		$docModel->name = $model->name;
+    		$docModel->availableStatus = 'Offline';
     		$docModel->save();
     		if($docModel)
     		{

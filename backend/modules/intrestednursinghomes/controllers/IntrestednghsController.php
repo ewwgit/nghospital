@@ -224,6 +224,7 @@ public function behaviors()
         $interestednghInfo = Intrestednghs::find()->where(['insnghid' => $id])->one();
     	$model = new SignupConvertForm();
     	$model->email =  $interestednghInfo->email;
+    	$model->name =  $interestednghInfo->name;
     	$nursinghomeModel = new Nursinghomes();
     	$nursinghomeModel->scenario = 'convertsneed';
     	$model->scenario = 'interested';
@@ -249,6 +250,7 @@ public function behaviors()
     		$nursinghomeModel->updatedDate = date('Y-m-d H:i:s');
     		$nursinghomeModel->createdBy = Yii::$app->user->identity->id;
     		$nursinghomeModel->updatedBy = Yii::$app->user->identity->id;
+    		$nursinghomeModel->nursingHomeName = $model->name;    		
     		$nursinghomeModel->save();
     		if($nursinghomeModel)
     		{
