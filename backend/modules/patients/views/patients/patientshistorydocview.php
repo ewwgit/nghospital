@@ -187,7 +187,12 @@ h3 {
 								}?> </div>
 								<div class="right">BP Left Arm</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->BPLeftArm; ?></div>
+								<div class="right-second">
+								<?php if(!empty($model->BPLeftArm)){
+									echo $model->BPLeftArm;;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 								
 								<div class="right">BP Right Arm</div>								
 								<div class="right-content">:</div>
@@ -195,23 +200,48 @@ h3 {
 													        
 								<div class="right">Pulse Rate</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->pulseRate; ?></div>
+								<div class="right-second">
+									<?php if(!empty($model->pulseRate)){
+									echo $model->pulseRate;;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 								
 								<div class="right">Temparature</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?=  $model->temparatureType; ?> </div>
+								<div class="right-second">
+								<?php if(!empty($model->temparatureType)){
+									echo $model->temparatureType;;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 								
 								<div class="right">Diseases</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->diseases; ?></div>
+								<div class="right-second">
+								<?php if(!empty($model->diseases)){
+									echo $model->diseases;;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 													        
 								<div class="right">Allergic Medicine</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->allergicMedicine; ?></div>
+								<div class="right-second">
+									<?php if(!empty($model->allergicMedicine)){
+									echo $model->allergicMedicine;;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 								
 								<div class="right">Patient Compliant</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?=  $model->patientCompliant; ?> </div>
+								<div class="right-second">
+								<?php if(!empty($model->patientCompliant)){
+									echo $model->patientCompliant;;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 								
 								
 								

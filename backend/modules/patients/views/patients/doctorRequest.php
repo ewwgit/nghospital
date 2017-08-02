@@ -258,23 +258,47 @@ if (! empty ( $mpatientInformationModel->respirationRate )) {
 
 											<div class="right">Pulse Rate</div>
 											<div class="right-content">:</div>
-											<div class="right-second"><?= $mpatientInformationModel->pulseRate; ?></div>
+											<div class="right-second"><?php if (! empty ( $mpatientInformationModel->pulseRate )) {
+									        echo $mpatientInformationModel->pulseRate;;
+								            } else {
+									           echo 'Not Mentioned';
+								                     } ?></div>
 
 											<div class="right">Temparature</div>
 											<div class="right-content">:</div>
-											<div class="right-second"><?=  $mpatientInformationModel->temparatureType; ?> </div>
+											<div class="right-second">
+											<?php if (! empty ( $mpatientInformationModel->temparatureType )) {
+									        echo $mpatientInformationModel->temparatureType;;
+								            } else {
+									           echo 'Not Mentioned';
+								                     } ?> </div>
 
 											<div class="right">Diseases</div>
 											<div class="right-content">:</div>
-											<div class="right-second"><?= $mpatientInformationModel->diseases; ?></div>
+											<div class="right-second">
+											<?php if (! empty ( $mpatientInformationModel->diseases )) {
+									        echo $mpatientInformationModel->diseases;;
+								            } else {
+									           echo 'Not Mentioned';
+								                     } ?></div>
 
 											<div class="right">Allergic Medicine</div>
 											<div class="right-content">:</div>
-											<div class="right-second"><?= $mpatientInformationModel->allergicMedicine; ?></div>
+											<div class="right-second">
+											<?php if (! empty ( $mpatientInformationModel->allergicMedicine )) {
+									        echo $mpatientInformationModel->allergicMedicine;;
+								            } else {
+									           echo 'Not Mentioned';
+								                     } ?></div>
 
 											<div class="right">Patient Compliant</div>
 											<div class="right-content">:</div>
-											<div class="right-second"><?=  $mpatientInformationModel->patientCompliant; ?> </div>
+											<div class="right-second">
+											<?php if (! empty ( $mpatientInformationModel->patientCompliant )) {
+									        echo $mpatientInformationModel->patientCompliant;;
+								            } else {
+									           echo 'Not Mentioned';
+								                     } ?> </div>
 
 										</div>
 										<!---doctor-box closed-->
