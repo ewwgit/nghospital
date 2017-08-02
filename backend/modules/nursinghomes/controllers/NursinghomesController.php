@@ -48,7 +48,7 @@ public function behaviors()
 		}
 		else if(UserrolesModel::getRole() == 3)
 		{
-			$permissionsArray = ['profileupdate','profileview','reset-password','states'];
+			$permissionsArray = ['profileupdate','profileview','reset-password','states','doctorspecialitieslist'];
 		}
 		else {
 			$modulePermissions = ModulePermissions::find()->where(['moduleId' =>3,'adminuserId'=> Yii::$app->user->identity->id])->one();
@@ -91,7 +91,7 @@ public function behaviors()
 				'access' => [
 						'class' => AccessControl::className(),
 						'only' => [
-								'index','create','update','view','delete','profileupdate','profileview','reset-password','states'
+								'index','create','update','view','delete','profileupdate','profileview','reset-password','states','doctorspecialitieslist'
 	
 						],
 						'rules' => [
