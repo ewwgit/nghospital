@@ -1097,7 +1097,7 @@ public function behaviors()
     	 
     	 
     	if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-    		$model->patientRequestStatus = 'Completed';
+    		$model->patientRequestStatus = 'COMPLETED';
     		$model->update();
     
     		//$prmodel = new PatientRequests();
