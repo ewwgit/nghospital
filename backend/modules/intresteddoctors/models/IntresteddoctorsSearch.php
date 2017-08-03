@@ -41,7 +41,7 @@ class IntresteddoctorsSearch extends Intresteddoctors
      */
     public function search($params)
     {
-        $query = Intresteddoctors::find();
+        $query = Intresteddoctors::find()->where(['status' => 'Active']);
 
         // add conditions that should always apply here
 

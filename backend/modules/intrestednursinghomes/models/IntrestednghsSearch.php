@@ -41,7 +41,7 @@ class IntrestednghsSearch extends Intrestednghs
      */
     public function search($params)
     {
-        $query = Intrestednghs::find();
+        $query = Intrestednghs::find()->where(['status' => 'Active']);
 
         // add conditions that should always apply here
 
