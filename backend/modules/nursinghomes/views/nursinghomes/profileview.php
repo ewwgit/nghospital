@@ -41,7 +41,7 @@ th {
 			<div class="panel ">	
 			
 			<div class="col-md-8">	
-						<div class="box4" style="float: left; color:#389">
+						<div class="box4" style="float: left; color:#369">
 						
 						<div class="right" style=" width: 40%"> Unique ID</div>								
 								<div class="right-content" style="  width: 0% ">:</div>
