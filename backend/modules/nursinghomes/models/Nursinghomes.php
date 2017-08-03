@@ -76,7 +76,7 @@ public function rules()
 //         		'on' => 'create'
 //         				],
         		['nursingImage', 'file',
-        		'extensions'=>'JPEG,PNG',
+        		'extensions'=>'JPEG,PNG,jpg',
         		'wrongExtension'=>'Only {extensions} types are allowed',
         		],
 
