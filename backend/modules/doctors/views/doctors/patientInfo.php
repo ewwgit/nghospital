@@ -229,12 +229,20 @@ if (! empty ( $mpatientModel->village )) {
 											<div class="right-content">:</div>
 											<div class="right-second">
 								 
-									<?= $mpatientModel->pinCode;?></div>
+									<?php if(!empty($mpatientModel->pinCode)){
+									echo $mpatientModel->pinCode;
+								     }else{
+									echo 'Not Mentioned';
+								     }?></div>
 											<div class="right">Mobile</div>
 											<div class="right-content">:</div>
 											<div class="right-second">
-								 
-									<?= $mpatientModel->mobile;?></div>
+							
+									<?php if(!empty($mpatientModel->mobile)){
+									echo $mpatientModel->mobile;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 										</div>
 										<!---doctor-box closed-->
 									</div>
