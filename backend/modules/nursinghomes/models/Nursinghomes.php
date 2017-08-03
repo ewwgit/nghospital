@@ -61,7 +61,7 @@ public function rules()
         	
             [[ 'status','contactPerson', 'mobile', 'city', 'state',  'country', 'pinCode', 'address', 'description',
             		'username','email','landline','nursingHomeName'], 'required','on' => ['create','update']],
-        		[['nursingImage','password'],'required','on' => 'create'],
+        	[['nursingImage','password'],'required','on' => 'create'],
             [['nuserId', 'state', 'country', 'createdBy', 'updatedBy','mobile','landline'], 'integer'],
             [['address', 'description'], 'string'],
             [['countriesList','updatedDate','createdDate','nuserId', 'nurshingUniqueId', 'contactPerson', 'mobile', 'city', 'state', 'stateName', 'country', 'countryName', 'pinCode', 'address', 'description','nursingImage',
@@ -75,6 +75,10 @@ public function rules()
 // 				'message' => 'User name already exists try for new',
 //         		'on' => 'create'
 //         				],
+        		['nursingImage', 'file',
+        		'extensions'=>'JPEG,PNG',
+        		'wrongExtension'=>'Only {extensions} types are allowed',
+        		],
 
         		
         		['username',

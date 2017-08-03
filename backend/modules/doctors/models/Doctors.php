@@ -147,6 +147,10 @@ class Doctors extends \yii\db\ActiveRecord
         		[['doctorImage'],'required','on' => 'create'],
         		 //[['doctorImage'], 'image','skipOnEmpty'=>false,],
                  //[['doctorImage'], 'required']
+        		['doctorImage', 'file',
+        		'extensions'=>'JPEG,PNG',
+        		'wrongExtension'=>'Only {extensions} types are allowed',
+        		],
         		[['userId','doctorUniqueId'],'required','on' => 'convertsneed'],
         		[['startTime','endTime','day'],'safe'],
         		

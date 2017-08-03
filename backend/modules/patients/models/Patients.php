@@ -89,6 +89,10 @@ class Patients extends \yii\db\ActiveRecord
         				'extensions'=>'doc,pdf,docx', 
         				'wrongExtension'=>'Only {extensions} types are allowed', 
         				],
+        		['patientImage', 'file',
+        		'extensions'=>'JPEG,PNG',
+        		'wrongExtension'=>'Only {extensions} types are allowed',
+        		],
         	[['height','weight','respirationRate','BPLeftArm','BPRightArm','pulseRate','temparatureType','diseases','allergicMedicine','createdDate','patientCompliant', 'createdDate', 'updatedDate', 'countryName', 'stateName', 'patientUniqueId'],'safe'],
         ];
     }
