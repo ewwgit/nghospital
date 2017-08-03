@@ -25,13 +25,46 @@ $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->nurs
 
 <ul class="list-group">
   <li class="list-group-item">
-   <div ><?php echo  Html::img($imgeurl ,['width' => '200px','height' => '150px'],['doctors/nghdetail','nuid'=>$model->nuserId]); ?> </div>
+   
+   	<img class='image' 
+							src="<?php
+							if($model->nursingImage)
+							{
+								
+								echo isset( $model->nursingImage)? Url::base().'/'.$model->nursingImage : '' ;
+							
+							}else {
+									 echo Url::base()."/images/user-iconnew.png" ;
+								      }
+								?>"
+							width="150px" height="150px"> </img> 
   	<div class=" color ">Nursing Home </div>	
   	<div class="col  " >:</div>							
-    <div class=" val "><?php echo $model->nursingHomeName; ?> </div>
+    <div class=" val ">
+    <?php if(! empty ($model->nursingHomeName))
+    {
+    	echo $model->nursingHomeName;
+    }
+    else
+    {
+    	echo "Not Mentioned";
+    }
+    		?> </div>
     	<div class=" color ">Contact Person </div>	
   	<div class="col  " >:</div>							
-    <div class=" val "><?php echo $model->contactPerson; ?> </div>
+    <div class=" val ">
+    <?php if(!empty($model->contactPerson))
+    {
+    	echo $model->contactPerson;
+    }
+    else
+    {
+    	echo "Not Mentioned";
+    }
+    	?> </div>
+ 
+  
+    
   	
  
 </li>
@@ -42,7 +75,7 @@ $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->nurs
 <style>
 .col{
 color: #3c8dbc;
-margin-left: 95px;;
+margin-left: 90px;;
 margin-top: -19px;
 }
 .color{
@@ -50,7 +83,7 @@ color: #3c8dbc;
 margin-top: 10px;
 }
 .val{
-margin-left: 110px;
+margin-left: 95px;
 margin-top: -18px;
 
 }
