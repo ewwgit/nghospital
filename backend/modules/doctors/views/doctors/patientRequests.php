@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
              				$url = Url::to(['/doctors/doctors/patient-info','phsId'=>$data->patientHistoryId]);
              				return Html::a(
              						'<span class="glyphicon glyphicon-eye-open"></span>',
-             						$url);
+             						$url,['title'=>'View']);
              				},
              		
              				],
