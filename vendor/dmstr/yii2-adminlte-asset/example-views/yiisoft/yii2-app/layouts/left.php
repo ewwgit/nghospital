@@ -3,7 +3,8 @@ use app\models\UserrolesModel;
 use app\modules\nursinghomes\models\Nursinghomes;
 use app\modules\doctors\models\Doctors;
 use common\models\User;
-
+use app\models\AdminInformation;
+use yii\helpers\Url;
 ?>
 <aside class="main-sidebar">
 
@@ -17,21 +18,53 @@ use common\models\User;
              $roleiddata = User::find()->select(['role'])->where(['role'=> Yii::$app->user->identity->role])->one();
              $nursingimage = Nursinghomes::find()->select(['nursingImage'])->where(['nuserId'=>Yii::$app->user->identity->id])->one();
              $doctorimage = Doctors::find()->select(['doctorImage'])->where(['userId'=>Yii::$app->user->identity->id])->one();
-          
-             if ($nursingimage['nursingImage'] != '' || $doctorimage['doctorImage'] != '' ){
-					   if($roleiddata['role'] == 3)
-					       {?>
-					   	  <img src="<?= $nursingimage['nursingImage'] ?>" class="img-circle" alt="Nursing Image"/>
-					   	 
-					      <?php  }elseif ($roleiddata['role'] == 2){?>
-					     <img src="<?= $doctorimage['doctorImage'] ?>" class="img-circle" alt="Doctor Image"/>
-					    
-					   	 
-                        <?php }else{ ?>
-                          <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
-                        <?php }}else{?>
-                        	 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
-                       <?php  }?>
+             $userimage = AdminInformation::find()->select(['profileImage'])->where(['aduserId'=>Yii::$app->user->identity->id])->one();
+            
+             if($roleiddata['role'] ==1)
+             	{
+             		?>
+             		<img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="images" alt="User Image"/>
+             		<?php
+             	}
+             else
+             {
+             	if ($nursingimage['nursingImage'] != '' || $doctorimage['doctorImage'] != '' || $userimage['profileImage'] != '' )
+             	{
+             		 if($roleiddata['role'] == 3)
+					   {
+					   		?>
+					   	 		 <img src="<?= $nursingimage['nursingImage'] ?>" class="images" alt="Image"/>
+               
+					  		<?php  
+					   }
+					  elseif ($roleiddata['role'] == 2)
+					  {
+					  	?>
+					  	 <img src="<?= $doctorimage['doctorImage'] ?>" class="images" alt="Image"/>					  	
+					  	<?php 
+					  	
+					  }
+					  elseif ($roleiddata['role'] == 4)
+					  {
+					  	
+					  	?>
+					 	<img src="<?= $userimage['profileImage'] ?>" class="images" alt="Image"/>					  	
+					  	<?php 
+					  }
+             	}
+					  else 
+					  {
+					  	?>
+					  	<img class='images'
+             				src="<?php
+									 echo Url::base()."/images/user-iconnew.png" ;
+							
+								?>"
+             width="100" height="100"> </img>
+					  	<?php 
+					  	
+					  }
+             }?>
                 
             </div>
             <div class="pull-left info">
