@@ -50,16 +50,25 @@ $this->params['breadcrumbs'][] = $this->title;
         		'attribute'=>'status',
         		'value'=> $status,
         		],
-        		['attribute'=>'profileImage',
-        		'format' => 'html',
-        		'value'=>Html::img($model->profileImage ? $model->profileImage : '@web',['width' => '150px']),
         		
-        		],
 
         		 
            
            // 'createdBy',
            // 'updatedBy',
+        ],
+    		]) ?>
+    		<?php if($model->profileImage != ''){?>
+    							<?php $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->profileImage;?>
+    							<?php  } ?>
+    <?= DetailView::widget([
+							'model' => $model,
+							'attributes' => [
+									[
+											'attribute'=>'profileImage',
+											'format' => 'html',
+											'value'=>Html::img($model->profileImage ? $imgeurl : 'images/user-iconnew.png',['width' => '150px','height' => '150px']),
+        		],
         ],
     ]) ?>
 </div>

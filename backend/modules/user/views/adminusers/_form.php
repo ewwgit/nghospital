@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\file\FileInput;
-
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model app\models\AdminMaster */
 /* @var $form yii\widgets\ActiveForm */
@@ -34,20 +34,36 @@ use kartik\file\FileInput;
 <?= $form->field($model, 'status')->dropDownList([ '10' => 'Active', '0' => 'In-active', ], ['prompt' => 'Select Status'])?>
 
 </div>
-			
-			<div class="form-group col-lg-6 col-sm-12">
-			 <?php if($model->profileImage != ''){?>
-         <div class="col-lg-5 col-sm-12 profileimage"> 
-					<img src='<?php echo $model->profileImage ; ?>' width="100px"
-						height="100px;">
-		  </div>
-      <?php } ?>
-			
-			  <?=$form->field ( $model, 'file' )->widget ( FileInput::classname (),
+
+<div class="form-group col-lg-6 col-sm-12">
+    <?php if($model->profileImage != ''){?>
+    
+    <?php $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->profileImage;?>
+
+						 		
+						 		<?php  }
+						 		// print_r($imgeurl);exit;?>
+						<img class='image' 
+							src="<?php
+							if($model->profileImage)
+							{
+								
+								echo isset( $model->profileImage)? Url::base().'/'.$model->profileImage : '' ;
+							
+							}else {
+									 echo Url::base()."/images/user-iconnew.png" ;
+								     }
+								?>"
+							width="100" height="100"> </img> 
+							 <?=$form->field ( $model, 'file' )->widget ( FileInput::classname (),
    		[ 'options' => [ 'accept' => 'image/*' ],'pluginOptions' =>[[ 'browseLabel' => 'Profile Image', 'allowedFileExtensions'=>['jpg','png','jpeg'] ]] ] )?>  
+            <?= $form->field($model, 'profileImage')->hiddenInput()->label(false); ?>
+            
         
-         </div>
-         <div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'address')->textArea([]) ?></div>
+	</div>     
+			
+			
+    <div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'address')->textArea(['rows'=>3]) ?></div>    
         	
 
 <div class="form-group  col-lg-7  col-sm-12" style="margin-top: 100px;"> 
