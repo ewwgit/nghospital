@@ -63,6 +63,8 @@ use unclead\multipleinput\MultipleInput;
         'enableError' => true,
         		
         		'items' => [
+        				
+        				'NaN' => 'No time',
         				'00:00' => '12:00 AM',
     					'00:30' => '12:30 AM',
         				
@@ -131,6 +133,8 @@ use unclead\multipleinput\MultipleInput;
     		'enableError' => true,
     			
     				'items' => [
+    						
+    					'0000' => 'No time',
     				    '00:00' => '12:00 AM',
     					'00:30' => '12:30 AM',
         				
