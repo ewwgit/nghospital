@@ -41,7 +41,7 @@ use app\modules\qualifications\models\Qualifications;
   <li class="list-group-item">
     						
     <div ><?php echo  Html::img($doctordata->doctorImage ? $imgeurl : 'images/user-iconnew.png',['width' => '200px','height' => '150px']); ?> </div>
-  	<div class=" color ">Doctorname </div>	
+  	<div class=" color ">Doctor Name </div>	
   	<div class="col  " >:</div>							
     <div class=" val "><?php echo Doctors::getDoctorname($model->rdoctorId); ?> </div>
   	<div class=" color " >Specialities </div>
