@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'mobile')->textInput(['maxlength' => 10]) ?>
     </div>
 <div class="form-group col-lg-6 ">
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'description')->textarea(['rows' => 6,'maxlength' => 255]) ?>
     </div>
     <?php // $form->field($model, 'createdDate')->textInput() ?>
 

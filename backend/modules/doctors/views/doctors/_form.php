@@ -83,10 +83,10 @@ use dosamigos\ckeditor\CKEditor;
     <?= $form->field($model, 'pinCode')->textInput(['maxlength' => 8]) ?>
     </div>
     <div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'address')->textarea(['rows' => 4]) ?>
+    <?= $form->field($model, 'address')->textarea(['rows' => 4,'maxlength' => 255]) ?>
 	</div>
 	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'permanentAddress')->textarea(['rows' => 4]) ?>
+    <?= $form->field($model, 'permanentAddress')->textarea(['rows' => 4,'maxlength' => 255]) ?>
 	</div>
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'APMC')->textInput(['maxlength' => true]) ?>

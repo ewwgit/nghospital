@@ -58,7 +58,7 @@ use kartik\file\FileInput;
    	</div>
    	
    		<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'address')->textarea(['rows' => 4]) ?>
+    <?= $form->field($model, 'address')->textarea(['rows' => 4,'maxlength'=>true]) ?>
 	</div>
    
    	<div class="form-group col-lg-6 col-sm-12">
@@ -67,7 +67,7 @@ use kartik\file\FileInput;
    
    	 
     <div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'description')->textarea(['rows' => 4]) ?>
+    <?= $form->field($model, 'description')->textarea(['rows' => 4,'maxlength'=>true]) ?>
 	</div>
 	
    

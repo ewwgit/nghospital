@@ -63,7 +63,7 @@ use yii\helpers\Url;
 	</div>     
 			
 			
-    <div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'address')->textArea(['rows'=>3]) ?></div>    
+    <div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'address')->textArea(['rows'=>3,'maxlength' => 255]) ?></div>    
         	
 
 <div class="form-group  col-lg-7  col-sm-12" style="margin-top: 100px;"> 

@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
     </div>
     
     <div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'description')->textarea(['rows' => 6,'maxlength' => 255]) ?>
     </div>
     
     <div class="form-group">

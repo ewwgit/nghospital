@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 	</div>
 	
 	<div class="form-group col-lg-7">
-    <?= $form->field($model, 'description')->textarea(['rows' => 4]) ?>
+    <?= $form->field($model, 'description')->textarea(['rows' => 4,'maxlength' => 255]) ?>
 	</div>
 	<div class="form-group col-lg-7">
     <?= $form->field($model, 'status')->dropDownList([ 'Active' => 'Active', 'In-active' => 'In-active', ], ['prompt' => 'Select Status']) ?>
