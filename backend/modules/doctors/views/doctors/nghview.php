@@ -37,7 +37,7 @@ $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->nurs
 									 echo Url::base()."/images/user-iconnew.png" ;
 								      }
 								?>"
-							width="150px" height="150px"> </img> 
+							style="height:150px;width:180px;"> </img> 
   	<div class=" color ">Nursing Home </div>	
   	<div class="col  " >:</div>							
     <div class=" val ">
