@@ -45,6 +45,9 @@ class IntresteddoctorsController extends Controller
 		if(UserrolesModel::getRole() == 1)
 		{
 			$permissionsArray = ['index','create','update','view','delete','convert-doctors'];
+		}elseif (UserrolesModel::getRole() == 4)
+		{
+			$permissionsArray = ['index','create','update','view','delete','convert-doctors'];
 		}
 		else {
 			$modulePermissions = ModulePermissions::find()->where(['moduleId' =>2,'adminuserId'=> Yii::$app->user->identity->id])->one();

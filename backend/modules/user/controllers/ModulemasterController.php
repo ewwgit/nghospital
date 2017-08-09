@@ -18,7 +18,48 @@ class ModulemasterController extends Controller
 {
  public function behaviors()
     {
+    	$permissionsArray = [''];
+    	if(UserrolesModel::getRole() == 1)
+    	{
+    		$permissionsArray = ['index','create','update','view','delete','states','reset-password'];
+    	}
+    	else if(UserrolesModel::getRole() == 3)
+    	{
+    		$permissionsArray = ['profileupdate','profileview','reset-password','states','doctorspecialitieslist'];
+    	}else if(UserrolesModel::getRole() == 4)
+    	{
+    		$permissionsArray = ['index','create','update','view','delete','states','reset-password'];
+    	}
+    	else {
+    		$modulePermissions = ModulePermissions::find()->where(['moduleId' =>3,'adminuserId'=> Yii::$app->user->identity->id])->one();
+    		if($modulePermissions['permissions_all'] == 1)
+    		{
+    			$permissionsArray = ['index','create','update','view','delete','states'];
+    		}
+    		else {
+    			if($modulePermissions['permissions_add'] == 1)
+    			{
+    				$permissionAdd = ['create','states'];
+    				$permissionsArray = array_merge($permissionsArray,$permissionAdd);
+    			}
+    			if($modulePermissions['permissions_edit'] == 1)
+    			{
+    				$permissionEdit = ['update','states'];
+    				$permissionsArray = array_merge($permissionsArray,$permissionEdit);
+    			}
+    			if($modulePermissions['permissions_delete'] == 1)
+    			{
+    				$permissionDelete = ['delete','states'];
+    				$permissionsArray = array_merge($permissionsArray,$permissionDelete);
+    			}
+    			if($modulePermissions['permissions_view'] == 1)
+    			{
+    				$permissionView = ['index','view','states'];
+    				$permissionsArray = array_merge($permissionsArray,$permissionView);
+    			}
     	
+    		}
+    	}
     
    
         return [
@@ -53,7 +94,7 @@ class ModulemasterController extends Controller
 			        								],
 			        								'allow' => true,
 		        						       		'matchCallback' => function ($rule, $action) {
-		        						       		return (UserrolesModel::getRole() == 1);
+		        						       		return (UserrolesModel::getRole());
 		        						       		}
 			        								
 		        								]
