@@ -218,6 +218,5 @@ class Doctors extends \yii\db\ActiveRecord
     		}
     	}
     	return $avialableDoctors;
-    }
-    
+    }   
 }

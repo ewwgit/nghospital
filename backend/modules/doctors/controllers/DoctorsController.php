@@ -1006,6 +1006,13 @@ public function behaviors()
     	}
     
     	if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword($id)) {
+    		$docinfo = User::find()->where(['id' => $id])->one();
+    		$username = $docinfo->username;
+    		$uemail = $docinfo->email;
+    		$newpassword = $model->password;
+    		//print_r($username);
+    		//print_r($newpassword);exit();
+    		
     		Yii::$app->getSession()->setFlash('success', 'New password was saved.');
     
     		return $this->redirect(['index']);;
