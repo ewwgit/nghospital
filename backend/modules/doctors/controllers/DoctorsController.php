@@ -1108,6 +1108,7 @@ public function behaviors()
     	 
     	if ($model->load(Yii::$app->request->post()) && $model->validate()) {
     		$model->patientRequestStatus = 'COMPLETED';
+    		$model->updatedDate = date("Y-m-d H:i:s");
     		$model->update();
     
     		//$prmodel = new PatientRequests();
@@ -1122,7 +1123,9 @@ public function behaviors()
     	} */
     	 
     	return $this->render('patientInfo',
-    			['model' => $model,'mpatientModel' => $mpatientModel,'mpatientInformationModel' => $mpatientInformationModel]);
+    			['model' => $model,
+    					'mpatientModel' => $mpatientModel,
+    					'mpatientInformationModel' => $mpatientInformationModel]);
     	//print_r($avialableDoctors);exit();
     }
     public function actionNghlist()

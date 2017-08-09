@@ -56,7 +56,7 @@ $tremodel = DoctorNghPatient::find()->where(['patientHistoryId' => $mpatientInfo
 						    
 						    ?>
    
-						<div class="form-group col-md-5 col-sm-12 col-xs-6" style="border: 1px solid #bce8f1; border-radius:5px; color:#369">
+						<div class="form-group col-md-6 col-sm-12 col-xs-6" style="border: 1px solid #bce8f1; border-radius:5px; color:#369">
 							<div class="right">Prescription</div>
 							<div class="right-content">:</div>
 							<div class="right-second docname"><?php echo  $tremodel->treatment ?></div>
@@ -152,9 +152,7 @@ $tremodel = DoctorNghPatient::find()->where(['patientHistoryId' => $mpatientInfo
 											<div class="right">Country Name</div>
 											<div class="right-content">:</div>
 											<div class="right-second">
-								<?php
-								
-if (! empty ( $mpatientModel->countryName )) {
+								<?php if (! empty ( $mpatientModel->countryName )) {
 									echo $mpatientModel->countryName;
 									;
 								} else {
@@ -164,9 +162,7 @@ if (! empty ( $mpatientModel->countryName )) {
 											<div class="right">State Name</div>
 											<div class="right-content">:</div>
 											<div class="right-second">
-								<?php
-								
-if (! empty ( $mpatientModel->stateName )) {
+								<?php if (! empty ( $mpatientModel->stateName )) {
 									echo $mpatientModel->stateName;
 									;
 								} else {
