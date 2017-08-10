@@ -1013,8 +1013,15 @@ public function behaviors()
     		$username = $docinfo->username;
     		$uemail = $docinfo->email;
     		$newpassword = $model->password;
+    		$body='Username:'.$username. + ''.'NewPassword:' .$newpassword;
     		//print_r($username);
     		//print_r($newpassword);exit();
+    		\Yii::$app->mailer->compose()
+    		->setFrom('ngh@expertwebworx.in')
+    		->setTo($uemail)
+    		->setSubject('You Have Received a New Message on ' . \Yii::$app->name)
+    		->setHtmlBody($body)
+    		->send();
     		
     		Yii::$app->getSession()->setFlash('success', 'New password was saved.');
     
