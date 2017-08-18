@@ -241,9 +241,11 @@ class IntresteddoctorsController extends Controller
     	$model = new SignupConvertForm();
     	$model->email =  $interesteddocInfo->email;
     	$model->name =  $interesteddocInfo->name;
+    	$newpassword = $model->password;
     	$docModel = new Doctors();
     	$docModel->scenario = 'convertsneed';
     	$model->scenario = 'interested';
+    	
     
     	if ($model->load(Yii::$app->request->post()) && $model->validate()){
     		$model->role= 2;
@@ -275,11 +277,27 @@ class IntresteddoctorsController extends Controller
     		//print_r($docModel->errors);exit();
     		Yii::$app->session->setFlash('success', "Converted User to Doctors Successfully ");
     		return $this->redirect(['index']);
-    	} else {
+    	} 
+    	$body='Hi &nbsp;&nbsp;';
+    	$body.=$model->name;
+    	$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    			You are successfully converted as a Doctor
+    			<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    				Your UserName is:'.$model->name;
+    	$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Password is:' .$newpassword;
+    	 
+    	$body.='<br><br><br><u>Thanks&Regards,</u>';
+    	$body.='<br>&nbsp;NGH Admin.';
+    	 
+    	\Yii::$app->mailer->compose()
+    	->setFrom('ngh@expertwebworx.in')
+    	->setTo($model->email)
+    	->setSubject('You Have Received a New Message on ' . \Yii::$app->name)
+    	->setHtmlBody($body)
+    	->send();
     		return $this->render('convertdoctors', [
     				'model' => $model,
     		]);
-    	}
     
     }
 }
