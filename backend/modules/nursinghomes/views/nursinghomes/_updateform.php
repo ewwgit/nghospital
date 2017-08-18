@@ -62,7 +62,7 @@ use yii\helpers\Url;
 	 
 	
 	<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'address')->textarea(['rows' => 3]) ?>
+    <?= $form->field($model, 'address')->textarea(['rows' => 3,'maxlength' => 255]) ?>
 	</div>
 	  	<div class="form-group col-lg-6 col-sm-12">   
     <?= $form->field($model, 'pinCode')->textInput(['maxlength' => 8]) ?>
@@ -70,7 +70,7 @@ use yii\helpers\Url;
 	
 	
 		<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'description')->textarea(['rows' => 4]) ?>
+    <?= $form->field($model, 'description')->textarea(['rows' => 4,'maxlength' => 255]) ?>
    	</div>
    	
    		
