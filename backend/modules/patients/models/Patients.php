@@ -86,11 +86,11 @@ class Patients extends \yii\db\ActiveRecord
         		'message' => 'PinCode Must be between 4 and 8 numeric only.'
         				],
         		['documentUrl', 'file',
-        				'extensions'=>'doc,pdf,docx', 
+        				'extensions'=>'doc,pdf,docx,jpeg,png,jpg', 
         				'wrongExtension'=>'Only {extensions} types are allowed', 
         				],
         		['patientImage', 'file',
-        		'extensions'=>'JPEG,PNG,jpg',
+        		'extensions'=>'jpeg,png,jpg',
         		'wrongExtension'=>'Only {extensions} types are allowed',
         		],
         	[['height','weight','respirationRate','BPLeftArm','BPRightArm','pulseRate','temparatureType','diseases','allergicMedicine','createdDate','patientCompliant', 'createdDate', 'updatedDate', 'countryName', 'stateName', 'patientUniqueId'],'safe'],

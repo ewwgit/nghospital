@@ -274,7 +274,7 @@ h3 {
 						    		{
 						    			$imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).'images/pdf_img.png';
 						    		}
-						    		elseif ($exten == 'doc')
+						    		elseif ($exten == 'doc' || $exten == 'docx')
 						    		{
 						    			$imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).'images/doc_img.png';
 						    		}
