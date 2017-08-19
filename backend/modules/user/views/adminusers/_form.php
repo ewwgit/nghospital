@@ -17,13 +17,13 @@ use yii\helpers\Url;
 
 			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'readOnly'=>($model->scenario == 'update')? "readonly" : false]) ?></div>
 
-			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'firstName')->textInput(['maxlength' => true]) ?></div>
+			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'firstName')->textInput(['maxlength' => 255]) ?></div>
 
 			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'password')->passwordInput() ?></div>
 
 
 
-			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'lastName')->textInput(['maxlength' => true]) ?></div>
+			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'lastName')->textInput(['maxlength' => 255]) ?></div>
 			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'phoneNumber')->textInput(['maxlength' => 10]) ?></div>
 
 			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'role')->dropDownList($model->roles, ['prompt' => 'Select Role']) ?></div>
@@ -36,25 +36,7 @@ use yii\helpers\Url;
 </div>
 
 <div class="form-group col-lg-6 col-sm-12">
-    <?php if($model->profileImage != ''){?>
     
-    <?php $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->profileImage;?>
-
-						 		
-						 		<?php  }
-						 		// print_r($imgeurl);exit;?>
-						<img class='image' 
-							src="<?php
-							if($model->profileImage)
-							{
-								
-								echo isset( $model->profileImage)? Url::base().'/'.$model->profileImage : '' ;
-							
-							}else {
-									 echo Url::base()."/images/user-iconnew.png" ;
-								     }
-								?>"
-							width="100" height="100"> </img> 
 							 <?=$form->field ( $model, 'file' )->widget ( FileInput::classname (),
    		[ 'options' => [ 'accept' => 'image/*' ],'pluginOptions' =>[[ 'browseLabel' => 'Profile Image', 'allowedFileExtensions'=>['jpg','png','jpeg'] ]] ] )?>  
             <?= $form->field($model, 'profileImage')->hiddenInput()->label(false); ?>

@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="admin-master-update">
 
-    <?= $this->render('_form', [
+    <?= $this->render('_updateform', [
         'model' => $model,
     ]) ?>
 
