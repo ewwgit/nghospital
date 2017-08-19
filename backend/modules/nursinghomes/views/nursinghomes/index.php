@@ -96,7 +96,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'updatedDate',
 
             ['class' => 'yii\grid\ActionColumn',
-            		'template' => '{view} {update} {delete}{password}',
+            		'template' => '{view} {update} {delete}  {password}',
             		'buttons' => [
             				'password' => function ($url,$data) {
             				$url = Url::to(['/nursinghomes/nursinghomes/reset-password','id'=>$data->nuserId]);

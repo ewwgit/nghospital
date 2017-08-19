@@ -35,7 +35,7 @@ use yii\helpers\Url;
    	</div>
    	
    		<div class="form-group col-lg-6 col-sm-12">
-    <?= $form->field($model, 'nursingHomeName')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'nursingHomeName')->textInput(['maxlength' => 255]) ?>
    	</div>  
  
     
