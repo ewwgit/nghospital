@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'specialityName')->textInput(['maxlength' => true]) ?>
 	</div>
 	<div class="form-group col-lg-7">
-    <?= $form->field($model, 'specialityCode')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'specialityCode')->textInput(['maxlength' => 200]) ?>
 	</div>
 	
 	<div class="form-group col-lg-7">
