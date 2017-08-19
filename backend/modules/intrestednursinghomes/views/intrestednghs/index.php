@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'createdDate',
 
             ['class' => 'yii\grid\ActionColumn',
-            		'template' => '{view} {update} {delete}{convert}',
+            		'template' => '{view} {update} {delete}  {convert}',
             		'buttons' => [
             				'convert' => function ($url,$data) {
             				$url = Url::to(['/intrestednursinghomes/intrestednghs/convert-nursinghomes','id'=>$data->insnghid]);
