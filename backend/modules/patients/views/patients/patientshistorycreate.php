@@ -18,40 +18,40 @@ $previousDoc = array();
 <?php 
 $historyform = '<div class="row">
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-4 col-sm-12">Height:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'height')->textInput(['maxlength' => true])->label(false).'</div>
+    <div class="col-lg-4 col-sm-12">Height:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'height')->textInput(['maxlength' => 8])->label(false).'</div>
 </div>
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-4 col-sm-12">Weight:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'weight')->textInput(['maxlength' => true])->label(false).'</div>
+    <div class="col-lg-4 col-sm-12">Weight:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'weight')->textInput(['maxlength' => 6])->label(false).'</div>
 </div>
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-4 col-sm-12">Resp Rate:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'respirationRate')->textInput(['maxlength' => true])->label(false).'</div>
+    <div class="col-lg-4 col-sm-12">Resp Rate:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'respirationRate')->textInput(['maxlength' => 3])->label(false).'</div>
 </div>
 </div>
 <div class="row">
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-4 col-sm-12">Pulse Rate:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'pulseRate')->textInput(['maxlength' => true])->label(false).'</div>
+    <div class="col-lg-4 col-sm-12">Pulse Rate:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'pulseRate')->textInput(['maxlength' =>3])->label(false).'</div>
 </div>    
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-4 col-sm-12">BpLeft Arm:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'BPLeftArm')->textInput(['maxlength' => true])->label(false).'</div>
+    <div class="col-lg-4 col-sm-12">BpLeft Arm:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'BPLeftArm')->textInput(['maxlength' => 6])->label(false).'</div>
 </div>
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-4 col-sm-12">BPRight Arm:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'BPRightArm')->textInput(['maxlength' => true])->label(false).'</div>
+    <div class="col-lg-4 col-sm-12">BPRight Arm:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'BPRightArm')->textInput(['maxlength' => 6])->label(false).'</div>
 </div>
 </div>
 <div class="row">
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-4 col-sm-12">Temparature:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'temparatureType')->textInput(['maxlength' => true])->label(false).'</div>
+    <div class="col-lg-4 col-sm-12">Temparature:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'temparatureType')->textInput(['maxlength' => 5])->label(false).'</div>
 </div>
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-4 col-sm-12">Diseases:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'diseases')->textInput(['maxlength' => true])->label(false).'</div>
+    <div class="col-lg-4 col-sm-12">Diseases:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'diseases')->textInput(['maxlength' => 200])->label(false).'</div>
 </div> 
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-4 col-sm-12">Allergic Medicine:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'allergicMedicine')->textInput(['maxlength' => true])->label(false).'</div>
+    <div class="col-lg-4 col-sm-12">Allergic Medicine:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'allergicMedicine')->textInput(['maxlength' => 100])->label(false).'</div>
 </div>
 </div>
 <div class="row">
 <div class="form-group col-lg-4 col-sm-12">
-	<div class="col-lg-4 col-sm-12">Compliant:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'patientCompliant')->textarea(['rows' => 6])->label(false).'</div>
+	<div class="col-lg-4 col-sm-12">Compliant:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'patientCompliant')->textarea(['rows' => 6,'maxlength'=>255])->label(false).'</div>
 </div>
 <div class="form-group col-lg-4 col-sm-12">
     <div class="col-lg-4 col-sm-12">Document:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'documentUrl[]')->widget(FileInput::classname(), [
