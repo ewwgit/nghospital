@@ -87,13 +87,19 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'updatedBy',
 
             ['class' => 'yii\grid\ActionColumn',
-            		'template' => '{view} {update} {delete}{permissions}',
+            		'template' => '{view} {update} {delete} {permissions}  {password}',
             		'buttons' => [
             				'permissions' => function ($url,$data) {
             				$url = Url::to(['/user/adminusers/permissions','id'=>$data->id]);
             				return Html::a(
             						'<span class="glyphicon glyphicon-user"></span>',
             						$url,['title'=>'Permissions']);
+            				},
+            				'password' => function ($url,$data) {
+            				$url = Url::to(['/user/adminusers/reset-password','id'=>$data->id]);
+            				return Html::a(
+            						'<span class="glyphicon glyphicon-lock"></span>',
+            						$url,['title'=>'Reset Password']);
             				},
             		
             				],

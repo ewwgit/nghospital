@@ -20,6 +20,7 @@ use backend\models\Role;
 use app\models\AdminInformation;
 use app\models\UserMainSearch;
 use yii\helpers\ArrayHelper;
+use backend\models\ChangePasswordForm;
 use common\models\User;
 
 use app\models\AdminMaster;
@@ -638,6 +639,51 @@ class AdminusersController extends Controller
      * @return AdminMaster the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
+    public function actionResetPassword($id)
+    {
+    
+    	try {
+    		$model = new ChangePasswordForm();
+    	} catch (InvalidParamException $e) {
+    		throw new BadRequestHttpException($e->getMessage());
+    	}
+    
+    	if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword($id)) {
+    		$docinfo = User::find()->where(['id' => $id])->one();
+    		$username = $docinfo->username;
+    		$uemail = $docinfo->email;
+    		$newpassword = $model->password;
+    		//$body='Username:'.$username. + ''.'NewPassword:' .$newpassword;
+    		//print_r($username);
+    		//print_r($newpassword);exit();
+    
+    
+    		$body='Hi &nbsp;&nbsp;';
+    		$body.=$username;
+    		$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    				Your UserName is:'.$username;
+    		$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your NewPassword is:' .$newpassword;
+    
+    		$body.='<br><br><br><u>Thanks&Regards,</u>';
+    		$body.='<br>&nbsp;NGH Admin.';
+    
+    		\Yii::$app->mailer->compose()
+    		->setFrom('ngh@expertwebworx.in')
+    		->setTo($uemail)
+    		->setSubject('You Have Received a New Message on ' . \Yii::$app->name)
+    		->setHtmlBody($body)
+    		->send();
+    
+    		Yii::$app->getSession()->setFlash('success', 'New password was saved.');
+    
+    		return $this->redirect(['index']);;
+    	}
+    
+    	return $this->render('resetPassword', [
+    			'model' => $model,
+    	]);
+    
+    }
    /*  protected function findModel($id)
     {
         if (($model = AdminMaster::findOne($id)) !== null) {
