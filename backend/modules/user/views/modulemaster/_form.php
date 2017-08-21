@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
 
     
 <div class="form-group col-lg-7 col-sm-12">
-    <?= $form->field($model, 'moduleName')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'moduleName')->textInput(['maxlength' => 255]) ?>
 </div>
    
 <div class="form-group col-lg-7 col-sm-12">
