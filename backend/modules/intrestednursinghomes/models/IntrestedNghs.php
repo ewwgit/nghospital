@@ -52,7 +52,7 @@ class IntrestedNghs extends \yii\db\ActiveRecord
         		'message' => 'Email can contain @ and .com characters.'
         		 ],
         		 ['email', 'string', 'max' => 255],
-        		 ['email', 'unique', 'message' => 'This email address has already been taken.'],
+        		// ['email', 'unique', 'message' => 'This email address has already been taken.'],
         	     ['email','email'],
         ];
     }

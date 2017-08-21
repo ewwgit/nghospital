@@ -155,8 +155,7 @@ class IntresteddoctorsController extends Controller
     public function actionCreate()
     {
         $model = new Intresteddoctors();
-
-        if ($model->load(Yii::$app->request->post())) {
+      if ($model->load(Yii::$app->request->post()) && $model->validate()){
         	
         	$model->role = 2;
         	$model->status = 'Active';
@@ -170,6 +169,7 @@ class IntresteddoctorsController extends Controller
                 'model' => $model,
             ]);
         }
+        
     }
 
     /**
@@ -201,7 +201,7 @@ class IntresteddoctorsController extends Controller
     public function actionDelete($id)
     {
        // $this->findModel($id)->delete();
-    	try{
+    	 try{
     		//$model = $this->findModel($id)->delete();
     		$insdocinfo = IntrestedDoctors::find()->where(['insdocid' => $id])->one();
     		$insdocinfo->status ='In-active';
