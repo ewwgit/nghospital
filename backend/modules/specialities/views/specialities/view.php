@@ -7,7 +7,7 @@ use app\modules\nursinghomes\models\Nursinghomes;
 /* @var $this yii\web\View */
 /* @var $model app\modules\specialities\models\Specialities */
 $str = $model->specialityName;
-$rest = substr($str, 0, 150);
+$rest = substr($str, 0, 50);
 
 $this->title = $rest;
 //$this->title = $model->specialityName;
