@@ -228,7 +228,7 @@ public function behaviors()
     	$model = new SignupConvertForm();
     	$model->email =  $interestednghInfo->email;
     	$model->name =  $interestednghInfo->name;
-    	$model->password =  $interestednghInfo->password;
+    	$newpassword = $model->password;
     	$nursinghomeModel = new Nursinghomes();
     	$nursinghomeModel->scenario = 'convertsneed';
     	$model->scenario = 'interested';
@@ -260,27 +260,28 @@ public function behaviors()
     		{
     			Intrestednghs::deleteAll(['insnghid'=> $id]);
     		}
+    		$body='Hi &nbsp;&nbsp;';
+    		$body.=$model->name;
+    		$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    			You are successfully converted to Nursing Home
+    			<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    				Your UserName is:'.$model->name;
+    		$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Password is:' .$model->password;
+    		 
+    		$body.='<br><br><br><u>Thanks&Regards,</u>';
+    		$body.='<br>&nbsp;NGH Admin.';
+    		 
+    		\Yii::$app->mailer->compose()
+    		->setFrom('ngh@expertwebworx.in')
+    		->setTo($model->email)
+    		->setSubject('You Have Received a New Message on ' . \Yii::$app->name)
+    		->setHtmlBody($body)
+    		->send();
     		//print_r($nursinghomeModel->errors);exit();
     		Yii::$app->session->setFlash('success', "Converted User to Nursing Homes Successfully ");
     		return $this->redirect(['index']);
     	} 
-    	$body='Hi &nbsp;&nbsp;';
-    	$body.=$model->name;
-    	$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    			You are successfully converted to Nursing Home
-    			<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    				Your UserName is:'.$model->name;
-    	$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Password is:' .$model->password;
     	
-    	$body.='<br><br><br><u>Thanks&Regards,</u>';
-    	$body.='<br>&nbsp;NGH Admin.';
-    	
-    	\Yii::$app->mailer->compose()
-    	->setFrom('ngh@expertwebworx.in')
-    	->setTo($model->email)
-    	->setSubject('You Have Received a New Message on ' . \Yii::$app->name)
-    	->setHtmlBody($body)
-    	->send();
     		return $this->render('nursinghomes', [
     				'model' => $model,
     		]);
