@@ -72,7 +72,6 @@ $this->params['breadcrumbs'][] = $this->title;
     
     word-wrap: break-word;
 }
-
 .detail-view th {
    max-width: 10px;
    
