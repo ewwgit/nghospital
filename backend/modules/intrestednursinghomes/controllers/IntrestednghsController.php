@@ -16,7 +16,7 @@ use app\modules\nursinghomes\models\Nursinghomes;
 use app\models\UserrolesModel;
 use yii\filters\AccessControl;
 use app\models\ModulePermissions;
-
+use common\models\User;
 /**
  * IntrestednghsController implements the CRUD actions for Intrestednghs model.
  */
@@ -256,6 +256,8 @@ public function behaviors()
     		$nursinghomeModel->updatedBy = Yii::$app->user->identity->id;
     		$nursinghomeModel->nursingHomeName = $model->name;    		
     		$nursinghomeModel->save();
+    		$userinfo = User::find()->where(['id' => $userData->id])->one();
+    		$newpassword = $model->password;
     		if($nursinghomeModel)
     		{
     			Intrestednghs::deleteAll(['insnghid'=> $id]);
@@ -265,7 +267,7 @@ public function behaviors()
     		$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     			You are successfully converted to Nursing Home
     			<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    				Your UserName is:'.$model->name;
+    				Your UserName is:'.$userinfo->username;
     		$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Password is:' .$model->password;
     		 
     		$body.='<br><br><br><u>Thanks&Regards,</u>';

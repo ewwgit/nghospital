@@ -1013,13 +1013,15 @@ public function behaviors()
     		$username = $docinfo->username;
     		$uemail = $docinfo->email;
     		$newpassword = $model->password;
+    		$doctorInfo = Doctors::find()->where(['userId' => $id])->one();
+    		$name=$doctorInfo->name;
     		//$body='Username:'.$username. + ''.'NewPassword:' .$newpassword;
     		//print_r($username);
     		//print_r($newpassword);exit();
     		
     		
     		$body='Hi &nbsp;&nbsp;';
-    		$body.=$username;    		
+    		$body.=$name;    		
     		$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     				Your UserName is:'.$username;
     		$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your NewPassword is:' .$newpassword;

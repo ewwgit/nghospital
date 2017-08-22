@@ -504,10 +504,12 @@ public function behaviors()
     		$username = $nurseinfo->username;
     		$uemail = $nurseinfo->email;
     		$newpassword = $model->password;
+    		$nurseingInfo = NursingHomes::find()->where(['nuserId' => $id])->one();
+    		$name=$nurseingInfo->nursingHomeName;
     		//print_r($username);
     		//print_r($newpassword);exit();
     		$body='Hi &nbsp;&nbsp;';
-    		$body.=$username;
+    		$body.=$name;
     		$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     				Your UserName is:'.$username;
     		$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your NewPassword is:' .$newpassword;
