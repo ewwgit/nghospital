@@ -270,31 +270,36 @@ class IntresteddoctorsController extends Controller
     		$docModel->name = $model->name;
     		$docModel->availableStatus = 'Offline';
     		$docModel->save();
+    		$userinfo = User::find()->where(['id' => $userData->id])->one();
+    		$newpassword = $model->password;
+    		
     		if($docModel)
     		{
     			IntrestedDoctors::deleteAll(['insdocid'=> $id]);
     		}
     		//print_r($docModel->errors);exit();
+    		$body='Hi &nbsp;&nbsp;';
+    		$body.=$model->name;
+    		$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    			You are successfully converted as a Doctor
+    			<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    				Your UserName is:'.$userinfo->username;
+    		$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Password is:' .$newpassword;
+    		
+    		$body.='<br><br><br><u>Thanks&Regards,</u>';
+    		$body.='<br>&nbsp;NGH Admin.';
+    		
+    		\Yii::$app->mailer->compose()
+    		->setFrom('ngh@expertwebworx.in')
+    		->setTo($model->email)
+    		->setSubject('You Have Received a New Message on ' . \Yii::$app->name)
+    		->setHtmlBody($body)
+    		->send();
+    		
     		Yii::$app->session->setFlash('success', "Converted User to Doctors Successfully ");
     		return $this->redirect(['index']);
     	} 
-    	$body='Hi &nbsp;&nbsp;';
-    	$body.=$model->name;
-    	$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    			You are successfully converted as a Doctor
-    			<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    				Your UserName is:'.$model->name;
-    	$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Password is:' .$newpassword;
-    	 
-    	$body.='<br><br><br><u>Thanks&Regards,</u>';
-    	$body.='<br>&nbsp;NGH Admin.';
-    	 
-    	\Yii::$app->mailer->compose()
-    	->setFrom('ngh@expertwebworx.in')
-    	->setTo($model->email)
-    	->setSubject('You Have Received a New Message on ' . \Yii::$app->name)
-    	->setHtmlBody($body)
-    	->send();
+    	
     		return $this->render('convertdoctors', [
     				'model' => $model,
     		]);
