@@ -55,12 +55,7 @@ use yii\helpers\Url;
 					  else 
 					  {
 					  	?>
-					  	<img class='images'
-             				src="<?php
-									 echo Url::base()."/images/user-iconnew.png" ;
-							
-								?>"
-             width="100" height="100"> </img>
+					  	<img src="<?php echo Url::base()."/images/user-iconnew.png" ;?>"class="images" alt="Image"> </img>
 					  	<?php 
 					  	
 					  }
