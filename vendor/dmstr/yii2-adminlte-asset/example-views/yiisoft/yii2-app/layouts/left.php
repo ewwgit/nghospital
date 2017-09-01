@@ -44,7 +44,7 @@ use yii\helpers\Url;
 					  	<?php 
 					  	
 					  }
-					  elseif ($roleiddata['role'] == 4)
+					  elseif ($roleiddata['role'] >= 4)
 					  {
 					  	
 					  	?>
@@ -271,3 +271,13 @@ use yii\helpers\Url;
     </section>
 
 </aside>
+<style>
+.images{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-top: -2px;
+}
+
+</style>
