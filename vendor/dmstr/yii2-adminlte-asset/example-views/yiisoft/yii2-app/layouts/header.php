@@ -88,6 +88,7 @@ use yii\helpers\Url;
                         <li class="user-header">
                          <?php 
              $roleiddata = User::find()->select(['role'])->where(['role'=> Yii::$app->user->identity->role])->one();
+             //print_r($roleiddata['role']);exit;
              //$username=User::find()->select(['username'])->where(['username'=>Yii::$app->user->identity->username])->one();
              $nursingimage = Nursinghomes::find()->select(['nursingImage'])->where(['nuserId'=>Yii::$app->user->identity->id])->one();
              $doctorimage = Doctors::find()->select(['doctorImage'])->where(['userId'=>Yii::$app->user->identity->id])->one();
@@ -149,7 +150,30 @@ use yii\helpers\Url;
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn  btn-default">Profile</a>
+                                 <?php 	if($roleiddata['role'] ==3){ ?>
+             		           <?=  Html::a(
+                                    'Profile',
+                                    ['/nursinghomes/nursinghomes/profileview','uid'=>Yii::$app->user->identity->id],
+                                    ['data-method' => 'post', 'class' => 'btn btn-default']
+                                ) ?>
+                                
+             		          <?php }else if($roleiddata['role'] ==2) { ?>
+             		         
+             		          <?=  Html::a(
+                                    'Profile',
+                                    ['/doctors/doctors/profileview','uid'=>Yii::$app->user->identity->id],
+                                    ['data-method' => 'post', 'class' => 'btn btn-default']
+             		          		
+                                ) ?>
+                                <?php }else if($roleiddata['role'] >= 4){ ?>
+             		         
+             		          <?=  Html::a(
+                                    'Profile',
+                                    ['/user/adminusers/view','id'=>Yii::$app->user->identity->id],
+                                    ['data-method' => 'post', 'class' => 'btn btn-default']
+                                ) ?><?php }?>
+             		         
+                                
                             </div>
                             <div class="pull-right">
                                 <?= Html::a(
