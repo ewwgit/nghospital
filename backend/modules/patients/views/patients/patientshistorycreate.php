@@ -385,4 +385,19 @@ $( document ).ready(function() {
 	margin-bottom: 0px;
 	margin-top: 0px;
 }
+.krajee-default.file-preview-frame .file-thumbnail-footer {
+	height: 60px;
+}
+.krajee-default .file-actions {
+	margin-top: 0px;
+	}
+.krajee-default.file-preview-frame {
+	margin: -2px;
+	}
+.file-preview {
+	padding: 0px 5px 5px;
+	}
+.close {
+	font-size: 20px;
+}
 </style>
