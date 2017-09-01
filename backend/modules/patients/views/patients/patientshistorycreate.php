@@ -8,6 +8,8 @@ use kartik\date\DatePicker;
 use kartik\file\FileInput;
 use yii\web\View;
 use app\modules\patients\models\PatientDocuments;
+use app\modules\patients\models\DoctorNghPatient;
+use app\modules\doctors\models\Doctors;
 
 $this->title = 'Patients History';
 $this->params['breadcrumbs'][] = $this->title;
@@ -93,8 +95,11 @@ $documents = '';
 		'patients/patients/patientshistorydocview' 
 ] );?>
 
+
 <?php if(empty($model->previousRecords))
 {
+	
+	
 	$previousrecords .='<div class="col-lg-7 col-sm-12">
     There is no previous records exist.
 </div>';
@@ -105,20 +110,55 @@ $documents = '';
 <?php }else{
 	$pr=1;
 	$k=0;
+	$s=0;
+	
+?>
+
+
+<?php 	
 foreach ($model->previousRecords as $previousRecords)
 {
-	$docInfo = PatientDocuments::find()->where(['patientInfoId'=> $previousRecords->patientInfoId])->all();
-	if(!empty($docInfo))
+	$docInfo = PatientDocuments::find()->where(['patientInfoId'=> $previousRecords->patientInfoId])->all();?>
+	
+	<?php 	if(!empty($docInfo))
 	{
 		$previousDoc[$k]['patientInfoId'] = $previousRecords->patientInfoId;
 		$previousDoc[$k]['createdDate'] = date("d-M-Y",strtotime($previousRecords->createdDate));
-		$k++;
+	    $k++;
 		
 	}
+    $doctorname = DoctorNghPatient::find()->select('doctorId')->where(['patientHistoryId' => $previousRecords->patientInfoId])->asArray()->one();
+
+	$doctor_name = Doctors::find()->select('name')->where(['userId' => $doctorname])->asArray()->one();
+
+        if(!empty($doctor_name))
+	     {
+	     	foreach ($doctor_name as $name){
+	    $previousDoc[$s]['createdDate'] = date("d-M-Y",strtotime($previousRecords->createdDate));
+		$previousDoc[$s]['patientInfoId'] = $previousRecords->patientInfoId;
+		$previousDoc[$s]['name'] = $name;
+		$s++;
+	     	}}else{
+		echo 'Not Mentionad';
+	}  
 	
-	$previousrecords .= '<div class="col-lg-7 col-sm-12">
-    <div class="col-lg-1 col-sm-12">'.$pr.'.</div> <div class="col-lg-8 col-sm-12"><a href="'.$previousrecordsUrl.'&infoid='.$previousRecords->patientInfoId.'" target="_blank">'.date("d-M-Y",strtotime($previousRecords->createdDate)).'</a></div>
-</div>';
+
+  $previousrecords .= '<div class="col-lg-7 col-sm-12">
+
+ <table style="color:#2698b7;" class="col-lg-7 col-sm-12 " border=1>
+	<tr>
+	<td>sno</td>
+	<td>Date</td>
+	<td>Doctor Name</td>
+	</tr>
+
+ <tr>
+ <td>'.$pr.'</td>
+ <td><a href="'.$previousrecordsUrl.'&infoid='.$previousRecords->patientInfoId.'" target="_blank">'.date("d-M-Y",strtotime($previousRecords->createdDate)).'</a></td>
+ <td><a href="'.$previousrecordsUrl.'&infoid='.$previousRecords->patientInfoId.'" target="_blank"><b>'.$doctor_name['name'].'</b></a></td>
+ </tr>
+    		</table>
+    		       </div>';
 	?>
 	
 <?php 
@@ -134,8 +174,10 @@ for($m=0; $m<count($previousDoc);$m++)
 {
 	$sno = $m+1;
 	$documents .= '<div class="col-lg-7 col-sm-12">
-    <div class="col-lg-1 col-sm-12">'.$sno.'.</div> <div class="col-lg-8 col-sm-12"><a href="'.$DocpreviousrecordsUrl.'&infoid='.$previousDoc[$m]['patientInfoId'].'" target="_blank">'.$previousDoc[$m]['createdDate'].'</a></div>
-</div>';
+        <div class="col-lg-1 col-sm-12">'.$sno.'.</div> 
+		<div class="col-lg-8 col-sm-12"><a href="'.$DocpreviousrecordsUrl.'&infoid='.$previousDoc[$m]['patientInfoId'].'" target="_blank">'
+		.$previousDoc[$m]['createdDate'].'</a></div>
+        </div>';
 }
 }?>
 

@@ -127,10 +127,7 @@ use yii\helpers\Url;
 					  {
 					  	?>
 					  	<img src="<?php echo Url::base()."/images/user-iconnew.png" ;?>" class="images" alt="Image"> </img>
-					  	<?php 
-					  	
-					  }
-             }             	?>
+					  	<?php }}  ?>
                             <p>
                                 <?php echo Yii::$app->user->identity->username;?>
                             </p>

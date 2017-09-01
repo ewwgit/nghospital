@@ -548,6 +548,17 @@ public function behaviors()
     		throw new NotFoundHttpException('The requested page does not exist.');
     	}
     }
+    public function actionPatientshistoryviewpdf($infoid)
+    {
+    	    	
+    	$model = $this->findinfoModel($infoid);
+    	$patmodel = Patients::find()->where(['patientId' =>$model->patientId])->one();
+    	
+    	return $this->render('patientshistoryview_pdf', [
+    			'model' => $this->findinfoModel($infoid),'patmodel' => $patmodel,'infoid'=>$infoid
+    	]);
+    }
+
 
     public function actionPatientshistoryview($infoid)
     {
