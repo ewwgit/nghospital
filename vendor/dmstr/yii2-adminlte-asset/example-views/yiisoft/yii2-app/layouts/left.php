@@ -274,5 +274,9 @@ use yii\helpers\Url;
     margin-right: 10px;
     margin-top: -2px;
 }
+.user-panel>.image>img {
+   max-width:45px;
+   height:45px;
+    }
 
 </style>
