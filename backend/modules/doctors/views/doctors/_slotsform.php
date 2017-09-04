@@ -64,7 +64,7 @@ use unclead\multipleinput\MultipleInput;
         		
         		'items' => [
         				
-        				'NaN' => 'No time',
+        			  //'0000' => 'No Time',
         				'00:00' => '12:00 AM',
     					'00:30' => '12:30 AM',
         				
@@ -129,12 +129,12 @@ use unclead\multipleinput\MultipleInput;
     		[
     		'name'  => 'endTime',
     		'title' => 'End Time',
-    				'type'  => 'dropDownList',
+    		'type'  => 'dropDownList',
     		'enableError' => true,
     			
     				'items' => [
     						
-    					'0000' => 'No time',
+    					//'0000' => 'No time',
     				    '00:00' => '12:00 AM',
     					'00:30' => '12:30 AM',
         				

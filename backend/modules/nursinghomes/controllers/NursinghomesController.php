@@ -49,7 +49,7 @@ public function behaviors()
 		else if(UserrolesModel::getRole() == 3)
 		{
 			$permissionsArray = ['profileupdate','profileview','reset-password','states','doctorspecialitieslist'];
-		}else if(UserrolesModel::getRole() == 4)
+		}else if(UserrolesModel::getRole() >= 4)
 		{
 			$permissionsArray = ['index','create','update','view','delete','states','reset-password'];
 		}

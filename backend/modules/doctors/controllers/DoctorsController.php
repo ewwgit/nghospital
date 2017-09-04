@@ -54,7 +54,7 @@ public function behaviors()
 		elseif(UserrolesModel::getRole() == 2)
 		{
 			$permissionsArray = ['profileupdate','profileview','patient-requests','reset-password','patient-info','states','patient-requests-completed'];
-		}elseif(UserrolesModel::getRole() == 4)
+		}elseif(UserrolesModel::getRole() >= 4)
 		{
 			$permissionsArray = ['index','create','update','view','delete','reset-password','states'];
 		}

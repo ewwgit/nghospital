@@ -32,7 +32,7 @@ public function behaviors()
 		if(UserrolesModel::getRole() == 1)
 		{
 			$permissionsArray = ['index','create','update','view','delete','convert-nursinghomes'];
-		}elseif (UserrolesModel::getRole() == 4)
+		}elseif (UserrolesModel::getRole() >= 4)
 		{
 			$permissionsArray = ['index','create','update','view','delete','convert-nursinghomes'];
 		}
