@@ -34,32 +34,33 @@ $historyform = '<div class="row">
     <div class="col-lg-4 col-sm-12">Pulse Rate:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'pulseRate')->textInput(['maxlength' =>3])->label(false).'</div>
 </div>    
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-4 col-sm-12">BP:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'BPLeftArm')->textInput(['maxlength' => 6])->label(false).'</div>
+    <div class="col-lg-4 col-sm-12">BpLeft Arm:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'BPLeftArm')->textInput(['maxlength' => 6])->label(false).'</div>
 </div>
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-4 col-sm-12">Temparature:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'temparatureType')->textInput(['maxlength' => 5])->label(false).'</div>
+    <div class="col-lg-4 col-sm-12">BPRight Arm:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'BPRightArm')->textInput(['maxlength' => 6])->label(false).'</div>
 </div>
 </div>
 <div class="row">
+<div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-4 col-sm-12">Temparature:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'temparatureType')->textInput(['maxlength' => 5])->label(false).'</div>
+</div>
 <div class="form-group col-lg-4 col-sm-12">
     <div class="col-lg-4 col-sm-12">Diseases:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'diseases')->textInput(['maxlength' => 200])->label(false).'</div>
 </div> 
 <div class="form-group col-lg-4 col-sm-12">
     <div class="col-lg-4 col-sm-12">Allergic Medicine:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'allergicMedicine')->textInput(['maxlength' => 100])->label(false).'</div>
 </div>
+</div>
+<div class="row">
+<div class="form-group col-lg-4 col-sm-12">
+	<div class="col-lg-4 col-sm-12">Compliant:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'patientCompliant')->textarea(['rows' => 6,'maxlength'=>255])->label(false).'</div>
+</div>
 <div class="form-group col-lg-4 col-sm-12">
     <div class="col-lg-4 col-sm-12">Document:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'documentUrl[]')->widget(FileInput::classname(), [
     'options' => ['multiple' => true],
     'pluginOptions' => ['previewFileType' => 'any']
 ])->label(false).'</div>
-</div>	
 </div>
-<div class="row">
-
-<div class="form-group col-lg-4 col-sm-12">
-	<div class="col-lg-4 col-sm-12">Compliant:</div> <div class="col-lg-8 col-sm-12">'.$form->field($model, 'patientCompliant')->textarea(['rows' => 6,'maxlength'=>255])->label(false).'</div>
-</div>
-
 </div>
 			
 			<div class="row">
@@ -110,6 +111,14 @@ $documents = '';
 	$pr=1;
 	$k=0;
 	$s=0;
+	$previousrecords .= '<div class="col-lg-7 col-sm-12">
+	
+ <table style="color:#2698b7;" class="col-lg-7 col-sm-12 " border=1>
+	<tr>
+	<td>sno</td>
+	<td>Date</td>
+	<td>Doctor Name</td>
+	</tr>';
 	
 ?>
 
@@ -142,14 +151,7 @@ foreach ($model->previousRecords as $previousRecords)
 	}  
 	
 
-  $previousrecords .= '<div class="col-lg-7 col-sm-12">
-
- <table style="color:#2698b7;" class="col-lg-7 col-sm-12 " border=1>
-	<tr>
-	<td>sno</td>
-	<td>Date</td>
-	<td>Doctor Name</td>
-	</tr>
+  $previousrecords .= '
 
  <tr>
  <td>'.$pr.'</td>
@@ -162,7 +164,9 @@ foreach ($model->previousRecords as $previousRecords)
 	
 <?php 
 $pr++;
-} }?>
+} 
+$previousrecords .='</table></div>'; 
+}?>
 
 <?php if(empty($previousDoc)){
 	$documents .='<div class="col-lg-7 col-sm-12">
