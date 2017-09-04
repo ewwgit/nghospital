@@ -194,13 +194,11 @@ $this->params ['breadcrumbs'] [] = $this->title;
 				<div class="right">Respiration Rate</div>
 				<div class="right-content">:</div>
 				<div class="right-second">5454</div>
-				<div class="right">BP LeftArm</div>
+				<div class="right">BP</div>
 				<div class="right-content">:</div>
 				<div class="right-second">121</div>
 
-				<div class="right">BP RightArm</div>
-				<div class="right-content">:</div>
-				<div class="right-second">1212</div>
+				
 
 				<div class="right">Pulse Rate</div>
 				<div class="right-content">:</div>

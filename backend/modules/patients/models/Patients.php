@@ -39,7 +39,6 @@ class Patients extends \yii\db\ActiveRecord
 	public $weight;
 	public $respirationRate;
 	public $BPLeftArm;
-	public $BPRightArm;
 	public $pulseRate;
 	public $temparatureType;
 	public $diseases;
@@ -60,7 +59,7 @@ class Patients extends \yii\db\ActiveRecord
     {
         return [
             [['firstName', 'lastName', 'gender', 'age', 'dateOfBirth', 'country', 'state'], 'required'],
-             [['BPLeftArm','BPRightArm'],'required'],
+             [['BPLeftArm',],'required'],
             [['gender'], 'string'],
             [['age','mobile','pinCode'],'integer'],
             [['dateOfBirth', 'createdDate', 'updatedDate','patientImage','patientimageupdate','previousRecords','createdBy','updatedBy','district', 'city', 'mandal', 'village', 'pinCode', 'mobile'], 'safe'],
@@ -93,7 +92,7 @@ class Patients extends \yii\db\ActiveRecord
         		'extensions'=>'jpeg,png,jpg',
         		'wrongExtension'=>'Only {extensions} types are allowed',
         		],
-        	[['height','weight','respirationRate','BPLeftArm','BPRightArm','pulseRate','temparatureType','diseases','allergicMedicine','createdDate','patientCompliant', 'createdDate', 'updatedDate', 'countryName', 'stateName', 'patientUniqueId'],'safe'],
+        	[['height','weight','respirationRate','BPLeftArm','pulseRate','temparatureType','diseases','allergicMedicine','createdDate','patientCompliant', 'createdDate', 'updatedDate', 'countryName', 'stateName', 'patientUniqueId'],'safe'],
         ];
     }
 
@@ -124,6 +123,7 @@ class Patients extends \yii\db\ActiveRecord
             'createdDate' => 'Created Date',
             'updatedDate' => 'Updated Date',
         	'documentUrl' => 'Patient Documents',
+        		'BPLeftArm' => 'BP',
         ];
     }
 }

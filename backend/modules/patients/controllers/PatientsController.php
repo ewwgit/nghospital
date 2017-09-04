@@ -389,7 +389,6 @@ public function behaviors()
     				$model->weight = $patmodel->weight;
     				$model->respirationRate = $patmodel->respirationRate;
     				$model->BPLeftArm = $patmodel->BPLeftArm;
-    				$model->BPRightArm = $patmodel->BPRightArm;
     				$model->pulseRate = $patmodel->pulseRate;
     				$model->temparatureType = $patmodel->temparatureType;
     				$model->diseases = $patmodel->diseases;
@@ -459,7 +458,7 @@ public function behaviors()
         	$patmodelnew->weight = $model->weight;
         	$patmodelnew->respirationRate = $model->respirationRate;
         	$patmodelnew->BPLeftArm = $model->BPLeftArm;
-        	$patmodelnew->BPRightArm = $model->BPRightArm;
+        	
         	$patmodelnew->pulseRate = $model->pulseRate;
         	$patmodelnew->temparatureType = $model->temparatureType;
         	$patmodelnew->diseases = $model->diseases;
@@ -509,7 +508,7 @@ public function behaviors()
         	$patmodelnew->weight = $model->weight;
         	$patmodelnew->respirationRate = $model->respirationRate;
         	$patmodelnew->BPLeftArm = $model->BPLeftArm;
-        	$patmodelnew->BPRightArm = $model->BPRightArm;
+        
         	$patmodelnew->pulseRate = $model->pulseRate;
         	$patmodelnew->temparatureType = $model->temparatureType;
         	$patmodelnew->diseases = $model->diseases;

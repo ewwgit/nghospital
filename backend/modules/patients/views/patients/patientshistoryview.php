@@ -205,13 +205,11 @@ h3 {
 								}else{
 									echo 'Not Mentioned';
 								}?> </div>
-								<div class="right">BP Left Arm</div>								
+								<div class="right">BP</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->BPLeftArm; ?></div>
 								
-								<div class="right">BP Right Arm</div>								
-								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->BPRightArm; ?></div>
+								
 													        
 							    <div class="right">Pulse Rate</div>								
 								<div class="right-content">:</div>

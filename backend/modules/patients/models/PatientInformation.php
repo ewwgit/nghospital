@@ -37,12 +37,12 @@ class PatientInformation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['patientId', 'height', 'weight', 'respirationRate', 'BPLeftArm', 'BPRightArm', 'pulseRate', 'temparatureType', 'diseases', 'allergicMedicine', 'createdDate', 'patientCompliant'], 'safe'],
+            [['patientId', 'height', 'weight', 'respirationRate', 'BPLeftArm', 'pulseRate', 'temparatureType', 'diseases', 'allergicMedicine', 'createdDate', 'patientCompliant'], 'safe'],
             [['patientId'], 'integer'],
-            [['patientId','BPLeftArm','BPRightArm'], 'required'],
+            [['patientId','BPLeftArm'], 'required'],
             [['patientCompliant'], 'string'],
             //[['height', 'weight', 'respirationRate', 'pulseRate'], 'string', 'max' => 5],
-            [['BPLeftArm', 'BPRightArm', 'temparatureType', 'diseases', 'allergicMedicine'], 'string', 'max' => 200],
+            [['BPLeftArm', 'temparatureType', 'diseases', 'allergicMedicine'], 'string', 'max' => 200],
 
         ];
     }
@@ -58,8 +58,7 @@ class PatientInformation extends \yii\db\ActiveRecord
             'height' => 'Height',
             'weight' => 'Weight',
             'respirationRate' => 'Respiration Rate',
-            'BPLeftArm' => 'Bpleft Arm',
-            'BPRightArm' => 'Bpright Arm',
+            'BPLeftArm' => 'BP',
             'pulseRate' => 'Pulse Rate',
             'temparatureType' => 'Temparature Type',
             'diseases' => 'Diseases',

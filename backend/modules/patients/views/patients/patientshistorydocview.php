@@ -153,7 +153,7 @@ h3 {
 						    </div> <!---doctor-box closed-->
 						    </div>	<!---main-wrap closed-->
 						    <?php 
-						    $cdate = $patmodel->createdDate;
+						    $cdate = $model->createdDate;
 						    $yrdata= strtotime($cdate);
 						    $yeardata= date('d-M-Y', $yrdata);
 						    
@@ -193,7 +193,7 @@ h3 {
 								}else{
 									echo 'Not Mentioned';
 								}?> </div>
-								<div class="right">BP Left Arm</div>								
+								<div class="right">BP</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								<?php if(!empty($model->BPLeftArm)){
@@ -202,9 +202,7 @@ h3 {
 									echo 'Not Mentioned';
 								}?></div>
 								
-								<div class="right">BP Right Arm</div>								
-								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->BPRightArm; ?></div>
+							
 													        
 								<div class="right">Pulse Rate</div>								
 								<div class="right-content">:</div>
@@ -289,7 +287,7 @@ h3 {
 									?>
 									<?php 
 								}else{
-									echo 'Not Mentioned';
+									echo 'There are no documents available';
 								}
 								?>
 																			
