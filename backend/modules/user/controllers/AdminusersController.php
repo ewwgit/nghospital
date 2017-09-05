@@ -481,7 +481,7 @@ class AdminusersController extends Controller
     		$success= 1;
     		
     	}
-    	else {
+    else {
 		    	if($permissiontype == 'permission-add')
 		    	{
 		    		$permissionAdd = $modulePermissions['permissions_add'];
@@ -489,15 +489,26 @@ class AdminusersController extends Controller
 		    		{
 		    			
 		    			$modulePermissions->permissions_add = 1;
+		    			if($modulePermissions->permissions_add == 1 && $modulePermissions->permissions_edit == 1 &&
+		    					$modulePermissions->permissions_delete == 1 && $modulePermissions->permissions_view == 1)
+		    			{
+		    				$modulePermissions->permissions_all=1;
+		    			}
+		    			else 
+		    			{
+		    				$modulePermissions->permissions_all=0;		    				
+		    			}
 		    			$modulePermissions->update();
 		    			$success= 1;
 		    		}
 		    		else if($permissionAdd == 1)
 		    		{
 		    			$modulePermissions->permissions_add = 0;
+		    			$modulePermissions->permissions_all=0;
 		    			$modulePermissions->update();
 		    			$success= 1;
 		    		}
+		    		
 		    		else
 		    		{
 		    			$modulePermissionsNew = new ModulePermissions();
@@ -516,15 +527,26 @@ class AdminusersController extends Controller
 		    		{
 		    			 
 		    			$modulePermissions->permissions_edit = 1;
+		    			if($modulePermissions->permissions_add == 1 && $modulePermissions->permissions_edit == 1 &&
+		    					$modulePermissions->permissions_delete == 1 && $modulePermissions->permissions_view == 1)
+		    			{
+		    				$modulePermissions->permissions_all=1;
+		    			}
+		    			else
+		    			{
+		    				$modulePermissions->permissions_all=0;
+		    			}
 		    			$modulePermissions->update();
 		    			$success= 1;
 		    		}
 		    		else if($permissionEdit == 1)
 		    		{
 		    			$modulePermissions->permissions_edit = 0;
+		    			$modulePermissions->permissions_all=0;
 		    			$modulePermissions->update();
 		    			$success= 1;
 		    		}
+		    		
 		    		else
 		    		{
 		    			$modulePermissionsNew = new ModulePermissions();
@@ -543,16 +565,26 @@ class AdminusersController extends Controller
 		    		{
 		    	
 		    			$modulePermissions->permissions_delete = 1;
+		    			if($modulePermissions->permissions_add == 1 && $modulePermissions->permissions_edit == 1 &&
+		    					$modulePermissions->permissions_delete == 1 && $modulePermissions->permissions_view == 1)
+		    			{
+		    				$modulePermissions->permissions_all=1;
+		    			}
+		    			else
+		    			{
+		    				$modulePermissions->permissions_all=0;
+		    			}
 		    			$modulePermissions->update();
 		    			$success= 1;
 		    		}
 		    		else if($permissionDelete == 1)
 		    		{
 		    			$modulePermissions->permissions_delete = 0;
+		    			$modulePermissions->permissions_all=0;
 		    			$modulePermissions->update();
 		    			$success= 1;
 		    	
-		    		}
+		    		}		    		
 		    		else
 		    		{
 		    			$modulePermissionsNew = new ModulePermissions();
@@ -561,26 +593,33 @@ class AdminusersController extends Controller
 		    			$modulePermissionsNew->permissions_delete = 1;
 		    			$modulePermissionsNew->save();
 		    			$success= 1;
-		    		}
-		    		 
+		    		}		    		 
 		    	}
 		    	if($permissiontype == 'permission-view')
 		    	{
 		    		$permissionView = $modulePermissions['permissions_view'];
 		    		if($permissionView == 0)
-		    		{
-		    	
+		    		{		    	
 		    			$modulePermissions->permissions_view = 1;
+		    			if($modulePermissions->permissions_add == 1 && $modulePermissions->permissions_edit == 1 &&
+		    					$modulePermissions->permissions_delete == 1 && $modulePermissions->permissions_view == 1)
+		    			{
+		    				$modulePermissions->permissions_all=1;
+		    			}
+		    			else
+		    			{
+		    				$modulePermissions->permissions_all=0;
+		    			}
 		    			$modulePermissions->update();
 		    			$success= 1;
 		    		}
 		    		else if($permissionView == 1)
 		    		{
 		    			$modulePermissions->permissions_view = 0;
+		    			$modulePermissions->permissions_all=0;
 		    			$modulePermissions->update();
-		    			$success= 1;
-		    	
-		    		}
+		    			$success= 1;		    	
+		    		}		    		
 		    		else
 		    		{
 		    			$modulePermissionsNew = new ModulePermissions();
@@ -616,6 +655,7 @@ class AdminusersController extends Controller
 		    			$success= 1;
 		    			 
 		    		}
+		    		
 		    		else
 		    		{
 		    			$modulePermissionsNew = new ModulePermissions();
@@ -681,12 +721,10 @@ class AdminusersController extends Controller
     		Yii::$app->getSession()->setFlash('success', 'New password was saved.');
     
     		return $this->redirect(['index']);;
-    	}
-    
+    	}    
     	return $this->render('resetPassword', [
     			'model' => $model,
-    	]);
-    
+    	]);    
     }
    /*  protected function findModel($id)
     {
