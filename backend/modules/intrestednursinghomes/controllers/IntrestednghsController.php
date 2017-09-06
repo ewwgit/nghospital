@@ -32,9 +32,8 @@ public function behaviors()
 		if(UserrolesModel::getRole() == 1)
 		{
 			$permissionsArray = ['index','create','update','view','delete','convert-nursinghomes'];
-		}elseif (UserrolesModel::getRole() >= 4)
-		{
-			$permissionsArray = ['index','create','update','view','delete','convert-nursinghomes'];
+		}else if (UserrolesModel::getRole() == '') {
+			$permissionsArray = [''];
 		}
 		else {
 			$modulePermissions = ModulePermissions::find()->where(['moduleId' =>4,'adminuserId'=> Yii::$app->user->identity->id])->one();
