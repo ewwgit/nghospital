@@ -152,8 +152,9 @@ use yii\helpers\Url;
             ]
         ) ?>
 
-<?php }else{?>
-        <?= dmstr\widgets\Menu::widget(
+<?php } elseif (UserrolesModel::getRole() == 1){?>
+
+<?= dmstr\widgets\Menu::widget(
             [
                 'options' => ['class' => 'sidebar-menu'],
                 'items' => [
@@ -256,6 +257,99 @@ use yii\helpers\Url;
                 		
                 		],
                 		],
+                		
+                		
+                ],
+            ]
+        ) ?>
+
+<?php }else{?>
+        <?= dmstr\widgets\Menu::widget(
+            [
+                'options' => ['class' => 'sidebar-menu'],
+                'items' => [
+                    ['label' => 'Dashboard', 'icon' => 'dashboard', 'url' => ['/']],
+                    /* ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
+                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest], */
+                		
+                		[
+                		'label' => 'Admin Users',
+                		'icon' => 'user',
+                		'url' => '#',
+                		'items' => [
+                				
+                				['label' => 'Profile', 'icon' => 'plus-circle', 'url' => ['/user/adminusers/view','id'=>Yii::$app->user->identity->id],],
+                		],
+                		
+                		],
+                		
+                		[
+                		'label' => 'Doctors',
+                		//'class' => 'fa fa-user-md',
+                		'icon' => 'user-md',
+                		'url' => '#',
+                		'items' => [
+                				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/doctors/doctors/create'],],
+                				['label' => 'View All', 'icon' => 'eye', 'url' => ['/doctors/doctors'],],
+                		
+                		],
+                		],
+                		[
+                		'label' => 'Interested Doctors',
+                		//'class' => 'fa fa-user-md',
+                		'icon' => 'user-md',
+                		'url' => '#',
+                		'items' => [
+                				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/intresteddoctors/intresteddoctors/create'],],
+                				['label' => 'View All', 'icon' => 'eye', 'url' => ['/intresteddoctors/intresteddoctors'],],
+                		
+                		],
+                		],
+                		[
+                		'label' => 'Qualifications',
+                		//'class' => 'fa fa-user-md',
+                		'icon' => 'sun-o',
+                		'url' => '#',
+                		'items' => [
+                				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/qualifications/qualifications/create'],],
+                				['label' => 'View All', 'icon' => 'eye', 'url' => ['/qualifications/qualifications'],],
+                		
+                		],
+                		],
+                		[
+                		'label' => 'Speicialities',
+                		//'class' => 'fa fa-user-md',
+                		'icon' => 'id-badge',
+                		'url' => '#',
+                		'items' => [
+                				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/specialities/specialities/create'],],
+                				['label' => 'View All', 'icon' => 'eye', 'url' => ['/specialities/specialities'],],
+                		
+                		],
+                		],
+                		[
+                		'label' => 'Nursing Homes',
+                		//'class' => 'fa fa-user-md',
+                		'icon' => 'h-square',
+                		'url' => '#',
+                		'items' => [
+                				['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/nursinghomes/nursinghomes/create'],],
+                				['label' => 'View All', 'icon' => 'eye', 'url' => ['/nursinghomes/nursinghomes'],],
+                		
+                		],
+                		],
+                		[
+                				'label' => 'Intrested Nursing Homes',
+                				//'class' => 'fa fa-user-md',
+                				'icon' => 'h-square',
+                				'url' => '#',
+                				'items' => [
+                						['label' => 'Create', 'icon' => 'plus-circle', 'url' => ['/intrestednursinghomes/intrestednghs/create'],],
+                						['label' => 'View All', 'icon' => 'eye', 'url' => ['/intrestednursinghomes/intrestednghs'],],
+                		
+                				],
+                		],
+                		
                 		
                 		
                 ],
