@@ -4,6 +4,7 @@ namespace backend\models;
 use yii\base\Model;
 use yii\base\InvalidParamException;
 use common\models\User;
+use yii;
 
 /**
  * Password reset form
@@ -33,7 +34,9 @@ class ResetPasswordForm extends Model
         }
         $this->_user = User::findByPasswordResetToken($token);
         if (!$this->_user) {
-            throw new InvalidParamException('Wrong password reset token.');
+           // throw new InvalidParamException('Wrong password reset token.');
+        	return Yii::$app->getResponse()->redirect('site/login/');
+        	
         }
         parent::__construct($config);
     }
