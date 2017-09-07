@@ -223,7 +223,7 @@ $items = [
 </div>
 <div class="row">
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-4 col-sm-12">Age:</div> <div class="col-lg-8 col-sm-12"> <?= $form->field($model, 'age')->textInput(['maxlength' => 5])->label(false); ?></div>
+    <div class="col-lg-4 col-sm-12">Age:</div> <div class="col-lg-8 col-sm-12"> <?= $form->field($model, 'age')->textInput(['maxlength' => 3])->label(false); ?></div>
 </div>
 <div class="form-group col-lg-4 col-sm-12">
     <div class="col-lg-4 col-sm-12">Date of Birth:</div> <div class="col-lg-8 col-sm-12"><?= $form->field($model, 'dateOfBirth')->widget ( DatePicker::classname (), [ 'options' => [ 'placeholder' => 'Enter Date Of Birth ...' ],'pluginOptions' => [ 'autoclose' => true , 'format' => 'yyyy-mm-dd'] ] )->label(false); ?></div>
@@ -290,7 +290,7 @@ $items = [
 									 echo Url::base()."/images/user-iconnew.png" ;
 								      }
 								?>"
-							width="100" height="100"> </img> 
+							width="157"; height="100"> </img> 
 
 </div>
 <?php } ?>
