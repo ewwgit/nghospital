@@ -175,7 +175,45 @@ class AdminusersController extends Controller
         		'data' =>$data,
         ]);
     }
-
+    public function actionProfileview($id)
+    {
+    	$model = new SignupFormadmin();
+    	$adminInfo = new AdminInformation();
+    	 
+    	$adminuser = User::find()->where(['id' => $id])->one();
+    	 
+    	//print_r($adminuser);exit;
+    	 
+    	if(!empty($adminuser))
+    	{
+    		$model->username = $adminuser->username;
+    		$model->email = $adminuser->email;
+    		$model->status = $adminuser->status;
+    		$model->role = $adminuser->role;
+    		$model->id = $adminuser->id;
+    		//print_r($model->role);exit;
+    		$roleName = Role::find()->select('RoleName')->where( ['RoleId' => $model->role])->one();
+    
+    		$datas = ArrayHelper::toArray($roleName, ['RoleName']);
+    		$data=implode($datas);
+    		$model->role = $data;
+    		$adminInfo = AdminInformation::find()->where(['aduserId' => $adminuser->id])->one();
+    		if(!empty($adminInfo))
+    		{
+    			$model->firstName = $adminInfo->firstName;
+    			$model->lastName = $adminInfo->lastName;
+    			$model->address = $adminInfo->address;
+    			$model->profileImage = $adminInfo->profileImage;
+    			$model->phoneNumber = $adminInfo->phoneNumber;
+    			$model->idproofs = $adminInfo->idproofs;
+    		}
+    	}
+    	return $this->render('profileview', [
+    			'model' => $model,
+    			'data' =>$data,
+    	]);
+    }
+    
     /**
      * Creates a new AdminMaster model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -381,6 +419,118 @@ class AdminusersController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+    public function actionProfileupdate($id){
+    	$model = new SignupFormadmin();
+    	$adminInfo = new AdminInformation();
+    	$adminuser = User::find()->where(['id' => $id])->one();
+    	
+    	if(!empty($adminuser))
+    	{
+    		$model->username = $adminuser->username;
+    		$model->email = $adminuser->email;
+    		$model->status = $adminuser->status;
+    		$model->role = $adminuser->role;
+    		$adminInfo = AdminInformation::find()->where(['aduserId' => $adminuser->id])->one();
+    		if(!empty($adminInfo))
+    		{
+    			$model->firstName = $adminInfo->firstName;
+    			$model->lastName = $adminInfo->lastName;
+    			$model->address = $adminInfo->address;
+    			$model->profileImage = $adminInfo->profileImage;
+    			$model->phoneNumber = $adminInfo->phoneNumber;
+    			$model->idproofs = $adminInfo->idproofs;
+    		}
+    	}
+    	
+    	if ($model->load(Yii::$app->request->post()))
+    	{
+    		$model->file = UploadedFile::getInstance($model,'file');
+    		if($model->validate())
+    		{
+    			 
+    			$adminuser->username = $model->username;
+    			$adminuser->email = $model->email;
+    			$adminuser->status = $model->status ;
+    			$adminuser->role = $model->role ;
+    			if($model->password != '')
+    			{
+    				$adminuser->setPassword($model->password);
+    			}
+    			$adminuser->update();
+    			//print_r($adminuser->id);exit();
+    			 
+    			$adminInfo->aduserId = $adminuser->id;
+    			$adminInfo->firstName = $model->firstName;
+    			$adminInfo->lastName = $model->lastName;
+    			$adminInfo->phoneNumber = $model->phoneNumber;
+    			$adminInfo->idproofs = $model->idproofs;
+    			 
+    			$adminInfo->address = $model->address ;
+    			 
+    			 
+    			if($model->file != '')
+    			{
+    				$imageName = rand(1000,100000).$model->file->baseName;
+    				$model->file->saveAs('profileimages/'.$imageName.'.'.$model->file->extension );
+    				 
+    				$model->profileImage = 'profileimages/'.$imageName.'.'.$model->file->extension;
+    				$adminInfo->profileImage= $model->profileImage;
+    			}
+    			//echo $model->profileImage;exit();
+    			$adminInfo->save();
+    			Yii::$app->session->setFlash('success', " Adminuser Updated successfully ");
+    			return $this->redirect(['profileview','id' => $adminuser->id]);
+    		}
+    		else {
+    			$Roles = $model->getAllRoles();
+    			$newroles = array();
+    			 
+    			foreach ($Roles as $key => $val)
+    			{
+    				if(($val != 'Super Admin')&& ($val != 'Doctor')&& ($val != 'Nursing Home') ){
+    					$newroles [$key] = $val;
+    				}
+    	
+    			}
+    			/* for ($i=1;$i<=count($Roles);$i++)
+    			 {
+    			 if(($Roles[$i] != 'super admin')&& ($Roles[$i] != 'user') )
+    			 {
+    			 $newroles [$i] = $Roles[$i];
+    			 }
+    			 } */
+    			 
+    			$model->roles = $newroles;
+    			return $this->render('update', [
+    					'model' => $model,
+    			]);
+    		}
+    	} else {
+    		$Roles = $model->getAllRoles();
+    		$newroles = array();
+    		 
+    		foreach ($Roles as $key => $val)
+    		{
+    			if(($val != 'Super Admin')&& ($val != 'Doctor')&& ($val != 'Nursing Home') ){
+    				$newroles [$key] = $val;
+    			}
+    			 
+    		}
+    		/* for ($i=1;$i<=count($Roles);$i++)
+    		 {
+    		 if(($Roles[$i] != 'super admin')&& ($Roles[$i] != 'user') )
+    		 {
+    		 $newroles [$i] = $Roles[$i];
+    		 }
+    		 } */
+    		 
+    		$model->roles = $newroles;
+    		return $this->render('update', [
+    				'model' => $model,
+    		]);
+    	}
+    	
     }
 
     /**
