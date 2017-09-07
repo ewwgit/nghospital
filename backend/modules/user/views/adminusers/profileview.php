@@ -11,7 +11,7 @@ $rest = substr($str, 0, 150);
 
 $this->title = $rest;
 //$this->title = $model->username;
-$this->params['breadcrumbs'][] = ['label' => 'Admin Users', 'url' => ['index']];
+//$this->params['breadcrumbs'][] = ['label' => 'Admin Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="doctors-view">
