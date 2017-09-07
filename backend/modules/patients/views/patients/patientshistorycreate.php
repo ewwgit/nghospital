@@ -114,9 +114,9 @@ $documents = '';
 	
  <table style="color:#2698b7;" class="col-lg-7 col-sm-12 " border=1>
 	<tr>
-	<td>sno</td>
-	<td>Date</td>
-	<td>Doctor Name</td>
+	<td style="text-align:center; font-weight:bold;">S.No</td>
+	<td style="text-align:center; font-weight:bold;">Date</td>
+	<td style="text-align:center; font-weight:bold;">Doctor Name</td>
 	</tr>';
 	
 ?>
@@ -153,9 +153,9 @@ foreach ($model->previousRecords as $previousRecords)
   $previousrecords .= '
 
  <tr>
- <td>'.$pr.'</td>
- <td><a href="'.$previousrecordsUrl.'&infoid='.$previousRecords->patientInfoId.'" target="_blank">'.date("d-M-Y",strtotime($previousRecords->createdDate)).'</a></td>
- <td><a href="'.$previousrecordsUrl.'&infoid='.$previousRecords->patientInfoId.'" target="_blank"><b>'.$doctor_name['name'].'</b></a></td>
+ <td style="text-align:center;">'.$pr.'</td>
+ <td style="text-align:center"><a href="'.$previousrecordsUrl.'&infoid='.$previousRecords->patientInfoId.'" target="_blank">'.date("d-M-Y",strtotime($previousRecords->createdDate)).'</a></td>
+ <td style="text-align:center"><a href="'.$previousrecordsUrl.'&infoid='.$previousRecords->patientInfoId.'" target="_blank">'.$doctor_name['name'].'</a></td>
  </tr>
     		';
 	?>
@@ -400,5 +400,8 @@ $( document ).ready(function() {
 	}
 .close {
 	font-size: 20px;
+}
+td {
+line-height: 1.8;
 }
 </style>
