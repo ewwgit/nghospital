@@ -156,7 +156,7 @@ use yii\helpers\Url;
              		         
              		          <?=  Html::a(
                                     'Profile',
-                                    ['/user/adminusers/view','id'=>Yii::$app->user->identity->id],
+                                    ['/user/adminusers/profileview','id'=>Yii::$app->user->identity->id],
                                     ['data-method' => 'post', 'class' => 'btn btn-default']
                                 ) ?><?php }?>
              		         
