@@ -502,7 +502,7 @@ class AdminusersController extends Controller
     			 } */
     			 
     			$model->roles = $newroles;
-    			return $this->render('update', [
+    			return $this->render('profileupdate', [
     					'model' => $model,
     			]);
     		}
@@ -526,7 +526,7 @@ class AdminusersController extends Controller
     		 } */
     		 
     		$model->roles = $newroles;
-    		return $this->render('update', [
+    		return $this->render('profileupdate', [
     				'model' => $model,
     		]);
     	}
