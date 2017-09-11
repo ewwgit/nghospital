@@ -3,7 +3,7 @@
 namespace app\modules\intrestednursinghomes\controllers;
 
 use Yii;
-use app\modules\intrestednursinghomes\models\Intrestednghs;
+use app\modules\intrestednursinghomes\models\IntrestedNghs;
 use app\modules\intrestednursinghomes\models\IntrestednghsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

@@ -3,7 +3,7 @@
 namespace app\modules\intresteddoctors\controllers;
 
 use Yii;
-use app\modules\intresteddoctors\models\Intresteddoctors;
+use app\modules\intresteddoctors\models\IntrestedDoctors;
 use app\modules\intresteddoctors\models\IntresteddoctorsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
