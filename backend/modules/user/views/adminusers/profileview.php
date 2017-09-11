@@ -36,7 +36,7 @@ th {
           
 				<div class="panel-body">		   
 					<!--form section start -->
-					<div class="right" style="color:#369;">ProFile Image</div>						
+					<div class="right" style="color:#369;">Profile Image</div>						
 					<div class="col-md-3" style="float:left;">					
 									       <?php if($model->profileImage != ''){?>
     							<?php $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->profileImage;?>
@@ -65,15 +65,15 @@ th {
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->email; ?> </div>
 								
-								<div class="right">Firstname</div>								
+								<div class="right">First Name</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->firstName; ?> 
 								</div>
-								<div class="right">LastName</div>								
+								<div class="right">Last Name</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->lastName; ?>
 								</div>
-								<div class="right">PhoneNumber</div>								
+								<div class="right">Phone Number</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->phoneNumber;?>
 								</div>
@@ -91,7 +91,7 @@ th {
 								
 								
 								
-								<div class="right">RoleName</div>								
+								<div class="right">Role Name</div>								
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $model->role;?>
 								</div>

@@ -278,7 +278,7 @@ use yii\helpers\Url;
                 		'url' => '#',
                 		'items' => [
                 				
-                				['label' => 'ProfileView', 'icon' => 'plus-circle', 'url' => ['/user/adminusers/profileview','id'=>Yii::$app->user->identity->id],],
+                				['label' => 'Profile View', 'icon' => 'plus-circle', 'url' => ['/user/adminusers/profileview','id'=>Yii::$app->user->identity->id],],
                 				['label' => 'Profile Update', 'icon' => 'eye', 'url' => ['/user/adminusers/profileupdate','id'=>Yii::$app->user->identity->id],],
                 		],
                 		
