@@ -57,17 +57,17 @@ class IntresteddoctorsController extends Controller
 			else {
 				if($modulePermissions['permissions_add'] == 1)
 				{
-					$permissionAdd = ['create'];
+					$permissionAdd = ['create','index'];
 					$permissionsArray = array_merge($permissionsArray,$permissionAdd);
 				}
 				if($modulePermissions['permissions_edit'] == 1)
 				{
-					$permissionEdit = ['update'];
+					$permissionEdit = ['update','index'];
 					$permissionsArray = array_merge($permissionsArray,$permissionEdit);
 				}
 				if($modulePermissions['permissions_delete'] == 1)
 				{
-					$permissionDelete = ['delete'];
+					$permissionDelete = ['delete','index'];
 					$permissionsArray = array_merge($permissionsArray,$permissionDelete);
 				}
 				if($modulePermissions['permissions_view'] == 1)

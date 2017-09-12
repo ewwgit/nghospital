@@ -67,17 +67,17 @@ public function behaviors()
 			else {
 				if($modulePermissions['permissions_add'] == 1)
 				{
-					$permissionAdd = ['create','states'];
+					$permissionAdd = ['create','states','index'];
 					$permissionsArray = array_merge($permissionsArray,$permissionAdd);
 				}
 				if($modulePermissions['permissions_edit'] == 1)
 				{
-					$permissionEdit = ['update','states'];
+					$permissionEdit = ['update','states','index'];
 					$permissionsArray = array_merge($permissionsArray,$permissionEdit);
 				}
 				if($modulePermissions['permissions_delete'] == 1)
 				{
-					$permissionDelete = ['delete','states'];
+					$permissionDelete = ['delete','states','index'];
 					$permissionsArray = array_merge($permissionsArray,$permissionDelete);
 				}
 				if($modulePermissions['permissions_view'] == 1)
