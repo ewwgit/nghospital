@@ -268,5 +268,13 @@ a.desc:after {
 	font-size:9px!important;
 	} 
 }
-
+.fileinput-upload-button {
+	display: none;
+}
+.kv-file-zoom {
+	display: none;
+}
+.file-object {
+	width: 100%;
+}
 /* Doctors detailview template css ends */
