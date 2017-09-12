@@ -138,24 +138,15 @@ foreach ($model->previousRecords as $previousRecords)
 
 	$doctor_name = Doctors::find()->select('name')->where(['userId' => $doctorname])->asArray()->one();
 
-        if(!empty($doctor_name))
-	     {
-	     	foreach ($doctor_name as $name){
-	    $previousDoc[$s]['createdDate'] = date("d-M-Y",strtotime($previousRecords->createdDate));
-		$previousDoc[$s]['patientInfoId'] = $previousRecords->patientInfoId;
-		$previousDoc[$s]['name'] = $name;
-		$s++;
-	     	}}else{
-		echo 'Not Mentionad';
-	}  
-	
-
   $previousrecords .= '
 
  <tr>
  <td style="text-align:center;">'.$pr.'</td>
  <td style="text-align:center"><a href="'.$previousrecordsUrl.'&infoid='.$previousRecords->patientInfoId.'" target="_blank">'.date("d-M-Y",strtotime($previousRecords->createdDate)).'</a></td>
- <td style="text-align:center"><a href="'.$previousrecordsUrl.'&infoid='.$previousRecords->patientInfoId.'" target="_blank">'.$doctor_name['name'].'</a></td>
+ <td style="text-align:center"><a href="'.$previousrecordsUrl.'&infoid='.$previousRecords->patientInfoId.'" target="_blank">'.$doctor_name['name'].
+    		
+	
+	'</a></td>
  </tr>
     		';
 	?>
@@ -223,7 +214,7 @@ $items = [
 </div>
 <div class="row">
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-4 col-sm-12">Age:</div> <div class="col-lg-8 col-sm-12"> <?= $form->field($model, 'age')->textInput(['maxlength' => 3])->label(false); ?></div>
+    <div class="col-lg-4 col-sm-12">Age:</div> <div class="col-lg-8 col-sm-12"> <?= $form->field($model, 'age')->textInput(['maxlength' => true])->label(false); ?></div>
 </div>
 <div class="form-group col-lg-4 col-sm-12">
     <div class="col-lg-4 col-sm-12">Date of Birth:</div> <div class="col-lg-8 col-sm-12"><?= $form->field($model, 'dateOfBirth')->widget ( DatePicker::classname (), [ 'options' => [ 'placeholder' => 'Enter Date Of Birth ...' ],'pluginOptions' => [ 'autoclose' => true , 'format' => 'yyyy-mm-dd'] ] )->label(false); ?></div>
@@ -290,7 +281,7 @@ $items = [
 									 echo Url::base()."/images/user-iconnew.png" ;
 								      }
 								?>"
-							width="157"; height="100"> </img> 
+							width="100" height="100"> </img> 
 
 </div>
 <?php } ?>
