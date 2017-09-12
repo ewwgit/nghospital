@@ -11,6 +11,7 @@ function printContent(el){
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\StringHelper;
 //**********************//
 use common\models\User;
 //**********************//
@@ -43,7 +44,7 @@ th {
 								<div class="right-content" style="  width: 0% ">:</div>
 								<div class="right-second" style=" width:38% ">
 								<?php if(!empty($model->name)){
-									echo $model->name;
+									echo StringHelper::truncate(($model->name),40);
 								}else{
 									echo 'Not Mentioned';
 								}?></div>
