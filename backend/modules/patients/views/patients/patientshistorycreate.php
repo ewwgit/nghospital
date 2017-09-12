@@ -395,4 +395,7 @@ $( document ).ready(function() {
 td {
 line-height: 1.8;
 }
+textarea {
+    resize: none;
+}
 </style>
