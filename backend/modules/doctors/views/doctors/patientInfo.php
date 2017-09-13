@@ -375,6 +375,9 @@ h3 {
 .detail-view td {
 	max-width: 150px;
 }
+textarea {
+    resize: none;
+}
 </style>
 
 <?php
