@@ -90,7 +90,7 @@ th {
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $usernamedata['email']; ?> </div>
 								
-								<div class="right">Qualification</div>								
+								<div class="right">Qualifications</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								<?php if(!empty($docqualiary)){
@@ -108,7 +108,7 @@ th {
 									echo 'Not Mentioned';
 								}?></div>
 								
-								<div class="right">Country Name</div>								
+								<div class="right">Country </div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								<?php if(!empty($model->countryName)){
@@ -118,7 +118,7 @@ th {
 								}?></div>
 								
 								
-								<div class="right">State Name</div>								
+								<div class="right">State</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								<?php if(!empty($model->stateName)){
@@ -127,7 +127,7 @@ th {
 									echo 'Not Mentioned';
 								}?></div>
 								
-								<div class="right">City Name</div>								
+								<div class="right">City</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 									<?php if(!empty($model->city)){
@@ -165,7 +165,7 @@ th {
 									echo 'Not Mentioned';
 								}?></div>
 								
-								<div class="right">Mobile</div>								
+								<div class="right">Mobile Number</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 									<?php if(!empty($model->doctorMobile)){

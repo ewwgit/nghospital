@@ -61,7 +61,7 @@ $this->params ['breadcrumbs'] [] = $this->title;
 							<div class="right-content">:</div>
 							<div class="right-second docname"></div>
 
-							<div class="right">Qualification</div>
+							<div class="right">Qualifications</div>
 							<div class="right-content">:</div>
 							<div class="right-second docquali"></div>
 
@@ -123,7 +123,7 @@ $this->params ['breadcrumbs'] [] = $this->title;
 											<div class="right-content">:</div>
 											<div class="right-second"><?=  $mpatientModel->age ?> </div>
 
-											<div class="right">Country Name</div>
+											<div class="right">Country</div>
 											<div class="right-content">:</div>
 											<div class="right-second">
 								<?php
@@ -135,7 +135,7 @@ if (! empty ( $mpatientModel->countryName )) {
 									echo 'Not Mentioned';
 								}
 								?></div>
-											<div class="right">State Name</div>
+											<div class="right">State</div>
 											<div class="right-content">:</div>
 											<div class="right-second">
 								<?php
@@ -148,7 +148,7 @@ if (! empty ( $mpatientModel->stateName )) {
 								}
 								?></div>
 
-											<div class="right">City Name</div>
+											<div class="right">City</div>
 											<div class="right-content">:</div>
 											<div class="right-second">
 									<?php
@@ -209,7 +209,7 @@ if (! empty ( $mpatientModel->village )) {
 								     }else{
 									echo 'Not Mentioned';
 								     }?></div>
-											<div class="right">Mobile</div>
+											<div class="right">Mobile Number</div>
 											<div class="right-content">:</div>
 											<div class="right-second">
 							
@@ -284,7 +284,7 @@ if (! empty ( $mpatientInformationModel->respirationRate )) {
 									           echo 'Not Mentioned';
 								                     } ?></div>
 
-											<div class="right">Temparature</div>
+											<div class="right">Temperature</div>
 											<div class="right-content">:</div>
 											<div class="right-second">
 											<?php if (! empty ( $mpatientInformationModel->temparatureType )) {

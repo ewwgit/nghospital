@@ -51,7 +51,11 @@ $this->params['breadcrumbs'][] = $this->title;
         		'label' => 'Unique Id',
         		],
             'contactPerson',
-            'mobile',
+          
+        		[
+        		'attribute'=>'mobile',
+        		'label' =>   'Mobile Number',
+        		],
         	//	'countryName',
         	[
         		'attribute'=>'countryName',

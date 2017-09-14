@@ -87,7 +87,7 @@ h3 {
 								
 								
 								
-								<div class="right">Country Name</div>								
+								<div class="right">Country </div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								<?php if(!empty($patmodel->countryName)){
@@ -97,7 +97,7 @@ h3 {
 								}?></div>
 								
 								
-								<div class="right">State Name</div>								
+								<div class="right">State </div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								<?php if(!empty($patmodel->stateName)){
@@ -106,7 +106,7 @@ h3 {
 									echo 'Not Mentioned';
 								}?></div>
 								
-								<div class="right">City Name</div>								
+								<div class="right">City </div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 									<?php if(!empty($patmodel->city)){
@@ -153,7 +153,7 @@ h3 {
 								}else{
 									echo 'Not Mentioned';
 								}?></div>
-								<div class="right">Mobile</div>								
+								<div class="right">Mobile Number</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								
@@ -220,7 +220,7 @@ h3 {
 									echo 'Not Mentioned';
 								}?></div>
 								
-								<div class="right">Temparature</div>								
+								<div class="right">Temperature</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								<?php if(!empty($model->temparatureType)){

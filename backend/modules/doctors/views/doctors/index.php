@@ -41,12 +41,25 @@ $this->params['breadcrumbs'][] = $this->title;
             //'qualification:ntext',
             // 'city',
             // 'state',
-             'stateName',
+        		[
+        		'label' => 'Country',
+        		'attribute' => 'countryName',
+        		],
+        		[
+        		'label' => 'State',
+        		'attribute' =>'stateName',
+        		],
+        		
+        		
+             
             // 'country',
-             'countryName',
+             
             // 'address:ntext',
         	
-             'doctorMobile',
+             	[
+        		'label' => 'Mobile Number',
+        		'attribute' => 'doctorMobile',
+        		],
         		['attribute'=>'status',
         		'label' => 'Status',
         		'value' => function ($data) {

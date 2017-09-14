@@ -107,7 +107,7 @@ th {
 								<div class="right-content">:</div>
 								<div class="right-second"><?= $usernamedata['email']; ?></div>
 								
-								<div class="right">Mobile</div>								
+								<div class="right">Mobile Number</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								<?php if(!empty($model->mobile)){
@@ -116,7 +116,7 @@ th {
 									echo 'Not Mentioned';
 								}?> </div>
 								
-								<div class="right">Landline</div>								
+								<div class="right">Landline Number</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								<?php if(!empty($model->landline)){
