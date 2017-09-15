@@ -21,12 +21,12 @@ $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->nurs
 ?>
 
 
-<div class="col-sm-3">
+<div class="form-group col-lg-3 col-sm-12">
 
 <ul class="list-group">
   <li class="list-group-item">
    
-   	<img class='image' 
+   	  <div style="text-align:center;"><img 
 							src="<?php
 							if($model->nursingImage)
 							{
@@ -37,7 +37,7 @@ $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->nurs
 									 echo Url::base()."/images/user-iconnew.png" ;
 								      }
 								?>"
-							style="height:150px;width:180px;"> </img> 
+							style="height:150px;width:150px;"> </img> </div>
   	<div class=" color ">Nursing Home </div>	
   	<div class="col  " >:</div>							
     <div class=" val ">
@@ -75,15 +75,16 @@ $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->nurs
 <style>
 .col{
 color: #3c8dbc;
-margin-left: 90px;;
+margin-left: 110px;;
 margin-top: -19px;
 }
 .color{
 color: #3c8dbc;
 margin-top: 10px;
+padding-left:20px;
 }
 .val{
-margin-left: 95px;
+margin-left: 120px;
 margin-top: -18px;
 
 }

@@ -37,17 +37,17 @@ use app\modules\qualifications\models\Qualifications;
  
 <div class="form-group col-lg-3 col-sm-12">
   <div >
-  <ul class="list-group">
-  <li class="list-group-item">
+  <ul class="list-group" >
+  <li class="list-group-item" >
     						
-    <div ><?php echo  Html::img($doctordata->doctorImage ? $imgeurl : 'images/user-iconnew.png',['width' => '200px','height' => '150px']); ?> </div>
-  	<div class=" color ">Doctor Name </div>	
+    <div style="text-align:center;"><?php echo  Html::img($doctordata->doctorImage ? $imgeurl : 'images/user-iconnew.png',['width' => '200px','height' => '150px']); ?> </div>
+  	<div class=" color " >Doctor Name </div>	
   	<div class="col  " >:</div>							
     <div class=" val "><?php echo Doctors::getDoctorname($model->rdoctorId); ?> </div>
-  	<div class=" color " >Specialities </div>
+  	<div class=" color ">Specialities </div>
   	<div class="col  " >:</div>								
     <div class=" val "><?php echo Specialities::getSpname($model->rspId); ?> </div>
-	<div class=" color " >Qualification </div>
+	<div class=" color "  >Qualification </div>
 	<div class="col  " >:</div>									
     <div class=" val "><?php echo  implode(" , ",$docqualiary); ?> </div>
  </li></ul>
@@ -56,15 +56,15 @@ use app\modules\qualifications\models\Qualifications;
 <style>
 .col{
 color: #3c8dbc;
-margin-left: 79px;
-margin-top: -19px;
+margin-left: 100px;
+margin-top: -19px;
 }
 .color{
 color: #3c8dbc;
-margin-top: 10px;
+margin-top: 10px;padding-left: 20px
 }
 .val{
-margin-left: 92px;
+margin-left: 110px;
 margin-top: -18px;
 
 }
