@@ -647,6 +647,16 @@ class AdminusersController extends Controller
 		    			{
 		    				$modulePermissions->permissions_all=0;		    				
 		    			}
+		    			if($modulePermissions->permissions_add == 1 || $modulePermissions->permissions_edit == 1 ||
+		    					$modulePermissions->permissions_delete == 1)
+		    			{
+		    				$modulePermissions->permissions_view=1;
+		    			}
+		    			else
+		    			{
+		    				$modulePermissions->permissions_view=0;
+		    			}
+		    			
 		    			$modulePermissions->update();
 		    			$success= 1;
 		    		}
@@ -685,6 +695,15 @@ class AdminusersController extends Controller
 		    			{
 		    				$modulePermissions->permissions_all=0;
 		    			}
+		    			if($modulePermissions->permissions_add == 1 || $modulePermissions->permissions_edit == 1 ||
+		    					$modulePermissions->permissions_delete == 1)
+		    			{
+		    				$modulePermissions->permissions_view=1;
+		    			}
+		    			else
+		    			{
+		    				$modulePermissions->permissions_view=0;
+		    			}
 		    			$modulePermissions->update();
 		    			$success= 1;
 		    		}
@@ -722,6 +741,15 @@ class AdminusersController extends Controller
 		    			else
 		    			{
 		    				$modulePermissions->permissions_all=0;
+		    			}
+		    			if($modulePermissions->permissions_add == 1 || $modulePermissions->permissions_edit == 1 ||
+		    					$modulePermissions->permissions_delete == 1)
+		    			{
+		    				$modulePermissions->permissions_view=1;
+		    			}
+		    			else
+		    			{
+		    				$modulePermissions->permissions_view=0;
 		    			}
 		    			$modulePermissions->update();
 		    			$success= 1;
@@ -765,6 +793,9 @@ class AdminusersController extends Controller
 		    		else if($permissionView == 1)
 		    		{
 		    			$modulePermissions->permissions_view = 0;
+		    			$modulePermissions->permissions_add = 0;
+		    			$modulePermissions->permissions_edit = 0;
+		    			$modulePermissions->permissions_delete = 0;
 		    			$modulePermissions->permissions_all=0;
 		    			$modulePermissions->update();
 		    			$success= 1;		    	

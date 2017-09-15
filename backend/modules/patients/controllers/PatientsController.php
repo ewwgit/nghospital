@@ -43,7 +43,7 @@ public function behaviors()
 		}
 		else if(UserrolesModel::getRole() == 3)
 		{
-			$permissionsArray = ['index','patientshistorycreate','patientshistoryview','Patientshistorydocview','request-doctor','doctor-info'];
+			$permissionsArray = ['index','patientshistorycreate','patientshistoryview','patientshistorydocview','request-doctor','doctor-info'];
 		}
 		else {$permissionEdit = [];
 			$permissionsArray = array_merge($permissionsArray,$permissionEdit);
@@ -59,7 +59,7 @@ public function behaviors()
 				'access' => [
 						'class' => AccessControl::className(),
 						'only' => [
-								'index','create','update','view','delete','patientshistorycreate','patientshistoryview','Patientshistorydocview','request-doctor','doctor-info'
+								'index','create','update','view','delete','patientshistorycreate','patientshistoryview','patientshistorydocview','request-doctor','doctor-info'
 	
 						],
 						'rules' => [
@@ -378,9 +378,9 @@ public function behaviors()
     		{
     			$model->patientimageupdate = $model->patientImage;
     			$dateString=$model->dateOfBirth;
-    			$years = round((time()-strtotime($dateString))/(3600*24*365.25));
+    			$years = round((time()-strtotime($dateString))/(365.25*24*3600));
     			$model->age = $years;
-    			$model->dateOfBirth = date('d-M-Y',strtotime($dateString));
+    			$model->dateOfBirth = date('Y-m-d',strtotime($dateString));
     			//echo $years;exit();
     			$patmodel = PatientInformation::find()->where(['patientId' =>$model->patientId])->orderBy('patientInfoId DESC')->one();
     			if (! (empty ( $patmodel )))
