@@ -12,7 +12,7 @@ use app\modules\doctors\models\Doctors;
 /* @var $model app\modules\doctors\models\Doctors */
 
 $this->title = $patmodel->firstName;
-$this->params['breadcrumbs'][] = ['label' => 'Patients', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Doctors'];
 $this->params['breadcrumbs'][] = $this->title;
 $reqmodel = DoctorNghPatient::find()->where(['patientHistoryId' => $infoid])->one();
 //print_r($reqmodel);exit();
