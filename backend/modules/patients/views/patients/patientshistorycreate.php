@@ -112,11 +112,11 @@ $documents = '';
 	$s=0;
 	$previousrecords .= '<div class="col-lg-7 col-sm-12">
 	
- <table style="color:#2698b7;" class="col-lg-7 col-sm-12 " border=1>
+ <table class="col-lg-7 col-sm-12 table table-striped table-bordered" border=0>
 	<tr>
-	<td style="text-align:center; font-weight:bold;">S.No</td>
-	<td style="text-align:center; font-weight:bold;">Date</td>
-	<td style="text-align:center; font-weight:bold;">Doctor Name</td>
+	<td>S.No</td>
+	<td>Date</td>
+	<td>Doctor Name</td>
 	</tr>';
 	
 ?>
@@ -141,9 +141,9 @@ foreach ($model->previousRecords as $previousRecords)
   $previousrecords .= '
 
  <tr>
- <td style="text-align:center;">'.$pr.'</td>
- <td style="text-align:center"><a href="'.$previousrecordsUrl.'&infoid='.$previousRecords->patientInfoId.'" target="_blank">'.date("d-M-Y",strtotime($previousRecords->createdDate)).'</a></td>
- <td style="text-align:center"><a href="'.$previousrecordsUrl.'&infoid='.$previousRecords->patientInfoId.'" target="_blank">'.$doctor_name['name'].
+ <td>'.$pr.'</td>
+ <td><a href="'.$previousrecordsUrl.'&infoid='.$previousRecords->patientInfoId.'" target="_blank">'.date("d-M-Y",strtotime($previousRecords->createdDate)).'</a></td>
+ <td><a href="'.$previousrecordsUrl.'&infoid='.$previousRecords->patientInfoId.'" target="_blank">'.$doctor_name['name'].
     		
 	
 	'</a></td>
@@ -162,15 +162,25 @@ $previousrecords .='</table></div>';
     There is no previous documents exist.
 </div>';
 }else{
+	$documents .='<div class="col-lg-7 col-sm-12 ">
+		 <table class="col-lg-7 col-sm-12 table table-striped table-bordered" border=0>
+	<tr>
+	<td>S.No</td>
+	<td>Date</td>
+	
+	</tr>';
 for($m=0; $m<count($previousDoc);$m++)
 {
 	$sno = $m+1;
-	$documents .= '<div class="col-lg-7 col-sm-12">
-        <div class="col-lg-1 col-sm-12">'.$sno.'.</div> 
-		<div class="col-lg-8 col-sm-12"><a href="'.$DocpreviousrecordsUrl.'&infoid='.$previousDoc[$m]['patientInfoId'].'" target="_blank">'
-		.$previousDoc[$m]['createdDate'].'</a></div>
-        </div>';
+	$documents .= '
+		<tr>
+        <td>'.$sno.'.</td> 
+		<td class="col-lg-8 col-sm-12"><a href="'.$DocpreviousrecordsUrl.'&infoid='.$previousDoc[$m]['patientInfoId'].'" target="_blank">'
+		.$previousDoc[$m]['createdDate'].'</a>
+        </td></tr>';
 }
+$documents .='</table></div>';
+
 }?>
 
 <?php 
