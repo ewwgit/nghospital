@@ -1190,4 +1190,31 @@ public function behaviors()
     	 
     }
     
+    public function actionPreviousrecords($pid)
+    {
+    	
+    	$model = PatientInformation::find()->select(['patientInfoId','createdDate'])->where(['patientId' =>$pid])->orderBy('createdDate DESC')->all();
+    	//print_r($model);exit();
+    	return $this->render('previousrecords', [
+    			'model'=>$model
+    	]);
+    }
+public function actionPatientshistoryview($infoid)
+    {
+    	$model = $this->findinfoModel($infoid);
+    	$patmodel = Patients::find()->where(['patientId' =>$model->patientId])->one();
+    	//print_r($model->height);exit();
+    
+    	return $this->render('patientshistoryview', [
+    			'model' => $this->findinfoModel($infoid),'patmodel' => $patmodel,'infoid'=>$infoid
+    	]);
+    }
+    protected function findinfoModel($infoid)
+    {
+    	if (($model = PatientInformation::findOne($infoid)) !== null) {
+    		return $model;
+    	} else {
+    		throw new NotFoundHttpException('The requested page does not exist.');
+    	}
+    }
 }

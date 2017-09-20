@@ -340,6 +340,9 @@ if (! empty ( $mpatientInformationModel->respirationRate )) {
 								            } else {
 									           echo 'Not Mentioned';
 								                     } ?> </div>
+								                 <div style="text-align:right">    
+								            <?= Html::a('Previous Records', ['/doctors/doctors/previousrecords', 'pid' => $mpatientModel->patientId]) ?>
+								             </div>        
 										</div>
 										<!---doctor-box closed-->
 									</div>
