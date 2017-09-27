@@ -345,10 +345,7 @@ public function behaviors()
         	 		$dspeciality->rspId =$specid['spId'];
         	 		$dspeciality->save();
         	 	}
-        	 		 
-        	 		 
-        	 	
-        	 }
+          	 }
         	
         	
         	 Yii::$app->session->setFlash('success', " Doctors Created successfully ");
