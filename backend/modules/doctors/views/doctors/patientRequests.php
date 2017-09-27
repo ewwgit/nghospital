@@ -53,6 +53,8 @@ $this->params['breadcrumbs'][] = $this->title;
         		],
 
              ['class' => 'yii\grid\ActionColumn',
+             		'header'=>'Actions',
+             		'headerOptions'=>['style'=>'color:#3c8dbc'],
             		'template' => '{view} ',
              		'buttons' => [
              				'view' => function ($url,$data) {

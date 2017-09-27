@@ -89,6 +89,8 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'updatedDate',
 
              ['class' => 'yii\grid\ActionColumn',
+             		'header'=>'Actions',
+             		'headerOptions'=>['style'=>'color:#3c8dbc'],
             		'template' => '{view} {update} {delete}  {password}',
             		'buttons' => [
             				'password' => function ($url,$data) {

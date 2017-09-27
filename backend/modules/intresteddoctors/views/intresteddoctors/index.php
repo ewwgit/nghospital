@@ -34,6 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'createdDate',
 
             ['class' => 'yii\grid\ActionColumn',
+            		'header'=>'Actions',
+            		'headerOptions'=>['style'=>'color:#3c8dbc'],
             		'template' => '{view} {update} {delete}  {convert}',
             		'buttons' => [
             				'convert' => function ($url,$data) {

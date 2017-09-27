@@ -94,10 +94,14 @@ use dosamigos\ckeditor\CKEditor;
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'TSMC')->textInput(['maxlength' => true]) ?>
 	</div>
+	<div class="form-group col-lg-6 col-sm-12" >
+    <?= $form->field($model, 'availableStatus')->dropDownList([ 'Online' => 'Online', 'Offline' => 'Offline', ], ['prompt' => 'Select Available Status']) ?>
+	</div>
     <div class="form-group col-lg-6 col-sm-12">
     <?php if($model->doctorImage != ''){?>
-    </div>
-    <div class="form-group col-lg-6 col-sm-12">
+    </div>   
+	
+	 <div class="form-group col-lg-6 col-sm-12">
     <?php $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->doctorImage;?>
 
 						 		
@@ -120,11 +124,7 @@ use dosamigos\ckeditor\CKEditor;
             
         
 	</div>   
-	<div class="form-group col-lg-6 col-sm-12" >
-    <?= $form->field($model, 'availableStatus')->dropDownList([ 'Online' => 'Online', 'Offline' => 'Offline', ], ['prompt' => 'Select Available Status']) ?>
-	</div>
-	
-	<div class="form-group col-lg-6 col-sm-12">
+	<div class="form-group col-lg-12 col-sm-12">
 	<?= $form->field($model, 'summery')->widget(CKEditor::className(), [
         'options' => ['rows' => 4],
         'preset' => 'basic'
@@ -132,7 +132,7 @@ use dosamigos\ckeditor\CKEditor;
 	</div>
 	
 	
-    <div class="form-group">
+    <div class="form-group col-lg-6 col-sm-12">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 

@@ -36,7 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'createdDate',
             // 'updatedDate',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+            		'header'=>'Actions',
+            		'headerOptions'=>['style'=>'color:#3c8dbc'],
+    ],
         ],
     ]); ?>
 </div>

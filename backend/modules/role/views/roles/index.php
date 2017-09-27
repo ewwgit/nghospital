@@ -46,7 +46,10 @@ $this->params['breadcrumbs'][] = $this->title;
         		'filter' => Html::activeDropDownList($searchModel, 'status', ['Active' => 'Active','In-active' => 'In-active'],['class'=>'form-control','prompt' => 'Status']),
         		],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+            		'header'=>'Actions',
+            		'headerOptions'=>['style'=>'color:#3c8dbc'],
+    ],
         ],
     ]); ?>
 

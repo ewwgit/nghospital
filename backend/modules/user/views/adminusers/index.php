@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
     		
         		[
         		'attribute'=>'status',
-        		'label'=>'status',
+        		'label'=>'Status',
         		'filter' => Html::activeDropDownList($searchModel, 'status', ['10' => 'Active','0' => 'In-active'],['class'=>'form-control','prompt' => 'Status']),
         		'value' => function($data)
         				{
@@ -88,6 +88,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn',
             		'template' => '{view} {update} {delete} {permissions}  {password}',
+            		'header'=>'Actions',
+            		'headerOptions'=>['style'=>'color:#3c8dbc'],
             		'buttons' => [
             				'permissions' => function ($url,$data) {
             				$url = Url::to(['/user/adminusers/permissions','id'=>$data->id]);
