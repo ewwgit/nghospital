@@ -53,7 +53,7 @@ public function behaviors()
 		}
 		elseif(UserrolesModel::getRole() == 2)
 		{
-			$permissionsArray = ['profileupdate','profileview','patient-requests','reset-password','patient-info','states','patient-requests-completed','nghlist','slots','previousrecords'];
+			$permissionsArray = ['profileupdate','profileview','patient-requests','reset-password','patient-info','states','patient-requests-completed','nghlist','slots','previousrecords','patientshistoryview'];
 		}
 		else if (UserrolesModel::getRole() == '') {
 			$permissionsArray = [''];
@@ -101,7 +101,7 @@ public function behaviors()
 				'access' => [
 						'class' => AccessControl::className(),
 						'only' => [
-								'index','create','update','view','delete','profileupdate','profileview','patient-requests','reset-password','patient-info','states','patient-requests-completed','nghlist','slots','previousrecords'
+								'index','create','update','view','delete','profileupdate','profileview','patient-requests','reset-password','patient-info','states','patient-requests-completed','nghlist','slots','previousrecords','patientshistoryview'
 	
 						],
 						'rules' => [
