@@ -709,7 +709,7 @@ public function behaviors()
     				} */
     			}
     			//print_r($delary);exit();
-    			Yii::$app->getSession()->setFlash('success', 'created New  time slots.');
+    			Yii::$app->getSession()->setFlash('success', 'Updated New  time slots.');
     			return $this->redirect(['slots']);
 //     			/exit();
     		}
