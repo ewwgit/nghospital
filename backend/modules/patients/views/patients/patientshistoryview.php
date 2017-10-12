@@ -6,6 +6,7 @@ use yii\widgets\DetailView;
 use common\models\User;
 use app\modules\patients\models\DoctorNghPatient;
 use app\modules\doctors\models\Doctors;
+use yii\helpers\Url;
 //**********************//
 
 /* @var $this yii\web\View */
@@ -306,6 +307,11 @@ h3 {
 								}
 								?> </div>
 						   </div>
+						   <?php 
+						    $prescriptionurl = Yii::$app->urlManager->createAbsoluteUrl ( [ 
+		'patients/patients/patientshistoryviewpdf' ,'infoid' => $model->patientInfoId
+						    	] );?>
+						   <a href="<?php echo $prescriptionurl;?>" target="_blank" class="btn btn-info" role="button" style="margin-left:20px">Pdf</a>
 					   </div>	  
 					   
 					   
