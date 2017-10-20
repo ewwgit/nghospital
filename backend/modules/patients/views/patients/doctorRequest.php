@@ -319,6 +319,14 @@ if (! empty ( $mpatientInformationModel->respirationRate )) {
 								            } else {
 									           echo 'Not Mentioned';
 								                     } ?> </div>
+								            <div class="right">SPO2</div>
+											<div class="right-content">:</div>
+											<div class="right-second">
+											<?php if (! empty ( $mpatientInformationModel->spo2 )) {
+									        echo $mpatientInformationModel->spo2;;
+								            } else {
+									           echo 'Not Mentioned';
+								                     } ?> </div>
 
 										</div>
 										<!---doctor-box closed-->

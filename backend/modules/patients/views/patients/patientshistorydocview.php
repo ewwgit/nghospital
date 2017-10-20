@@ -249,6 +249,14 @@ h3 {
 									echo 'Not Mentioned';
 								}?></div>
 								
+								<div class="right">SPO2</div>								
+								<div class="right-content">:</div>
+								<div class="right-second">
+								<?php if(!empty($model->spo2)){
+									echo $model->spo2;;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 								
 								
 																 							
