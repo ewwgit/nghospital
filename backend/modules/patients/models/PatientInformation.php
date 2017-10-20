@@ -37,7 +37,7 @@ class PatientInformation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['patientId', 'height', 'weight', 'respirationRate', 'BPLeftArm', 'pulseRate', 'temparatureType', 'diseases', 'allergicMedicine', 'createdDate', 'patientCompliant'], 'safe'],
+            [['patientId', 'height', 'weight', 'respirationRate', 'BPLeftArm', 'pulseRate', 'temparatureType', 'diseases', 'allergicMedicine', 'createdDate', 'patientCompliant','spo2'], 'safe'],
             [['patientId'], 'integer'],
             [['patientId','BPLeftArm'], 'required'],
             [['patientCompliant'], 'string'],
@@ -65,6 +65,7 @@ class PatientInformation extends \yii\db\ActiveRecord
             'allergicMedicine' => 'Allergic Medicine',
             'createdDate' => 'Created Date',
             'patientCompliant' => 'Patient Compliant',
+        	'spo2'=>'SPO2',
         ];
     }
 }

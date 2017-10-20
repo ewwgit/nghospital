@@ -171,6 +171,7 @@ public function behaviors()
         	$patmodel->diseases = $model->diseases;
         	$patmodel->allergicMedicine = $model->allergicMedicine;
         	$patmodel->patientCompliant = $model->patientCompliant; 
+        	$patmodel->spo2 = $model->spo2;
         	//print_r($patmodel->patientCompliant);exit();
         	$patmodel->createdDate = date('Y-m-d H:i:s');
         	//print_r($patmodel->createdDate);exit();
@@ -232,7 +233,7 @@ public function behaviors()
         	$model->diseases = $patmodel->diseases;
         	$model->allergicMedicine = $patmodel->allergicMedicine;
         	$model->patientCompliant = $patmodel->patientCompliant;
-        	
+        	$patmodel->spo2 = $model->spo2;
         }
         
 
@@ -256,6 +257,7 @@ public function behaviors()
         	$patmodel->diseases = $model->diseases;
         	$patmodel->allergicMedicine = $model->allergicMedicine;
         	$patmodel->patientCompliant = $model->patientCompliant;
+        	$patmodel->spo2 = $model->spo2;
         	//print_r($patmodel->patientCompliant);exit();
         	//$patmodel->createdDate = date('Y-m-d H:i:s');
         	//print_r($patmodel->createdDate);exit();
@@ -394,6 +396,7 @@ public function behaviors()
     				$model->diseases = $patmodel->diseases;
     				$model->allergicMedicine = $patmodel->allergicMedicine;
     				$model->patientCompliant = $patmodel->patientCompliant;
+    				$model->spo2 = $patmodel->spo2;
     				 
     			}
     			
@@ -464,6 +467,7 @@ public function behaviors()
         	$patmodelnew->diseases = $model->diseases;
         	$patmodelnew->allergicMedicine = $model->allergicMedicine;
         	$patmodelnew->patientCompliant = $model->patientCompliant;
+        	$patmodelnew->spo2 = $model->spo2;
         	$patmodelnew->createdDate = date('Y-m-d H:i:s');
         	$patmodelnew->save();
         	//print_r($patmodelnew->errors);exit();
@@ -514,6 +518,7 @@ public function behaviors()
         	$patmodelnew->diseases = $model->diseases;
         	$patmodelnew->allergicMedicine = $model->allergicMedicine;
         	$patmodelnew->patientCompliant = $model->patientCompliant;
+        	$patmodelnew->spo2 = $model->spo2;
         	$patmodelnew->createdDate = date('Y-m-d H:i:s');
         	//print_r($patmodel->patientCompliant);exit();
         	//$patmodel->createdDate = date('Y-m-d H:i:s');

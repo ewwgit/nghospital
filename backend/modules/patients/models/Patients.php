@@ -47,6 +47,7 @@ class Patients extends \yii\db\ActiveRecord
 	public $documentUrl;
 	public $patientimageupdate;
 	public $previousRecords;
+	public $spo2;
     public static function tableName()
     {
         return 'patients';
@@ -92,7 +93,7 @@ class Patients extends \yii\db\ActiveRecord
         		'extensions'=>'jpeg,png,jpg',
         		'wrongExtension'=>'Only {extensions} types are allowed',
         		],
-        	[['height','weight','respirationRate','BPLeftArm','pulseRate','temparatureType','diseases','allergicMedicine','createdDate','patientCompliant', 'createdDate', 'updatedDate', 'countryName', 'stateName', 'patientUniqueId'],'safe'],
+        	[['height','weight','respirationRate','BPLeftArm','pulseRate','temparatureType','diseases','allergicMedicine','createdDate','patientCompliant', 'createdDate', 'updatedDate', 'countryName', 'stateName', 'patientUniqueId','spo2'],'safe'],
         ];
     }
 
@@ -124,6 +125,7 @@ class Patients extends \yii\db\ActiveRecord
             'updatedDate' => 'Updated Date',
         	'documentUrl' => 'Patient Documents',
         		'BPLeftArm' => 'BP',
+        		'spo2'=>'SPO2',
         ];
     }
 }
