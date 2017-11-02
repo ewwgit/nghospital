@@ -18,11 +18,6 @@ use yii\helpers\Url;
 			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'readOnly'=>($model->scenario == 'update')? "readonly" : false]) ?></div>
 
 			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'firstName')->textInput(['maxlength' => 255]) ?></div>
-
-			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'password')->passwordInput() ?></div>
-
-
-
 			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'lastName')->textInput(['maxlength' => 255]) ?></div>
 			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'phoneNumber')->textInput(['maxlength' => 10]) ?></div>
 
