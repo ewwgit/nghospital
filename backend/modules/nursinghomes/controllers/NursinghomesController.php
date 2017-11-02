@@ -28,6 +28,9 @@ use app\modules\doctors\models\Doctors;
 use app\modules\doctors\models\DoctorsQualification;
 use app\modules\qualifications\models\Qualifications;
 use app\modules\doctors\models\DoctorsSpecialities;
+use app\modules\patients\models\DoctorNghPatient;
+use app\modules\patients\models\Patients;
+use app\modules\patients\models\DoctorNghPatientSearch;
 
 
 /**
@@ -616,6 +619,67 @@ public function behaviors()
     			'docspeciary'=>$docspeciary,
     			
     	]);
+    }
+    public function actionDoctorreport()
+    {
+    	
+    	$nursId = Yii::$app->user->identity->id;
+    	$status= "COMPLETED";
+    	$doctormodel = DoctorNghPatient::find()-> where(['nugrsingId'=> $nursId ,'patientRequestStatus'=>$status])->all();
+    	$drary = array();
+    	$patary = array();
+    	if(!empty($doctormodel))
+    	{
+    		foreach ($doctormodel as $dr)
+    		{
+    			$drary[] = $dr->patientId;
+    			//print_r($drary);exit();
+    			 
+    		}
+    	}
+    	for($k=0; $k<count($drary); $k++)
+    	{
+    		$pat = Patients::find()->select('firstName')->where(['patientId'=>$drary[$k]])->asArray()->one();
+    		$patary[] = $pat['firstName'];
+    	}
+    	$ddary=array();
+    	$docary = array();
+    	if(!empty($doctormodel))
+    	{
+    		foreach ($doctormodel as $dd)
+    		{
+    			$ddary[] = $dd->doctorId;
+    			//print_r($ddary);exit();
+    	
+    		}
+    	}
+    	for($m=0; $m<count($ddary); $m++)
+    	{
+    		$doc = Doctors::find()->select('name')->where(['userId'=>$ddary[$m]])->asArray()->one();
+    		//print_r($doc);exit();
+    		$docary[] = $doc['name'];
+    	}
+    	$cdate = array();
+    	if(!empty($doctormodel))
+    	{
+    		foreach ($doctormodel as $dt)
+    		{
+    			$cdate[] = $dt->updatedDate;
+    			
+    			 
+    		}
+    	}
+    	//print_r($cdate);exit();
+    
+    	return $this->render('doctorReport', [
+    			'cdate'=>$cdate,
+    			'docary'=> $docary,
+    			'patary' => $patary
+    	]);
+    	
+    	  
+    	  
+    
     }
     
 

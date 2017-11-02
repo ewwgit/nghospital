@@ -131,7 +131,7 @@ use yii\helpers\Url;
                 				['label' => 'Profile', 'icon' => 'plus-circle', 'url' => ['/nursinghomes/nursinghomes/profileview','uid'=>Yii::$app->user->identity->id],],
                 				['label' => 'Profile Update', 'icon' => 'eye', 'url' => ['/nursinghomes/nursinghomes/profileupdate','uid'=>Yii::$app->user->identity->id],],
                 				['label' => 'Doctors specialities List', 'icon' => 'eye', 'url' => ['/nursinghomes/nursinghomes/doctorspecialitieslist'],],
-                				
+                				['label' => 'Consultant Report', 'icon' => 'eye', 'url' => ['/nursinghomes/nursinghomes/doctorreport'],],
                 		],
                 		],
                 		
