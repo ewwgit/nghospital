@@ -5,7 +5,7 @@ namespace app\modules\intresteddoctors\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\intresteddoctors\models\Intresteddoctors;
+use app\modules\intresteddoctors\models\IntrestedDoctors;
 
 /**
  * IntresteddoctorsSearch represents the model behind the search form about `app\modules\intresteddoctors\models\Intresteddoctors`.
