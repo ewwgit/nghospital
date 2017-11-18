@@ -26,6 +26,7 @@ use backend\models\ChangePasswordForm;
 use app\modules\patients\models\DoctorNghPatient;
 use yii\data\ActiveDataProvider;
 use app\modules\patients\models\Patients;
+use app\modules\patients\models\PatientsSearch;
 use app\modules\patients\models\PatientInformation;
 use app\modules\patients\models\DoctorNghPatientSearch;
 use app\modules\nursinghomes\models\Nursinghomes;
@@ -49,7 +50,7 @@ public function behaviors()
 		$permissionsArray = [''];
 		if(UserrolesModel::getRole() == 1)
 		{
-			$permissionsArray = ['index','create','update','view','delete','reset-password','states'];
+			$permissionsArray = ['index','create','update','view','delete','reset-password','states','patient-consultant-report','patient-info','previousrecords','patientshistoryview'];
 		}
 		elseif(UserrolesModel::getRole() == 2)
 		{
@@ -264,14 +265,6 @@ public function behaviors()
        	$speciInfo =[''];
        }
        $model ->allSpeci = $speciInfo;
-       
-       
-       
-       
-       
-       
-       
-        
         if ($model->load(Yii::$app->request->post()) )
         { 
         	
@@ -1096,7 +1089,21 @@ public function behaviors()
     	 
     	//print_r($patientinfoModel);exit();
     }
-    
+    public function actionPatientConsultantReport($id)
+    {
+    	 $search = new DoctorNghPatientSearch();
+    	 $serachparam = Yii::$app->request->queryParams;
+    	//print_r($serachparam);exit();
+    	 $serachparam['DoctorNghPatientSearch']['status'] ='COMPLETED';
+    	// print_r($serachparam);exit();
+    	 $dataProvider=$search->doctorreports($serachparam,$id);    	
+    	// $dataProvider = $searchModel->search($data);
+    	 return $this->render('patientConsultantReport', [
+    	 		
+    	 'search' => $search,
+    	 'dataProvider' => $dataProvider,
+    	 ]); 
+    }
     public function actionPatientInfo($phsId)
     {
     	$model = DoctorNghPatient::find()->where(['patientHistoryId' => $phsId])->one();
@@ -1188,8 +1195,15 @@ public function behaviors()
     }
     
     public function actionPreviousrecords($pid)
-    {
-    	
+    {  
+    	/*$searchModel= new PatientsSearch();
+    	$serachparam = Yii::$app->request->queryParams;
+    	//print_r($serachparam);exit();
+    	$dataProvider=$searchModel->previousrecords($serachparam,$pid);
+    	return $this->render('previousrecords',[
+    			'searchModel'=>$searchModel,
+    			'dataProvider'=>$dataProvider
+    	]);*/
     	$model = PatientInformation::find()->select(['patientInfoId','createdDate'])->where(['patientId' =>$pid])->orderBy('createdDate DESC')->all();
     	//print_r($model);exit();
     	return $this->render('previousrecords', [
@@ -1206,6 +1220,7 @@ public function actionPatientshistoryview($infoid)
     			'model' => $this->findinfoModel($infoid),'patmodel' => $patmodel,'infoid'=>$infoid
     	]);
     }
+   
     protected function findinfoModel($infoid)
     {
     	if (($model = PatientInformation::findOne($infoid)) !== null) {

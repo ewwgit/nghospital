@@ -27,6 +27,7 @@ class DoctorNghPatient extends \yii\db\ActiveRecord
 	public $firstName;
 	public $lastName;
 	public $specialities;
+	public $name;
     /**
      * @inheritdoc
      */
@@ -48,7 +49,7 @@ class DoctorNghPatient extends \yii\db\ActiveRecord
         	[['doctor','phsId','specialities'],'required','on' => 'requestdoctor'],
         	[['treatment'],'required','on' => 'requesttreatment'],	
         		
-        		[['nursingHomeName','firstName','lastName','treatment'], 'safe'],
+        		[['nursingHomeName','firstName','lastName','treatment','name'], 'safe'],
         ];
     }
 

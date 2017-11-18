@@ -102,7 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn',
             		'header'=>'Actions',
             		'headerOptions'=>['style'=>'color:#3c8dbc'],
-            		'template' => '{view} {update} {delete}  {password}',
+            		'template' => '{view} {update} {delete}  {password} {reports}',
             		'buttons' => [
             				'password' => function ($url,$data) {
             				$url = Url::to(['/nursinghomes/nursinghomes/reset-password','id'=>$data->nuserId]);
@@ -116,7 +116,10 @@ $this->params['breadcrumbs'][] = $this->title;
             						'<span class="glyphicon glyphicon-trash"></span>',
             						$url,['title'=>'Delete','aria-label' => 'Delete', 'data-pjax' => '0','data-confirm'=>'Are you sure you want to delete this item?','data-method' => 'post']);
             				},
-            		
+            				'reports' => function ($url,$data){
+            				$url = Url::to(['/nursinghomes/nursinghomes/patient-consultant-report','id'=>$data->nuserId]);
+            				return Html::a('<span class="glyphicon glyphicon-certificate"></span>',$url,(['title'=>'Reports']));
+            				}
             				],
             		
             ],

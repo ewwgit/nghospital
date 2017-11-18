@@ -623,7 +623,17 @@ public function behaviors()
     public function actionDoctorreport()
     {
     	
-    	$nursId = Yii::$app->user->identity->id;
+    	$searchModel = new DoctorNghPatientSearch();
+    	$serachparam = Yii::$app->request->queryParams;
+    	$serachparam['DoctorNghPatientSearch']['status'] ='COMPLETED';
+    	$dataProvider=$searchModel->dtreports($serachparam);
+    	return $this->render('patientConsultantReport',[
+    			'searchModel'=>$searchModel,
+    			'dataProvider'=>$dataProvider,
+    			 
+    	]);
+    	//print_r($serachparam);exit();
+    	/*
     	$status= "COMPLETED";
     	$doctormodel = DoctorNghPatient::find()-> where(['nugrsingId'=> $nursId ,'patientRequestStatus'=>$status])->all();
     	$drary = array();
@@ -677,11 +687,23 @@ public function behaviors()
     			'patary' => $patary
     	]);
     	
-    	  
+    	  */
     	  
     
     }
-    
+    public  function actionPatientConsultantReport($id)
+    {
+    	//print_r($id);exit();
+    	$searchModel = new DoctorNghPatientSearch();
+    	$serachparam = Yii::$app->request->queryParams;
+    	$serachparam['DoctorNghPatientSearch']['status'] ='COMPLETED';
+    	$dataProvider=$searchModel->nghreports($serachparam,$id);    	
+    	return $this->render('patientConsultantReport',[
+    			'searchModel'=>$searchModel,
+    			    	'dataProvider'=>$dataProvider,
+    			
+    	]);
+    }
 
     
     
