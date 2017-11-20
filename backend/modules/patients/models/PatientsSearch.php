@@ -16,11 +16,12 @@ class PatientsSearch extends Patients
     /**
      * @inheritdoc
      */
+	public $name;
     public function rules()
     {
         return [
             [['patientId', 'country', 'state'], 'integer'],
-            [['firstName', 'lastName', 'gender', 'age', 'dateOfBirth', 'patientUniqueId', 'countryName', 'stateName', 'district', 'city', 'mandal', 'village', 'pinCode', 'mobile', 'createdDate', 'updatedDate'], 'safe'],
+            [['firstName', 'lastName', 'gender', 'age', 'dateOfBirth', 'patientUniqueId', 'countryName', 'stateName', 'district', 'city', 'mandal', 'village', 'pinCode', 'mobile', 'createdDate','name', 'updatedDate'], 'safe'],
         ];
     }
 
@@ -89,5 +90,30 @@ class PatientsSearch extends Patients
             ->andFilterWhere(['like', 'mobile', $this->mobile]);
 
         return $dataProvider;
+    }
+    public function previousrecords($params,$pid)
+    {
+    	//print_r($pid);exit();
+    	$query=PatientInformation::find()
+    	->select('patient_information.patientInfoId,patient_information.createdDate,doctor_ngh_patient.doctorId,doctors.name')
+    	->leftjoin('doctor_ngh_patient','doctor_ngh_patient.patientHistoryId=patient_information.patientInfoId')
+    	->leftjoin('doctors','doctors.userId=doctor_ngh_patient.doctorId')
+    										->where("patient_information.patientId ='$pid'");
+    	//$query=PatientInformation::find()->select(['patientInfoId','createdDate'])->where(['patientId' =>$pid])->orderBy('createdDate DESC');
+    	//print_r($query);exit();
+    	$dataProvider = new ActiveDataProvider([
+    			'query' => $query,
+    			'sort' => ['attributes' => [ 'createdDate']],
+    	]);
+    			$this->load($params);
+    										 
+              if (!$this->validate()) {
+    				// uncomment the following line if you do not want to return any records when validation fails
+                  // $query->where('0=1');
+    			return $dataProvider;
+    	}
+    	$query->andFilterWhere(['like', 'doctors.name', $this->name])
+    	->andFilterWhere(['like', 'patient_information.createdDate', $this->createdDate]);
+    	return $dataProvider;
     }
 }

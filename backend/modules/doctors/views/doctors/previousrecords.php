@@ -1,6 +1,9 @@
 <?php
 
-
+use yii\helpers\Html;
+use yii\grid\GridView;
+use yii\helpers\Url;
+use kartik\date\DatePicker;
 use app\modules\patients\models\DoctorNghPatient;
 use app\modules\doctors\models\Doctors;
 /* @var $this yii\web\View */
@@ -18,48 +21,60 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
   
- <table class="table table-striped table-bordered">
-	<tr style="color:#3c8dbc;">
-	<th>S.No</th>
-	<th>Date</th>
-	<th>Doctor Name</th>
-	</tr>
-	<?php 
-	$previousrecordsUrl = Yii::$app->urlManager->createAbsoluteUrl ( [
-			'doctors/doctors/patientshistoryview'
-	] );
-	
-	//$doctorname = DoctorNghPatient::find()->select('doctorId')->where(['patientHistoryId' => $model->patientInfoId])->asArray()->one();
-	
-	//$doctor_name = Doctors::find()->select('name')->where(['userId' => $doctorname])->asArray()->one();
-for($m=0; $m<count($model);$m++)
-{
-	$sno = $m+1;
-	
-	    $doctorname = DoctorNghPatient::find()->select('doctorId')->where(['patientHistoryId' => $model[$m]['patientInfoId']])->asArray()->one();
-		
-		$doctor_name = Doctors::find()->select('name')->where(['userId' => $doctorname])->asArray()->one();
-		//print_r($doctor_name);
-	?>
-	<tr>
-		<td><?php echo $sno; ?></td>
-		
-		<td><?php echo '<a href="'.$previousrecordsUrl.'&infoid='.$model[$m]['patientInfoId'].'" target="_blank">'.date("d-M-Y",strtotime($model[$m]['createdDate'])).'</a>'?></td>
-		<td><?php if(!empty($doctor_name['name']))
-				{
-		echo $doctor_name['name'];
-					
-}
-else {
-	echo "-";
-}?></td>	</tr>
-<?php 
-	$sno++;
-}
-?>
-	
-	
-</table>
+<?= GridView::widget([
+        'dataProvider' => $dataProvider,
+    	'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+       			 [
+        		'attribute' =>'name',
+       			 		'label'=>'Doctor Name',
+       			 		'headerOptions'=>['style'=>'color:#3c8dbc'],
+        		],
+        		[
+        		'attribute' => 'createdDate',
+        		'label' => 'Date',
+        		
+        		'value' => 'createdDate',
+        			/*'value'=>	function ($dataProvider) {
+        					return Html::a($dataProvider->createdDate,['/doctors/doctors/patientshistoryview','infoid'=>$dataProvider->patientInfoId]);
+        				},*/
+        		'filter' => DatePicker::widget([
+        				'model' => $searchModel,
+        				'attribute' => 'createdDate',
+        				'removeButton' => false,
+        				'options' => ['placeholder' => 'Select Date..'],
+        				'pluginOptions' => [
+        						'autoclose'=>true,
+        						'format' => 'yyyy-mm-dd'
+        				],
+        				
+        		]),
+        				],
+        		 ['class' => 'yii\grid\ActionColumn',
+             		'header'=>'Actions',
+             		'headerOptions'=>['style'=>'color:#3c8dbc'],
+            		'template' => '{view} ',
+             		'buttons' => [
+             				'view' => function ($url,$data) {
+             				$url = Url::to(['/doctors/doctors/patientshistoryview','infoid'=>$data->patientInfoId]);
+             				return Html::a(
+             						'<span class="glyphicon glyphicon-eye-open"></span>',
+             						$url,['title'=>'View']);
+             				},
+             		
+             				],
+            		
+            		
+            ],
+        	
+        	
+            		
+            		
+            
+        ],
+    ]); ?>
 </div>
 </div>
 </div>

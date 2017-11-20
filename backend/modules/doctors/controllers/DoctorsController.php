@@ -1196,19 +1196,19 @@ public function behaviors()
     
     public function actionPreviousrecords($pid)
     {  
-    	/*$searchModel= new PatientsSearch();
+    	$searchModel= new PatientsSearch();
     	$serachparam = Yii::$app->request->queryParams;
     	//print_r($serachparam);exit();
     	$dataProvider=$searchModel->previousrecords($serachparam,$pid);
     	return $this->render('previousrecords',[
     			'searchModel'=>$searchModel,
     			'dataProvider'=>$dataProvider
-    	]);*/
-    	$model = PatientInformation::find()->select(['patientInfoId','createdDate'])->where(['patientId' =>$pid])->orderBy('createdDate DESC')->all();
+    	]);
+    	/*$model = PatientInformation::find()->select(['patientInfoId','createdDate'])->where(['patientId' =>$pid])->orderBy('createdDate DESC')->all();
     	//print_r($model);exit();
     	return $this->render('previousrecords', [
     			'model'=>$model
-    	]);
+    	]);*/
     }
 public function actionPatientshistoryview($infoid)
     {
