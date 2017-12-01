@@ -1091,6 +1091,7 @@ public function behaviors()
     }
     public function actionPatientConsultantReport($id)
     {
+    	
     	 $search = new DoctorNghPatientSearch();
     	 $serachparam = Yii::$app->request->queryParams;
     	//print_r($serachparam);exit();
@@ -1098,8 +1099,9 @@ public function behaviors()
     	// print_r($serachparam);exit();
     	 $dataProvider=$search->doctorreports($serachparam,$id);    	
     	// $dataProvider = $searchModel->search($data);
+    	
     	 return $this->render('patientConsultantReport', [
-    	 		
+    	 
     	 'search' => $search,
     	 'dataProvider' => $dataProvider,
     	 ]); 
@@ -1152,6 +1154,55 @@ public function behaviors()
     					'mpatientModel' => $mpatientModel,
     					'mpatientInformationModel' => $mpatientInformationModel]);
     	//print_r($avialableDoctors);exit();
+    }
+    public function actionPatientDetails($phsId)
+    {
+    	$model = DoctorNghPatient::find()->where(['patientHistoryId' => $phsId])->one();
+    	$model->scenario = 'requesttreatment';
+    	$mpatientModel = new Patients();
+    	$mpatientInformationModel = new PatientInformation();
+    	$model->phsId = $phsId;
+    	$pDate = date("Y-M-d H:i:s");
+    	$presentDay = date("D", strtotime($pDate));
+    	$presentTime =  date("H:i", strtotime($pDate));
+    	$avialableDoctors = array();
+    	//echo $presentTime;exit();
+    	 
+    
+    	$patientId = 0;
+    	$nghId = 0;
+    	$patientInfo = PatientInformation::find()->where(['patientInfoId' => $model->phsId])->one();
+    	$patientId = $patientInfo->patientId;
+    	if($patientId !=0)
+    	{
+    		$mpatientInformationModel = $patientInfo;
+    		$nghInfo = Patients::find()->where(['patientId' => $patientId])->one();
+    		$nghId = $nghInfo->createdBy;
+    		$mpatientModel = $nghInfo;
+    	}
+    
+    
+    	if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+    		$model->patientRequestStatus = 'COMPLETED';
+    		$model->updatedDate = date("Y-m-d H:i:s");
+    		$model->update();
+    
+    		//$prmodel = new PatientRequests();
+    
+    
+    		return $this->redirect(['patient-requests']);
+    
+    		//print_r($nghId);exit();
+    	}
+    	/* else{
+    	 print_r($model->errors);exit();
+    	 } */
+    
+    	return $this->render('patientDetails',
+    			['model' => $model,
+    					'mpatientModel' => $mpatientModel,
+    					'mpatientInformationModel' => $mpatientInformationModel]);
+    			//print_r($avialableDoctors);exit();
     }
     public function actionNghlist()
     {

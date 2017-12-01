@@ -1,48 +1,53 @@
 <?php
+use yii\helpers\html;
+use yii\grid\GridView;
+use yii\helpers\url;
+use kartik\date\DatePicker;
 
 
-use app\modules\patients\models\Patients;
-use app\modules\doctors\models\Doctors;
-/* @var $this yii\web\View */
-/* @var $searchModel app\modules\doctors\models\DoctorsSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
-$this->title = 'Consultant Report';
-$this->params['breadcrumbs'][] = $this->title;
-//$sdata = User::find()->select('status')->all();
-//$data = $sdata->status;
+$this->title = 'Doctor Report';
+$this->params['breadcrumbs'][]=$this->title;
 ?>
 <div class="doctors-index">
-<div class="box box-primary">
-<div class="box-body">
-    
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-  
- <table class="table table-striped table-bordered">
-	<tr style="color:#3c8dbc;">
-	<th>S.No</th>
-	<th>Patient  Name</th>
-	<th>Doctor Name</th>
-	<th>Prescription Date</th>
-	</tr>
-	<?php 
-	for($m=0,$n=0;$m<count($patary),$n<count($cdate);$m++,$n++)
-	{
-		$sno=$m+1;
-	?>
-	<tr>
-	<td><?php echo $sno;?></td>
-	<td><?php echo $patary[$m];?></td>
-	<td><?php echo $docary[$m];?></td>
-	<td><?php  echo $cdate[$n];?></td>
-	
-<?php 			
-	}	
-	?>
-	
-</tr>
-</table>
+	<div class="box box-primary">
+		<div class="box-body">
+		<?= GridView::widget([
+				'filterModel'=>$searchModel,
+				'dataProvider'=>$dataProvider,
+				'columns'=>[
+						['class' => 'yii\grid\SerialColumn'],
+						[
+								'attribute'=>'firstName',
+								'label'=>'Patient Name',
+								'value'=>function($data)
+								{
+							return $data->firstName . "" . $data->lastName;
+						},
+								'headerOptions'=>['style'=>'color:#3c8dbc'],
+						],
+						[
+								'attribute'=>'name',
+								'label'=>'Doctor Name',
+								'headerOptions'=>['style'=>'color:#3c8dbc'],
+						],
+						[
+								'headerOptions'=>['style'=>'color:#3c8dbc'],
+							'attribute'=>'updatedDate',
+							'label'=>'Prescription Date',
+								'value' => 'updatedDate',
+        						'filter' => DatePicker::widget([
+        						'model'=>$searchModel,
+        						'attribute' => 'updatedDate',
+        						'removeButton' => false,
+        						'options' => ['placeholder' => 'Select Date..'],
+        							'pluginOptions' => [
+        							'autoclose'=>true,
+        						'format' => 'yyyy-mm-dd'
+        				]
+        				]),
+				]
+		]
+		])?>
+		</div>
+	</div>
 </div>
-</div>
-</div>
-

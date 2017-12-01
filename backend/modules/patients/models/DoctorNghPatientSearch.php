@@ -149,7 +149,7 @@ class DoctorNghPatientSearch extends DoctorNghPatient
     public function nghreports($params,$id)
     {
     	
-    	$patientInfoModel=DoctorNghPatient::find()->select('doctor_ngh_patient.doctorId,doctor_ngh_patient.patientId,doctor_ngh_patient.updatedDate,patients.firstName,doctors.name')->innerJoin('patients','doctor_ngh_patient.patientId = patients.patientId')->innerJoin('doctors','doctor_ngh_patient.doctorId = doctors.userId')->where("doctor_ngh_patient.nugrsingId = '$id' AND doctor_ngh_patient.patientRequestStatus = '".$params['DoctorNghPatientSearch']['status']."'");
+    	$patientInfoModel=DoctorNghPatient::find()->select('doctor_ngh_patient.doctorId,doctor_ngh_patient.patientId,doctor_ngh_patient.updatedDate,patients.firstName,patients.lastName,doctors.name')->innerJoin('patients','doctor_ngh_patient.patientId = patients.patientId')->innerJoin('doctors','doctor_ngh_patient.doctorId = doctors.userId')->where("doctor_ngh_patient.nugrsingId = '$id' AND doctor_ngh_patient.patientRequestStatus = '".$params['DoctorNghPatientSearch']['status']."'");
     	//print_r($patientInfoModel);exit();
     	$dataProvider=new ActiveDataProvider([
     			'query'=>$patientInfoModel,
@@ -162,6 +162,7 @@ class DoctorNghPatientSearch extends DoctorNghPatient
     		// $query->where('0=1');
     		return $dataProvider;
     	}
+    	
     	$patientInfoModel->andFilterWhere(['like','patients.firstName',$this->firstName])
     					 ->andFilterWhere(['like','doctors.name',$this->name])
     					 ->andFilterWhere(['like','doctor_ngh_patient.updatedDate', $this->updatedDate]);
@@ -172,7 +173,7 @@ class DoctorNghPatientSearch extends DoctorNghPatient
     {
     	$nursId = Yii::$app->user->identity->id;
     	//print_r($nursId);exit();
-    	$patientInfoModel=DoctorNghPatient::find()->select('doctor_ngh_patient.doctorId,doctor_ngh_patient.patientId,doctor_ngh_patient.updatedDate,patients.firstName,doctors.name')->innerJoin('patients','doctor_ngh_patient.patientId = patients.patientId')->innerJoin('doctors','doctor_ngh_patient.doctorId = doctors.userId')->where("doctor_ngh_patient.nugrsingId = '$nursId' AND doctor_ngh_patient.patientRequestStatus = '".$params['DoctorNghPatientSearch']['status']."'");
+    	$patientInfoModel=DoctorNghPatient::find()->select('doctor_ngh_patient.doctorId,doctor_ngh_patient.patientId,doctor_ngh_patient.updatedDate,patients.firstName,patients.lastName,doctors.name')->innerJoin('patients','doctor_ngh_patient.patientId = patients.patientId')->innerJoin('doctors','doctor_ngh_patient.doctorId = doctors.userId')->where("doctor_ngh_patient.nugrsingId = '$nursId' AND doctor_ngh_patient.patientRequestStatus = '".$params['DoctorNghPatientSearch']['status']."'");
     	//print_r($patientInfoModel);exit();
     	$dataProvider=new ActiveDataProvider([
     			'query'=>$patientInfoModel,
@@ -191,4 +192,5 @@ class DoctorNghPatientSearch extends DoctorNghPatient
     	 
     	return $dataProvider;
     }
+  
 }

@@ -15,10 +15,14 @@ $this->params['breadcrumbs'][]=$this->title;
 				'filterModel'=>$searchModel,
 				'dataProvider'=>$dataProvider,
 				'columns'=>[
-						['class'=>'yii\grid\serialcolumn'],
+						['class' => 'yii\grid\SerialColumn'],
 						[
-							'attribute'=>'firstName',
-								'label'=>'First Name',
+								'attribute'=>'firstName',
+								'label'=>'Patient Name',
+								'value'=>function($data)
+								{
+							return $data->firstName . "" . $data->lastName;
+						},
 								'headerOptions'=>['style'=>'color:#3c8dbc'],
 						],
 						[

@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
             		'template' => '{view} ',
              		'buttons' => [
              				'view' => function ($url,$data) {
-             				$url = Url::to(['/doctors/doctors/patient-info','phsId'=>$data->patientHistoryId]);
+             				$url = Url::to(['/doctors/doctors/patient-details','phsId'=>$data->patientHistoryId]);
              				return Html::a(
              						'<span class="glyphicon glyphicon-eye-open"></span>',
              						$url,['title'=>'View']);

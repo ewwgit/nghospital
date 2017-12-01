@@ -627,7 +627,7 @@ public function behaviors()
     	$serachparam = Yii::$app->request->queryParams;
     	$serachparam['DoctorNghPatientSearch']['status'] ='COMPLETED';
     	$dataProvider=$searchModel->dtreports($serachparam);
-    	return $this->render('patientConsultantReport',[
+    	return $this->render('doctorreport',[
     			'searchModel'=>$searchModel,
     			'dataProvider'=>$dataProvider,
     			 
@@ -694,11 +694,16 @@ public function behaviors()
     public  function actionPatientConsultantReport($id)
     {
     	//print_r($id);exit();
+    	
+    	
     	$searchModel = new DoctorNghPatientSearch();
     	$serachparam = Yii::$app->request->queryParams;
     	$serachparam['DoctorNghPatientSearch']['status'] ='COMPLETED';
-    	$dataProvider=$searchModel->nghreports($serachparam,$id);    	
+    	$dataProvider=$searchModel->nghreports($serachparam,$id);   
+    	
+    	
     	return $this->render('patientConsultantReport',[
+    			
     			'searchModel'=>$searchModel,
     			    	'dataProvider'=>$dataProvider,
     			
