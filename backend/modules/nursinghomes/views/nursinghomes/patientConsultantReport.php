@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][]=$this->title;
 								'label'=>'Patient Name',
 								'value'=>function($data)
 								{
-							return $data->firstName . "" . $data->lastName;
+							return $data->firstName . " " . $data->lastName;
 						},
 								'headerOptions'=>['style'=>'color:#3c8dbc'],
 						],
