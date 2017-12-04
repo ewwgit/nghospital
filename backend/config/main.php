@@ -1,4 +1,5 @@
 <?php
+use kartik\mpdf\Pdf;
 date_default_timezone_set("Asia/Kolkata");
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
@@ -81,6 +82,25 @@ return [
     								'@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app'
     						],
     				],
+    		],
+    		
+    		'html2pdf' => [
+            'class' => 'yii2tech\html2pdf\Manager',
+            'viewPath' => '@app/pdf',
+            'converter' => [
+                'class' => 'yii2tech\html2pdf\converters\Wkhtmltopdf',
+                'defaultOptions' => [
+                    'pageSize' => 'A4'
+                ],
+            ]
+        ],
+    		
+    		'pdf' => [
+    				'class' => Pdf::classname(),
+    				'format' => Pdf::FORMAT_A4,
+    				'orientation' => Pdf::ORIENT_PORTRAIT,
+    				'destination' => Pdf::DEST_BROWSER,
+    				// refer settings section for all configuration options
     		],
     ],
     'params' => $params,

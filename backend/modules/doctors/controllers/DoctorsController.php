@@ -1355,4 +1355,96 @@ public function actionPatientshistoryview($infoid)
     	}
     	echo '</table>';
     }
+    
+    public function actionPdfcheck()
+    {
+    	$phsId = 18;
+
+    	$model = DoctorNghPatient::find()->where(['patientHistoryId' => $phsId])->one();
+    	$model->scenario = 'requesttreatment';
+    	$mpatientModel = new Patients();
+    	$mpatientInformationModel = new PatientInformation();
+    	$model->phsId = $phsId;
+    	$pDate = date("Y-M-d H:i:s");
+    	$presentDay = date("D", strtotime($pDate));
+    	$presentTime =  date("H:i", strtotime($pDate));
+    	$avialableDoctors = array();
+    	//echo $presentTime;exit();
+    	 
+    	
+    	$patientId = 0;
+    	$nghId = 0;
+    	$patientInfo = PatientInformation::find()->where(['patientInfoId' => $model->phsId])->one();
+    	$patientId = $patientInfo->patientId;
+    	if($patientId !=0)
+    	{
+    		$mpatientInformationModel = $patientInfo;
+    		$nghInfo = Patients::find()->where(['patientId' => $patientId])->one();
+    		$nghId = $nghInfo->createdBy;
+    		$mpatientModel = $nghInfo;
+    	}
+    	
+    	
+    	
+    	
+    	$html = <<<HTML
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert Title Here</title>
+
+</head>
+
+<body>
+	<div class="maincontainer">
+        <header>
+            <div class="img">
+                <img src="user.jpg" alt="Doctor"/>
+            </div>
+            <h1>Doctor Prescription Pad</h1>
+            <h2>Hospital Name</h2>
+            <h3>KPHB</h3>
+            <div class="user">
+            	<h1>Saritha</h1>
+                <h3>Date: <span>12-Sep-2017</span></h3>
+            </div>
+        </header>
+        <aside>
+        	<div class="labelgroup">
+            	<label>Patient Name <i>:</i></label>
+                <span>Harinath Yadavalli</span>
+            </div>
+            <div class="labelgroup">
+            	<label>Mobile Number <i>:</i></label>
+                <span>9908736517</span>
+            </div>
+            <div class="labelgroup">
+            	<label>Unique ID <i>:</i></label>
+                <span>00001PAT07092017</span>
+            </div>
+             <div class="labelgroup">
+            	<label>Prescription Date <i>:</i></label>
+                <span>17-Oct-2017</span>
+            </div>
+            <div class="labelgroup">
+            	<label>Nursing Home Adress <i>:</i></label>
+                <span>H.No: 8-2-608/27,Mastan Mansion, Gaffar Khan Colony,Road No. 10, Banjarahills, Hyderabad, Telangana 500034</span>
+            </div>
+            <div class="labelgroup">
+            	<label>Phone Number <i>:</i></label>
+                <span>9908736517</span>
+            </div>
+        </aside>    
+    </div>
+</body>
+</html>
+    	
+HTML;
+    	$pdf = Yii::$app->pdf;
+$pdf->content = $html;
+return $pdf->render();
+
+
+}
 }
