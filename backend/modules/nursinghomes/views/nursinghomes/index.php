@@ -102,7 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn',
             		'header'=>'Actions',
             		'headerOptions'=>['style'=>'color:#3c8dbc'],
-            		'template' => '{view} {update} {delete}  {password} {reports}',
+            		'template' => '{view} {update} {delete}  {password} {reports} {excel-sheet}',
             		'buttons' => [
             				'password' => function ($url,$data) {
             				$url = Url::to(['/nursinghomes/nursinghomes/reset-password','id'=>$data->nuserId]);
@@ -119,6 +119,11 @@ $this->params['breadcrumbs'][] = $this->title;
             				'reports' => function ($url,$data){
             				$url = Url::to(['/nursinghomes/nursinghomes/patient-consultant-report','id'=>$data->nuserId]);
             				return Html::a('<span class="glyphicon glyphicon-certificate"></span>',$url,(['title'=>'Reports']));
+            				},
+            				'excel-sheet'=>function($url,$data)
+            				{
+            					$url=Url::to(['/nursinghomes/nursinghomes/nursinghomes-consultant-report-excel','id'=>$data->nuserId]);
+            					return Html::a('<span class="glyphicon glyphicon-download"></span>',$url,(['title'=>'Excel Sheet']));
             				}
             				],
             		

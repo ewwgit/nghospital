@@ -634,8 +634,41 @@ public function behaviors()
     	]);
     	//print_r($serachparam);exit();
     	/*
+    	
+    	  */
+    	  
+    
+    }
+    public  function actionPatientConsultantReport($id)
+    {
+    	//print_r($id);exit();
+    	
+    	
+    	$searchModel = new DoctorNghPatientSearch();
+    	$serachparam = Yii::$app->request->queryParams;
+    	$serachparam['DoctorNghPatientSearch']['status'] ='COMPLETED';
+    	$dataProvider=$searchModel->nghreports($serachparam,$id);   
+    	
+    	
+    	return $this->render('patientConsultantReport',[
+    			
+    			'searchModel'=>$searchModel,
+    			    	'dataProvider'=>$dataProvider,
+    			
+    	]);
+    }
+
+    public function actionNursinghomesConsultantReportExcel($id){
     	$status= "COMPLETED";
-    	$doctormodel = DoctorNghPatient::find()-> where(['nugrsingId'=> $nursId ,'patientRequestStatus'=>$status])->all();
+    	$user=User::find()->select('username')->where(['id'=>$id])->all();
+    	//print_r($user);exit();
+    	$uname = '';
+    	foreach ($user as $u)
+    	{
+    		$uname=$u->username;
+    		//print_r($uname);exit();
+    	}
+    	$doctormodel = DoctorNghPatient::find()-> where(['nugrsingId'=> $id ,'patientRequestStatus'=>$status])->all();
     	$drary = array();
     	$patary = array();
     	if(!empty($doctormodel))
@@ -680,36 +713,41 @@ public function behaviors()
     		}
     	}
     	//print_r($cdate);exit();
-    
-    	return $this->render('doctorReport', [
+    /*
+    	return $this->render('export', [
     			'cdate'=>$cdate,
     			'docary'=> $docary,
     			'patary' => $patary
     	]);
     	
-    	  */
-    	  
-    
+    */
+    	
+    	$filename = 'Data-'.Date('YmdGis-').$uname.'-NursinghomesConsultantReport.xls';
+    	header("Content-type: application/vnd-ms-excel");
+    	header("Content-Disposition: attachment; filename=".$filename);
+    	
+    	echo '
+    		
+    	<table border="1" width="100%">
+        <thead>
+            <tr>
+    			<th>S.No</th>
+				<th>Patient  Name</th>
+				<th>Doctor Name</th>
+                <th>Prescription Date</th>
+                            </tr>
+        </thead>';
+    	for($m=0,$n=0;$m<count($patary),$n<count($cdate);$m++,$n++)
+    	{
+    		$sno=$m+1;
+    		echo '
+                <tr>
+    				<td>'.$sno.'</td>
+    				<td>'.$patary[$m].'</td>
+    				<td>'.$docary[$m].'</td>
+    				<td>'.$cdate[$n].'</td></tr>';
+    	}
+    	echo '</table>';
     }
-    public  function actionPatientConsultantReport($id)
-    {
-    	//print_r($id);exit();
-    	
-    	
-    	$searchModel = new DoctorNghPatientSearch();
-    	$serachparam = Yii::$app->request->queryParams;
-    	$serachparam['DoctorNghPatientSearch']['status'] ='COMPLETED';
-    	$dataProvider=$searchModel->nghreports($serachparam,$id);   
-    	
-    	
-    	return $this->render('patientConsultantReport',[
-    			
-    			'searchModel'=>$searchModel,
-    			    	'dataProvider'=>$dataProvider,
-    			
-    	]);
-    }
-
-    
     
 }

@@ -1090,8 +1090,7 @@ public function behaviors()
     	//print_r($patientinfoModel);exit();
     }
     public function actionPatientConsultantReport($id)
-    {
-    	
+    {    	
     	 $search = new DoctorNghPatientSearch();
     	 $serachparam = Yii::$app->request->queryParams;
     	//print_r($serachparam);exit();
@@ -1100,8 +1099,7 @@ public function behaviors()
     	 $dataProvider=$search->doctorreports($serachparam,$id);    	
     	// $dataProvider = $searchModel->search($data);
     	
-    	 return $this->render('patientConsultantReport', [
-    	 
+    	 return $this->render('patientConsultantReport', [    	 
     	 'search' => $search,
     	 'dataProvider' => $dataProvider,
     	 ]); 
@@ -1279,5 +1277,82 @@ public function actionPatientshistoryview($infoid)
     	} else {
     		throw new NotFoundHttpException('The requested page does not exist.');
     	}
+    }
+    public function actionDoctorsConsultantReportExcel($id)
+    {
+    	$status="COMPLETED";
+    	$user=User::find()->select('username')->where(['id'=>$id])->all();
+    	//print_r($user);exit();
+    	$uname = '';
+    	foreach ($user as $u)
+    	{
+    		$uname=$u->username;
+    		//print_r($uname);exit();
+    	}
+    	$query=DoctorNghPatient::find()->where(['doctorId'=> $id ,'patientRequestStatus'=>$status])->all();
+    	//print_r($query);exit();
+    	$dateary=array();
+    	$patary=array();
+    	$nurary=array();
+    	if(!empty($query))
+    	{
+    		foreach ($query as $dary)
+    		{
+    			$dateary[]=$dary->updatedDate;
+    			//print_r($dateary);
+    			$patary[]=$dary->patientId;
+    			$nurary[]=$dary->nugrsingId;
+    		}
+    	}
+    	$pfirstname=array();
+    	$plastname=array();
+    	for($k=0;$k<count($patary);$k++)
+    	{
+    		$pat=Patients::find()->select('firstName,lastName')->where(['patientId'=>$patary[$k]])->all();
+    		foreach ($pat as $pname)
+    		{
+    		$pfirstname[]=$pname->firstName;
+    		$plastname[]=$pname->lastName;
+    		}
+    	}
+    	$nname=array();
+    	for($i=0;$i<count($nurary);$i++)
+    	{
+    		$nur=Nursinghomes::find()->select('nursingHomeName')->where(['nuserId'=>$nurary[$i]])->all();
+    		foreach($nur as $name)
+    		{
+    			$nname[]=$name->nursingHomeName;
+    			
+    		}
+    	}
+    	
+    	//print_r(count($nname));exit();
+    	$filename = 'Data-'.Date('YmdGis-').$uname.'-DoctorsConsultantReport.xlsx ';
+    	header('Content-type:application/vnd-ms-excel');
+    	header('Content-Disposition:attachment;filename='.$filename);
+    	echo '
+    			<table border="1" width="100%">
+        <thead>
+            <tr>
+    			<th>S.No</th>
+    			<th>NursingHomeName</th>
+				<th>FirstName</th>
+    			<th>LastName</th>    			
+				<th>Prescription Date</th>
+                            </tr>
+        </thead>';
+    	for($m=0;$m<count($dateary);$m++)
+    	{
+    		$sno=$m+1;
+    		echo '
+                <tr>
+    				<td>'.$sno.'</td>
+    				<td>'.$nname[$m].'</td>
+    				<td>'.$pfirstname[$m].'</td>
+    				<td>'.$plastname[$m].'</td>
+    				
+    				<td>'.$dateary[$m].'</td></tr>';
+    	}
+    	echo '</table>';
     }
 }

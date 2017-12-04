@@ -23,7 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Doctors', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+    <?=
+    
+       GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -91,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
              ['class' => 'yii\grid\ActionColumn',
              		'header'=>'Actions',
              		'headerOptions'=>['style'=>'color:#3c8dbc'],
-            		'template' => '{view} {update} {delete}  {password} {reports}',
+            		'template' => '{view} {update} {delete}  {password} {reports} {excel-sheet}',
             		'buttons' => [
             				'password' => function ($url,$data) {
             				$url = Url::to(['/doctors/doctors/reset-password','id'=>$data->userId]);
@@ -111,6 +113,11 @@ $this->params['breadcrumbs'][] = $this->title;
             						'<span class="glyphicon glyphicon-certificate"></span>',
             						$url,['title'=>'Reports']);
             				 
+            				},
+            				'excel-sheet'=>function($url,$data)
+            				{
+            					$url=Url::to(['/doctors/doctors/doctors-consultant-report-excel','id'=>$data->userId]);
+            					return Html::a('<span class="glyphicon glyphicon-download"></span>',$url,(['title'=>'Excel Sheet']));
             				}
             				],
             		
