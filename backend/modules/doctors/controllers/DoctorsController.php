@@ -1356,9 +1356,15 @@ public function actionPatientshistoryview($infoid)
     	echo '</table>';
     }
     
-    public function actionPdfcheck()
+    public function actionPrescriptionpdf()
     {
-    	$phsId = 18;
+    	$phsId = 0;
+    	
+    	if(isset($_GET['phsId']) && $_GET['phsId'] != '')
+    	{
+    		$phsId = $_GET['phsId'];
+    	}
+    	if($phsId != 0){
 
     	$model = DoctorNghPatient::find()->where(['patientHistoryId' => $phsId])->one();
     	$model->scenario = 'requesttreatment';
@@ -1383,8 +1389,10 @@ public function actionPatientshistoryview($infoid)
     		$nghId = $nghInfo->createdBy;
     		$mpatientModel = $nghInfo;
     	}
-    	
-    	
+    	$doctorInfo = Doctors::find()->select('name')->where(['userId' => $model->doctorId])->one();
+    	$nursinghomeinfo = Nursinghomes::find()->where(['nuserId' => $model->nugrsingId])->one();
+    	$precriptionDate = date('d-M-Y', strtotime($model->updatedDate));
+    	$currentdatenew = date('d-M-Y');
     	
     	
     	$html = <<<HTML
@@ -1392,59 +1400,62 @@ public function actionPatientshistoryview($infoid)
 <html>
 <head>
 <meta charset="utf-8">
-<title>Insert Title Here</title>
-
+    	
 </head>
-
-<body>
-	<div class="maincontainer">
-        <header>
-            <div class="img">
-                <img src="user.jpg" alt="Doctor"/>
+    	
+<body style="box-sizing:border-box; font-family: 'Source Sans Pro',sans-serif; margin:0px; padding:0px;">
+	<div style="width:800px;  height:auto; overflow:hidden; margin:10px auto; border:1px solid #bce8f1; border-radius:4px; padding:10px; position:relative;">
+        <header style="width:800px; float:left; position: relative; border-bottom: 2px solid #5aab4a; padding: 0 10px; box-sizing: border-box;">
+            <div class="img" style="width: 93px; height:104px; overflow:hidden; float: left; position: relative;">
+                <img src="http://expertwebworx.in//nghospital/backend/web/profileimages/1512454366Desert.jpg" alt="Doctor"/>
             </div>
-            <h1>Doctor Prescription Pad</h1>
-            <h2>Hospital Name</h2>
-            <h3>KPHB</h3>
-            <div class="user">
-            	<h1>Saritha</h1>
-                <h3>Date: <span>12-Sep-2017</span></h3>
-            </div>
+            <h1 style="font-family: 'Source Sans Pro',sans-serif; font-size: 30px; color:#0000ff; text-align:center; margin:0px;">Doctor Prescription Pad</h1>
+            <h2 style="font-family: 'Source Sans Pro',sans-serif; color: #008000; font-size:22px; padding: 5px 0; text-align:center; margin:0px;">$nursinghomeinfo->nursingHomeName</h2>
+            <h3 style="font-family: 'Source Sans Pro',sans-serif; color: #333333; font-size: 18px; text-align:center; margin:0px;">$nursinghomeinfo->city</h3>
+    	
+            	<div style="width: 350px; float: left; clear: left; position: relative; margin-bottom: -20px;">$doctorInfo->name</div>
+                <div style="width: 350px; float: right; clear: right; text-align: right;">Date: $currentdatenew</div>
+    	
         </header>
-        <aside>
-        	<div class="labelgroup">
-            	<label>Patient Name <i>:</i></label>
-                <span>Harinath Yadavalli</span>
+        <aside style="width:800px; float:left; position: relative; border-bottom: 2px solid #5aab4a; padding:10px; padding-bottom:0px; box-sizing: border-box;">
+        	<div style="width: 800px; float: left; position: relative; padding:0 0 10px 0;">
+            	<div style="width: 400px; float: left; color: #295a8c; font-size: 14px;">Patient Name <i style="font-style: normal; float: right; padding-right: 15px;">:</i></div>
+                <div style="font-size: 14px; color: #333333;  float: left;">$mpatientModel->firstName $mpatientModel->lastName</div>
             </div>
-            <div class="labelgroup">
-            	<label>Mobile Number <i>:</i></label>
-                <span>9908736517</span>
+            
+            
+             <div style="width: 800px; float: left; position: relative; padding:0 0 10px 0;">
+            	<div style="width: 400px; float: left; color: #295a8c; font-size: 14px;">Prescription Date <i style="font-style: normal; float: right; padding-right: 15px;">:</i></div>
+                <div style="font-size: 14px; color: #333333;  float: left;">$precriptionDate</div>
             </div>
-            <div class="labelgroup">
-            	<label>Unique ID <i>:</i></label>
-                <span>00001PAT07092017</span>
+                		
+                		<div style="width: 800px; float: left; position: relative; padding:0 0 10px 0;">
+            	<div style="width: 400px; float: left; color: #295a8c; font-size: 14px;">Prescription <i style="font-style: normal; float: right; padding-right: 15px;">:</i></div>
+                <div style="font-size: 14px; color: #333333;  float: left;">$model->treatment</div>
             </div>
-             <div class="labelgroup">
-            	<label>Prescription Date <i>:</i></label>
-                <span>17-Oct-2017</span>
+            <div style="width: 800px; float: left; position: relative; padding:0 0 10px 0;">
+            	<div style="width: 400px; float: left; color: #295a8c; font-size: 14px;">Nursing Home Adress <i style="font-style: normal; float: right; padding-right: 15px;">:</i></div>
+                <div style="font-size: 14px; color: #333333;  float: left;">$nursinghomeinfo->address<br /> PIN CODE: $nursinghomeinfo->pinCode</div>
             </div>
-            <div class="labelgroup">
-            	<label>Nursing Home Adress <i>:</i></label>
-                <span>H.No: 8-2-608/27,Mastan Mansion, Gaffar Khan Colony,Road No. 10, Banjarahills, Hyderabad, Telangana 500034</span>
+            
+        </aside>
+        <footer style="width:800px; float:left; position: relative; padding:10px; padding-bottom:0px; box-sizing: border-box;">
+            <div style="width: 800px; float: left; position: relative; padding:0px; font-family: 'Source Sans Pro',sans-serif; font-size: 13px; color: #989898; text-align:center;">
+                Footer Content Goes Here
             </div>
-            <div class="labelgroup">
-            	<label>Phone Number <i>:</i></label>
-                <span>9908736517</span>
-            </div>
-        </aside>    
+        </footer>
     </div>
 </body>
 </html>
-    	
+   
 HTML;
+    	
+    	
     	$pdf = Yii::$app->pdf;
 $pdf->content = $html;
+$pdf->filename = 'Doctor Prescription';
 return $pdf->render();
-
+    	}
 
 }
 }
