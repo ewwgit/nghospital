@@ -41,8 +41,14 @@ $historyform = '<div class="row">
 </div>
 </div>
 <div class="row">
+		
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-3 col-sm-12">Diseases:</div> <div class="col-lg-9 col-sm-12">'.$form->field($model, 'diseases')->textInput(['maxlength' => 200])->label(false).'</div>
+    <div class="col-lg-3 col-sm-12">Compliant:</div> <div class="col-lg-9 col-sm-12">'.
+	$form->field($model, 'patientCompliant')->dropDownList(['Fever'=>'Fever','Cough'=>'Cough','Pain abdomen'=>'Pain abdomen','COPD'=>'COPD','Injury'=>'Injury','Burning urination'=>'Burning urination','Chest pain'=>'Chest pain'
+			,'Body pains'=>'Body pains','Cold'=>'Cold','Asthma'=>'Asthma','Throat pain'=>'Throat pain','Itching'=>'Itching','Swelling'=>'Swelling','Bleeding'=>'Bleeding','Ulceration'=>'Ulceration','Rash'=>'Rash','Unable to move'=>'Unable to move','
+			Shortness of breath'=>'Shortness of breath','Infection over body'=>'Infection over body','Discharge'=>'Discharge','Ear pain'=>'Ear pain','Dis urea'=>'Dis urea','Diarrhea'=>'Diarrhea','Vomiting'=>'Vomiting','Disability'=>'Disability','Constipation'=>'Constipation','Hiccough'=>'Hiccough'
+	],['prompt' => 'Complaints'],
+											['itemOptions' => ['class' =>'radio-inline']])->label(false).'</div>
 </div> 
 <div class="form-group col-lg-4 col-sm-12">
     <div class="col-lg-3 col-sm-12">Allergic Medicine:</div> <div class="col-lg-9 col-sm-12">'.$form->field($model, 'allergicMedicine')->textInput(['maxlength' => 100])->label(false).'</div>
@@ -55,7 +61,8 @@ $historyform = '<div class="row">
 </div>
 <div class="row">
 <div class="form-group col-lg-4 col-sm-12">
-	<div class="col-lg-3 col-sm-12">Compliant:</div> <div class="col-lg-9 col-sm-12">'.$form->field($model, 'patientCompliant')->textarea(['rows' => 6,'maxlength'=>255])->label(false).'</div>
+	<div class="col-lg-3 col-sm-12">Diagnosis:</div> <div class="col-lg-9 col-sm-12">'.
+	$form->field($model, 'diagnosis')->textInput(['maxlength' => 200])->label(false).'</div>
 </div>
    
     <div class="form-group col-lg-4 col-sm-12">
@@ -278,11 +285,14 @@ $items = [
     <div class="col-lg-3 col-sm-12">Mobile:</div> <div class="col-lg-9 col-sm-12"><?= $form->field($model, 'mobile')->textInput(['maxlength' => 10])->label(false); ?></div>
 </div>
 <div class="form-group col-lg-4 col-sm-12">
+    <div class="col-lg-3 col-sm-12">Aadhar Number:</div> <div class="col-lg-9 col-sm-12"><?= $form->field($model, 'aadhar_number')->textInput(['maxlength' => 12])->label(false); ?></div>
+</div>
+<div class="form-group col-lg-4 col-sm-12">
     <div class="col-lg-3 col-sm-12">Image:</div> <div class="col-lg-9 col-sm-12"><?=$form->field ( $model, 'patientImage' )->widget ( FileInput::classname (),
    		[ 'options' => [ 'accept' => 'image/*' ],'pluginOptions' =>[[ 'browseLabel' => 'Patient Image', 'allowedFileExtensions'=>['jpg','png','jpeg'] ]] ] )->label(false);?></div>
 </div>
+<div class="pad">
   <?php if($model->patientimageupdate != ''){?>
-<div class="form-group col-lg-4 col-sm-12">
   
 
     <img class='image' 
@@ -296,11 +306,11 @@ $items = [
 									 echo Url::base()."/images/user-iconnew.png" ;
 								      }
 								?>"
-							width="100" height="100"> </img> 
+							width="100" height="100" style="float:right;"> </img> 
 
-</div>
+
 <?php } ?>
-
+</div>
 </div>
 <div class="form-group col-lg-12 col-sm-12" style="border-bottom: 1px solid #ccc;">
 <?php 
@@ -412,5 +422,8 @@ line-height: 1.8;
 }
 textarea {
     resize: none;
+}
+.pad{
+padding:0px 32px 0px 0px;
 }
 </style>

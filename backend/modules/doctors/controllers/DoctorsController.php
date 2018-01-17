@@ -1,7 +1,5 @@
 <?php
-
 namespace app\modules\doctors\controllers;
-
 use Yii;
 use app\modules\doctors\models\Doctors;
 use app\modules\doctors\models\DoctorsSearch;
@@ -22,7 +20,6 @@ use app\modules\doctors\models\DoctorSlots;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 use backend\models\ChangePasswordForm;
-
 use app\modules\patients\models\DoctorNghPatient;
 use yii\data\ActiveDataProvider;
 use app\modules\patients\models\Patients;
@@ -31,11 +28,9 @@ use app\modules\patients\models\PatientInformation;
 use app\modules\patients\models\DoctorNghPatientSearch;
 use app\modules\nursinghomes\models\Nursinghomes;
 use app\modules\nursinghomes\models\NursinghomesSearch;
-
 use app\models\UserrolesModel;
 use yii\filters\AccessControl;
 use app\models\ModulePermissions;
-
 /**
  * DoctorsController implements the CRUD actions for Doctors model.
  */
@@ -45,8 +40,7 @@ class DoctorsController extends Controller
      * @inheritdoc
      */
 public function behaviors()
-	{
-	
+	{	
 		$permissionsArray = [''];
 		if(UserrolesModel::getRole() == 1)
 		{
@@ -85,11 +79,8 @@ public function behaviors()
 				{
 					$permissionView = ['index','view','states'];
 					$permissionsArray = array_merge($permissionsArray,$permissionView);
-				}
-	
-			}
-			
-			
+				}	
+			}			
 		}
 		//print_r($permissionsArray);exit();
 		return [
@@ -103,7 +94,6 @@ public function behaviors()
 						'class' => AccessControl::className(),
 						'only' => [
 								'index','create','update','view','delete','profileupdate','profileview','patient-requests','reset-password','patient-info','states','patient-requests-completed','nghlist','slots','previousrecords','patientshistoryview'
-	
 						],
 						'rules' => [
 								[
@@ -112,13 +102,11 @@ public function behaviors()
 										'matchCallback' => function ($rule, $action) {
 										return (UserrolesModel::getRole());
 										}
-										],
-	
+										],	
 										]
 										]
 										];
 	}
-
     /**
      * Lists all Doctors models.
      * @return mixed
@@ -127,13 +115,11 @@ public function behaviors()
     {
         $searchModel = new DoctorsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
-
     /**
      * Displays a single Doctors model.
      * @param integer $id
@@ -150,15 +136,13 @@ public function behaviors()
     	{
     		foreach ($doctorQulification as $dq)
     		{
-    			$dqary[] = $dq->qualification;
-    	
+    			$dqary[] = $dq->qualification;    	
     		}
     	}
     	for($k=0; $k<count($dqary); $k++)
     	{
     		$docquali = Qualifications::find()->select('qualification')->where( ['qlid' => $dqary[$k]])->asArray()->one();
-    		$docqualiary[] = $docquali['qualification'];
-    		 
+    		$docqualiary[] = $docquali['qualification'];    		 
     	}
     	$docSpecialities = DoctorsSpecialities::find()->select('rspId')->where( ['rdoctorId' => $model->userId])->all();
     	//print_r($docSpecialities);exit();
@@ -168,8 +152,7 @@ public function behaviors()
     	{
     		foreach ($docSpecialities as $ds)
     		{
-    			$dsary[] = $ds->rspId;
-    	
+    			$dsary[] = $ds->rspId;    	
     		}
     	}
     	//print_r($dsary);exit();
@@ -178,15 +161,11 @@ public function behaviors()
     		$docspeci = Specialities::find()->select('specialityName')->where( ['spId' => $dsary[$m]])->asArray()->one();
     		$docspeciary[] = $docspeci['specialityName'];
     	}
-    	
-    	
-    	//$model->qualification = $docqualiary;
-    	
+    	//$model->qualification = $docqualiary;    	
         return $this->render('view', [
             'model' => $this->findModel($id),'docqualiary' =>$docqualiary,'docspeciary'=>$docspeciary,
         ]);
     }
-
     /**
      * Creates a new Doctors model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -196,32 +175,22 @@ public function behaviors()
     {
         $model = new Doctors();
         $singupModel = new SignupForm();
-        $model->scenario = 'create';//password validation only show create  form//
-        
+        $model->scenario = 'create';//password validation only show create  form//        
         $model->countriesList = Countries::getCountries();
-        $model->citiesData = [];
-        
-        if($model->country != ''){
-        	 
-        	$model->state=States::getCountrysByStatesView($model->country );
-        	 
+        $model->citiesData = [];        
+        if($model->country != ''){        	 
+        	$model->state=States::getCountrysByStatesView($model->country );        	 
         }else{
         	$model->country = $model->country;
         	$model->statesData =[];
         	$model->state='';
-        }
-        
-       
+        }       
        //$qualificationData = Qualifications::find()->select('qualification')->asArray()->where(['status' => 'Active'])->all();
        //$model ->allquali = $qualificationData;
-       //print_r($model ->allquali);exit();
-       
-       
-       
+       //print_r($model ->allquali);exit();       
        $qualificationData = Qualifications::find()
        ->select('qualification')->where(['status' => 'Active'])
-       ->all();
-        
+       ->all();        
        $qualiInfo = array();
        if(!empty($qualificationData))
        {
@@ -237,17 +206,12 @@ public function behaviors()
        }
        else {
        	$qualiInfo =[''];
-       }
-       
+       }       
        $model ->allQuali = $qualiInfo;
-       //print_r($qualiInfo);exit();
-       
-       
-       
+       //print_r($qualiInfo);exit();       
        $specialityData = Specialities::find()
        ->select('specialityName')->where(['status' => 'Active'])
-       ->all();
-       
+       ->all();       
        $speciInfo = array();
        if(!empty($specialityData))
        {
@@ -266,21 +230,17 @@ public function behaviors()
        }
        $model ->allSpeci = $speciInfo;
         if ($model->load(Yii::$app->request->post()) )
-        { 
-        	
+        {         	
         	$model->doctorImage = UploadedFile::getInstance($model,'doctorImage');
         	if($model->validate())
-        	{
-        		
+        	{        		
         	$singupModel->username = $model->username;
         	$singupModel->email = $model->email;
         	$singupModel->password = $model->password;
         	$singupModel->role = 2;
-        	$user = $singupModel->signup();
-        	
+        	$user = $singupModel->signup();        	
         	$model->email = 'dummy@mailinator.com';
-        	$model->username = 'dummy';
-        	
+        	$model->username = 'dummy';        	
         	$presentDate = date('Y-m-d');
         	$doctorscount = Doctors::find()->where("createdDate LIKE '$presentDate%'")->count();
         	/* echo $nursinghomescount;
@@ -290,8 +250,7 @@ public function behaviors()
         	$dateInfo = date_parse(date('Y-m-d H:i:s'));
         	$monthval = str_pad($dateInfo['month'], 2, '0', STR_PAD_LEFT);
         	$dayval = str_pad($dateInfo['day'], 2, '0', STR_PAD_LEFT);
-        	$overallUniqueId = $uniqonlyId.'DOC'.$dayval.$monthval.$dateInfo['year'];
-        	
+        	$overallUniqueId = $uniqonlyId.'DOC'.$dayval.$monthval.$dateInfo['year'];        	
         	$model->createdDate = date('Y-m-d H:i:s');
         	$model->updatedDate = date('Y-m-d H:i:s');
         	$model->countryName = Countries::getCountryName($model->country);
@@ -300,16 +259,11 @@ public function behaviors()
         	$model->doctorUniqueId = $overallUniqueId;
         	$model->createdBy = Yii::$app->user->identity->id;
         	$model->updatedBy = Yii::$app->user->identity->id;
-        	$model->availableStatus = 'Offline';
-        	
-        	 
+        	$model->availableStatus = 'Offline';        	 
         	if(!(empty($model->doctorImage)))
-        	{
-        		 
-        		$imageName = time().$model->doctorImage->name;
-        			
-        		$model->doctorImage->saveAs('profileimages/'.$imageName );
-        		 
+        	{        		 
+        		$imageName = time().$model->doctorImage->name;        			
+        		$model->doctorImage->saveAs('profileimages/'.$imageName );        		 
         		$model->doctorImage = 'profileimages/'.$imageName;
         	}
         	$model->save();
@@ -323,11 +277,8 @@ public function behaviors()
         		$dqualification->docId = $model->userId;
         		$dqualification->qualification = $qulificationInfo->qlid;
         		$dqualification->save();
-        		}
-        	       	
-        	}
-        	
-        	
+        		}        	       	
+        	}        	
              for($k=0; $k<count($model->specialities);$k++)
         	 {
         	 	$specid = Specialities::find()->select('spId')->where(['specialityName' =>$model->specialities[$k]])->asArray()->one();
@@ -338,27 +289,22 @@ public function behaviors()
         	 		$dspeciality->rspId =$specid['spId'];
         	 		$dspeciality->save();
         	 	}
-          	 }
-        	
-        	
+          	 }        	
         	 Yii::$app->session->setFlash('success', " Doctors Created successfully ");
             //return $this->redirect(['view', 'id' => $model->doctorid]);
             return $this->redirect(['index']);
         	}
         	else {
         		 return $this->render('create', [
-                'model' => $model,
-            	
+                'model' => $model,            	
             ]);
         	}
         } else {
             return $this->render('create', [
-                'model' => $model,
-            	
+                'model' => $model,            	
             ]);
         }
     }
-
     /**
      * Updates an existing Doctors model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -378,18 +324,15 @@ public function behaviors()
         {
         	foreach ($doctorQulification as $dq)
         	{
-        		$dqary[] = $dq->qualification;
-        		
+        		$dqary[] = $dq->qualification;        		
         	}
         }
         for($k=0; $k<count($dqary); $k++)
         {
         	$docquali = Qualifications::find()->select('qualification')->where( ['qlid' => $dqary[$k]])->asArray()->one();
-        	$docqualiary[] = $docquali['qualification'];
-        	
+        	$docqualiary[] = $docquali['qualification'];        	
         }
-        $model->qualification = $docqualiary;
-        
+        $model->qualification = $docqualiary;        
         $docSpecialities = DoctorsSpecialities::find()->select('rspId')->where( ['rdoctorId' => $model->userId])->all();
         //print_r($docSpecialities);exit();
         $dsary = array();
@@ -398,40 +341,30 @@ public function behaviors()
         {
         	foreach ($docSpecialities as $ds)
         	{
-        		$dsary[] = $ds->rspId;
-        
+        		$dsary[] = $ds->rspId;        
         	}
         }
         //print_r($dsary);exit();
         for($m=0; $m<count($dsary); $m++)
         {
         	$docspeci = Specialities::find()->select('specialityName')->where( ['spId' => $dsary[$m]])->asArray()->one();
-        	$docspeciary[] = $docspeci['specialityName'];
-        	 
+        	$docspeciary[] = $docspeci['specialityName'];        	 
         }
-        $model->specialities = $docspeciary;
-      
-        
+        $model->specialities = $docspeciary;        
         $model->countriesList = Countries::getCountries();
         $model->docimageupdate = $model->doctorImage;
         $model->doctorImage = '';
-        $model->citiesData = [];
-        
+        $model->citiesData = [];        
         if($model->country != ''){
-        
-        	$model->statesData= Countries::getStatesByCountryupdate($model->country );
-        
+               	$model->statesData= Countries::getStatesByCountryupdate($model->country );        
         }else{
         	$model->country = $model->country;
         	$model->statesData =[];
         	$model->state='';
-        }
-        
-        
+        }        
         $qualificationData = Qualifications::find()
         ->select('qualification')->where(['status' => 'Active'])
-        ->all();
-        
+        ->all();        
         $qualiInfo = array();
         if(!empty($qualificationData))
         {
@@ -448,13 +381,10 @@ public function behaviors()
         else {
         	$qualiInfo =[''];
         }
-        $model ->allQuali = $qualiInfo;
-        
-        
+        $model ->allQuali = $qualiInfo;        
         $specialityData = Specialities::find()
         ->select('specialityName')->where(['status' => 'Active'])
-        ->all();
-         
+        ->all();         
         $speciInfo = array();
         if(!empty($specialityData))
         {
@@ -471,17 +401,13 @@ public function behaviors()
         else {
         	$speciInfo =[''];
         }
-        $model ->allSpeci = $speciInfo;
-        
-        
-        $usermodel = User::find() ->where(['id' =>$model->userId])->one();
-        
+        $model ->allSpeci = $speciInfo;        
+        $usermodel = User::find() ->where(['id' =>$model->userId])->one();        
         if (! (empty ( $usermodel ))) {
         	$model->username = $usermodel->username;
         	$model->email = $usermodel->email;
         	$model->status = $usermodel->status;
         }
-
         if ($model->load(Yii::$app->request->post()) )
         {
         	 $model->doctorImage = UploadedFile::getInstance($model,'doctorImage');
@@ -491,29 +417,22 @@ public function behaviors()
         	 $model->updatedBy = Yii::$app->user->identity->id;
         	 //echo $model->country;exit();
         	 $model->countryName = Countries::getCountryName($model->country);
-        	 $model->stateName = States::getStateName($model->state);
-        	 
+        	 $model->stateName = States::getStateName($model->state);        	 
         	 $usermodel->status = $model->status;
         	 $usermodel->save();
-        	 //print_r($model->doctorImage);exit();
-        	 
+        	 //print_r($model->doctorImage);exit();        	 
         	 if(!(empty($model->doctorImage)))
-        	 {
-        	 	
-        	 	$imageName = time().$model->doctorImage->name;
-        	 	
-        	 	$model->doctorImage->saveAs('profileimages/'.$imageName );
-        	 	 
+        	 {        	 	
+        	 	$imageName = time().$model->doctorImage->name;        	 	
+        	 	$model->doctorImage->saveAs('profileimages/'.$imageName );        	 	 
         	 	$model->doctorImage = 'profileimages/'.$imageName;
-        	 	
-        	 }
+        	  }
         	 else {
         	 	$model->doctorImage = $model->docimageupdate; 
         	 }
         	 //print_r($model->doctorImage);exit();
         	 $model->save();
-        	 //print_r($model->errors);exit();
-        	 
+        	 //print_r($model->errors);exit();        	 
         	 DoctorsQualification::deleteAll( ['docId' => $model->userId]);
         	 if(!empty($model->qualification))
         	 {
@@ -527,12 +446,8 @@ public function behaviors()
         		$dqualification->qualification = $qulificationInfo->qlid;
         		$dqualification->save();
         		}
-        	 		
-        	 		
         	 	}
-        	 }
-        	 
-        	 
+        	 }        	 
         	 DoctorsSpecialities::deleteAll( ['rdoctorId' => $model->userId]);
         	 for($k=0; $k<count($model->specialities);$k++)
         	 {
@@ -543,26 +458,19 @@ public function behaviors()
         	 		$dspeciality->rdoctorId = $model->userId;
         	 		$dspeciality->rspId =$specid['spId'];
         	 		$dspeciality->save();
-        	 	}
-        	 		 
-        	 		 
-        	 	
+        	 	}        	 	
         	 }
-        	 //print_r($model->qualification);exit();
-        	 
-        	
+        	 //print_r($model->qualification);exit();        	
         	 Yii::$app->session->setFlash('success', " Doctors Updated successfully ");
             //return $this->redirect(['view', 'id' => $model->doctorid]);
             return $this->redirect(['index']);
-        	 }
-            
+        	 }            
         } else {
             return $this->render('update', [
                 'model' => $model,
             ]);
         }
     }
-
     /**
      * Deletes an existing Doctors model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -578,17 +486,13 @@ public function behaviors()
     		$UserInfo = User::find()->where(['id' => $id])->one();
     		$UserInfo->status = 0;
     		$UserInfo->update();
-    		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted Doctors.');
-    		 
-    	}
-    	
+    		Yii::$app->getSession()->setFlash('success', 'You are successfully deleted Doctors.');    		 
+    	}    	
     	catch(\yii\db\Exception $e){
-    		Yii::$app->getSession()->setFlash('error', 'This Doctor is not deleted.');
-    		 
+    		Yii::$app->getSession()->setFlash('error', 'This Doctor is not deleted.');    		 
     	}
         return $this->redirect(['index']);
     }
-
     /**
      * Finds the Doctors model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -605,30 +509,22 @@ public function behaviors()
         }
     }
     public function actionStates()
-    {
-    
+    {    
     	$out = [];
     	if (isset($_POST['depdrop_parents'])) {
-    		$parents = $_POST['depdrop_parents'];
-    
+    		$parents = $_POST['depdrop_parents'];    
     		if ($parents != null) {
     			$country = $parents[0];
     			$states = Countries::getStatesByCountry($country);
     			/* $out = [
     			 ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
-    			 ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
-    
+    			 ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']    
     			]; */
     			echo Json::encode(['output'=>$states, 'selected'=>0]);
-    			return;
-    
-    
+    			return;    
     		}
-    	}
-    
-    	echo Json::encode(['output'=>'', 'selected'=>'']);
-    
-    
+    	}    
+    	echo Json::encode(['output'=>'', 'selected'=>'']);    
     }
     public function actionSlots()
     {
@@ -672,8 +568,7 @@ public function behaviors()
     						$slotInfoModel->endTime = $model->slotsInfo[$k]['endTime'];
     						$slotInfoModel->dsDoctorId =  Yii::$app->user->identity->id;
     						$slotInfoModel->save();
-    					}
-    					
+    					}    					
     				}
     				else{
     				$slotInfoModel = new DoctorSlots();
@@ -711,8 +606,7 @@ public function behaviors()
     	return $this->render('slots', [
     			'model' => $model,
     	]);
-    	}
-    	
+    	}    	
     }
     protected function finduserModel($uid)
     {
@@ -746,18 +640,15 @@ public function behaviors()
     	{
     		foreach ($doctorQulification as $dq)
     		{
-    			$dqary[] = $dq->qualification;
-    
+    			$dqary[] = $dq->qualification;    
     		}
     	}
     	for($k=0; $k<count($dqary); $k++)
     	{
     		$docquali = Qualifications::find()->select('qualification')->where( ['qlid' => $dqary[$k]])->asArray()->one();
-    		$docqualiary[] = $docquali['qualification'];
-    		 
+    		$docqualiary[] = $docquali['qualification'];    		 
     	}
-    	$model->qualification = $docqualiary;
-    
+    	$model->qualification = $docqualiary;    
     	$docSpecialities = DoctorsSpecialities::find()->select('rspId')->where( ['rdoctorId' => $model->userId])->all();
     	//print_r($docSpecialities);exit();
     	$dsary = array();
@@ -766,40 +657,30 @@ public function behaviors()
     	{
     		foreach ($docSpecialities as $ds)
     		{
-    			$dsary[] = $ds->rspId;
-    
+    			$dsary[] = $ds->rspId;    
     		}
     	}
     	//print_r($dsary);exit();
     	for($m=0; $m<count($dsary); $m++)
     	{
     		$docspeci = Specialities::find()->select('specialityName')->where( ['spId' => $dsary[$m]])->asArray()->one();
-    		$docspeciary[] = $docspeci['specialityName'];
-    
+    		$docspeciary[] = $docspeci['specialityName'];    
     	}
-    	$model->specialities = $docspeciary;
-    
-    
+    	$model->specialities = $docspeciary;    
     	$model->countriesList = Countries::getCountries();
     	$model->docimageupdate = $model->doctorImage;
     	$model->doctorImage = '';
-    	$model->citiesData = [];
-    
-    	if($model->country != ''){
-    
-    		$model->statesData= Countries::getStatesByCountryupdate($model->country );
-    
+    	$model->citiesData = [];    
+    	if($model->country != ''){    
+    		$model->statesData= Countries::getStatesByCountryupdate($model->country );    
     	}else{
     		$model->country = $model->country;
     		$model->statesData =[];
     		$model->state='';
-    	}
-    
-    
+    	}    
     	$qualificationData = Qualifications::find()
     	->select('qualification')->where(['status' => 'Active'])
-    	->all();
-    
+    	->all();    
     	$qualiInfo = array();
     	if(!empty($qualificationData))
     	{
@@ -816,13 +697,10 @@ public function behaviors()
     	else {
     		$qualiInfo =[''];
     	}
-    	$model ->allQuali = $qualiInfo;
-    
-    
+    	$model ->allQuali = $qualiInfo;    
     	$specialityData = Specialities::find()
     	->select('specialityName')->where(['status' => 'Active'])
-    	->all();
-    	 
+    	->all();    	 
     	$speciInfo = array();
     	if(!empty($specialityData))
     	{
@@ -839,17 +717,13 @@ public function behaviors()
     	else {
     		$speciInfo =[''];
     	}
-    	$model ->allSpeci = $speciInfo;
-    
-    
-    	$usermodel = User::find() ->where(['id' =>$model->userId])->one();
-    
+    	$model ->allSpeci = $speciInfo;    
+    	$usermodel = User::find() ->where(['id' =>$model->userId])->one();    
     	if (! (empty ( $usermodel ))) {
     		$model->username = $usermodel->username;
     		$model->email = $usermodel->email;
     		$model->status = $usermodel->status;
-    	}
-    
+    	}    
     	if ($model->load(Yii::$app->request->post()) )
     	{
     		$model->doctorImage = UploadedFile::getInstance($model,'doctorImage');
@@ -859,29 +733,22 @@ public function behaviors()
     			$model->updatedBy = Yii::$app->user->identity->id;
     			//echo $model->country;exit();
     			$model->countryName = Countries::getCountryName($model->country);
-    			$model->stateName = States::getStateName($model->state);
-    
+    			$model->stateName = States::getStateName($model->state);    
     			$usermodel->status = $model->status;
     			$usermodel->save();
-    			//print_r($model->doctorImage);exit();
-    
+    			//print_r($model->doctorImage);exit();    
     			if(!(empty($model->doctorImage)))
-    			{
-    				 
-    				$imageName = time().$model->doctorImage->name;
-    				 
-    				$model->doctorImage->saveAs('profileimages/'.$imageName );
-    
-    				$model->doctorImage = 'profileimages/'.$imageName;
-    				 
+    			{    				 
+    				$imageName = time().$model->doctorImage->name;    				 
+    				$model->doctorImage->saveAs('profileimages/'.$imageName );    
+    				$model->doctorImage = 'profileimages/'.$imageName;    				 
     			}
     			else {
     				$model->doctorImage = $model->docimageupdate;
     			}
     			//print_r($model->doctorImage);exit();
     			$model->save();
-    			//print_r($model->errors);exit();
-    
+    			//print_r($model->errors);exit();    
     			DoctorsQualification::deleteAll( ['docId' => $model->userId]);
     			if(!empty($model->qualification))
     			{
@@ -894,13 +761,9 @@ public function behaviors()
     						$dqualification->docId = $model->userId;
     						$dqualification->qualification = $qulificationInfo->qlid;
     						$dqualification->save();
-    					}
-    
-    
+    					}    
     				}
-    			}
-    
-    
+    			}    
     			DoctorsSpecialities::deleteAll( ['rdoctorId' => $model->userId]);
     			for($k=0; $k<count($model->specialities);$k++)
     			{
@@ -911,19 +774,13 @@ public function behaviors()
     					$dspeciality->rdoctorId = $model->userId;
     					$dspeciality->rspId =$specid['spId'];
     					$dspeciality->save();
-    				}
-    				 
-    				 
-    				 
+    				}    				 
     			}
-    			//print_r($model->qualification);exit();
-    
-    			 
+    			//print_r($model->qualification);exit();    			 
     			Yii::$app->session->setFlash('success', " Doctors Updated successfully ");
     			//return $this->redirect(['view', 'id' => $model->doctorid]);
     			return $this->redirect(['profileview','uid' => $usermodel->id]);
-    		}
-    
+    		}    
     	} else {
     		return $this->render('profileupdate', [
     				'model' => $model,
@@ -944,15 +801,13 @@ public function behaviors()
     	{
     		foreach ($doctorQulification as $dq)
     		{
-    			$dqary[] = $dq->qualification;
-    			 
+    			$dqary[] = $dq->qualification;    			 
     		}
     	}
     	for($k=0; $k<count($dqary); $k++)
     	{
     		$docquali = Qualifications::find()->select('qualification')->where( ['qlid' => $dqary[$k]])->asArray()->one();
-    		$docqualiary[] = $docquali['qualification'];
-    		 
+    		$docqualiary[] = $docquali['qualification'];    		 
     	}
     	$docSpecialities = DoctorsSpecialities::find()->select('rspId')->where( ['rdoctorId' => $model->userId])->all();
     	//print_r($docSpecialities);exit();
@@ -962,8 +817,7 @@ public function behaviors()
     	{
     		foreach ($docSpecialities as $ds)
     		{
-    			$dsary[] = $ds->rspId;
-    			 
+    			$dsary[] = $ds->rspId;    			 
     		}
     	}
     	//print_r($dsary);exit();
@@ -971,34 +825,22 @@ public function behaviors()
     	{
     		$docspeci = Specialities::find()->select('specialityName')->where( ['spId' => $dsary[$m]])->asArray()->one();
     		$docspeciary[] = $docspeci['specialityName'];
-    	}
-    	 
-    	 
-    	//$model->qualification = $docqualiary;
-    	 
+    	}    	     	 
+    	//$model->qualification = $docqualiary;    	 
     	return $this->render('profileview', [
     			'model' => $model,'docqualiary' =>$docqualiary,'docspeciary'=>$docspeciary,
     	]);
-    }
-    
-    
-    
-    
-    
+    }    
     /**
      *  Reset Password
-     */
-    
-    
+     */    
     public function actionResetPassword($id)
-    {
-    	
+    {    	
     	try {
     		$model = new ChangePasswordForm();
     	} catch (InvalidParamException $e) {
     		throw new BadRequestHttpException($e->getMessage());
-    	}
-    
+    	}    
     	if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword($id)) {
     		$docinfo = User::find()->where(['id' => $id])->one();
     		$username = $docinfo->username;
@@ -1008,36 +850,27 @@ public function behaviors()
     		$name=$doctorInfo->name;
     		//$body='Username:'.$username. + ''.'NewPassword:' .$newpassword;
     		//print_r($username);
-    		//print_r($newpassword);exit();
-    		
-    		
+    		//print_r($newpassword);exit();    		
     		$body='Hi &nbsp;&nbsp;';
     		$body.=$name;    		
     		$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     				Your UserName is:'.$username;
-    		$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your NewPassword is:' .$newpassword;
-    				
+    		$body.='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your NewPassword is:' .$newpassword;    				
     		$body.='<br><br><br><u>Thanks&Regards,</u>';
     		$body.='<br>&nbsp;NGH Admin.';
-
     		\Yii::$app->mailer->compose()
     		->setFrom('ngh@expertwebworx.in')
     		->setTo($uemail)
     		->setSubject('You Have Received a New Message on ' . \Yii::$app->name)
     		->setHtmlBody($body)
-    		->send();
-    		
-    		Yii::$app->getSession()->setFlash('success', 'New password was saved.');
-    
+    		->send();    		
+    		Yii::$app->getSession()->setFlash('success', 'New password was saved.');    
     		return $this->redirect(['index']);;
-    	}
-    
+    	}    
     	return $this->render('resetPassword', [
     			'model' => $model,
-    	]);
-    	
-    }
-    
+    	]);    	
+    }    
     public function actionPatientRequests()
     {
     	/* $docId = Yii::$app->user->identity->id;
@@ -1045,22 +878,18 @@ public function behaviors()
     	$dataProvider = new ActiveDataProvider([
     			'query' => $patientinfoModel,
     			'sort' => ['attributes' => ['nursingHomeName','firstName','lastName','patientRequestStatus']],
-    	]);
-    	
+    	]);    	
     	return $this->render('patientRequests', [
     			'dataProvider' => $dataProvider,
-    	]); */
-    	
+    	]); */    	
     	$searchModel = new DoctorNghPatientSearch();
     	$serachparam = Yii::$app->request->queryParams;
     	$serachparam['DoctorNghPatientSearch']['status'] ='PROCESSING';
-    	$dataProvider = $searchModel->search($serachparam);
-    	
+    	$dataProvider = $searchModel->search($serachparam);    	
     	return $this->render('patientRequests', [
     			'searchModel' => $searchModel,
     			'dataProvider' => $dataProvider,
-    	]);
-    	
+    	]);    	
     	//print_r($patientinfoModel);exit();
     }
     public function actionPatientRequestsCompleted()
@@ -1070,23 +899,19 @@ public function behaviors()
     	 $dataProvider = new ActiveDataProvider([
     	 'query' => $patientinfoModel,
     	 'sort' => ['attributes' => ['nursingHomeName','firstName','lastName','patientRequestStatus']],
-    	 ]);
-    	  
+    	 ]);    	  
     	 return $this->render('patientRequests', [
     	 'dataProvider' => $dataProvider,
-    	 ]); */
-    	 
+    	 ]); */    	 
     	$searchModel = new DoctorNghPatientSearch();
     	$serachparam = Yii::$app->request->queryParams;
     	$serachparam['DoctorNghPatientSearch']['status'] ='COMPLETED';
     	//print_r(Yii::$app->request->queryParams);exit();
-    	$dataProvider = $searchModel->search($serachparam);
-    	 
+    	$dataProvider = $searchModel->search($serachparam);    	 
     	return $this->render('patientRequests', [
     			'searchModel' => $searchModel,
     			'dataProvider' => $dataProvider,
-    	]);
-    	 
+    	]);    	 
     	//print_r($patientinfoModel);exit();
     }
     public function actionPatientConsultantReport($id)
@@ -1097,8 +922,7 @@ public function behaviors()
     	 $serachparam['DoctorNghPatientSearch']['status'] ='COMPLETED';
     	// print_r($serachparam);exit();
     	 $dataProvider=$search->doctorreports($serachparam,$id);    	
-    	// $dataProvider = $searchModel->search($data);
-    	
+    	// $dataProvider = $searchModel->search($data);    	
     	 return $this->render('patientConsultantReport', [    	 
     	 'search' => $search,
     	 'dataProvider' => $dataProvider,
@@ -1115,9 +939,7 @@ public function behaviors()
     	$presentDay = date("D", strtotime($pDate));
     	$presentTime =  date("H:i", strtotime($pDate));
     	$avialableDoctors = array();
-    	//echo $presentTime;exit();
-    	
-    	 
+    	//echo $presentTime;exit();    	 
     	$patientId = 0;
     	$nghId = 0;
     	$patientInfo = PatientInformation::find()->where(['patientInfoId' => $model->phsId])->one();
@@ -1128,25 +950,18 @@ public function behaviors()
     		$nghInfo = Patients::find()->where(['patientId' => $patientId])->one();
     		$nghId = $nghInfo->createdBy;
     		$mpatientModel = $nghInfo;
-    	}
-    	 
-    	 
+    	}    	 
     	if ($model->load(Yii::$app->request->post()) && $model->validate()) {
     		$model->patientRequestStatus = 'COMPLETED';
     		$model->updatedDate = date("Y-m-d H:i:s");
-    		$model->update();
-    
-    		//$prmodel = new PatientRequests();
-    		
-    		
-    			return $this->redirect(['patient-requests']);
-    		
+    		$model->update();    
+    		//$prmodel = new PatientRequests();    		
+    			return $this->redirect(['patient-requests']);    		
     		//print_r($nghId);exit();
     	}
     	/* else{
     		print_r($model->errors);exit();
-    	} */
-    	 
+    	} */    	 
     	return $this->render('patientInfo',
     			['model' => $model,
     					'mpatientModel' => $mpatientModel,
@@ -1164,9 +979,7 @@ public function behaviors()
     	$presentDay = date("D", strtotime($pDate));
     	$presentTime =  date("H:i", strtotime($pDate));
     	$avialableDoctors = array();
-    	//echo $presentTime;exit();
-    	 
-    
+    	//echo $presentTime;exit();    
     	$patientId = 0;
     	$nghId = 0;
     	$patientInfo = PatientInformation::find()->where(['patientInfoId' => $model->phsId])->one();
@@ -1177,25 +990,18 @@ public function behaviors()
     		$nghInfo = Patients::find()->where(['patientId' => $patientId])->one();
     		$nghId = $nghInfo->createdBy;
     		$mpatientModel = $nghInfo;
-    	}
-    
-    
+    	}    
     	if ($model->load(Yii::$app->request->post()) && $model->validate()) {
     		$model->patientRequestStatus = 'COMPLETED';
     		$model->updatedDate = date("Y-m-d H:i:s");
-    		$model->update();
-    
-    		//$prmodel = new PatientRequests();
-    
-    
-    		return $this->redirect(['patient-requests']);
-    
+    		$model->update();    
+    		//$prmodel = new PatientRequests();    
+    		return $this->redirect(['patient-requests']);    
     		//print_r($nghId);exit();
     	}
     	/* else{
     	 print_r($model->errors);exit();
-    	 } */
-    
+    	 } */    
     	return $this->render('patientDetails',
     			['model' => $model,
     					'mpatientModel' => $mpatientModel,
@@ -1206,8 +1012,7 @@ public function behaviors()
     {
     	/*
     	 $searchModel = new NursinghomesSearch();
-    	 $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-    
+    	 $dataProvider = $searchModel->search(Yii::$app->request->queryParams);    
     	 return $this->render('nghlist', [
     	 'searchModel' => $searchModel,
     	 'dataProvider' => $dataProvider,
@@ -1220,29 +1025,21 @@ public function behaviors()
     					'pageSize' => 100,
     			],
     			'query' => Nursinghomes::find(),
-    	]);
-    	 
+    	]);    	 
     	return $this->render ('nghlist', [
     			'dataProvider' => $dataProvider,
-    	]);
-    	 
-    	 
+    	]);    	 
     }
     public function actionNghdetail($nuid)
-    {
-    	 
+    {    	 
     	$nusermodel =  User::findOne($nuid);
     	//print_r($nusermodel);exit();
-    	$model = Nursinghomes::find()->where(['nuserId' =>$nusermodel->id])->one();
-    	 
+    	$model = Nursinghomes::find()->where(['nuserId' =>$nusermodel->id])->one();    	 
     	return $this->render('nghdetail', [
     			'model' => $model,
     			// 'model' => $model,
-    	]);
-    	 
-    	 
-    }
-    
+    	]);    	 
+    }    
     public function actionPreviousrecords($pid)
     {  
     	$searchModel= new PatientsSearch();
@@ -1263,13 +1060,11 @@ public function actionPatientshistoryview($infoid)
     {
     	$model = $this->findinfoModel($infoid);
     	$patmodel = Patients::find()->where(['patientId' =>$model->patientId])->one();
-    	//print_r($model->height);exit();
-    
+    	//print_r($model->height);exit();    
     	return $this->render('patientshistoryview', [
     			'model' => $this->findinfoModel($infoid),'patmodel' => $patmodel,'infoid'=>$infoid
     	]);
-    }
-   
+    }   
     protected function findinfoModel($infoid)
     {
     	if (($model = PatientInformation::findOne($infoid)) !== null) {
@@ -1281,6 +1076,7 @@ public function actionPatientshistoryview($infoid)
     public function actionDoctorsConsultantReportExcel($id)
     {
     	$status="COMPLETED";
+    	
     	$user=User::find()->select('username')->where(['id'=>$id])->all();
     	//print_r($user);exit();
     	$uname = '';
@@ -1289,7 +1085,7 @@ public function actionPatientshistoryview($infoid)
     		$uname=$u->username;
     		//print_r($uname);exit();
     	}
-    	$query=DoctorNghPatient::find()->where(['doctorId'=> $id ,'patientRequestStatus'=>$status])->all();
+    	$query=DoctorNghPatient::find()->where("doctorId= '$id' AND patientRequestStatus='$status' AND (RequestType != 'Review Consultation')")->all();
     	//print_r($query);exit();
     	$dateary=array();
     	$patary=array();
@@ -1321,15 +1117,15 @@ public function actionPatientshistoryview($infoid)
     		$nur=Nursinghomes::find()->select('nursingHomeName')->where(['nuserId'=>$nurary[$i]])->all();
     		foreach($nur as $name)
     		{
-    			$nname[]=$name->nursingHomeName;
-    			
+    			$nname[]=$name->nursingHomeName;    			
     		}
     	}
-    	
+    
     	//print_r(count($nname));exit();
-    	$filename = 'Data-'.Date('YmdGis-').$uname.'-DoctorsConsultantReport.xlsx ';
-    	header('Content-type:application/vnd-ms-excel');
-    	header('Content-Disposition:attachment;filename='.$filename);
+    	$filename = 'Data-'.Date('YmdGis-').$uname.'-DoctorsConsultantReport.xlsx';
+    	//pathinfo($filename, PATHINFO_EXTENSION);
+    	header("Content-Type: application/vnd.ms-excel; charset=UTF-8;");
+    	header('Content-Disposition:attachment;filename="'.$filename.'"');
     	echo '
     			<table border="1" width="100%">
         <thead>
@@ -1349,10 +1145,50 @@ public function actionPatientshistoryview($infoid)
     				<td>'.$sno.'</td>
     				<td>'.$nname[$m].'</td>
     				<td>'.$pfirstname[$m].'</td>
-    				<td>'.$plastname[$m].'</td>
-    				
+    				<td>'.$plastname[$m].'</td>    				
     				<td>'.$dateary[$m].'</td></tr>';
     	}
     	echo '</table>';
+    }
+    public function actionCount($uid)
+    {
+    	// 	print_r($uid);exit();
+    	$model = new Nursinghomes();
+    	$count=array();
+    	$nurname=array();
+    	$nurcountary=array();
+    	if (($model->load ( Yii::$app->request->post () )) && ($model->validate ()))
+    	{
+    		$nurId=DoctorNghPatient::find()->select('nugrsingId')->distinct()->where("doctorId ='$uid' AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'")->all();
+    		//print_r($doctorId);    		 
+    		foreach ($nurId as $did)
+    		{
+    			$nurcountary[]=$did->nugrsingId;
+    		}
+    		//print_r($nurcountary);
+    		for($k=0;$k<count($nurcountary);$k++)
+    		{
+    			$query=DoctorNghPatient::find()->select('nugrsingId')->where("doctorId ='$uid' AND nugrsingId='$nurcountary[$k]' AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'")->count();
+    			if($query !='')
+    			{
+    				$count[]=$query;
+    			}
+    			//print_r($count);
+    			// $query=DoctorNghPatient::find()->select('doctorId')->asArray()->where(['nugrsingId'=>$uid,['createdDate BETWEEN '$model->fromdate' AND '$model->todate'']])->all();
+    			 $nursinghomename=Nursinghomes::find()->select('nursingHomeName')->where(['nuserId'=>$nurcountary[$k]])->all();
+    			foreach($nursinghomename as $n)
+    			{
+    				$nurname[]=$n['nursingHomeName'];
+    			}
+    			// print_r($dname);
+    		}
+    	}
+    	//exit();
+    	return $this->render('count',[
+    			'model'=>$model,
+    			'count'=>$count,
+    			'nurname'=>$nurname,
+    			'nurcountary'=>$nurcountary,
+    	]);
     }
 }

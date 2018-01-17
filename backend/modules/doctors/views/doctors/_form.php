@@ -94,18 +94,19 @@ use dosamigos\ckeditor\CKEditor;
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'TSMC')->textInput(['maxlength' => true]) ?>
 	</div>
-	
-    
-  
+	<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'MCI')->textInput(['maxlength' => true]) ?>
+	</div>   
+  <div class="form-group col-lg-6 col-sm-12" >
+    <?=$form->field($model, 'status')->dropDownList(['10' => 'Active','0' => 'In-Active'],['prompt' => 'Status'],
+											['itemOptions' => ['class' =>'radio-inline']])?>
+	</div>
     <div class="form-group col-lg-6 col-sm-12">
       <?=$form->field ( $model, 'doctorImage' )->widget ( FileInput::classname (),
    		[ 'options' => [ 'accept' => 'image/*' ],'pluginOptions' =>[[ 'browseLabel' => 'Profile Image', 'allowedFileExtensions'=>['jpg','png','jpeg'] ]] ] )?>     
     </div>
-	<div class="form-group col-lg-6 col-sm-12" >
-    <?=$form->field($model, 'status')->dropDownList(['10' => 'Active','0' => 'In-Active'],['prompt' => 'Status'],
-											['itemOptions' => ['class' =>'radio-inline']])?>
-	</div> 
-	  <div class="form-group col-lg-12 col-sm-12">
+	 
+	  <div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'summery')->widget(CKEditor::className(), [
         'options' => ['rows' => 2],
         'preset' => 'basic'

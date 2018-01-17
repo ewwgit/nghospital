@@ -94,6 +94,9 @@ use dosamigos\ckeditor\CKEditor;
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'TSMC')->textInput(['maxlength' => true]) ?>
 	</div>
+	<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'MCI')->textInput(['maxlength' => true]) ?>
+	</div>
 	<div class="form-group col-lg-6 col-sm-12" >
     <?= $form->field($model, 'availableStatus')->dropDownList([ 'Online' => 'Online', 'Offline' => 'Offline', ], ['prompt' => 'Select Available Status']) ?>
 	</div>
@@ -124,7 +127,7 @@ use dosamigos\ckeditor\CKEditor;
             
         
 	</div>   
-	<div class="form-group col-lg-12 col-sm-12">
+	<div class="form-group col-lg-6 col-sm-12">
 	<?= $form->field($model, 'summery')->widget(CKEditor::className(), [
         'options' => ['rows' => 4],
         'preset' => 'basic'

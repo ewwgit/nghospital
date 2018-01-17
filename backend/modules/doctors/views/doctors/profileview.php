@@ -201,6 +201,14 @@ th {
 								}else{
 									echo 'Not Mentioned';
 								}?> </div>
+								<div class="right">MCI</div>								
+								<div class="right-content">:</div>
+								<div class="right-second">
+								<?php if(!empty($model->MCI)){
+									echo $model->MCI;;
+								}else{
+									echo 'Not Mentioned';
+								}?> </div>
 							<!--  	<div class="right">Status</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">/**/</div>

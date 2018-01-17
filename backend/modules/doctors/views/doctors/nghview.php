@@ -38,6 +38,8 @@ $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->nurs
 								      }
 								?>"
 							style="height:150px;width:150px;"> </img> </div>
+							<div class="ngh">
+  
   	<div class=" color ">Nursing Home </div>	
   	<div class="col  " >:</div>							
     <div class=" val ">
@@ -65,7 +67,7 @@ $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->nurs
  
   
     
-  	
+  	</div>
  
 </li>
 </ul>
@@ -87,6 +89,10 @@ padding-left:20px;
 margin-left: 120px;
 margin-top: -18px;
 
+}
+.ngh
+{
+min-height:120px;
 }
 </style>
 

@@ -8,20 +8,16 @@ function printContent(el){
 }
 </script>
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\helpers\StringHelper;
 //**********************//
 use common\models\User;
 //**********************//
-
 /* @var $this yii\web\View */
 /* @var $model app\modules\doctors\models\Doctors */
-
 // $str = $model->name;
 // $rest = substr($str, 0, 150);
-
 $this->title = "Doctors View";
 $this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -70,126 +66,107 @@ th {
         		],
         ],
     ]) ?>
-					</div>			
-          
+					</div>
 				<div class="panel-body">		   
-					<!--form section start -->
-	
+					<!--form section start -->	
 					<div class="row">
 						<div class="col-md-12 col-sm-6 col-xs-6 main-wrap">
 							<div class="doctor-box">					        
-								<div class="right">User Name</div>								
+								<div class="right padd">User Name</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?= $usernamedata['username']; ?> </div>
-								
-								<div class="right">Email</div>								
+								<div class="right-second"><?= $usernamedata['username']; ?> </div>								
+								<div class="right padd">Email</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?= $usernamedata['email']; ?> </div>
-								
-								<div class="right">Qualifications</div>								
+								<div class="right-second"><?= $usernamedata['email']; ?> </div>								
+								<div class="right padd">Qualifications</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								<?php if(!empty($docqualiary)){
 									echo implode(" , ",$docqualiary);
 								}else{
 									echo 'Not Mentioned';
-								}?></div>
-								
-								<div class="right">Specialities</div>								
+								}?></div>								 
+								<div class="right padd">Specialities</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								<?php if(!empty($docspeciary)){
 									echo implode(" , ",$docspeciary);
 								}else{
 									echo 'Not Mentioned';
-								}?></div>
-								
-								<div class="right">Country </div>								
+								}?></div>								
+								<div class="right padd">Country </div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								<?php if(!empty($model->countryName)){
 									echo $model->countryName;;
 								}else{
 									echo 'Not Mentioned';
-								}?></div>
-								
-								
-								<div class="right">State </div>								
+								}?></div>								
+								<div class="right padd">State </div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								<?php if(!empty($model->stateName)){
 									echo $model->stateName;;
 								}else{
 									echo 'Not Mentioned';
-								}?></div>
-								
-								<div class="right">City </div>								
+								}?></div>								
+								<div class="right padd">City </div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 									<?php if(!empty($model->city)){
 									echo $model->city;;
 								}else{
 									echo 'Not Mentioned';
-								}?></div>
-								
-								
-								
-								<div class="right">Present Address</div>								
+								}?></div>								
+								<div class="right padd">Present Address</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								<?php if(!empty($model->address)){
 									echo $model->address;;
 								}else{
 									echo 'Not Mentioned';
-								}?> </div>
-								
-								<div class="right">Permanent Adress</div>								
+								}?> </div>								
+								<div class="right padd">Permanent Adress</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								<?php if(!empty($model->permanentAddress)){
 									echo $model->permanentAddress;;
 								}else{
 									echo 'Not Mentioned';
-								}?></div>
-								
-								<div class="right">Pin Code</div>								
+								}?></div>								
+								<div class="right padd">Pin Code</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								<?php if(!empty($model->pinCode)){
 									echo $model->pinCode;;
 								}else{
 									echo 'Not Mentioned';
-								}?></div>
-								
-								<div class="right">Mobile Number</div>								
+								}?></div>								
+								<div class="right padd">Mobile Number</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 									<?php if(!empty($model->doctorMobile)){
 									echo $model->doctorMobile;;
 								}else{
 									echo 'Not Mentioned';
-								}?></div>
-								
-								<div class="right">Summery</div>								
+								}?></div>								
+								<div class="right padd">Summery</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								<?php if(!empty($model->summery)){
 									echo $model->summery;;
 								}else{
 									echo 'Not Mentioned';
-								}?></div>
-
-								
-								<div class="right">APMC</div>								
+								}?></div>								
+								<div class="right padd">APMC</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 									<?php if(!empty($model->APMC)){
 									echo $model->APMC;;
 								}else{
 									echo 'Not Mentioned';
-								}?></div>
-								
-								<div class="right">TSMC</div>								
+								}?></div>								
+								<div class="right padd">TSMC</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 								<?php if(!empty($model->TSMC)){
@@ -197,12 +174,17 @@ th {
 								}else{
 									echo 'Not Mentioned';
 								}?> </div>
-								<div class="right">Status</div>								
+								<div class="right padd">MCI</div>								
 								<div class="right-content">:</div>
-								<div class="right-second"><?php if($usernamedata['status']==10){echo"Active";}else {echo"In-Active";} ?></div>
-								
-								
-																 							
+								<div class="right-second">
+								<?php if(!empty($model->MCI)){
+									echo $model->MCI;;
+								}else{
+									echo 'Not Mentioned';
+								}?> </div>
+								<div class="right padd">Status</div>								
+								<div class="right-content">:</div>
+								<div class="right-second"><?php if($usernamedata['status']==10){echo"Active";}else {echo"In-Active";} ?></div>							 							
 							</div><!---doctor-box closed-->							
 						</div>	<!---main-wrap closed-->							
 					</div><!---row closed-->						
@@ -215,4 +197,9 @@ th {
 </div>
 </div>
 </div>
-
+<style>
+.padd
+{
+	margin:10px;
+}
+</style>

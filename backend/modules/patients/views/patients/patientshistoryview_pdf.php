@@ -238,7 +238,15 @@ background-color: #6b5;*/
 					<?php if(!empty($patmodel->mobile)){echo $patmodel->mobile;}else{echo 'Not Mentioned';}?></div>
                    
 						
-						
+						<div class="right" style="width: 33%;padding-left:90px;">Aadhar Number</div>								
+								<div class="right-content">:</div>
+								<div class="right-second">
+								 
+									<?php if(!empty($patmodel->aadhar_number)){
+									echo $patmodel->aadhar_number;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 						
 						
 						<div class="right"  style="width: 33%;padding-left:90px;">Unique ID</div>								
@@ -370,11 +378,11 @@ background-color: #6b5;*/
 									echo 'Not Mentioned';
 								}?></div>
 								
-								<div class="right"  style="width: 33%;padding-left:90px;">Diseases</div>								
+								<div class="right"  style="width: 33%;padding-left:90px;">Diagnosis</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
-								<?php if(!empty($model->diseases)){
-									echo $model->diseases;;
+								<?php if(!empty($model->diagnosis)){
+									echo $model->diagnosis;;
 								}else{
 									echo 'Not Mentioned';
 								}?></div>
@@ -404,7 +412,14 @@ background-color: #6b5;*/
 								}else{
 									echo 'Not Mentioned';
 								}?></div>
-								
+								<div class="right"  style="width: 33%;padding-left:90px;">Request Type</div>								
+								<div class="right-content">:</div>
+								<div class="right-second">
+								<?php if(!empty($reqmodel->RequestType)){
+									echo $reqmodel->RequestType;;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
                             </div> <!---doctor-box closed-->
 						  </div> 
 								

@@ -28,12 +28,12 @@ $this->params ['breadcrumbs'] [] = $this->title;
 		<div class="box-body"> 
 
     <?php $form = ActiveForm::begin(['options'=>['enctype' =>'multipart/form-data']]); ?>
-    <div class="form-group col-lg-4 col-sm-12">
+    <div class="form-group col-lg-3 col-sm-12">
    
     <?= $form->field($model, 'specialities')->dropDownList($sepecialities,['prompt'=>'Select Specialities']);?>
 	</div>
     
-    <div class="form-group col-lg-4 col-sm-12">
+    <div class="form-group col-lg-3 col-sm-12">
     <?php echo $form->field($model, 'doctor')->widget(DepDrop::classname(),[
                     		'data'=>$avialableDoctors,
     		
@@ -46,8 +46,13 @@ $this->params ['breadcrumbs'] [] = $this->title;
 ]);
      
  ?>
+ 
 	</div>
-			<div class="form-group col-lg-4 col-sm-12 ">
+	  <div class="form-group col-lg-3 col-sm-12">
+   
+    <?= $form->field($model, 'RequestType')->dropDownList(['Ip Consultation'=>'Ip Consultation','Op Consultation'=>'Op Consultation','Review Consultation'=>'Review Consultation'],['prompt'=>'Select Type']);?>
+	</div>
+			<div class="form-group col-lg-3 col-sm-12 ">
 	<?= $form->field($model, 'phsId')->hiddenInput()->label(false)?>
         <?= Html::submitButton('Request', ['class' => 'btn btn-primary'])?>
     </div>
@@ -68,6 +73,11 @@ $this->params ['breadcrumbs'] [] = $this->title;
 							<div class="right">Specialities</div>
 							<div class="right-content">:</div>
 							<div class="right-second docspec"></div>
+							
+							
+							<div class="right">Summery</div>
+							<div class="right-content">:</div>
+							<div class="right-second docsummery"></div>
 							
 
 						</div>
@@ -218,6 +228,15 @@ if (! empty ( $mpatientModel->village )) {
 								}else{
 									echo 'Not Mentioned';
 								}?></div>
+								<div class="right">Aadhar Number</div>								
+								<div class="right-content">:</div>
+								<div class="right-second">
+								 
+									<?php if(!empty($patmodel->aadhar_number)){
+									echo $patmodel->aadhar_number;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 										</div>
 										<!---doctor-box closed-->
 									</div>
@@ -293,11 +312,11 @@ if (! empty ( $mpatientInformationModel->respirationRate )) {
 									           echo 'Not Mentioned';
 								                     } ?> </div>
 
-											<div class="right">Diseases</div>
+											<div class="right">Diagnosis</div>
 											<div class="right-content">:</div>
 											<div class="right-second">
-											<?php if (! empty ( $mpatientInformationModel->diseases )) {
-									        echo $mpatientInformationModel->diseases;;
+											<?php if (! empty ( $mpatientInformationModel->diagnosis )) {
+									        echo $mpatientInformationModel->diagnosis;;
 								            } else {
 									           echo 'Not Mentioned';
 								                     } ?></div>
@@ -387,6 +406,7 @@ $this->registerJs ( "
 		$('.docquali').html(data.qualification);
 		$('.docspec').html(data.speciality);
 		$('.docmob').html(data.mobile);
+		$('.docsummery').html(data.summery);
 		}
 		else{
 		$('.docinfomaincls').hide();
