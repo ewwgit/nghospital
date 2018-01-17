@@ -1367,7 +1367,7 @@ public function actionPatientshistoryview($infoid)
     	if($phsId != 0){
 
     	$model = DoctorNghPatient::find()->where(['patientHistoryId' => $phsId])->one();
-    	$model->scenario = 'requesttreatment';
+    	
     	$mpatientModel = new Patients();
     	$mpatientInformationModel = new PatientInformation();
     	$model->phsId = $phsId;
@@ -1389,10 +1389,14 @@ public function actionPatientshistoryview($infoid)
     		$nghId = $nghInfo->createdBy;
     		$mpatientModel = $nghInfo;
     	}
-    	$doctorInfo = Doctors::find()->select('name')->where(['userId' => $model->doctorId])->one();
+    	$doctorInfo = Doctors::find()->select('name,doctorImage')->where(['userId' => $model->doctorId])->one();
     	$nursinghomeinfo = Nursinghomes::find()->where(['nuserId' => $model->nugrsingId])->one();
     	$precriptionDate = date('d-M-Y', strtotime($model->updatedDate));
     	$currentdatenew = date('d-M-Y');
+    	if($doctorInfo->doctorImage == NULL || $doctorInfo->doctorImage == '')
+    	{
+    		$doctorInfo->doctorImage = 'images/user-iconnew.png';
+    	}
     	
     	
     	$html = <<<HTML
@@ -1407,7 +1411,7 @@ public function actionPatientshistoryview($infoid)
 	<div style="width:800px;  height:auto; overflow:hidden; margin:10px auto; border:1px solid #bce8f1; border-radius:4px; padding:10px; position:relative;">
         <header style="width:800px; float:left; position: relative; border-bottom: 2px solid #5aab4a; padding: 0 10px; box-sizing: border-box;">
             <div class="img" style="width: 93px; height:104px; overflow:hidden; float: left; position: relative;">
-                <img src="http://expertwebworx.in//nghospital/backend/web/profileimages/1512454366Desert.jpg" alt="Doctor"/>
+                <img src="http://expertwebworx.in/nghospital/backend/web/$doctorInfo->doctorImage" alt="Doctor"/>
             </div>
             <h1 style="font-family: 'Source Sans Pro',sans-serif; font-size: 30px; color:#0000ff; text-align:center; margin:0px;">Doctor Prescription Pad</h1>
             <h2 style="font-family: 'Source Sans Pro',sans-serif; color: #008000; font-size:22px; padding: 5px 0; text-align:center; margin:0px;">$nursinghomeinfo->nursingHomeName</h2>
