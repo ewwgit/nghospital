@@ -1150,6 +1150,7 @@ public function actionPatientshistoryview($infoid)
     	}
     	echo '</table>';
     }
+
     public function actionCount($uid)
     {
     	// 	print_r($uid);exit();
@@ -1191,4 +1192,109 @@ public function actionPatientshistoryview($infoid)
     			'nurcountary'=>$nurcountary,
     	]);
     }
+
+    
+    public function actionPrescriptionpdf()
+    {
+    	$phsId = 0;
+    	
+    	if(isset($_GET['phsId']) && $_GET['phsId'] != '')
+    	{
+    		$phsId = $_GET['phsId'];
+    	}
+    	if($phsId != 0){
+
+    	$model = DoctorNghPatient::find()->where(['patientHistoryId' => $phsId])->one();
+    	$model->scenario = 'requesttreatment';
+    	$mpatientModel = new Patients();
+    	$mpatientInformationModel = new PatientInformation();
+    	$model->phsId = $phsId;
+    	$pDate = date("Y-M-d H:i:s");
+    	$presentDay = date("D", strtotime($pDate));
+    	$presentTime =  date("H:i", strtotime($pDate));
+    	$avialableDoctors = array();
+    	//echo $presentTime;exit();
+    	 
+    	
+    	$patientId = 0;
+    	$nghId = 0;
+    	$patientInfo = PatientInformation::find()->where(['patientInfoId' => $model->phsId])->one();
+    	$patientId = $patientInfo->patientId;
+    	if($patientId !=0)
+    	{
+    		$mpatientInformationModel = $patientInfo;
+    		$nghInfo = Patients::find()->where(['patientId' => $patientId])->one();
+    		$nghId = $nghInfo->createdBy;
+    		$mpatientModel = $nghInfo;
+    	}
+    	$doctorInfo = Doctors::find()->select('name')->where(['userId' => $model->doctorId])->one();
+    	$nursinghomeinfo = Nursinghomes::find()->where(['nuserId' => $model->nugrsingId])->one();
+    	$precriptionDate = date('d-M-Y', strtotime($model->updatedDate));
+    	$currentdatenew = date('d-M-Y');
+    	
+    	
+    	$html = <<<HTML
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+    	
+</head>
+    	
+<body style="box-sizing:border-box; font-family: 'Source Sans Pro',sans-serif; margin:0px; padding:0px;">
+	<div style="width:800px;  height:auto; overflow:hidden; margin:10px auto; border:1px solid #bce8f1; border-radius:4px; padding:10px; position:relative;">
+        <header style="width:800px; float:left; position: relative; border-bottom: 2px solid #5aab4a; padding: 0 10px; box-sizing: border-box;">
+            <div class="img" style="width: 93px; height:104px; overflow:hidden; float: left; position: relative;">
+                <img src="http://expertwebworx.in//nghospital/backend/web/profileimages/1512454366Desert.jpg" alt="Doctor"/>
+            </div>
+            <h1 style="font-family: 'Source Sans Pro',sans-serif; font-size: 30px; color:#0000ff; text-align:center; margin:0px;">Doctor Prescription Pad</h1>
+            <h2 style="font-family: 'Source Sans Pro',sans-serif; color: #008000; font-size:22px; padding: 5px 0; text-align:center; margin:0px;">$nursinghomeinfo->nursingHomeName</h2>
+            <h3 style="font-family: 'Source Sans Pro',sans-serif; color: #333333; font-size: 18px; text-align:center; margin:0px;">$nursinghomeinfo->city</h3>
+    	
+            	<div style="width: 350px; float: left; clear: left; position: relative; margin-bottom: -20px;">$doctorInfo->name</div>
+                <div style="width: 350px; float: right; clear: right; text-align: right;">Date: $currentdatenew</div>
+    	
+        </header>
+        <aside style="width:800px; float:left; position: relative; border-bottom: 2px solid #5aab4a; padding:10px; padding-bottom:0px; box-sizing: border-box;">
+        	<div style="width: 800px; float: left; position: relative; padding:0 0 10px 0;">
+            	<div style="width: 400px; float: left; color: #295a8c; font-size: 14px;">Patient Name <i style="font-style: normal; float: right; padding-right: 15px;">:</i></div>
+                <div style="font-size: 14px; color: #333333;  float: left;">$mpatientModel->firstName $mpatientModel->lastName</div>
+            </div>
+            
+            
+             <div style="width: 800px; float: left; position: relative; padding:0 0 10px 0;">
+            	<div style="width: 400px; float: left; color: #295a8c; font-size: 14px;">Prescription Date <i style="font-style: normal; float: right; padding-right: 15px;">:</i></div>
+                <div style="font-size: 14px; color: #333333;  float: left;">$precriptionDate</div>
+            </div>
+                		
+                		<div style="width: 800px; float: left; position: relative; padding:0 0 10px 0;">
+            	<div style="width: 400px; float: left; color: #295a8c; font-size: 14px;">Prescription <i style="font-style: normal; float: right; padding-right: 15px;">:</i></div>
+                <div style="font-size: 14px; color: #333333;  float: left;">$model->treatment</div>
+            </div>
+            <div style="width: 800px; float: left; position: relative; padding:0 0 10px 0;">
+            	<div style="width: 400px; float: left; color: #295a8c; font-size: 14px;">Nursing Home Adress <i style="font-style: normal; float: right; padding-right: 15px;">:</i></div>
+                <div style="font-size: 14px; color: #333333;  float: left;">$nursinghomeinfo->address<br /> PIN CODE: $nursinghomeinfo->pinCode</div>
+            </div>
+            
+        </aside>
+        <footer style="width:800px; float:left; position: relative; padding:10px; padding-bottom:0px; box-sizing: border-box;">
+            <div style="width: 800px; float: left; position: relative; padding:0px; font-family: 'Source Sans Pro',sans-serif; font-size: 13px; color: #989898; text-align:center;">
+                Footer Content Goes Here
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+   
+HTML;
+    	
+    	
+    	$pdf = Yii::$app->pdf;
+$pdf->content = $html;
+$pdf->filename = 'Doctor Prescription';
+return $pdf->render();
+    	}
+
+}
+
 }
