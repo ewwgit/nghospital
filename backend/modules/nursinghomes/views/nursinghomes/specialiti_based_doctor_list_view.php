@@ -40,8 +40,8 @@ use app\modules\qualifications\models\Qualifications;
   <ul class="list-group" >
   <li class="list-group-item" >
     						
-    <div style="text-align:center;"><?php echo  Html::img($doctordata->doctorImage ? $imgeurl : 'images/user-iconnew.png',['width' => '200px','height' => '150px']); ?> </div>
-  	<div class=" color " >Doctor Name </div>	
+    <div style="text-align:center;"><?php echo  Html::img($doctordata->doctorImage ? $imgeurl : 'images/user-iconnew.png',['width' => '200px','height' => '150px']); ?> </div>	<div class="ngh">
+    	<div class=" color " >Doctor Name </div>	
   	<div class="col  " >:</div>							
     <div class=" val "><?php echo Doctors::getDoctorname($model->rdoctorId); ?> </div>
   	<div class=" color ">Specialities </div>
@@ -49,7 +49,7 @@ use app\modules\qualifications\models\Qualifications;
     <div class=" val "><?php echo Specialities::getSpname($model->rspId); ?> </div>
 	<div class=" color "  >Qualification </div>
 	<div class="col  " >:</div>									
-    <div class=" val "><?php echo  implode(" , ",$docqualiary); ?> </div>
+    <div class=" val "><?php echo  implode(" , ",$docqualiary); ?> </div></div>
  </li></ul>
 </div>
 </div>
@@ -61,13 +61,13 @@ margin-top: -19px;
 }
 .color{
 color: #3c8dbc;
-margin-top: 10px;padding-left: 20px
+margin-top: 0px;padding-left: 20px
 }
 .val{
 margin-left: 110px;
 margin-top: -18px;
 
-}
+}.ngh{min-height:120px;}
 </style>
 
 

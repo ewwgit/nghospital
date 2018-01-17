@@ -41,7 +41,7 @@ class Patients extends \yii\db\ActiveRecord
 	public $BPLeftArm;
 	public $pulseRate;
 	public $temparatureType;
-	public $diseases;
+	public $diagnosis;
 	public $allergicMedicine;
 	public $patientCompliant;
 	public $documentUrl;
@@ -59,15 +59,16 @@ class Patients extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['firstName', 'lastName', 'gender', 'age', 'dateOfBirth', 'country', 'state'], 'required'],
+            [['firstName', 'lastName', 'gender', 'age', 'dateOfBirth', 'country', 'state','aadhar_number'], 'required'],
              [['BPLeftArm',],'required'],
             [['gender'], 'string'],
             [['age','mobile','pinCode'],'integer'],
-            [['dateOfBirth', 'createdDate', 'updatedDate','patientImage','patientimageupdate','previousRecords','createdBy','updatedBy','district', 'city', 'mandal', 'village', 'pinCode', 'mobile'], 'safe'],
+            [['dateOfBirth', 'createdDate', 'updatedDate','patientImage','patientimageupdate','previousRecords','createdBy','updatedBy','district', 'city', 'mandal', 'village', 'pinCode', 'mobile','aadhar_number'], 'safe'],
             [['country', 'state'], 'integer'],
             [['firstName', 'lastName', 'patientUniqueId', 'countryName', 'stateName', 'district', 'city', 'mandal', 'village'], 'string', 'max' => 200],
            // [['age'], 'string', 'max' => 10],
             [['pinCode', 'mobile'], 'string', 'max' => 15],
+      
         		['age',
         		'match',
         		'pattern' => '/^[0-9]+$/  ',
@@ -93,7 +94,7 @@ class Patients extends \yii\db\ActiveRecord
         		'extensions'=>'jpeg,png,jpg',
         		'wrongExtension'=>'Only {extensions} types are allowed',
         		],
-        	[['height','weight','respirationRate','BPLeftArm','pulseRate','temparatureType','diseases','allergicMedicine','createdDate','patientCompliant', 'createdDate', 'updatedDate', 'countryName', 'stateName', 'patientUniqueId','spo2'],'safe'],
+        	[['height','weight','respirationRate','BPLeftArm','pulseRate','temparatureType','diagnosis','allergicMedicine','createdDate','patientCompliant', 'createdDate', 'updatedDate', 'countryName', 'stateName', 'patientUniqueId','spo2'],'safe'],
         ];
     }
 

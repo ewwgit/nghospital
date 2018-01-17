@@ -64,7 +64,9 @@ $tremodel = DoctorNghPatient::find()->where(['patientHistoryId' => $mpatientInfo
 							<div class="right">Date</div>
 							<div class="right-content">:</div>
 							<div class="right-second docname"><?php echo $yeardata;  ?></div>
-							
+							 <div class="right">Request Type</div>
+							<div class="right-content">:</div>
+							<div class="right-second docname"><?php echo $tremodel->RequestType;  ?></div>
 
 							
 							
@@ -239,6 +241,15 @@ if (! empty ( $mpatientModel->village )) {
 								}else{
 									echo 'Not Mentioned';
 								}?></div>
+								<div class="right">Aadhar Number</div>
+											<div class="right-content">:</div>
+											<div class="right-second">
+							
+									<?php if(!empty($mpatientModel->aadhar_number)){
+									echo $mpatientModel->aadhar_number;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 										</div>
 										<!---doctor-box closed-->
 									</div>
@@ -314,11 +325,11 @@ if (! empty ( $mpatientInformationModel->respirationRate )) {
 									           echo 'Not Mentioned';
 								                     } ?> </div>
 
-											<div class="right">Diseases</div>
+											<div class="right">Diagnosis</div>
 											<div class="right-content">:</div>
 											<div class="right-second">
-											<?php if (! empty ( $mpatientInformationModel->diseases )) {
-									        echo $mpatientInformationModel->diseases;;
+											<?php if (! empty ( $mpatientInformationModel->diagnosis )) {
+									        echo $mpatientInformationModel->diagnosis;;
 								            } else {
 									           echo 'Not Mentioned';
 								                     } ?></div>

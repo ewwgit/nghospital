@@ -94,6 +94,9 @@ use dosamigos\ckeditor\CKEditor;
 	<div class="form-group col-lg-6 col-sm-12">
     <?= $form->field($model, 'TSMC')->textInput(['maxlength' => true]) ?>
 	</div>
+	<div class="form-group col-lg-6 col-sm-12">
+    <?= $form->field($model, 'MCI')->textInput(['maxlength' => true]) ?>
+	</div> 
 	  <div class="form-group col-lg-6 col-sm-12">
     <?=$form->field($model, 'status')->dropDownList(['10' => 'Active','0' => 'In-Active'],['prompt' => 'Status'],
 											['itemOptions' => ['class' =>'radio-inline']])?>
@@ -129,7 +132,7 @@ use dosamigos\ckeditor\CKEditor;
 	
 	 
 	
-	<div class="form-group col-lg-12 col-sm-12">
+	<div class="form-group col-lg-6 col-sm-12">
 	<?= $form->field($model, 'summery')->widget(CKEditor::className(), [
         'options' => ['rows' => 4],
         'preset' => 'basic'

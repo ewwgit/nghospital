@@ -668,7 +668,7 @@ public function behaviors()
     		$uname=$u->username;
     		//print_r($uname);exit();
     	}
-    	$doctormodel = DoctorNghPatient::find()-> where(['nugrsingId'=> $id ,'patientRequestStatus'=>$status])->all();
+    	$doctormodel = DoctorNghPatient::find()-> where("nugrsingId='$id' AND patientRequestStatus='$status'  AND (RequestType != 'Review Consultation')")->all();
     	$drary = array();
     	$patary = array();
     	if(!empty($doctormodel))
@@ -676,8 +676,7 @@ public function behaviors()
     		foreach ($doctormodel as $dr)
     		{
     			$drary[] = $dr->patientId;
-    			//print_r($drary);exit();
-    			 
+    			//print_r($drary);exit();    			 
     		}
     	}
     	for($k=0; $k<count($drary); $k++)
@@ -749,5 +748,49 @@ public function behaviors()
     	}
     	echo '</table>';
     }
-    
+   public function actionCount($uid)
+   {  	
+  // 	print_r($uid);exit();
+  	 	$model = new Nursinghomes();
+  	 	$count=array();
+  	 	$dname=array();
+  	 	$doctorcountary=array();
+  	 	if (($model->load ( Yii::$app->request->post () )) && ($model->validate ())) 
+  	 	{
+  	 		$doctorId=DoctorNghPatient::find()->select('doctorId')->distinct()->where("nugrsingId ='$uid' AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'")->all(); 
+  	 		//print_r($doctorId);exit();
+  	 		foreach ($doctorId as $did)
+  	 		{
+  	 			$doctorcountary[]=$did->doctorId;
+  	 		}
+  	 		//print_r($doctorcountary);exit();
+  	 		
+  	 		for($k=0;$k<count($doctorcountary);$k++)
+  	 		{
+  	 		 $query=DoctorNghPatient::find()->select('doctorId')->where("nugrsingId ='$uid' AND doctorId='$doctorcountary[$k]' AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'")->count();
+  	 				if($query !='')
+  	 				{
+  	 					$count[]=$query;
+  	 				}
+  	 					//print_r($count);
+  	 				// $query=DoctorNghPatient::find()->select('doctorId')->asArray()->where(['nugrsingId'=>$uid,['createdDate BETWEEN '$model->fromdate' AND '$model->todate'']])->all();
+  	 	   
+  	 	   
+  	 	   			 $doctorname=Doctors::find()->select('name')->where(['userId'=>$doctorcountary[$k]])->all();
+  	 	   			 foreach($doctorname as $d)
+  	 	   			 {
+  	 	  			  	$dname[]=$d['name'];
+  	 	 			 }
+  	 	   			// print_r($dname);
+  	 		}
+  	 	  // exit();
+  	 	}
+  	 
+  	   	return $this->render('count',[    			
+    			'model'=>$model,
+  	   			'count'=>$count,
+  	   			'dname'=>$dname,
+  	   			'doctorcountary'=>$doctorcountary,
+    	]);
+   }
 }

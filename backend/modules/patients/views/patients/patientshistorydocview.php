@@ -149,7 +149,15 @@ h3 {
 								}else{
 									echo 'Not Mentioned';
 								}?></div>
-								
+								<div class="right">Aadhar Number</div>								
+								<div class="right-content">:</div>
+								<div class="right-second">
+								 
+									<?php if(!empty($patmodel->aadhar_number)){
+									echo $patmodel->aadhar_number;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 						    </div> <!---doctor-box closed-->
 						    </div>	<!---main-wrap closed-->
 						    <?php 
@@ -222,11 +230,11 @@ h3 {
 									echo 'Not Mentioned';
 								}?></div>
 								
-								<div class="right">Diseases</div>								
+								<div class="right">Diagnosis</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
-								<?php if(!empty($model->diseases)){
-									echo $model->diseases;;
+								<?php if(!empty($model->diagnosis)){
+									echo $model->diagnosis;;
 								}else{
 									echo 'Not Mentioned';
 								}?></div>

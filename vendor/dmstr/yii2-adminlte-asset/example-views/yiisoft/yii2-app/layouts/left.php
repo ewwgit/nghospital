@@ -104,7 +104,8 @@ use yii\helpers\Url;
                             ['label' => 'Patient Requests', 'icon' => 'eye', 'url' => ['/doctors/doctors/patient-requests'],],
                         	['label' => 'Completed Requests', 'icon' => 'eye', 'url' => ['/doctors/doctors/patient-requests-completed'],],
                         	['label' => 'Nursing Homes List', 'icon' => 'eye', 'url' => ['/doctors/doctors/nghlist'],],
-                            
+                        	['label' => 'Count Report', 'icon' => 'eye', 'url' => ['/doctors/doctors/count','uid'=>Yii::$app->user->identity->id],],
+                        		
                         ],
                     ],
                 		
@@ -132,6 +133,8 @@ use yii\helpers\Url;
                 				['label' => 'Profile Update', 'icon' => 'eye', 'url' => ['/nursinghomes/nursinghomes/profileupdate','uid'=>Yii::$app->user->identity->id],],
                 				['label' => 'Doctors specialities List', 'icon' => 'eye', 'url' => ['/nursinghomes/nursinghomes/doctorspecialitieslist'],],
                 				['label' => 'Consultant Report', 'icon' => 'eye', 'url' => ['/nursinghomes/nursinghomes/doctorreport'],],
+                				['label' => 'Count Report', 'icon' => 'eye', 'url' => ['/nursinghomes/nursinghomes/count','uid'=>Yii::$app->user->identity->id],],
+                				
                 		],
                 		],
                 		

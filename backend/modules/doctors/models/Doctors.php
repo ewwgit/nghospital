@@ -1,13 +1,9 @@
 <?php
-
 namespace app\modules\doctors\models;
-
 use Yii;
 use common\models\User;
-
 /**
- * This is the model class for table "doctors".
- *
+ * This is the model class for table "doctors". *
  * @property integer $doctorid
  * @property integer $userId
  * @property string $doctorUniqueId
@@ -36,13 +32,11 @@ class Doctors extends \yii\db\ActiveRecord
 	 public $rdoctorId;
     /**
      * @inheritdoc
-     */
-	
+     */	
 	 public $username;
      public $email;
      public $password;
-     public $confirmpassword;
-     
+     public $confirmpassword;     
      public $countriesList;
      public $statesData;
      public $citiesData;
@@ -54,24 +48,22 @@ class Doctors extends \yii\db\ActiveRecord
      public $allSpeci;
      public $startTime;
      public $endTime;
-     public $day;
-	
+     public $day;	
     public static function tableName()
     {
         return 'doctors';
     }
-
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [[ 'name', 'qualification','specialities', 'city', 'state',  'country',  'address', 'permanentAddress', 'pinCode', 'doctorMobile',  'summery', 'APMC', 'TSMC','username','email','status'], 'required','on' => ['create','update','profileupdate']],
+            [[ 'name', 'qualification','specialities', 'city', 'state',  'country',  'address', 'permanentAddress', 'pinCode', 'doctorMobile',  'summery', 'APMC', 'TSMC','username','email','status','MCI'], 'required','on' => ['create','update','profileupdate']],
             [['userId', 'state', 'country', 'createdBy', 'updatedBy'], 'integer'],
             [[ 'address','summery','permanentAddress'], 'string'],
-            [['stateName', 'countryName','createdDate', 'updatedDate','createdBy', 'updatedBy','name', 'qualification', 'city', 'state',  'country',  'address', 'permanentAddress', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC','userId','doctorUniqueId','username','email','password'], 'safe'],
-            [[ 'name', 'city', 'stateName', 'countryName', 'APMC', 'TSMC'], 'string', 'max' => 200],
+            [['stateName', 'countryName','createdDate', 'updatedDate','createdBy', 'updatedBy','name', 'qualification', 'city', 'state',  'country',  'address', 'permanentAddress', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC','userId','doctorUniqueId','username','email','password','MCI'], 'safe'],
+            [[ 'name', 'city', 'stateName', 'countryName', 'APMC', 'TSMC','MCI'], 'string', 'max' => 200],
         	[['docimageupdate','status'],'safe'],
         	[['availableStatus'],'required','on' =>['profileupdate']],
         	[['availableStatus'],'safe'],
@@ -79,14 +71,12 @@ class Doctors extends \yii\db\ActiveRecord
             ['username', 'required','on' => ['create','update','profileupdate']],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.','on' =>'create'],
             ['username', 'string', 'min' => 2, 'max' => 255],
-
             ['email', 'trim'],
             ['email', 'required','on' => ['create','update','profileupdate']],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.','on' =>'create'],
-
-            ['password', 'required' ,'on' =>'create'],
+			['password', 'required' ,'on' =>'create'],
 //         		['password',
 //         		'match', 'not' => true, 'pattern' => '/[^a-zA-Z0-9]/',
 //         		'message' => 'password Must be alphabates and numerics only.',
@@ -98,12 +88,10 @@ class Doctors extends \yii\db\ActiveRecord
         		'pattern' => '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/',
         		'message' => 'Email can contain @ and .com characters.'
         				],
-
         		['username',
         		'match', 'not' => true, 'pattern' => '/[^a-zA-Z0-9]/',
         		'message' => 'Invalid username pattern.',
-        		],
- 
+        		], 
            // [['pinCode', 'doctorMobile'], 'string', 'max' => 20],
         		/* [
         		'username',
@@ -152,11 +140,9 @@ class Doctors extends \yii\db\ActiveRecord
         		'wrongExtension'=>'Only {extensions} types are allowed',
         		],
         		[['userId','doctorUniqueId'],'required','on' => 'convertsneed'],
-        		[['startTime','endTime','day'],'safe'],
-        		
+        		[['startTime','endTime','day'],'safe'],        		
         ];
     }
-
     /**
      * @inheritdoc
      */
@@ -184,6 +170,7 @@ class Doctors extends \yii\db\ActiveRecord
             'summery' => 'Summery',
             'APMC' => 'APMC',
             'TSMC' => 'TSMC',
+        	'MCI'=>'MCI',
             'createdBy' => 'Created By',
             'updatedBy' => 'Updated By',
             'createdDate' => 'Created Date',
@@ -199,11 +186,9 @@ class Doctors extends \yii\db\ActiveRecord
     public static function getDoctorname($uId) {
     	$doctordata = Doctors::find()->select(['name'])->where(['userId'=>$uId])->one();
     	return $doctordata['name'];
-    }
-    
+    }    
     public static function getDoctorsBySpeciality($specId)
-    {
-    	
+    {    	
     	$pDate = date("Y-M-d H:i:s");
     	$presentDay = date("D", strtotime($pDate));
     	$presentTime =  date("H:i", strtotime($pDate));
@@ -215,6 +200,8 @@ class Doctors extends \yii\db\ActiveRecord
     		{
     		$avialableDoctors[$k]['id'] = $doctorInfo[$k]['userId'];
     		$avialableDoctors[$k]['name'] = $doctorInfo[$k]['name'];
+    		$avialableDoctors[$k]['summery']=$doctorInfo[$k]['summery'];
+    		//print_r($avialableDoctors[$k]['name']);
     		}
     	}
     	return $avialableDoctors;

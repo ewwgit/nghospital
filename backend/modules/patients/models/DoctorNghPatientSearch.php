@@ -49,7 +49,7 @@ class DoctorNghPatientSearch extends DoctorNghPatient
     	if(isset($params['DoctorNghPatientSearch']['status']) && $params['DoctorNghPatientSearch']['status'] != '')
     	{
     		
-    	$query = DoctorNghPatient::find()->select('doctor_ngh_patient.updatedDate,doctor_ngh_patient.patientRequestStatus,doctor_ngh_patient.patientHistoryId,nursinghomes.nursingHomeName,patients.firstName,patients.lastName')->innerJoin('nursinghomes','doctor_ngh_patient.nugrsingId=nursinghomes.nuserId')->innerJoin('patient_information','doctor_ngh_patient.patientHistoryId=patient_information.patientInfoId')->innerJoin('patients','patient_information.patientId=patients.patientId')->where("doctor_ngh_patient.doctorId =".$docId." AND doctor_ngh_patient.patientRequestStatus ='".$params['DoctorNghPatientSearch']['status']."'");
+    	$query = DoctorNghPatient::find()->select('doctor_ngh_patient.updatedDate,doctor_ngh_patient.patientRequestStatus,doctor_ngh_patient.patientHistoryId,nursinghomes.nursingHomeName,patients.firstName,patients.lastName')->innerJoin('nursinghomes','doctor_ngh_patient.nugrsingId=nursinghomes.nuserId')->innerJoin('patient_information','doctor_ngh_patient.patientHistoryId=patient_information.patientInfoId')->innerJoin('patients','patient_information.patientId=patients.patientId')->where("doctor_ngh_patient.doctorId =".$docId." AND doctor_ngh_patient.patientRequestStatus ='".$params['DoctorNghPatientSearch']['status']."' AND doctor_ngh_patient.RequestType != 'Review Consultation'");
     	}
     	else{
     		$query = DoctorNghPatient::find()->select('doctor_ngh_patient.updatedDate,doctor_ngh_patient.patientRequestStatus,doctor_ngh_patient.patientHistoryId,nursinghomes.nursingHomeName,patients.firstName,patients.lastName')->innerJoin('nursinghomes','doctor_ngh_patient.nugrsingId=nursinghomes.nuserId')->innerJoin('patient_information','doctor_ngh_patient.patientHistoryId=patient_information.patientInfoId')->innerJoin('patients','patient_information.patientId=patients.patientId')->where("doctor_ngh_patient.doctorId =".$docId);
@@ -107,7 +107,7 @@ class DoctorNghPatientSearch extends DoctorNghPatient
     	
     	//print_r($id);exit();
     	//print_r($params);exit();
-    	$query = DoctorNghPatient::find()->select('doctor_ngh_patient.patientRequestStatus,doctor_ngh_patient.patientHistoryId,doctor_ngh_patient.updatedDate,nursinghomes.nursingHomeName,patients.firstName,patients.lastName')->innerJoin('nursinghomes','doctor_ngh_patient.nugrsingId=nursinghomes.nuserId')->innerJoin('patient_information','doctor_ngh_patient.patientHistoryId=patient_information.patientInfoId')->innerJoin('patients','patient_information.patientId=patients.patientId')->where("doctor_ngh_patient.doctorId = '$id' AND  doctor_ngh_patient.patientRequestStatus ='".$params['DoctorNghPatientSearch']['status']."'");
+    	$query = DoctorNghPatient::find()->select('doctor_ngh_patient.patientRequestStatus,doctor_ngh_patient.patientHistoryId,doctor_ngh_patient.updatedDate,nursinghomes.nursingHomeName,patients.firstName,patients.lastName')->innerJoin('nursinghomes','doctor_ngh_patient.nugrsingId=nursinghomes.nuserId')->innerJoin('patient_information','doctor_ngh_patient.patientHistoryId=patient_information.patientInfoId')->innerJoin('patients','patient_information.patientId=patients.patientId')->where("doctor_ngh_patient.doctorId = '$id' AND  doctor_ngh_patient.patientRequestStatus ='".$params['DoctorNghPatientSearch']['status']."' AND doctor_ngh_patient.RequestType != 'Review Consultation'");
     	// print_r($patientinfoModel);exit();
     	$dataProvider = new ActiveDataProvider([
     			'query' => $query,
@@ -149,7 +149,7 @@ class DoctorNghPatientSearch extends DoctorNghPatient
     public function nghreports($params,$id)
     {
     	
-    	$patientInfoModel=DoctorNghPatient::find()->select('doctor_ngh_patient.doctorId,doctor_ngh_patient.patientId,doctor_ngh_patient.updatedDate,patients.firstName,patients.lastName,doctors.name')->innerJoin('patients','doctor_ngh_patient.patientId = patients.patientId')->innerJoin('doctors','doctor_ngh_patient.doctorId = doctors.userId')->where("doctor_ngh_patient.nugrsingId = '$id' AND doctor_ngh_patient.patientRequestStatus = '".$params['DoctorNghPatientSearch']['status']."'");
+    	$patientInfoModel=DoctorNghPatient::find()->select('doctor_ngh_patient.doctorId,doctor_ngh_patient.patientId,doctor_ngh_patient.updatedDate,patients.firstName,patients.lastName,doctors.name')->innerJoin('patients','doctor_ngh_patient.patientId = patients.patientId')->innerJoin('doctors','doctor_ngh_patient.doctorId = doctors.userId')->where("doctor_ngh_patient.nugrsingId = '$id' AND doctor_ngh_patient.patientRequestStatus = '".$params['DoctorNghPatientSearch']['status']."' AND doctor_ngh_patient.RequestType != 'Review Consultation'");
     	//print_r($patientInfoModel);exit();
     	$dataProvider=new ActiveDataProvider([
     			'query'=>$patientInfoModel,
@@ -173,7 +173,7 @@ class DoctorNghPatientSearch extends DoctorNghPatient
     {
     	$nursId = Yii::$app->user->identity->id;
     	//print_r($nursId);exit();
-    	$patientInfoModel=DoctorNghPatient::find()->select('doctor_ngh_patient.doctorId,doctor_ngh_patient.patientId,doctor_ngh_patient.updatedDate,patients.firstName,patients.lastName,doctors.name')->innerJoin('patients','doctor_ngh_patient.patientId = patients.patientId')->innerJoin('doctors','doctor_ngh_patient.doctorId = doctors.userId')->where("doctor_ngh_patient.nugrsingId = '$nursId' AND doctor_ngh_patient.patientRequestStatus = '".$params['DoctorNghPatientSearch']['status']."'");
+    	$patientInfoModel=DoctorNghPatient::find()->select('doctor_ngh_patient.doctorId,doctor_ngh_patient.patientId,doctor_ngh_patient.updatedDate,patients.firstName,patients.lastName,doctors.name')->innerJoin('patients','doctor_ngh_patient.patientId = patients.patientId')->innerJoin('doctors','doctor_ngh_patient.doctorId = doctors.userId')->where("doctor_ngh_patient.nugrsingId = '$nursId' AND doctor_ngh_patient.patientRequestStatus = '".$params['DoctorNghPatientSearch']['status']."' AND doctor_ngh_patient.RequestType != 'Review Consultation'");
     	//print_r($patientInfoModel);exit();
     	$dataProvider=new ActiveDataProvider([
     			'query'=>$patientInfoModel,
