@@ -168,7 +168,7 @@ public function behaviors()
         	$patmodel->BPRightArm = $model->BPRightArm;
         	$patmodel->pulseRate = $model->pulseRate;
         	$patmodel->temparatureType = $model->temparatureType;
-        	$patmodel->diagnosis = $model->diagnosis;
+        	$patmodel->diseases = $model->diseases;
         	$patmodel->allergicMedicine = $model->allergicMedicine;
         	$patmodel->patientCompliant = $model->patientCompliant; 
         	$patmodel->spo2 = $model->spo2;
@@ -230,7 +230,7 @@ public function behaviors()
         	$model->BPRightArm = $patmodel->BPRightArm;
         	$model->pulseRate = $patmodel->pulseRate;
         	$model->temparatureType = $patmodel->temparatureType;
-        	$model->diagnosis = $patmodel->diagnosis;
+        	$model->diseases = $patmodel->diseases;
         	$model->allergicMedicine = $patmodel->allergicMedicine;
         	$model->patientCompliant = $patmodel->patientCompliant;
         	$patmodel->spo2 = $model->spo2;
@@ -254,7 +254,7 @@ public function behaviors()
         	$patmodel->BPRightArm = $model->BPRightArm;
         	$patmodel->pulseRate = $model->pulseRate;
         	$patmodel->temparatureType = $model->temparatureType;
-        	$patmodel->diagnosis = $model->diagnosis;
+        	$patmodel->diseases = $model->diseases;
         	$patmodel->allergicMedicine = $model->allergicMedicine;
         	$patmodel->patientCompliant = $model->patientCompliant;
         	$patmodel->spo2 = $model->spo2;
@@ -394,7 +394,7 @@ public function behaviors()
     				$model->BPLeftArm = $patmodel->BPLeftArm;
     				$model->pulseRate = $patmodel->pulseRate;
     				$model->temparatureType = $patmodel->temparatureType;
-    				$model->diagnosis = $patmodel->diagnosis;
+    				$model->diseases = $patmodel->diseases;
     				$model->allergicMedicine = $patmodel->allergicMedicine;
     				$model->patientCompliant = $patmodel->patientCompliant;
     				$model->spo2 = $patmodel->spo2;
@@ -465,7 +465,7 @@ public function behaviors()
         	
         	$patmodelnew->pulseRate = $model->pulseRate;
         	$patmodelnew->temparatureType = $model->temparatureType;
-        	$patmodelnew->diagnosis = $model->diagnosis;
+        	$patmodelnew->diseases = $model->diseases;
         	$patmodelnew->allergicMedicine = $model->allergicMedicine;
         	$patmodelnew->patientCompliant = $model->patientCompliant;
         	$patmodelnew->spo2 = $model->spo2;
@@ -516,7 +516,7 @@ public function behaviors()
         
         	$patmodelnew->pulseRate = $model->pulseRate;
         	$patmodelnew->temparatureType = $model->temparatureType;
-        	$patmodelnew->diagnosis = $model->diagnosis;
+        	$patmodelnew->diseases = $model->diseases;
         	$patmodelnew->allergicMedicine = $model->allergicMedicine;
         	$patmodelnew->patientCompliant = $model->patientCompliant;
         	$patmodelnew->spo2 = $model->spo2;

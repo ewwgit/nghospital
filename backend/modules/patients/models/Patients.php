@@ -41,7 +41,7 @@ class Patients extends \yii\db\ActiveRecord
 	public $BPLeftArm;
 	public $pulseRate;
 	public $temparatureType;
-	public $diagnosis;
+	public $diseases;
 	public $allergicMedicine;
 	public $patientCompliant;
 	public $documentUrl;
@@ -94,7 +94,7 @@ class Patients extends \yii\db\ActiveRecord
         		'extensions'=>'jpeg,png,jpg',
         		'wrongExtension'=>'Only {extensions} types are allowed',
         		],
-        	[['height','weight','respirationRate','BPLeftArm','pulseRate','temparatureType','diagnosis','allergicMedicine','createdDate','patientCompliant', 'createdDate', 'updatedDate', 'countryName', 'stateName', 'patientUniqueId','spo2'],'safe'],
+        	[['height','weight','respirationRate','BPLeftArm','pulseRate','temparatureType','diseases','allergicMedicine','createdDate','patientCompliant', 'createdDate', 'updatedDate', 'countryName', 'stateName', 'patientUniqueId','spo2'],'safe'],
         ];
     }
 

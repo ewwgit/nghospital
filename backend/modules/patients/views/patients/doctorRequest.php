@@ -315,8 +315,8 @@ if (! empty ( $mpatientInformationModel->respirationRate )) {
 											<div class="right">Diagnosis</div>
 											<div class="right-content">:</div>
 											<div class="right-second">
-											<?php if (! empty ( $mpatientInformationModel->diagnosis )) {
-									        echo $mpatientInformationModel->diagnosis;;
+											<?php if (! empty ( $mpatientInformationModel->diseases )) {
+									        echo $mpatientInformationModel->diseases;;
 								            } else {
 									           echo 'Not Mentioned';
 								                     } ?></div>

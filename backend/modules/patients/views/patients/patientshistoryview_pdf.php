@@ -381,8 +381,8 @@ background-color: #6b5;*/
 								<div class="right"  style="width: 33%;padding-left:90px;">Diagnosis</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
-								<?php if(!empty($model->diagnosis)){
-									echo $model->diagnosis;;
+								<?php if(!empty($model->diseases)){
+									echo $model->diseases;;
 								}else{
 									echo 'Not Mentioned';
 								}?></div>

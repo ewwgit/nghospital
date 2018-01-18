@@ -62,7 +62,7 @@ $historyform = '<div class="row">
 <div class="row">
 <div class="form-group col-lg-4 col-sm-12">
 	<div class="col-lg-3 col-sm-12">Diagnosis:</div> <div class="col-lg-9 col-sm-12">'.
-	$form->field($model, 'diagnosis')->textInput(['maxlength' => 200])->label(false).'</div>
+	$form->field($model, 'diseases')->textInput(['maxlength' => 200])->label(false).'</div>
 </div>
    
     <div class="form-group col-lg-4 col-sm-12">
