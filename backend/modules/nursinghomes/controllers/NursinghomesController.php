@@ -757,6 +757,37 @@ public function behaviors()
   	 	$doctorcountary=array();
   	 	if (($model->load ( Yii::$app->request->post () )) && ($model->validate ())) 
   	 	{
+  	 		//print_r($model->treatmentstatus);
+  	 		if($model->treatmentstatus == 'PROCESSING' || $model->treatmentstatus == 'COMPLETED')
+  	 		{
+  	 			$doctorId=DoctorNghPatient::find()->select('doctorId')->distinct()->where("nugrsingId ='$uid' AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'  AND doctor_ngh_patient.patientRequestStatus = '$model->treatmentstatus'")->all();
+  	 			//print_r($doctorId);exit();
+  	 			foreach ($doctorId as $did)
+  	 			{
+  	 				$doctorcountary[]=$did->doctorId;
+  	 			}
+  	 			//print_r($doctorcountary);exit();
+  	 			
+  	 			for($k=0;$k<count($doctorcountary);$k++)
+  	 			{
+  	 				$query=DoctorNghPatient::find()->select('doctorId')->where("nugrsingId ='$uid' AND doctorId='$doctorcountary[$k]' AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'  AND doctor_ngh_patient.patientRequestStatus = '$model->treatmentstatus'")->count();
+  	 				if($query !='')
+  	 				{
+  	 					$count[]=$query;
+  	 				}
+  	 				//print_r($count);
+  	 				// $query=DoctorNghPatient::find()->select('doctorId')->asArray()->where(['nugrsingId'=>$uid,['createdDate BETWEEN '$model->fromdate' AND '$model->todate'']])->all();
+  	 			
+  	 			
+  	 				$doctorname=Doctors::find()->select('name')->where(['userId'=>$doctorcountary[$k]])->all();
+  	 				foreach($doctorname as $d)
+  	 				{
+  	 					$dname[]=$d['name'];
+  	 				}
+  	 				// print_r($dname);
+  	 			}
+  	 		}  	 		
+  	 		else {
   	 		$doctorId=DoctorNghPatient::find()->select('doctorId')->distinct()->where("nugrsingId ='$uid' AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'")->all(); 
   	 		//print_r($doctorId);exit();
   	 		foreach ($doctorId as $did)
@@ -782,6 +813,7 @@ public function behaviors()
   	 	  			  	$dname[]=$d['name'];
   	 	 			 }
   	 	   			// print_r($dname);
+  	 		}
   	 		}
   	 	  // exit();
   	 	}

@@ -378,14 +378,7 @@ background-color: #6b5;*/
 									echo 'Not Mentioned';
 								}?></div>
 								
-								<div class="right"  style="width: 33%;padding-left:90px;">Diagnosis</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-								<?php if(!empty($model->diseases)){
-									echo $model->diseases;;
-								}else{
-									echo 'Not Mentioned';
-								}?></div>
+								
 													        
 								<div class="right"  style="width: 33%;padding-left:90px;">Allergic Medicine</div>								
 								<div class="right-content">:</div>
@@ -401,6 +394,14 @@ background-color: #6b5;*/
 								<div class="right-second">
 								<?php if(!empty($model->patientCompliant)){
 									echo $model->patientCompliant;;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
+								<div class="right"  style="width: 33%;padding-left:90px;">Diagnosis</div>								
+								<div class="right-content">:</div>
+								<div class="right-second">
+								<?php if(!empty($model->diseases)){
+									echo $model->diseases;;
 								}else{
 									echo 'Not Mentioned';
 								}?></div>

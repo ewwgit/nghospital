@@ -256,7 +256,14 @@ h3 {
 								}else{
 									echo 'Not Mentioned';
 								}?></div>
-								
+								<div class="right">Diagnosis</div>								
+								<div class="right-content">:</div>
+								<div class="right-second">
+								<?php if(!empty($model->diseases)){
+									echo $model->diseases;;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
 								<div class="right">SPO2</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">

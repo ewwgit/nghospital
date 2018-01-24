@@ -279,7 +279,7 @@ public function behaviors()
         		$dqualification->save();
         		}        	       	
         	}        	
-             for($k=0; $k<count($model->specialities);$k++)
+            /*  for($k=0; $k<count($model->specialities);$k++)
         	 {
         	 	$specid = Specialities::find()->select('spId')->where(['specialityName' =>$model->specialities[$k]])->asArray()->one();
         	 	if(!empty($specid))
@@ -289,7 +289,15 @@ public function behaviors()
         	 		$dspeciality->rspId =$specid['spId'];
         	 		$dspeciality->save();
         	 	}
-          	 }        	
+          	 }    */ 
+        	$specid = Specialities::find()->select('spId')->where(['specialityName' =>$model->specialities])->one();
+        	if(!empty($specid))
+        	{
+        		$dspeciality = new DoctorsSpecialities();
+        		$dspeciality->rdoctorId = $model->userId;
+        		$dspeciality->rspId =$specid['spId'];
+        		$dspeciality->save();
+        	}
         	 Yii::$app->session->setFlash('success', " Doctors Created successfully ");
             //return $this->redirect(['view', 'id' => $model->doctorid]);
             return $this->redirect(['index']);
@@ -448,10 +456,11 @@ public function behaviors()
         		}
         	 	}
         	 }        	 
-        	 DoctorsSpecialities::deleteAll( ['rdoctorId' => $model->userId]);
-        	 for($k=0; $k<count($model->specialities);$k++)
+        	 DoctorsSpecialities::deleteAll( ['rdoctorId' => $model->userId]);        	 
+        	 /* for($k=0; $k<count($model->specialities);$k++)
         	 {
         	 	$specid = Specialities::find()->select('spId')->where(['specialityName' =>$model->specialities[$k]])->asArray()->one();
+        	 	print_r($specid);exit();
         	 	if(!empty($specid))
         	 	{
         	 		$dspeciality = new DoctorsSpecialities();
@@ -459,7 +468,16 @@ public function behaviors()
         	 		$dspeciality->rspId =$specid['spId'];
         	 		$dspeciality->save();
         	 	}        	 	
+        	 } */
+        	 $specid = Specialities::find()->select('spId')->where(['specialityName' =>$model->specialities])->one();
+        	 if(!empty($specid))
+        	 {
+        	 	$dspeciality = new DoctorsSpecialities();
+        	 	$dspeciality->rdoctorId = $model->userId;
+        	 	$dspeciality->rspId =$specid['spId'];
+        	 	$dspeciality->save();
         	 }
+        	// print_r($specid);exit();
         	 //print_r($model->qualification);exit();        	
         	 Yii::$app->session->setFlash('success', " Doctors Updated successfully ");
             //return $this->redirect(['view', 'id' => $model->doctorid]);
@@ -765,7 +783,7 @@ public function behaviors()
     				}
     			}    
     			DoctorsSpecialities::deleteAll( ['rdoctorId' => $model->userId]);
-    			for($k=0; $k<count($model->specialities);$k++)
+    			/* for($k=0; $k<count($model->specialities);$k++)
     			{
     				$specid = Specialities::find()->select('spId')->where(['specialityName' =>$model->specialities[$k]])->asArray()->one();
     				if(!empty($specid))
@@ -775,6 +793,14 @@ public function behaviors()
     					$dspeciality->rspId =$specid['spId'];
     					$dspeciality->save();
     				}    				 
+    			} */
+    			$specid = Specialities::find()->select('spId')->where(['specialityName' =>$model->specialities])->asArray()->one();
+    			if(!empty($specid))
+    			{
+    				$dspeciality = new DoctorsSpecialities();
+    				$dspeciality->rdoctorId = $model->userId;
+    				$dspeciality->rspId =$specid['spId'];
+    				$dspeciality->save();
     			}
     			//print_r($model->qualification);exit();    			 
     			Yii::$app->session->setFlash('success', " Doctors Updated successfully ");
@@ -1155,12 +1181,18 @@ public function actionPatientshistoryview($infoid)
     {
     	// 	print_r($uid);exit();
     	$model = new Nursinghomes();
+    	
     	$count=array();
     	$nurname=array();
     	$nurcountary=array();
     	if (($model->load ( Yii::$app->request->post () )) && ($model->validate ()))
     	{
-    		$nurId=DoctorNghPatient::find()->select('nugrsingId')->distinct()->where("doctorId ='$uid' AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'")->all();
+    		//print_r($model->treatmentstatus);exit();
+    		if($model->treatmentstatus == 'PROCESSING' || $model->treatmentstatus == 'COMPLETED')
+    		{
+    			
+    			$nurId=DoctorNghPatient::find()->select('nugrsingId')->distinct()->where("doctorId ='$uid'  AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation' AND doctor_ngh_patient.patientRequestStatus = '$model->treatmentstatus'")->all();
+    		
     		//print_r($doctorId);    		 
     		foreach ($nurId as $did)
     		{
@@ -1169,19 +1201,46 @@ public function actionPatientshistoryview($infoid)
     		//print_r($nurcountary);
     		for($k=0;$k<count($nurcountary);$k++)
     		{
-    			$query=DoctorNghPatient::find()->select('nugrsingId')->where("doctorId ='$uid' AND nugrsingId='$nurcountary[$k]' AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'")->count();
+    			$query=DoctorNghPatient::find()->select('nugrsingId')->where("doctorId ='$uid' AND nugrsingId='$nurcountary[$k]' AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation' AND doctor_ngh_patient.patientRequestStatus = '$model->treatmentstatus' ")->count();
     			if($query !='')
     			{
     				$count[]=$query;
     			}
-    			//print_r($count);
+    			//print_r($query);exit();
     			// $query=DoctorNghPatient::find()->select('doctorId')->asArray()->where(['nugrsingId'=>$uid,['createdDate BETWEEN '$model->fromdate' AND '$model->todate'']])->all();
     			 $nursinghomename=Nursinghomes::find()->select('nursingHomeName')->where(['nuserId'=>$nurcountary[$k]])->all();
     			foreach($nursinghomename as $n)
     			{
     				$nurname[]=$n['nursingHomeName'];
     			}
-    			// print_r($dname);
+    			// print_r($nurname);
+    		}
+    		}
+    		else {
+    			$nurId=DoctorNghPatient::find()->select('nugrsingId')->distinct()->where("doctorId ='$uid'  AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'")->all();
+    			
+    			//print_r($doctorId);
+    			foreach ($nurId as $did)
+    			{
+    				$nurcountary[]=$did->nugrsingId;
+    			}
+    			//print_r($nurcountary);
+    			for($k=0;$k<count($nurcountary);$k++)
+    			{
+    				$query=DoctorNghPatient::find()->select('nugrsingId')->where("doctorId ='$uid' AND nugrsingId='$nurcountary[$k]' AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'")->count();
+    				if($query !='')
+    				{
+    					$count[]=$query;
+    				}
+    				//print_r($query);exit();
+    				// $query=DoctorNghPatient::find()->select('doctorId')->asArray()->where(['nugrsingId'=>$uid,['createdDate BETWEEN '$model->fromdate' AND '$model->todate'']])->all();
+    				$nursinghomename=Nursinghomes::find()->select('nursingHomeName')->where(['nuserId'=>$nurcountary[$k]])->all();
+    				foreach($nursinghomename as $n)
+    				{
+    					$nurname[]=$n['nursingHomeName'];
+    				}
+    				// print_r($nurname);
+    			}
     		}
     	}
     	//exit();

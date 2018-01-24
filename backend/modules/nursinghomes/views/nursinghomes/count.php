@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][]=$this->title;
 				
 				</div>
 				<div class="col-md-4">
-				Status:<?= $form->field($model, 'treatmentstatus')->dropDownList(['prompt'=>'Select Status','PROCESSING','COMPLETED'])->label(false);?>	</div>
+				Status:<?= $form->field($model, 'treatmentstatus')->dropDownList(['prompt'=>'Select Status','PROCESSING'=>'PROCESSING','COMPLETED'=>'COMPLETED'])->label(false);?>	</div>
 				<div class=" form-group col-md-6" style="paddin-top:10px;">
     				<button type="submit" class="btn btn-primary">Search</button> </div>
 

@@ -44,7 +44,7 @@ use dosamigos\ckeditor\CKEditor;
     <?php echo $form->field($model, 'specialities')->widget(Select2::classname(), [
     'data' => $model ->allSpeci,
     'maintainOrder' => true,
-    'options' => ['placeholder' => 'Select Speciality', 'multiple' => true],
+    'options' => ['placeholder' => 'Select Speciality'],
     
 ]); ?>
     </div>

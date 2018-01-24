@@ -312,14 +312,6 @@ if (! empty ( $mpatientInformationModel->respirationRate )) {
 									           echo 'Not Mentioned';
 								                     } ?> </div>
 
-											<div class="right">Diagnosis</div>
-											<div class="right-content">:</div>
-											<div class="right-second">
-											<?php if (! empty ( $mpatientInformationModel->diseases )) {
-									        echo $mpatientInformationModel->diseases;;
-								            } else {
-									           echo 'Not Mentioned';
-								                     } ?></div>
 
 											<div class="right">Allergic Medicine</div>
 											<div class="right-content">:</div>
@@ -338,6 +330,15 @@ if (! empty ( $mpatientInformationModel->respirationRate )) {
 								            } else {
 									           echo 'Not Mentioned';
 								                     } ?> </div>
+								                     
+											<div class="right">Diagnosis</div>
+											<div class="right-content">:</div>
+											<div class="right-second">
+											<?php if (! empty ( $mpatientInformationModel->diseases )) {
+									        echo $mpatientInformationModel->diseases;;
+								            } else {
+									           echo 'Not Mentioned';
+								                     } ?></div>
 								            <div class="right">SPO2</div>
 											<div class="right-content">:</div>
 											<div class="right-second">

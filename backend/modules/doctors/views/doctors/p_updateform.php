@@ -38,7 +38,7 @@ use dosamigos\ckeditor\CKEditor;
     <?php echo $form->field($model, 'specialities')->widget(Select2::classname(), [
      'data' => $model ->allSpeci,
     'maintainOrder' => true,
-    'options' => ['placeholder' => 'Enter speciality', 'multiple' => true],
+    'options' => ['placeholder' => 'Enter speciality'],
     'pluginOptions' => [
         'tags' => true,
         'maximumInputLength' => 10

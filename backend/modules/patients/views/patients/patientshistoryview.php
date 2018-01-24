@@ -239,14 +239,7 @@ h3 {
 									echo 'Not Mentioned';
 								}?></div>
 								
-								<div class="right">Diagnosis</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-								<?php if(!empty($model->diseases)){
-									echo $model->diseases;;
-								}else{
-									echo 'Not Mentioned';
-								}?></div>
+								
 													        
 								<div class="right">Allergic Medicine</div>								
 								<div class="right-content">:</div>
@@ -262,6 +255,14 @@ h3 {
 								<div class="right-second">
 								<?php if(!empty($model->patientCompliant)){
 									echo $model->patientCompliant;;
+								}else{
+									echo 'Not Mentioned';
+								}?></div>
+								<div class="right">Diagnosis</div>								
+								<div class="right-content">:</div>
+								<div class="right-second">
+								<?php if(!empty($model->diseases)){
+									echo $model->diseases;;
 								}else{
 									echo 'Not Mentioned';
 								}?></div>
