@@ -24,6 +24,7 @@ use app\modules\specialities\models\Specialities;
 use app\models\UserrolesModel;
 use yii\filters\AccessControl;
 use app\models\ModulePermissions;
+use app\modules\nursinghomes\models\Nursinghomes;
 
 /**
  * PatientsController implements the CRUD actions for Patients model.
@@ -601,6 +602,7 @@ public function behaviors()
     
     public function actionRequestDoctor($phsId)
     {
+    	date_default_timezone_set("Asia/Calcutta");
     	$model = new DoctorNghPatient;
     	$model->scenario = 'requestdoctor';
     	$mpatientModel = new Patients();
@@ -643,6 +645,10 @@ public function behaviors()
     	
     	
     	if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+    		$docnewInfo = Doctors::find()->where(['userId' => $model->doctor])->one();
+    		$nurseInfo = Nursinghomes::find()->where(['nuserId' => $nghId])->one();
+    		$currentdatenew = date('d-M-Y h:i');
+    		//print_r($nurseInfo);exit();
     		
     		if($patientId != 0 && $nghId != 0)
     		{
@@ -661,6 +667,24 @@ public function behaviors()
     		$model->createdBy = Yii::$app->user->identity->id;
     		$model->updatedBy = Yii::$app->user->identity->id;
     		$model->save();
+    		
+    		//print_r($docnewInfo);exit();
+    		
+    		$ch = curl_init();
+    		$message = 'Hello '.$docnewInfo->name.' you have a Tele consultation Appointment with  '.$nurseInfo->nursingHomeName.' on '.$currentdatenew.'. ';
+    		//$message = "Your OTP is";
+    		$URL =  "http://sms.expertbulksms.com/WebServiceSMS.aspx?User=mulugu&passwd=Mulugu@123$&mobilenumber=".$docnewInfo->doctorMobile."&message=".urlencode($message)."&sid=mulugu&mtype=N";
+    		/* echo $URL;
+    		 exit(); */
+    		curl_setopt($ch, CURLOPT_URL,$URL);
+    		 
+    		
+    		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    		$server_output = curl_exec ($ch);
+    		//print_r(var_dump($server_output));exit();
+    		curl_close ($ch);
+    		$sendOtpresp = json_decode($server_output, true);
+    		
     		return $this->redirect(['index']);
     		}
     		else{

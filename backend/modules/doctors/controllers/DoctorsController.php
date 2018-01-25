@@ -298,6 +298,25 @@ public function behaviors()
         		$dspeciality->rspId =$specid['spId'];
         		$dspeciality->save();
         	}
+        	
+        	
+        	$ch = curl_init();
+        	$message = 'Thank you '.$model->name.' for Registering with CONSULT.XP, we will send your user id, pass word soon.';
+        	//$message = "Your OTP is";
+        	$URL =  "http://sms.expertbulksms.com/WebServiceSMS.aspx?User=mulugu&passwd=Mulugu@123$&mobilenumber=".$model->doctorMobile."&message=".urlencode($message)."&sid=mulugu&mtype=N";
+        	/* echo $URL;
+        	 exit(); */
+        	curl_setopt($ch, CURLOPT_URL,$URL);
+        	
+        	 
+        	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        	$server_output = curl_exec ($ch);
+        	//print_r(var_dump($server_output));exit();
+        	curl_close ($ch);
+        	$sendOtpresp = json_decode($server_output, true);
+        	
+        	
+        	
         	 Yii::$app->session->setFlash('success', " Doctors Created successfully ");
             //return $this->redirect(['view', 'id' => $model->doctorid]);
             return $this->redirect(['index']);
@@ -978,9 +997,26 @@ public function behaviors()
     		$mpatientModel = $nghInfo;
     	}    	 
     	if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+    		$docnewInfo = Doctors::find()->where(['userId' => $model->doctorId])->one();
+    		$nurseInfo = Nursinghomes::find()->where(['nuserId' => $model->nugrsingId])->one();
     		$model->patientRequestStatus = 'COMPLETED';
     		$model->updatedDate = date("Y-m-d H:i:s");
-    		$model->update();    
+    		$model->update();
+    		
+    		$ch = curl_init();
+    		$message = 'Hello '.$nurseInfo->nursingHomeName.', '.$mpatientModel->firstName.' '.$mpatientModel->lastName.' Advice form is ready to download.';
+    		//$message = "Your OTP is";
+    		$URL =  "http://sms.expertbulksms.com/WebServiceSMS.aspx?User=mulugu&passwd=Mulugu@123$&mobilenumber=".$nurseInfo->mobile."&message=".urlencode($message)."&sid=mulugu&mtype=N";
+    		/* echo $URL;
+    		 exit(); */
+    		curl_setopt($ch, CURLOPT_URL,$URL);
+    		 
+    		
+    		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    		$server_output = curl_exec ($ch);
+    		//print_r(var_dump($server_output));exit();
+    		curl_close ($ch);
+    		$sendOtpresp = json_decode($server_output, true);
     		//$prmodel = new PatientRequests();    		
     			return $this->redirect(['patient-requests']);    		
     		//print_r($nghId);exit();
