@@ -1296,58 +1296,147 @@ public function actionPatientshistoryview($infoid)
     	}
     	
     	
+    	$doctorQulification = DoctorsQualification::find()->select('qualification')->where( ['docId' => $model->doctorId])->all();
+    	//print_r($doctorQulification);exit();
+    	$dqary = array();
+    	$docqualiary = array();
+    	if(!empty($doctorQulification))
+    	{
+    		foreach ($doctorQulification as $dq)
+    		{
+    			$dqary[] = $dq->qualification;
+    		}
+    	}
+    	for($k=0; $k<count($dqary); $k++)
+    	{
+    		$docquali = Qualifications::find()->select('qualification')->where( ['qlid' => $dqary[$k]])->asArray()->one();
+    		$docqualiary[] = $docquali['qualification'];
+    	}
+    	$docSpecialities = DoctorsSpecialities::find()->select('rspId')->where( ['rdoctorId' => $model->doctorId])->all();
+    	//print_r($docSpecialities);exit();
+    	$dsary = array();
+    	$docspeciary = array();
+    	if(!empty($docSpecialities))
+    	{
+    		foreach ($docSpecialities as $ds)
+    		{
+    			$dsary[] = $ds->rspId;
+    		}
+    	}
+    	//print_r($dsary);exit();
+    	for($m=0; $m<count($dsary); $m++)
+    	{
+    		$docspeci = Specialities::find()->select('specialityName')->where( ['spId' => $dsary[$m]])->asArray()->one();
+    		$docspeciary[] = $docspeci['specialityName'];
+    	}
+    	
+    	if(!empty($docqualiary))
+    	{
+    	
+    	$doctorallQualifications = implode(",",$docqualiary);
+    	}
+    	else{
+    		$doctorallQualifications = '';
+    	}
+    	
+    	if(!empty($docspeciary))
+    	{
+    		 
+    		$doctorallSpec = $docspeciary[0];
+    	}
+    	else{
+    		$doctorallSpec = '';
+    	}
+    	
+    	
     	$html = <<<HTML
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-    	
+<title>Insert Title Here</title>
 </head>
-    	
+
 <body style="box-sizing:border-box; font-family: 'Source Sans Pro',sans-serif; margin:0px; padding:0px;">
-	<div style="width:800px;  height:auto; overflow:hidden; margin:10px auto; border:1px solid #bce8f1; border-radius:4px; padding:10px; position:relative;">
-        <header style="width:800px; float:left; position: relative; border-bottom: 2px solid #5aab4a; padding: 0 10px; box-sizing: border-box;">
-            <div class="img" style="width: 93px; height:104px; overflow:hidden; float: left; position: relative;">
-                <img src="http://expertwebworx.in/nghospital/backend/web/$doctorInfo->doctorImage" alt="Doctor"/>
-            </div>
-            <h1 style="font-family: 'Source Sans Pro',sans-serif; font-size: 30px; color:#0000ff; text-align:center; margin:0px;">Doctor Prescription Pad</h1>
-            <h2 style="font-family: 'Source Sans Pro',sans-serif; color: #008000; font-size:22px; padding: 5px 0; text-align:center; margin:0px;">$nursinghomeinfo->nursingHomeName</h2>
-            <h3 style="font-family: 'Source Sans Pro',sans-serif; color: #333333; font-size: 18px; text-align:center; margin:0px;">$nursinghomeinfo->city</h3>
-    	
-            	<div style="width: 350px; float: left; clear: left; position: relative; margin-bottom: -20px;">$doctorInfo->name</div>
-                <div style="width: 350px; float: right; clear: right; text-align: right;">Date: $currentdatenew</div>
-    	
-        </header>
-        <aside style="width:800px; float:left; position: relative; border-bottom: 2px solid #5aab4a; padding:10px; padding-bottom:0px; box-sizing: border-box;">
-        	<div style="width: 800px; float: left; position: relative; padding:0 0 10px 0;">
-            	<div style="width: 400px; float: left; color: #295a8c; font-size: 14px;">Patient Name <i style="font-style: normal; float: right; padding-right: 15px;">:</i></div>
-                <div style="font-size: 14px; color: #333333;  float: left;">$mpatientModel->firstName $mpatientModel->lastName</div>
-            </div>
-            
-            
-             <div style="width: 800px; float: left; position: relative; padding:0 0 10px 0;">
-            	<div style="width: 400px; float: left; color: #295a8c; font-size: 14px;">Prescription Date <i style="font-style: normal; float: right; padding-right: 15px;">:</i></div>
-                <div style="font-size: 14px; color: #333333;  float: left;">$precriptionDate</div>
-            </div>
-                		
-                		<div style="width: 800px; float: left; position: relative; padding:0 0 10px 0;">
-            	<div style="width: 400px; float: left; color: #295a8c; font-size: 14px;">Prescription <i style="font-style: normal; float: right; padding-right: 15px;">:</i></div>
-                <div style="font-size: 14px; color: #333333;  float: left;">$model->treatment</div>
-            </div>
-            <div style="width: 800px; float: left; position: relative; padding:0 0 10px 0;">
-            	<div style="width: 400px; float: left; color: #295a8c; font-size: 14px;">Nursing Home Adress <i style="font-style: normal; float: right; padding-right: 15px;">:</i></div>
-                <div style="font-size: 14px; color: #333333;  float: left;">$nursinghomeinfo->address<br /> PIN CODE: $nursinghomeinfo->pinCode</div>
-            </div>
-            
-        </aside>
-        <footer style="width:800px; float:left; position: relative; padding:10px; padding-bottom:0px; box-sizing: border-box;">
-            <div style="width: 800px; float: left; position: relative; padding:0px; font-family: 'Source Sans Pro',sans-serif; font-size: 13px; color: #989898; text-align:center;">
-                Footer Content Goes Here
-            </div>
-        </footer>
+<div style="width:576px;  height:auto; overflow:hidden; margin:10px auto; border:1px solid #bce8f1; border-radius:4px; padding:10px; position:relative;">
+  <header style="width:576px; float:left; position: relative; border-bottom: 2px solid #5aab4a; padding: 0 10px; box-sizing: border-box;">
+    <h1 style="font-family: 'Source Sans Pro',sans-serif; font-size: 38px; color:#ff6600; text-align:center; margin:0px;">CONSULT XP</h1>
+    <h3 style="font-family: 'Source Sans Pro',sans-serif; color: #323232; font-size: 18px; text-align:center; margin:0px;">ADDRESS</h3>
+    <h2 style="font-family: 'Source Sans Pro',sans-serif; color: #3572af; font-size:22px; padding: 5px 0; text-align:center; margin:0px;">ADVICE FORM</h2>
+    <div style="width:556px; float:left; position: relative;">
+      <div style="width:278px; float:left; position:relative;">
+        <div style="width: 278px; float: left; position: relative; padding:0 0 10px 0;">
+          <label style="width: 139px; float: left; color: #295a8c; font-size: 14px;">DR NAME <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+          <span style="font-size: 14px; color: #333; max-width: 139px; float: left;">$doctorInfo->name</span> </div>
+        <div style="width: 278px; float: left; position: relative; padding:0 0 10px 0;">
+          <label style="width: 139px; float: left; color: #295a8c; font-size: 14px;">SPECIALIZATION <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+          <span style="font-size: 14px; color: #333; max-width: 139px; float: left;">$doctorallSpec</span> </div>
+        <div style="width: 278px; float: left; position: relative; padding:0 0 10px 0;">
+          <label style="width: 139px; float: left; color: #295a8c; font-size: 14px;">QUALIFICATION <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+          <span style="font-size: 14px; color: #333; max-width: 139px; float: left;">$doctorallQualifications</span> </div>
+      </div>
+      <div style="width:278px; float:left; position:relative; margin-top:20px;">
+        <h3 style="font-size: 15px; color: #333; float: right; padding:12px 0; text-align: right; margin:0px;">Date: <span>$currentdatenew</span></h3>
+      </div>
     </div>
+  </header>
+  <aside style="width:576px; float:left; position: relative; border-bottom: 2px solid #5aab4a; padding:10px; padding-bottom:0px; box-sizing: border-box;">
+    <div style="width:270px; float:left; position:relative; padding-right:5px; box-sizing:border-box;">
+      <div style="width: 270px; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 130px; float: left; color: #295a8c; font-size: 14px;">PATIENT NAME <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 130px; float: left;">$mpatientModel->firstName $mpatientModel->lastName</span> </div>
+      <div style="width: 270px; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 130px; float: left; color: #295a8c; font-size: 14px;">AGE /SEX <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 130px; float: left;">$mpatientModel->age/$mpatientModel->gender</span> </div>
+      <div style="width: 270px; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 130px; float: left; color: #295a8c; font-size: 14px;">COMPLAINTS <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 130px; float: left;">$mpatientInformationModel->patientCompliant</span> </div>
+        <div style="width: 270px; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 130px; float: left; color: #295a8c; font-size: 14px;">DIAGNOSIS <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 130px; float: left;">$mpatientInformationModel->diseases</span> </div>
+      <div style="width: 270px; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 130px; float: left; color: #295a8c; font-size: 14px;">R R <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 130px; float: left;">$mpatientInformationModel->respirationRate</span> </div>
+      
+      
+    </div>
+    <div style="width:270px; float:left; position:relative; padding-left:5px; box-sizing:border-box;">
+      <div style="width: 270px; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 130px; float: left; color: #295a8c; font-size: 14px;">PATINET UID <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 130px; float: left;">$mpatientModel->patientUniqueId</span> </div>
+      <div style="width: 270px; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 130px; float: left; color: #295a8c; font-size: 14px;">BP <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 130px; float: left;">$mpatientInformationModel->BPLeftArm</span> </div>
+      <div style="width: 270px; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 130px; float: left; color: #295a8c; font-size: 14px;">TEMP <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 130px; float: left;">$mpatientInformationModel->temparatureType</span> </div>
+      <div style="width: 270px; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 130px; float: left; color: #295a8c; font-size: 14px;">SPO<sub>2</sub> <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 130px; float: left;">$mpatientInformationModel->spo2</span> </div>
+      <div style="width: 270px; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 130px; float: left; color: #295a8c; font-size: 14px;">PRATE <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 130px; float: left;">$mpatientInformationModel->pulseRate</span> </div>
+        
+        <div style="width: 270px; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 130px; float: left; color: #295a8c; font-size: 14px;">WGT <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 130px; float: left;">$mpatientInformationModel->weight</span> </div>
+      
+    </div>
+    <div style="width:556px; float:left; position:relative;">
+      <h6 style="color:#3572af; font-weight:600; font-size:14px; text-align:center; margin:0px; padding:10px;">ADVICE</h6>
+      <div style="height:200px; width:100%; float:left; position:relative; font-size:14px; margin:0 0 10px 0; padding:10px; box-sizing:border-box; border:1px solid #999; border-radius:5px;"> $model->treatment </div>
+    </div>
+  </aside>
+  <footer style="width:556px; float:left; position: relative; padding:10px; padding-bottom:0px; box-sizing: border-box;">
+    <div style="width: 556px; float: left; position: relative; padding:0px; font-family: 'Source Sans Pro',sans-serif; font-size: 13px; color: #989898; text-align:center;"> $nursinghomeinfo->nursingHomeName - $nursinghomeinfo->mobile </div>
+  </footer>
+</div>
 </body>
 </html>
+    	
+    	
+    	
+    	
    
 HTML;
     	
