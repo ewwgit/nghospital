@@ -8,15 +8,17 @@ function printContent(el){
 }
 </script>
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use common\models\User;
 use app\modules\patients\models\DoctorNghPatient;
 use app\modules\doctors\models\Doctors;
-
+use backend\models\SignupForm;
+use app\modules\doctors\models\DoctorsQualification;
+use app\modules\qualifications\models\Qualifications;
+use app\modules\doctors\models\DoctorsSpecialities;
+use app\modules\specialities\models\Specialities;
 use app\modules\nursinghomes\models\Nursinghomes;
-
 $this->title = $patmodel->firstName;
 $this->params['breadcrumbs'][] = ['label' => 'Patients', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -30,454 +32,173 @@ $docnmodel = Doctors::find()->where(['userId' => $reqmodel->doctorId])->one();
 else{
 	$reqmodel = new DoctorNghPatient();
 }
+$doctorQulification = DoctorsQualification::find()->select('qualification')->where( ['docId' => $docnmodel->userId])->all();
+//print_r($doctorQulification);exit();
+$dqary = array();
+$docqualiary = array();
+if(!empty($doctorQulification))
+{
+	foreach ($doctorQulification as $dq)
+	{
+		$dqary[] = $dq->qualification;
+	}
+}
+for($k=0; $k<count($dqary); $k++)
+{
+	$docquali = Qualifications::find()->select('qualification')->where( ['qlid' => $dqary[$k]])->asArray()->one();
+	$docqualiary[] = $docquali['qualification'];
+}
+$docSpecialities = DoctorsSpecialities::find()->select('rspId')->where( ['rdoctorId' => $docnmodel->userId])->all();
+//print_r($docSpecialities);exit();
+$dsary = array();
+$docspeciary = array();
+if(!empty($docSpecialities))
+{
+	foreach ($docSpecialities as $ds)
+	{
+		$dsary[] = $ds->rspId;
+	}
+}
+//print_r($dsary);exit();
+for($m=0; $m<count($dsary); $m++)
+{
+	$docspeci = Specialities::find()->select('specialityName')->where( ['spId' => $dsary[$m]])->asArray()->one();
+	$docspeciary[] = $docspeci['specialityName'];
+}
 
 ?>
-<div class="doctors-view">
-<div class="box box-primary">
-<div class="box-body">
-<div class="container" id="print">
-<style>
-th {
-	display: none;
-}
-h3 {
-	margin-top:0px;
-	padding-left: 208px;
-}
-.right-second1 {
-    font-size: 15px;
-     width: 0%; 
-    color: #676b6d;
-    margin: 10px;
-    float: left;
-   }
-   .right-second2 {
-    font-size: 15px;
-     width: 50%; 
-    color: #676b6d;
-     margin-top: -10px;
+<div style="background-color:#ffffff !important; margin:10px 0px 0px 10px">
+<body style="box-sizing:border-box; font-family: 'Source Sans Pro',sans-serif; margin:0px; padding:0px;background-color:#ffffff !important;">
+<div id="print" style="width:60%;  height:auto; overflow:hidden; margin:10px auto; border:1px solid #bce8f1; border-radius:4px; padding:10px; position:relative;">
+  <header style="width:100%; float:left; position: relative; border-bottom: 2px solid #5aab4a; padding: 0 10px; box-sizing: border-box;">
+    <h1 style="font-family: 'Source Sans Pro',sans-serif; font-size: 38px; color:#ff6600; text-align:center; margin:0px;">CONSULT XP</h1>
+    <h3 style="font-family: 'Source Sans Pro',sans-serif; color: #323232; font-size: 18px; text-align:center; margin:0px;">ADDRESS</h3>
+    <h2 style="font-family: 'Source Sans Pro',sans-serif; color: #3572af; font-size:22px; padding: 5px 0; text-align:center; margin:0px;">ADVICE FORM</h2>
+    <div style="width:100%; float:left; position: relative;">
+      <div style="width:50%; float:left; position:relative;">
+        <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+          <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">DR NAME <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+          <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php   if($docnmodel->name != '')
+														{
+															echo $docnmodel->name ;
+														}else {
+															echo 'Not Mentioned';
+														}
+													?> </span> </div>
+        <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+          <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">SPECIALIZATION <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+          <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php if(!empty($docspeciary)){
+									echo implode(" , ",$docspeciary);
+								}else{
+									echo 'Not Mentioned';
+								}?></span> </div>
+        <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+          <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">QUALIFICATION <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+          <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php if(!empty($docqualiary)){
+									echo implode(" , ",$docqualiary);
+								}else{
+									echo 'Not Mentioned';
+								}?></span> </div>
+      </div>
+      <?php 
+										    $cdate = $model->createdDate;
+						   					 $yrdata= strtotime($cdate);
+						   					 $yeardata= date('d-M-Y', $yrdata);?>
+      <div style="width:50%; float:left; position:relative; margin-top:20px;">
+        <h3 style="font-size: 15px; color: #333; float: right; padding:12px 0; text-align: right; margin:0px;">Date: <span><?php echo $yeardata ?></span></h3>
+      </div>
+    </div>
+  </header>
+  <aside style="width:100%; float:left; position: relative; border-bottom: 2px solid #5aab4a; padding:10px; padding-bottom:0px; box-sizing: border-box;">
+    <div style="width:50%; float:left; position:relative; padding-right:5px; box-sizing:border-box;">
+    <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">PATINET UID <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?= $patmodel->patientUniqueId; ?></span> </div>
+      <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">PATIENT NAME <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?= $patmodel->firstName; ?>&nbsp;<?= $patmodel->lastName; ?></span> </div>
+      <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">AGE /SEX <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?=  $patmodel->age ?>/<?= $patmodel->gender; ?></span> </div>
+      <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">COMPLAINTS <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php if(!empty($model->patientCompliant)){
+									echo $model->patientCompliant;;
+								}else{
+									echo 'Not Mentioned';
+								}?></span> </div>
      
-    float: left;
-   }
-   .right-content1 {
-   font-size: 15px;
-    color: #676b6d;
-    font-size: 15px;
-   width:2%;
-    margin-top: -10px;
-   
-    margin-bottom: 10px;
-   
-    float: left;
-}
-.right1 {
-    font-size: 15px;
-    width: 25%;
-    margin: 5px;
-    margin-top: -10px;
-    margin-right: 5px;
-    margin-bottom: 10px;
-    margin-left: 5px;
-    float: left;
-}
-.header
-{
-	height:70%;
-	margin-right:-15px;
-	
-}
-.prescription
-{
-	height:30px;
-	
-	width:100%;
-	
-	margin-top:-35px;
-	margin-left:15px;
-	margin-right:0px;
-	
-	
-}
-.prescription h1
-{
-	font-size:30px;
-	
-	margin-bottom:10px;
-}
-h5
-{
-	font-size:20px;
-	color:#369;
-	padding-left:50px;
-	
-}
-.address
-{
-	font-size:20px;
-	/*color:white;*/
-	padding-top:20px;
-	padding-left:30%;
-	color:#369;
-}
-.right1
-{
+      <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">DIAGNOSIS <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php if(!empty($model->diseases)){
+									echo $model->diseases;;
+								}else{
+									echo 'Not Mentioned';
+								}?></span> </div>
+								   <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">WGT <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php if(!empty($model->weight)){
+									echo $model->weight;;
+								}else{
+									echo 'Not Mentioned';
+								}?></span> </div>
+    </div>
     
-    margin: 5px;
+    <div style="width:50%; float:left; position:relative; padding-left:5px; box-sizing:border-box;">
+      
+      <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">BP <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?= $model->BPLeftArm; ?></span> </div>
+      <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">TEMP <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php if(!empty($model->temparatureType)){
+									echo $model->temparatureType;;
+								}else{
+									echo 'Not Mentioned';
+								}?></span> </div>
+      <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">SPO<sub>2</sub> <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php if(!empty($model->spo2)){
+									echo $model->spo2;;
+								}else{
+									echo 'Not Mentioned';
+								}?></span> </div>
+      <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">PRATE <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php if(!empty($model->pulseRate)){
+									echo $model->pulseRate;;
+								}else{
+									echo 'Not Mentioned';
+								}?></span> </div>
+      <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+        <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">R R <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
+        <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php if(!empty($model->respirationRate)){
+									echo $model->respirationRate;;
+								}else{
+									echo 'Not Mentioned';
+								}?></span> </div>
    
-    font-size:20px;
-	/*color:white;*/
-	padding-left:30px;
-	color:#369;
+    </div>
+    <div style="width:100%; float:left; position:relative;">
+      <h6 style="color:#3572af; font-weight:600; font-size:14px; text-align:center; margin:0px; padding:10px;">ADVICE</h6>
+      <div style="min-height:150px; width:100%; float:left; position:relative; font-size:14px; margin:0 0 10px 0; padding:10px; box-sizing:border-box; border:1px solid #999; border-radius:5px;"> <?php if($reqmodel->treatment){
+      	echo 	$reqmodel->treatment;
 }
-.nav1 {
-	clear: both;
-	color: #ffffff;
-	background-color: #6b5;
-	height: 10px;
-}
-.footer1 {
-clear: both;
-/*color: #ffffff;
-background-color: #6b5;*/
-
-}
-  /*  word-wrap: break-word;*/
-</style>
-
-    <div class="row">      
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" style="margin-left:0px; padding-left: 0px;">			   
-	<div class="panel panel-info">		
-	<div class="panel-body">		   
-    <div class="row">
-   
-    
-	<header class="header">
- 									  <img src="images/user.jpg" alt="images" style="float:left;width:20%;height:10%;padding-left:20px;padding-top:25px"></img>
-   										<div class="prescription">
-   											<h1 style="color:blue;padding-left:250px;padding-top:55px"> Doctor  Prescription  Pad</h1>
-   										</div><!-- End of Prescription -->
-   										
-   										<div class="prescription">
-   											<h1 style="color:green;padding-left:300px;padding-top:75px"> Hospital Name</h1>
-   										</div><br>  	<!-- End of Prescription -->
-   											<h3 style="padding-left:370px;padding-top:75px"><?php 
+else{
+	echo 'Not Mentioned';
+}?> </div>
+    </div>
+  </aside>
+  <footer style="width:100%; float:left; position: relative; padding:10px; padding-bottom:0px; box-sizing: border-box;">
+    <div style="width: 100%; float: left; position: relative; padding:0px; font-family: 'Source Sans Pro',sans-serif; font-size: 13px; color: #989898; text-align:center;"> NURSING HOME INFORMATION </div>
+ 	<div style="width: 100%; float: left; position: relative; padding:0px; font-family: 'Source Sans Pro',sans-serif; font-size: 13px; color: #989898; text-align:center;"> <?php 
 												 $model1 = Nursinghomes::find()->select('nursingHomeName,address,mobile,nursingImage')->where(['nuserId' =>Yii::$app->user->identity->id])->one();
 	 											//print_r(Yii::$app->user->identity->id);exit;
 												 if($model1->nursingHomeName != ''){									
 							 						  echo 	$model1->nursingHomeName;
 													}else{
 														echo 'Not Mentioned';
-													}?>
-											</h3>
-											
-									<div class="row">
-										<div class="col-md-12">
-												<h5> <?php   if($docnmodel->name != '')
-														{
-															echo $docnmodel->name ;
-														}else {
-															echo 'Not Mentioned';
-														}
-													?> 
-												 </h5>	
-										</div><!-- End of col-md-5 -->
-		
-										<div class="col-md-12">
-		 								  	<?php 
-										    $cdate = $model->createdDate;
-						   					 $yrdata= strtotime($cdate);
-						   					 $yeardata= date('d-M-Y', $yrdata);?>
-						   					<div class="col-md-12 col-sm-6 col-xs-6 main-wrap">
-												<div class="doctor-box">
-													 <div><h6 style="margin-left: 500px;font-size:20px;">Date: <?php echo $yeardata ?></h6></div>
-											   </div>
-					  						 </div>	
-										</div><!-- End of col-md-7 -->
-									</div><!-- End of row -->						
-   									</header>
-   						 <nav class="nav1"></nav>
-						
-						<div class="col-md-12 col-sm-6 col-xs-6 ">
-				<div>						
-					<div>	
-						<div class="box4" style="float: left; color:#369">
-						<div class="right" style=" width: 75%;margin-top:10px;padding-left:90px;">Patient Name</div>								
-						<div class="right-content" >:</div>
-						<div class="right-second1"><?= $patmodel->firstName; ?>&nbsp;<?= $patmodel->lastName; ?></div>
-						
-						
-						
-						
-						</div>				
-				  </div>
-					    
-				   <div class="col-md-3" style="float:right;margin-top:10px;;">
-								<?php if($patmodel->patientImage != ''){?>
-					<?php $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$patmodel->patientImage;?>
-					<?php  } ?>
-					<?= DetailView::widget([
-							'model' => $patmodel,
-							'attributes' => [
-									[
-											'attribute'=>'patientImage',
-											'format' => 'html',
-											'value'=>Html::img($patmodel->patientImage ? $imgeurl : 'images/user-iconnew.png',['width' => '100px','height' => '100px']),],],]) ?>
-					
-					</div>	
-					 </div> <!---doctor-box closed-->
-                     </div>	<!---main-wrap closed-->
-					
-					
-					
-                    
-                    <div class="col-md-12 col-sm-6 col-xs-6 mainwrap" style="color:#369">
-                  	<div class="doctor-box" >
-                    <div class="right"  style="width: 33%;padding-left:90px;">Mobile Number</div>								
-					<div class="right-content">:</div>
-					<div class="right-second">
-					<?php if(!empty($patmodel->mobile)){echo $patmodel->mobile;}else{echo 'Not Mentioned';}?></div>
-                   
-						
-						<div class="right" style="width: 33%;padding-left:90px;">Aadhar Number</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-								 
-									<?php if(!empty($patmodel->aadhar_number)){
-									echo $patmodel->aadhar_number;
-								}else{
-									echo 'Not Mentioned';
-								}?></div>
-						
-						
-						<div class="right"  style="width: 33%;padding-left:90px;">Unique ID</div>								
-						<div class="right-content">:</div>
-						<div class="right-second"><?= $patmodel->patientUniqueId; ?></div>
-						
-								<div class="right"  style="width: 33%;padding-left:90px;">Gender</div>								
-								<div class="right-content">:</div>
-								<div class="right-second"><?= $patmodel->gender; ?></div>
-								
-								<div class="right"  style="width: 33%;padding-left:90px;">Age</div>								
-								<div class="right-content">:</div>
-								<div class="right-second"><?=  $patmodel->age ?> </div>
-								
-								
-								
-								<div class="right"  style="width: 33%;padding-left:90px;">Country</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-								<?php if(!empty($patmodel->countryName)){
-									echo $patmodel->countryName;;
-								}else{
-									echo 'Not Mentioned';
-								}?></div>
-								<div class="right"  style="width: 33%;padding-left:90px;">State</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-								<?php if(!empty($patmodel->stateName)){
-									echo $patmodel->stateName;;
-								}else{
-									echo 'Not Mentioned';
-								}?></div>
-								
-								<div class="right"  style="width: 33%;padding-left:90px;">City</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-									<?php if(!empty($patmodel->city)){
-									echo $patmodel->city;;
-								}else{
-									echo 'Not Mentioned';
-								}?></div>
-								
-								
-								
-								<div class="right"  style="width: 33%;padding-left:90px;">District</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-								<?php if(!empty($patmodel->district)){
-									echo $patmodel->district;;
-								}else{
-									echo 'Not Mentioned';
-								}?> </div>
-								
-								<div class="right"  style="width: 33%;padding-left:90px;">Mandal</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-								<?php if(!empty($patmodel->mandal)){
-									echo $patmodel->mandal;;
-								}else{
-									echo 'Not Mentioned';
-								}?></div>
-								
-								<div class="right"  style="width: 33%;padding-left:90px;">Village</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-								<?php if(!empty($patmodel->village)){
-									echo $patmodel->village;;
-								}else{
-									echo 'Not Mentioned';
-								}?></div>
-								
-								<div class="right"  style="width: 33%;padding-left:90px;">Pin Code</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-								 
-									<?php if(!empty($patmodel->pinCode)){
-									echo $patmodel->pinCode;;
-								}else{
-									echo 'Not Mentioned';
-								}?></div>
-								<div class="right"  style="width: 33%;padding-left:90px;">Height</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-								<?php if(!empty($model->height)){
-									echo $model->height;;
-								}else{
-									echo 'Not Mentioned';
-								}?></div>
-
-								
-								<div class="right"  style="width: 33%;padding-left:90px;">Weight</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-									<?php if(!empty($model->weight)){
-									echo $model->weight;;
-								}else{
-									echo 'Not Mentioned';
-								}?></div>
-								
-								<div class="right"  style="width: 33%;padding-left:90px;">Respiration Rate</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-								<?php if(!empty($model->respirationRate)){
-									echo $model->respirationRate;;
-								}else{
-									echo 'Not Mentioned';
-								}?> </div>
-								<div class="right"  style="width: 33%;padding-left:90px;">BP</div>								
-								<div class="right-content">:</div>
-								<div class="right-second"><?= $model->BPLeftArm; ?></div>
-								
-							
-													        
-							    <div class="right"  style="width: 33%;padding-left:90px;">Pulse Rate</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-									<?php if(!empty($model->pulseRate)){
-									echo $model->pulseRate;;
-								}else{
-									echo 'Not Mentioned';
-								}?></div>
-								
-								<div class="right"  style="width: 33%;padding-left:90px;">Temperature</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-								<?php if(!empty($model->temparatureType)){
-									echo $model->temparatureType;;
-								}else{
-									echo 'Not Mentioned';
-								}?></div>
-								
-								
-													        
-								<div class="right"  style="width: 33%;padding-left:90px;">Allergic Medicine</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-									<?php if(!empty($model->allergicMedicine)){
-									echo $model->allergicMedicine;;
-								}else{
-									echo 'Not Mentioned';
-								}?></div>
-								
-								<div class="right"  style="width: 33%;padding-left:90px;">Patient Compliant</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-								<?php if(!empty($model->patientCompliant)){
-									echo $model->patientCompliant;;
-								}else{
-									echo 'Not Mentioned';
-								}?></div>
-								<div class="right"  style="width: 33%;padding-left:90px;">Diagnosis</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-								<?php if(!empty($model->diseases)){
-									echo $model->diseases;;
-								}else{
-									echo 'Not Mentioned';
-								}?></div>
-								<div class="right"  style="width: 33%;padding-left:90px;">SPO2</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-								<?php if(!empty($model->spo2)){
-									echo $model->spo2;;
-								}else{
-									echo 'Not Mentioned';
-								}?></div>
-								<div class="right"  style="width: 33%;padding-left:90px;">Request Type</div>								
-								<div class="right-content">:</div>
-								<div class="right-second">
-								<?php if(!empty($reqmodel->RequestType)){
-									echo $reqmodel->RequestType;;
-								}else{
-									echo 'Not Mentioned';
-								}?></div>
-                            </div> <!---doctor-box closed-->
-						  </div> 
-								
-								 <?php if($reqmodel->treatment == ''){
-	                                  $DocrequUrl = Yii::$app->urlManager->createAbsoluteUrl ( [ 
-		                              'patients/patients/request-doctor' ,'phsId' => $model->patientInfoId ] );?>
-                            <a href="<?php echo $DocrequUrl;?>" class="btn btn-info" role="button" style="margin-left:20px">Request To Doctor</a>
-								 
-								<?php }else{
-									   $udate = $reqmodel->updatedDate;
-						    $uydata= strtotime($udate);
-						    $uuudata= date('d-M-Y', $uydata);?>
-						    
-						
-						<div class="col-md-12 col-sm-6 col-xs-6 main-wrap">
-						<div class="doctor-box">
-						 <div><h6 style="margin-left: 500px;font-size:20px;">Date: <?php echo $uuudata ?></h6></div>
-								
-						   </div>
-					   </div>
-					    <nav class="nav1"></nav>	
-					   <div class="footer1">
-					   <div  style="float:left;margin-top:10px;padding-left:40px;">
-								<?php if($model1->nursingImage != ''){?>
-					<?php $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model1->nursingImage;?>
-					<?php  } ?>
-					<?= DetailView::widget([
-							'model' => $patmodel,
-							'attributes' => [
-									[
-											'attribute'=>'patientImage',
-											'format' => 'html',
-											'value'=>Html::img($model1->nursingImage ? $imgeurl : 'images/user-iconnew.png',['width' => '140px','height' => '150px']),],],]) ?>
-					
-					</div>	
-					<div class="address">
-						Nursing Home Adress - </div>
-						<div class="right-content"> </div>
-						<div class="right-second">
-								 <?php 
-								
-								if($model1->address !='')
-								{
-									echo $model1->address;
-								}
-								else {
-									echo 'Not Mentioned';
-								}
-								 ?> 
-					</div>
-					
-					
-					<div class="right1">
-						Phone Number -</div>
-						
-						<div class="right-second">
-								 <?php 
+													}?> -  <?php 
 								
 								if($model1->mobile !='')
 								{
@@ -486,25 +207,10 @@ background-color: #6b5;*/
 								else {
 									echo 'Not Mentioned';
 								}
-								 ?> 
-					</div>
-					   </div>  
-					  
-								<?php 	
-								}
-								?>									 							
-							 							
-												
-					</div><!---row closed-->						
-				</div><!---panel-body closed-->		
-			</div><!---panel-info closed-->	
-		</div><!---toppad-->
-	</div><!--row closed-->
-	
-	                           
-</div>
-<button class="btn btn-primary" onclick="printContent('print')" style="    margin-left: 480px; margin-top: 7px;">Print</button>
-</div>
+								 ?>  </div>
+  </footer>
 </div>
 
-
+</body>
+</div>
+<button class="btn btn-primary" onclick="printContent('print')" style="margin-left: 480px; margin-top: 7px;">Print</button>
