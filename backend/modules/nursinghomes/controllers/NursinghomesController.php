@@ -737,11 +737,8 @@ public function behaviors()
     	
     */
     	
-    	$filename = 'Data-'.Date('YmdGis-').$uname.'-NursinghomesConsultantReport.xls';
-    	header("Content-type: application/vnd-ms-excel");
-    	header("Content-Disposition: attachment; filename=".$filename);
     	
-    	echo '
+    	/* echo '
     		
     	<table border="1" width="100%">
         <thead>
@@ -762,7 +759,31 @@ public function behaviors()
     				<td>'.$docary[$m].'</td>
     				<td>'.$cdate[$n].'</td></tr>';
     	}
-    	echo '</table>';
+    	echo '</table>'; */
+    	$data = '<table border="1" width="100%">
+        <thead>
+            <tr>
+    			<th>S.No</th>
+				<th>Patient  Name</th>
+				<th>Doctor Name</th>
+                <th>Prescription Date</th>
+                            </tr>
+        </thead>';
+    	for($m=0,$n=0;$m<count($patary),$n<count($cdate);$m++,$n++)
+    	{
+    		$sno=$m+1;
+    		$data.=' <tr>
+    				<td>'.$sno.'</td>
+    				<td>'.$patary[$m].'</td>
+    				<td>'.$docary[$m].'</td>
+    				<td>'.$cdate[$n].'</td></tr>';
+    	}
+    	$data.='</table>';
+    	$filename = 'Data-'.Date('YmdGis-').$uname.'-NursinghomesConsultantReport.xlsx';
+    	//pathinfo($filename, PATHINFO_EXTENSION);
+    	header("Content-Type: application/vnd.ms-excel; charset=UTF-8;");
+    	header('Content-Disposition:attachment;filename="'.$filename.'"');
+    	echo $data;
     }
    public function actionCount($uid)
    {  	

@@ -1184,11 +1184,8 @@ public function actionPatientshistoryview($infoid)
     	}
     
     	//print_r(count($nname));exit();
-    	$filename = 'Data-'.Date('YmdGis-').$uname.'-DoctorsConsultantReport.xlsx';
-    	//pathinfo($filename, PATHINFO_EXTENSION);
-    	header("Content-Type: application/vnd.ms-excel; charset=UTF-8;");
-    	header('Content-Disposition:attachment;filename="'.$filename.'"');
-    	echo '
+    	
+    	/* echo '
     			<table border="1" width="100%">
         <thead>
             <tr>
@@ -1210,7 +1207,34 @@ public function actionPatientshistoryview($infoid)
     				<td>'.$plastname[$m].'</td>    				
     				<td>'.$dateary[$m].'</td></tr>';
     	}
-    	echo '</table>';
+    	echo '</table>'; */
+    	$data = '<table border="1" width="100%">
+        <thead>
+            <tr>
+    			<th>S.No</th>
+    			<th>NursingHomeName</th>
+				<th>FirstName</th>
+    			<th>LastName</th>    			
+				<th>Prescription Date</th>
+                            </tr>
+        </thead>';
+    	for($m=0;$m<count($dateary);$m++)
+    	{
+    		$sno=$m+1;
+    		$data.=' <tr>
+    				<td>'.$sno.'</td>
+    				<td>'.$nname[$m].'</td>
+    				<td>'.$pfirstname[$m].'</td>
+    				<td>'.$plastname[$m].'</td>    				
+    				<td>'.$dateary[$m].'</td></tr>';
+    		
+    	}
+    	$data.='</table>';
+    	$filename = 'Data-'.Date('YmdGis-').$uname.'-DoctorsConsultantReport.xlsx';
+    	//pathinfo($filename, PATHINFO_EXTENSION);
+    	header("Content-Type: application/vnd.ms-excel; charset=UTF-8;");
+    	header('Content-Disposition:attachment;filename="'.$filename.'"');
+    	echo $data;
     }
 
     public function actionCount($uid)

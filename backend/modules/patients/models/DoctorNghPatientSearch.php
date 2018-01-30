@@ -20,7 +20,7 @@ class DoctorNghPatientSearch extends DoctorNghPatient
     public function rules()
     {
         return [
-            [['doctorId', 'nugrsingId', 'patientId', 'patientHistoryId', 'treatment', 'patientRequestStatus', 'createdBy', 'updatedBy', 'createdDate', 'updatedDate','nursingHomeName','firstName','lastName','name','updatedDate'], 'safe'],
+            [['doctorId', 'nugrsingId', 'patientId', 'patientHistoryId', 'treatment', 'patientRequestStatus','RequestType', 'createdBy', 'updatedBy', 'createdDate', 'updatedDate','nursingHomeName','firstName','lastName','name','updatedDate'], 'safe'],
            
         ];
     }
@@ -47,12 +47,11 @@ class DoctorNghPatientSearch extends DoctorNghPatient
     	$docId = Yii::$app->user->identity->id;
     	
     	if(isset($params['DoctorNghPatientSearch']['status']) && $params['DoctorNghPatientSearch']['status'] != '')
-    	{
-    		
-    	$query = DoctorNghPatient::find()->select('doctor_ngh_patient.updatedDate,doctor_ngh_patient.patientRequestStatus,doctor_ngh_patient.patientHistoryId,nursinghomes.nursingHomeName,patients.firstName,patients.lastName')->innerJoin('nursinghomes','doctor_ngh_patient.nugrsingId=nursinghomes.nuserId')->innerJoin('patient_information','doctor_ngh_patient.patientHistoryId=patient_information.patientInfoId')->innerJoin('patients','patient_information.patientId=patients.patientId')->where("doctor_ngh_patient.doctorId =".$docId." AND doctor_ngh_patient.patientRequestStatus ='".$params['DoctorNghPatientSearch']['status']."' AND doctor_ngh_patient.RequestType != 'Review Consultation'");
+    	{    		
+    	$query = DoctorNghPatient::find()->select('doctor_ngh_patient.updatedDate,doctor_ngh_patient.patientRequestStatus,doctor_ngh_patient.patientHistoryId,doctor_ngh_patient.RequestType,nursinghomes.nursingHomeName,patients.firstName,patients.lastName')->innerJoin('nursinghomes','doctor_ngh_patient.nugrsingId=nursinghomes.nuserId')->innerJoin('patient_information','doctor_ngh_patient.patientHistoryId=patient_information.patientInfoId')->innerJoin('patients','patient_information.patientId=patients.patientId')->where("doctor_ngh_patient.doctorId =".$docId." AND doctor_ngh_patient.patientRequestStatus ='".$params['DoctorNghPatientSearch']['status']."' ");
     	}
     	else{
-    		$query = DoctorNghPatient::find()->select('doctor_ngh_patient.updatedDate,doctor_ngh_patient.patientRequestStatus,doctor_ngh_patient.patientHistoryId,nursinghomes.nursingHomeName,patients.firstName,patients.lastName')->innerJoin('nursinghomes','doctor_ngh_patient.nugrsingId=nursinghomes.nuserId')->innerJoin('patient_information','doctor_ngh_patient.patientHistoryId=patient_information.patientInfoId')->innerJoin('patients','patient_information.patientId=patients.patientId')->where("doctor_ngh_patient.doctorId =".$docId);
+    		$query = DoctorNghPatient::find()->select('doctor_ngh_patient.updatedDate,doctor_ngh_patient.patientRequestStatus,doctor_ngh_patient.patientHistoryId,doctor_ngh_patient.RequestType,nursinghomes.nursingHomeName,patients.firstName,patients.lastName')->innerJoin('nursinghomes','doctor_ngh_patient.nugrsingId=nursinghomes.nuserId')->innerJoin('patient_information','doctor_ngh_patient.patientHistoryId=patient_information.patientInfoId')->innerJoin('patients','patient_information.patientId=patients.patientId')->where("doctor_ngh_patient.doctorId =".$docId);
     	}
     	
 
@@ -60,7 +59,7 @@ class DoctorNghPatientSearch extends DoctorNghPatient
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-        		'sort' => ['attributes' => ['doctorId', 'nugrsingId', 'patientId', 'patientHistoryId', 'treatment', 'patientRequestStatus', 'createdBy', 'updatedBy', 'createdDate', 'updatedDate','nursingHomeName','firstName','lastName']],
+        		'sort' => ['attributes' => ['doctorId', 'nugrsingId', 'patientId', 'patientHistoryId', 'treatment', 'patientRequestStatus', 'createdBy', 'updatedBy', 'createdDate', 'updatedDate','nursingHomeName','firstName','lastName','RequestType']],
         		
         		
         ]);
@@ -97,6 +96,7 @@ class DoctorNghPatientSearch extends DoctorNghPatient
              ->andFilterWhere(['like', 'patients.lastName', $this->lastName])
              ->andFilterWhere(['like', 'patientRequestStatus', $this->patientRequestStatus])
             ->andFilterWhere(['like', 'doctor_ngh_patient.updatedDate', $this->updatedDate])
+            ->andFilterWhere(['like', 'doctor_ngh_patient.RequestType', $this->RequestType])
             
             ;
 //print_r($dataProvider->getModels());exit();

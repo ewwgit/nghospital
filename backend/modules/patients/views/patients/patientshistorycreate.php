@@ -236,7 +236,7 @@ $items = [
 </div>
 <div class="row">
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-3 col-sm-12">Age:</div> <div class="col-lg-9 col-sm-12"> <?= $form->field($model, 'age')->textInput(['maxlength' => true])->label(false); ?></div>
+    <div class="col-lg-3 col-sm-12">Age:</div> <div class="col-lg-9 col-sm-12"> <?= $form->field($model, 'age')->textInput(['maxlength' => 3])->label(false); ?></div>
 </div>
 <div class="form-group col-lg-4 col-sm-12">
     <div class="col-lg-3 col-sm-12">Date of Birth:</div> <div class="col-lg-9 col-sm-12"><?= $form->field($model, 'dateOfBirth')->widget ( DatePicker::classname (), [ 'options' => [ 'placeholder' => 'Enter Date Of Birth ...' ],'pluginOptions' => [ 'autoclose' => true , 'format' => 'yyyy-mm-dd'] ] )->label(false); ?></div>
@@ -285,7 +285,7 @@ $items = [
     <div class="col-lg-3 col-sm-12">Mobile:</div> <div class="col-lg-9 col-sm-12"><?= $form->field($model, 'mobile')->textInput(['maxlength' => 10])->label(false); ?></div>
 </div>
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-3 col-sm-12">Aadhar Number:</div> <div class="col-lg-9 col-sm-12"><?= $form->field($model, 'aadhar_number')->textInput(['maxlength' => 12])->label(false); ?></div>
+    <div class="col-lg-3 col-sm-12">Aadhar Number:</div> <div class="col-lg-9 col-sm-12"><?= $form->field($model, 'aadhar_number')->textInput(['minlength'=>12,'maxlength' => 12])->label(false); ?></div>
 </div>
 <div class="form-group col-lg-4 col-sm-12">
     <div class="col-lg-3 col-sm-12">Image:</div> <div class="col-lg-9 col-sm-12"><?=$form->field ( $model, 'patientImage' )->widget ( FileInput::classname (),

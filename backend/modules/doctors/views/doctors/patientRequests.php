@@ -29,6 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
         		'nursingHomeName',
         		'firstName',
         		'lastName',
+        		[
+        		'attribute'=>'RequestType',
+        				'label'=>'Request Type',
+        				'value'=>'RequestType',
+        				'filter'=>Html::activeDropdownlist($searchModel,'RequestType',['Ip Consultation'=>'Ip Consultation','Op Consultation'=>'Op Consultation','Review Consultation'=>'Review Consultation'],['class'=>'form-control','prompt' => 'select Request Type'])
+        		],
         		//'patientRequestStatus',
         		/* [
         		'attribute' => 'patientRequestStatus',

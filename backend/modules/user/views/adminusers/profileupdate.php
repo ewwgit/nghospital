@@ -24,10 +24,12 @@ $this->params['breadcrumbs'][] = 'Update';
 			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'lastName')->textInput(['maxlength' => 255]) ?></div>
 			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'phoneNumber')->textInput(['maxlength' => 10]) ?></div>
 			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'role')->dropDownList($model->roles, ['prompt' => 'Select Role']) ?></div>
-	        <div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'idproofs')->textArea(['rows'=>3,'maxlength'=>50]) ?></div>
-            <div class="form-group col-lg-6 col-sm-12">    
+	        <div class="form-group col-lg-6 col-sm-12">    
 <?= $form->field($model, 'status')->dropDownList([ '10' => 'Active', '0' => 'In-active', ], ['prompt' => 'Select Status'])?>
 </div>
+<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'idproofs')->textArea(['rows'=>3,'maxlength'=>50]) ?></div>
+        <div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'address')->textArea(['rows'=>3,'maxlength' => 255]) ?></div>    
+        
 <div class="form-group col-lg-6 col-sm-12">
     <?php if($model->profileImage != ''){?>    
     <?php $imgeurl = str_replace("frontend","backend",Yii::getAlias('@web/')).$model->profileImage;?>						 		
@@ -47,7 +49,6 @@ $this->params['breadcrumbs'][] = 'Update';
    		[ 'options' => [ 'accept' => 'image/*' ],'pluginOptions' =>[[ 'browseLabel' => 'Profile Image', 'allowedFileExtensions'=>['jpg','png','jpeg'] ]] ] )?>  
             <?= $form->field($model, 'profileImage')->hiddenInput()->label(false); ?>        
 	</div> 
-    <div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'address')->textArea(['rows'=>3,'maxlength' => 255]) ?></div>    
     <div class="form-group  col-lg-7  col-sm-12" style="margin-top: 100px;"> 
         <?= Html::submitButton( 'Submit', ['class' =>  'btn btn-primary'])?>
     </div>
@@ -66,7 +67,7 @@ $this->params['breadcrumbs'][] = 'Update';
 	width: 100%;
 }
 .form-group {
-	height: 120px;
+	/*height: 120px;*/
 	margin-bottom: 0;
 }
 .profileimage {

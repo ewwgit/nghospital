@@ -27,14 +27,14 @@ use yii\helpers\Url;
 			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'phoneNumber')->textInput(['maxlength' => 10]) ?></div>
 
 			<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'role')->dropDownList($model->roles, ['prompt' => 'Select Role']) ?></div>
-	        <div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'idproofs')->textArea(['rows'=>3,'maxlength'=>50]) ?></div>
-            
+	        
             <div class="form-group col-lg-6 col-sm-12"> 
    
 <?= $form->field($model, 'status')->dropDownList([ '10' => 'Active', '0' => 'In-active', ], ['prompt' => 'Select Status'])?>
 
 </div>
-
+<div class="form-group col-lg-6 col-sm-12">  <?= $form->field($model, 'idproofs')->textArea(['rows'=>3,'maxlength'=>50]) ?></div>
+            
 <div class="form-group col-lg-6 col-sm-12">
     
 							 <?=$form->field ( $model, 'file' )->widget ( FileInput::classname (),
