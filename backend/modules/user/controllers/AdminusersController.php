@@ -89,7 +89,7 @@ class AdminusersController extends Controller
         						'view',
         						'delete',
         						'permissions',
-        						'permissionsupdate'
+        						'permissionsupdate','profileview','profileupdate'
         		
         				],
         				'rules' => [
