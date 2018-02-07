@@ -51,8 +51,9 @@ $historyform = '<div class="row">
 											['itemOptions' => ['class' =>'radio-inline']])->label(false).'</div>
 </div> 
 <div class="form-group col-lg-4 col-sm-12">
-    <div class="col-lg-3 col-sm-12">Allergic Medicine:</div> <div class="col-lg-9 col-sm-12">'.$form->field($model, 'allergicMedicine')->textInput(['maxlength' => 100])->label(false).'</div>
-</div>
+			<div class="col-lg-3 col-sm-12">Diagnosis:</div> <div class="col-lg-9 col-sm-12">'.
+	$form->field($model, 'diseases')->textInput(['maxlength' => 200])->label(false).'</div>
+    </div>
     		 <div class="form-group col-lg-4 col-sm-12">
 	<div class="col-lg-3 col-sm-12">SPO2:</div> <div class="col-lg-9 col-sm-12">'.$form->field($model, 'spo2')->textInput(['maxlength' => 100])->label(false).'</div>
 </div>
@@ -61,8 +62,8 @@ $historyform = '<div class="row">
 </div>
 <div class="row">
 <div class="form-group col-lg-4 col-sm-12">
-	<div class="col-lg-3 col-sm-12">Diagnosis:</div> <div class="col-lg-9 col-sm-12">'.
-	$form->field($model, 'diseases')->textInput(['maxlength' => 200])->label(false).'</div>
+<div class="col-lg-3 col-sm-12">Treatment History:</div> <div class="col-lg-9 col-sm-12">'.$form->field($model, 'allergicMedicine')->textarea(['rows'=>4])->label(false).'</div>
+					
 </div>
    
     <div class="form-group col-lg-4 col-sm-12">

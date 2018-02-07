@@ -240,7 +240,7 @@ h3 {
 								
 								
 													        
-								<div class="right">Allergic Medicine</div>								
+								<div class="right">Treatment History</div>								
 								<div class="right-content">:</div>
 								<div class="right-second">
 									<?php if(!empty($model->allergicMedicine)){

@@ -76,7 +76,7 @@ for($m=0; $m<count($dsary); $m++)
     <h2 style="font-family: 'Source Sans Pro',sans-serif; color: #3572af; font-size:22px; padding: 5px 0; text-align:center; margin:0px;">ADVICE FORM</h2>
     <div style="width:100%; float:left; position: relative;">
       <div style="width:50%; float:left; position:relative;">
-        <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+        <div style="width: 100%; float: left; position: relative; padding:0 0 0px 0;">
           <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">DR NAME <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
           <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php   if($docnmodel->name != '')
 														{
@@ -85,14 +85,14 @@ for($m=0; $m<count($dsary); $m++)
 															echo 'Not Mentioned';
 														}
 													?> </span> </div>
-        <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+        <div style="width: 100%; float: left; position: relative; padding:0 0 0px 0;">
           <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">SPECIALIZATION <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
           <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php if(!empty($docspeciary)){
 									echo implode(" , ",$docspeciary);
 								}else{
 									echo 'Not Mentioned';
 								}?></span> </div>
-        <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+        <div style="width: 100%; float: left; position: relative; padding:0 0 0px 0;">
           <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">QUALIFICATION <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
           <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php if(!empty($docqualiary)){
 									echo implode(" , ",$docqualiary);
@@ -111,16 +111,16 @@ for($m=0; $m<count($dsary); $m++)
   </header>
   <aside style="width:100%; float:left; position: relative; border-bottom: 2px solid #5aab4a; padding:10px; padding-bottom:0px; box-sizing: border-box;">
     <div style="width:50%; float:left; position:relative; padding-right:5px; box-sizing:border-box;">
-    <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+    <div style="width: 100%; float: left; position: relative; padding:0 0 0px 0;">
         <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">PATINET UID <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
         <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?= $patmodel->patientUniqueId; ?></span> </div>
-      <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+      <div style="width: 100%; float: left; position: relative; padding:0 0 0px 0;">
         <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">PATIENT NAME <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
         <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?= $patmodel->firstName; ?>&nbsp;<?= $patmodel->lastName; ?></span> </div>
-      <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+      <div style="width: 100%; float: left; position: relative; padding:0 0 0px 0;">
         <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">AGE /SEX <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
         <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?=  $patmodel->age ?>/<?= $patmodel->gender; ?></span> </div>
-      <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+      <div style="width: 100%; float: left; position: relative; padding:0 0 0px 0;">
         <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">COMPLAINTS <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
         <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php if(!empty($model->patientCompliant)){
 									echo $model->patientCompliant;;
@@ -128,14 +128,14 @@ for($m=0; $m<count($dsary); $m++)
 									echo 'Not Mentioned';
 								}?></span> </div>
      
-      <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+      <div style="width: 100%; float: left; position: relative; padding:0 0 0px 0;">
         <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">DIAGNOSIS <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
         <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php if(!empty($model->diseases)){
 									echo $model->diseases;;
 								}else{
 									echo 'Not Mentioned';
 								}?></span> </div>
-								   <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+								   <div style="width: 100%; float: left; position: relative; padding:0 0 0px 0;">
         <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">WGT <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
         <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php if(!empty($model->weight)){
 									echo $model->weight;;
@@ -146,31 +146,31 @@ for($m=0; $m<count($dsary); $m++)
     
     <div style="width:50%; float:left; position:relative; padding-left:5px; box-sizing:border-box;">
       
-      <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+      <div style="width: 100%; float: left; position: relative; padding:0 0 0px 0;">
         <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">BP <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
         <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?= $model->BPLeftArm; ?></span> </div>
-      <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+      <div style="width: 100%; float: left; position: relative; padding:0 0 0px 0;">
         <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">TEMP <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
         <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php if(!empty($model->temparatureType)){
 									echo $model->temparatureType;;
 								}else{
 									echo 'Not Mentioned';
 								}?></span> </div>
-      <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+      <div style="width: 100%; float: left; position: relative; padding:0 0 0px 0;">
         <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">SPO<sub>2</sub> <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
         <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php if(!empty($model->spo2)){
 									echo $model->spo2;;
 								}else{
 									echo 'Not Mentioned';
 								}?></span> </div>
-      <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+      <div style="width: 100%; float: left; position: relative; padding:0 0 0px 0;">
         <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">PRATE <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
         <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php if(!empty($model->pulseRate)){
 									echo $model->pulseRate;;
 								}else{
 									echo 'Not Mentioned';
 								}?></span> </div>
-      <div style="width: 100%; float: left; position: relative; padding:0 0 10px 0;">
+      <div style="width: 100%; float: left; position: relative; padding:0 0 0px 0;">
         <label style="width: 50%; float: left; color: #295a8c; font-size: 14px;">R R <i style="font-style: normal; float: right; padding-right: 15px;">:</i></label>
         <span style="font-size: 14px; color: #333; max-width: 50%; float: left;"><?php if(!empty($model->respirationRate)){
 									echo $model->respirationRate;;
@@ -181,7 +181,7 @@ for($m=0; $m<count($dsary); $m++)
     </div>
     <div style="width:100%; float:left; position:relative;">
       <h6 style="color:#3572af; font-weight:600; font-size:14px; text-align:center; margin:0px; padding:10px;">ADVICE</h6>
-      <div style="min-height:150px; width:100%; float:left; position:relative; font-size:14px; margin:0 0 10px 0; padding:10px; box-sizing:border-box; border:1px solid #999; border-radius:5px;"> <?php if($reqmodel->treatment){
+      <div style="min-height:150px; width:100%; float:left; position:relative; font-size:18px; margin:0 0 10px 0; padding:10px; box-sizing:border-box; border:1px solid #999; border-radius:5px;"> <?php if($reqmodel->treatment){
       	echo 	$reqmodel->treatment;
 }
 else{
