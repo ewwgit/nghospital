@@ -313,13 +313,14 @@ class AdminusersController extends Controller
     	$model = new SignupFormadmin();
     	$adminInfo = new AdminInformation();
         $adminuser = User::find()->where(['id' => $id])->one();
-        
+      //  print_r($adminuser);exit;
         if(!empty($adminuser))
         {
         $model->username = $adminuser->username;
         $model->email = $adminuser->email;
         $model->status = $adminuser->status;
         $model->role = $adminuser->role;
+        $model->id = $adminuser->id;
         $adminInfo = AdminInformation::find()->where(['aduserId' => $adminuser->id])->one();
         if(!empty($adminInfo))
         {
