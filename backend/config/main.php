@@ -56,6 +56,9 @@ return [
             // this is the name of the session cookie used for login on the backend
             'name' => 'advanced-backend',
         ],
+    		'formatter' => [
+    				'class' => 'yii\i18n\Formatter',
+    				'timeZone' => 'America/New_York',],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
