@@ -37,8 +37,10 @@ $tremodel = DoctorNghPatient::find()->where(['patientHistoryId' => $mpatientInfo
     <?php $form = ActiveForm::begin(['options'=>['enctype' =>'multipart/form-data']]); ?>
     
     <div class="form-group col-lg-6">
-   	<div><h4>Prescription</h4></div>
-    <?= $form->field($model, 'treatment')->textarea(['rows' => 4])->label(false);?>
+   	<div><h4>Prescription</h4></div> <?= $form->field($model, 'treatment')->widget(CKEditor::className(), [
+        'options' => ['rows' => 2],
+        'preset' => 'basic'
+    ])->label(false);?>
 	</div>
 
 	<div class="form-group col-lg-6 col-sm-12 ">
