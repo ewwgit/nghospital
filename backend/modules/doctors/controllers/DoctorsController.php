@@ -1486,6 +1486,17 @@ public function actionPatientshistoryview($infoid)
       <h6 style="color:#3572af; font-weight:600; font-size:14px; text-align:center; margin:0px; padding:10px;">ADVICE</h6>
       <div style="height:200px; width:100%; float:left; position:relative; font-size:14px; margin:0 0 10px 0; padding:10px; box-sizing:border-box; border:1px solid #999; border-radius:5px;"> $model->treatment </div>
     </div>
+    
+<div style="width:556px; float:left; position:relative;">
+          <h6 style="color:#3572af; font-weight:600; font-size:14px; text-align:left; margin:0px; padding:10px;">Disclaimer</h6>
+          <ul>
+  <li> This tele consultation is provided on the request of the remote medical centre. As there is no availability of similar expertise at that place.</li>
+  <li> This expert consultation is provided basing on the clinical data provided by remote medical centre.</li>
+  <li>However if there is no improvement in the patient condition the patient may be referred to a higher centre for further management.</li>
+<li>The remote medical centre is advised to take the decision on the patient's treatment and not rely completely on tele consultation due to its limitations. </li>
+</ul>
+      </div>
+    
   </aside>
   <footer style="width:556px; float:left; position: relative; padding:10px; padding-bottom:0px; box-sizing: border-box;">
     <div style="width: 556px; float: left; position: relative; padding:0px; font-family: 'Source Sans Pro',sans-serif; font-size: 13px; color: #989898; text-align:center;"> $nursinghomeinfo->nursingHomeName - $nursinghomeinfo->mobile </div>
