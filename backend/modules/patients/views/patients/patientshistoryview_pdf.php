@@ -188,6 +188,16 @@ else{
 	echo 'Not Mentioned';
 }?> </div>
     </div>
+    <div style="width:100%; float:left; position:relative;">
+    
+     <label style="width: 50%;  color: #295a8c; font-size: 14px;">Disclaimer</label><br>
+        <ul>
+  <li> This tele consultation is provided on the request of the remote medical centre. As there is no availability of similar expertise at that place.</li>
+  <li> This expert consultation is provided basing on the clinical data provided by remote medical centre.</li>
+  <li>However if there is no improvement in the patient condition the patient may be referred to a higher centre for further management.</li>
+ <li>The remote medical centre is advised to take the decision on the patient's treatment and not rely completely on tele consultation due to its limitations. </li>
+</ul>
+</div>  
   </aside>
   <footer style="width:100%; float:left; position: relative; padding:10px; padding-bottom:0px; box-sizing: border-box;">
     <div style="width: 100%; float: left; position: relative; padding:0px; font-family: 'Source Sans Pro',sans-serif; font-size: 13px; color: #989898; text-align:center;"> NURSING HOME INFORMATION </div>
