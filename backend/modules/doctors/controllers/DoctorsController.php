@@ -41,7 +41,7 @@ class DoctorsController extends Controller
      */
 public function behaviors()
 	{	
-		$permissionsArray = [''];
+		$permissionsArray = ['prescriptionpdf'];
 		if(UserrolesModel::getRole() == 1)
 		{
 			$permissionsArray = ['index','create','update','view','delete','reset-password','states','patient-consultant-report','patient-info','previousrecords','patientshistoryview'];

@@ -8,6 +8,7 @@ use yii\filters\AccessControl;
 use common\models\LoginForm;
 use backend\models\PasswordResetRequestForm;
 use backend\models\ResetPasswordForm;
+use app\modules\patients\models\DoctorNghPatient;
 
 /**
  * Site controller
@@ -24,7 +25,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login', 'error','doctorreminder'],
                         'allow' => true,
                     ],
                     [
@@ -155,5 +156,13 @@ class SiteController extends Controller
     	return $this->render('resetPassword', [
     			'model' => $model,
     	]);
+    }
+    
+    public function actionDoctorreminder()
+    {
+    	$currentDate = date('Y-m-d H:i:s');
+    	$reqeustalready = DoctorNghPatient::find()->where(['patientRequestStatus' => 'PROCESSING'])->andWhere("")->all();
+    	
+    	print_r($reqeustalready);exit();
     }
 }
