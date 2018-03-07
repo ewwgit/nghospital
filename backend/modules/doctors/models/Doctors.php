@@ -62,7 +62,7 @@ class Doctors extends \yii\db\ActiveRecord
             [[ 'name', 'qualification','specialities', 'city', 'state',  'country',  'address', 'permanentAddress', 'pinCode', 'doctorMobile',  'summery', 'APMC', 'TSMC','username','email','status','MCI'], 'required','on' => ['create','update','profileupdate']],
             [['userId', 'state', 'country', 'createdBy', 'updatedBy'], 'integer'],
             [[ 'address','permanentAddress'], 'string'],
-        		[['summery','string','max'=>'2000']],
+        	[['summery'],'string','max'=>'2000'],
             [['stateName', 'countryName','createdDate', 'updatedDate','createdBy', 'updatedBy','name', 'qualification', 'city', 'state',  'country',  'address', 'permanentAddress', 'pinCode', 'doctorMobile', 'doctorImage', 'summery', 'APMC', 'TSMC','userId','doctorUniqueId','username','email','password','MCI'], 'safe'],
             [[ 'name', 'city', 'stateName', 'countryName', 'APMC', 'TSMC','MCI'], 'string', 'max' => 200],
         	[['docimageupdate','status'],'safe'],
