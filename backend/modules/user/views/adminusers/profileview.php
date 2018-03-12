@@ -1,3 +1,12 @@
+<script>
+function printContent(el){
+	var restorepage = document.body.innerHTML;
+	var printcontent = document.getElementById(el).innerHTML;
+	document.body.innerHTML = printcontent;
+	window.print();
+	document.body.innerHTML = restorepage;
+}
+</script>
 <?php
 
 use yii\helpers\Html;
@@ -114,6 +123,8 @@ th {
 	</div><!--row closed-->	
 </div>
 </div>
+<button class="btn btn-primary" onclick="printContent('print')" style="margin-left: 728px;">Print</button>
+
 </div>
 </div>
 

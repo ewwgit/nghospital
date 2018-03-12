@@ -112,7 +112,7 @@ class SignupFormadmin extends Model
     public function getAllRoles()
     {
     
-    	$allRolesobj = Role::find()->select(['RoleId','RoleName'])->where(('RoleId > 3'))->all();
+    	$allRolesobj = Role::find()->select(['RoleId','RoleName'])->where(('RoleId > 3 AND status = "Active"'))->all();
     	//print_r($allRolesobj);exit();
     	$data = ArrayHelper::toArray($allRolesobj, [
     			'RoleId',

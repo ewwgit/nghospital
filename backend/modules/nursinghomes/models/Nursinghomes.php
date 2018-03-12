@@ -37,13 +37,14 @@ class Nursinghomes extends \yii\db\ActiveRecord
      public $fromdate;
      public $todate;
      
-     
+     public $ntype;
+     public $name;
      public $countriesList;
      public $statesData;
      public $citiesData;
      
    public $treatmentstatus;
-	
+	public $requestType;
 	
     /**
      * @inheritdoc
@@ -67,9 +68,12 @@ public function rules()
              [['address'], 'string','max' => 255],
         	[['description'], 'string','max' => 255],
             [['countriesList','updatedDate','createdDate','nuserId', 'nurshingUniqueId', 'contactPerson', 'mobile', 'city', 'state', 'stateName', 'country', 'countryName', 'pinCode', 'address', 'description','nursingImage',
-            		'username','email','password','landline','nursingHomeName','fromdate','todate','treatmentstatus'], 'safe'],
+            		'username','email','password','landline','nursingHomeName','requestType','fromdate','todate','treatmentstatus','name','ntype'], 'safe'],
             [['contactPerson', 'city', 'stateName', 'countryName'], 'string', 'max' => 200],
-                 		
+        		[['fromdate','todate'],'required','on'=>['count','adminreports']],
+        		[['ntype','name','requestType'],'required','on'=>'adminreports'],
+        		[['todate'],'compare', 'compareAttribute' => 'fromdate', 'operator' => '>=',
+        				'message' => 'To date must be After From date.','on'=>['count','adminreports']],
 //         		[
 //         		'username',
 // 				'unique',
@@ -145,9 +149,9 @@ public function rules()
             'nuserId' => 'Nuser ID',
             'nurshingUniqueId' => 'Nurshing Unique ID',
             'contactPerson' => 'Contact Person',
-        		'username' => 'User Name',
-        		'password' => 'Password',
-        		'confirmpassword' => 'Confirm Password',
+        	'username' => 'User Name',
+        	'password' => 'Password',
+        	'confirmpassword' => 'Confirm Password',
             'mobile' => 'Mobile',
             'city' => 'City',
             'state' => 'State',

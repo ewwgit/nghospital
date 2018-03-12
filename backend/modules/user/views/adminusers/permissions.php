@@ -8,8 +8,9 @@ use app\models\UserMain;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ModulesMasterSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+$this->params['breadcrumbs'][] = ['label' => 'User','url' => ['index']];
 
-$this->title = 'User Permissions > '.$adminusername = UserMain::getUsername($model->id);
+$this->title = ''.$adminusername = UserMain::getUsername($model->id);
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modules-master-index">

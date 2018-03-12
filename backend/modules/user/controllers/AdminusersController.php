@@ -24,7 +24,7 @@ use backend\models\ChangePasswordForm;
 use common\models\User;
 
 use app\models\AdminMaster;
-/**
+use yii\data\ActiveDataProvider;/**
  * AdminusersController implements the CRUD actions for AdminMaster model.
  */
 class AdminusersController extends Controller
@@ -563,7 +563,15 @@ class AdminusersController extends Controller
     {
     	
     	$searchModel = new ModulesMasterSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+       $query = ModulesMaster::find()->where(['status'=>'Active']);
+        
+        $dataProvider = new ActiveDataProvider([
+        		'query' => $query,
+        		'pagination' => [
+        				'pageSize' => 25,
+        		],
+        ]);
+        
         $model = new User();
         $adminuser = User::find()->where(['id' => $id])->one();
         $model->id = $adminuser->id;

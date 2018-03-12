@@ -259,7 +259,20 @@ use yii\helpers\Url;
                 				['label' => 'View All', 'icon' => 'eye', 'url' => ['/intrestednursinghomes/intrestednghs'],],
                 		
                 		],
+                		
                 		],
+                		[
+                		'label' => 'Overall Reports',
+                		//'class' => 'fa fa-user-md',
+                		'icon' => 'h-square',
+                		'url' => '#',
+                		'items' => [
+                				['label' => 'Reports', 'icon' => 'plus-circle', 'url' => ['/nursinghomes/nursinghomes/adminreports'],],
+                					
+                		],
+                		
+                		],
+                		
                 		
                 		
                 ],

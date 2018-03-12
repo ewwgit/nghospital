@@ -14,12 +14,13 @@ use app\modules\patients\models\DoctorNghPatient;
 /* @var $model app\modules\doctors\models\Doctors */
 /* @var $form yii\widgets\ActiveForm */
 $this->title = 'Patient Request Details';
-$this->params ['breadcrumbs'] [] = [
+/* $this->params ['breadcrumbs'] [] = [
 		'label' => 'Patient Requests',
 		'url' => [
 				'/doctors/doctors/patient-requests'
 		]
-];
+]; */
+$this->params['breadcrumbs'][] = ['label'=>'Doctors','url' => ['index']];
 $this->params ['breadcrumbs'] [] = $this->title;
 $tremodel = DoctorNghPatient::find()->where(['patientHistoryId' => $mpatientInformationModel->patientInfoId])->one();
 //print_r($tremodel->patientRequestStatus);exit();

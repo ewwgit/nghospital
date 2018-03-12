@@ -376,7 +376,7 @@ public function behaviors()
     	if(isset($_GET['id']) && $_GET['id'] != '')
     	{
     		$id = trim($_GET['id']);
-    		$model = Patients::find()->where(['patientUniqueId' => $id])->one();
+    		$model = Patients::find()->where(['patientUniqueId' => $id,'createdBy'=>Yii::$app->user->identity->id])->one();
     	
     		if(!empty($model))
     		{

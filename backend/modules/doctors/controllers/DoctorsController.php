@@ -1230,10 +1230,8 @@ public function actionPatientshistoryview($infoid)
     		
     	}
     	$data.='</table>';
-    	$filename = 'Data-'.Date('YmdGis-').$uname.'-DoctorsConsultantReport.xlsx';
-    	//pathinfo($filename, PATHINFO_EXTENSION);
-    	header("Content-Type: application/vnd.ms-excel; charset=UTF-8;");
-    	header('Content-Disposition:attachment;filename="'.$filename.'"');
+    	header("Content-type: application/vnd.ms-excel");
+    	header('Content-Disposition: attachment; filename="DoctorReports_export_for_'.$uname.''. date('d.m.Y') . '.xls"');
     	echo $data;
     }
 
@@ -1241,7 +1239,7 @@ public function actionPatientshistoryview($infoid)
     {
     	// 	print_r($uid);exit();
     	$model = new Nursinghomes();
-    	
+    	$model->scenario = 'count';
     	$count=array();
     	$nurname=array();
     	$nurcountary=array();
@@ -1251,9 +1249,9 @@ public function actionPatientshistoryview($infoid)
     		if($model->treatmentstatus == 'PROCESSING' || $model->treatmentstatus == 'COMPLETED')
     		{
     			
-    			$nurId=DoctorNghPatient::find()->select('nugrsingId')->distinct()->where("doctorId ='$uid'  AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation' AND doctor_ngh_patient.patientRequestStatus = '$model->treatmentstatus'")->all();
+    			$nurId=DoctorNghPatient::find()->select('nugrsingId')->distinct()->where("doctorId ='$uid'  AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation' AND doctor_ngh_patient.patientRequestStatus = '$model->treatmentstatus'")->all();
     		
-    		//print_r($doctorId);    		 
+    		//print_r($nurId);    		 
     		foreach ($nurId as $did)
     		{
     			$nurcountary[]=$did->nugrsingId;
@@ -1261,12 +1259,12 @@ public function actionPatientshistoryview($infoid)
     		//print_r($nurcountary);
     		for($k=0;$k<count($nurcountary);$k++)
     		{
-    			$query=DoctorNghPatient::find()->select('nugrsingId')->where("doctorId ='$uid' AND nugrsingId='$nurcountary[$k]' AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation' AND doctor_ngh_patient.patientRequestStatus = '$model->treatmentstatus' ")->count();
+    			$query=DoctorNghPatient::find()->where("doctorId ='$uid' AND nugrsingId='$nurcountary[$k]' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation' AND doctor_ngh_patient.patientRequestStatus = '$model->treatmentstatus' ")->count();
     			if($query !='')
     			{
     				$count[]=$query;
     			}
-    			//print_r($query);exit();
+    			//print_r($query);
     			// $query=DoctorNghPatient::find()->select('doctorId')->asArray()->where(['nugrsingId'=>$uid,['createdDate BETWEEN '$model->fromdate' AND '$model->todate'']])->all();
     			 $nursinghomename=Nursinghomes::find()->select('nursingHomeName')->where(['nuserId'=>$nurcountary[$k]])->all();
     			foreach($nursinghomename as $n)
@@ -1275,9 +1273,10 @@ public function actionPatientshistoryview($infoid)
     			}
     			// print_r($nurname);
     		}
+    		
     		}
     		else {
-    			$nurId=DoctorNghPatient::find()->select('nugrsingId')->distinct()->where("doctorId ='$uid'  AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'")->all();
+    			$nurId=DoctorNghPatient::find()->select('nugrsingId')->distinct()->where("doctorId ='$uid'  AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'")->all();
     			
     			//print_r($doctorId);
     			foreach ($nurId as $did)
@@ -1287,7 +1286,7 @@ public function actionPatientshistoryview($infoid)
     			//print_r($nurcountary);
     			for($k=0;$k<count($nurcountary);$k++)
     			{
-    				$query=DoctorNghPatient::find()->select('nugrsingId')->where("doctorId ='$uid' AND nugrsingId='$nurcountary[$k]' AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'")->count();
+    				$query=DoctorNghPatient::find()->select('nugrsingId')->where("doctorId ='$uid' AND nugrsingId='$nurcountary[$k]' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'")->count();
     				if($query !='')
     				{
     					$count[]=$query;
