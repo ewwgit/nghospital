@@ -9,7 +9,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\Countries;
 use app\models\States;
-
+use yii\helpers\ArrayHelper;
 use common\models\User;
 use yii\helpers\Json;
 use backend\models\SignupForm;
@@ -47,7 +47,7 @@ public function behaviors()
 		$permissionsArray = [''];
 		if(UserrolesModel::getRole() == 1)
 		{
-			$permissionsArray = ['index','create','update','view','delete','states','reset-password'];
+			$permissionsArray = ['index','create','update','view','delete','states','reset-password','adminreports'];
 		}
 		else if(UserrolesModel::getRole() == 3)
 		{
@@ -96,7 +96,7 @@ public function behaviors()
 				'access' => [
 						'class' => AccessControl::className(),
 						'only' => [
-								'index','create','update','view','delete','profileupdate','profileview','reset-password','states','doctorspecialitieslist','specialitibaseddoctorlist','doctorreport','count'
+								'adminreports','index','create','update','view','delete','profileupdate','profileview','reset-password','states','doctorspecialitieslist','specialitibaseddoctorlist','doctorreport','count'
 	
 						],
 						'rules' => [
@@ -767,7 +767,7 @@ public function behaviors()
 				<th>Patient  Name</th>
 				<th>Doctor Name</th>
                 <th>Prescription Date</th>
-                            </tr>
+            </tr>
         </thead>';
     	for($m=0,$n=0;$m<count($patary),$n<count($cdate);$m++,$n++)
     	{
@@ -779,25 +779,25 @@ public function behaviors()
     				<td>'.$cdate[$n].'</td></tr>';
     	}
     	$data.='</table>';
-    	$filename = 'Data-'.Date('YmdGis-').$uname.'-NursinghomesConsultantReport.xlsx';
-    	//pathinfo($filename, PATHINFO_EXTENSION);
-    	header("Content-Type: application/vnd.ms-excel; charset=UTF-8;");
-    	header('Content-Disposition:attachment;filename="'.$filename.'"');
+    	header("Content-Type: application/vnd.ms-excel");
+    	header('Content-Disposition:attachment;filename="NursinghomesConsultantReport of'.$uname.''.  date('d.m.Y') . '.xls"');
     	echo $data;
     }
    public function actionCount($uid)
    {  	
   // 	print_r($uid);exit();
   	 	$model = new Nursinghomes();
+  	 	$model->scenario ='count';  	 		
   	 	$count=array();
   	 	$dname=array();
   	 	$doctorcountary=array();
   	 	if (($model->load ( Yii::$app->request->post () )) && ($model->validate ())) 
   	 	{
+  	 		
   	 		//print_r($model->treatmentstatus);
   	 		if($model->treatmentstatus == 'PROCESSING' || $model->treatmentstatus == 'COMPLETED')
   	 		{
-  	 			$doctorId=DoctorNghPatient::find()->select('doctorId')->distinct()->where("nugrsingId ='$uid' AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'  AND doctor_ngh_patient.patientRequestStatus = '$model->treatmentstatus'")->all();
+  	 			$doctorId=DoctorNghPatient::find()->select('doctorId')->distinct()->where("nugrsingId ='$uid' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'  AND doctor_ngh_patient.patientRequestStatus = '$model->treatmentstatus'")->all();
   	 			//print_r($doctorId);exit();
   	 			foreach ($doctorId as $did)
   	 			{
@@ -807,7 +807,7 @@ public function behaviors()
   	 			
   	 			for($k=0;$k<count($doctorcountary);$k++)
   	 			{
-  	 				$query=DoctorNghPatient::find()->select('doctorId')->where("nugrsingId ='$uid' AND doctorId='$doctorcountary[$k]' AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'  AND doctor_ngh_patient.patientRequestStatus = '$model->treatmentstatus'")->count();
+  	 				$query=DoctorNghPatient::find()->select('doctorId')->where("nugrsingId ='$uid' AND doctorId='$doctorcountary[$k]' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'  AND doctor_ngh_patient.patientRequestStatus = '$model->treatmentstatus'")->count();
   	 				if($query !='')
   	 				{
   	 					$count[]=$query;
@@ -825,7 +825,7 @@ public function behaviors()
   	 			}
   	 		}  	 		
   	 		else {
-  	 		$doctorId=DoctorNghPatient::find()->select('doctorId')->distinct()->where("nugrsingId ='$uid' AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'")->all(); 
+  	 		$doctorId=DoctorNghPatient::find()->select('doctorId')->distinct()->where("nugrsingId ='$uid' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'")->all(); 
   	 		//print_r($doctorId);exit();
   	 		foreach ($doctorId as $did)
   	 		{
@@ -835,22 +835,18 @@ public function behaviors()
   	 		
   	 		for($k=0;$k<count($doctorcountary);$k++)
   	 		{
-  	 		 $query=DoctorNghPatient::find()->select('doctorId')->where("nugrsingId ='$uid' AND doctorId='$doctorcountary[$k]' AND (createdDate BETWEEN '$model->fromdate' AND '$model->todate' OR updatedDate BETWEEN '$model->fromdate' AND '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'")->count();
+  	 		 $query=DoctorNghPatient::find()->select('doctorId')->where("nugrsingId ='$uid' AND doctorId='$doctorcountary[$k]' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType != 'Review Consultation'")->count();
   	 				if($query !='')
   	 				{
   	 					$count[]=$query;
   	 				}
-  	 					//print_r($count);
-  	 				// $query=DoctorNghPatient::find()->select('doctorId')->asArray()->where(['nugrsingId'=>$uid,['createdDate BETWEEN '$model->fromdate' AND '$model->todate'']])->all();
-  	 	   
-  	 	   
-  	 	   			 $doctorname=Doctors::find()->select('name')->where(['userId'=>$doctorcountary[$k]])->all();
-  	 	   			 foreach($doctorname as $d)
-  	 	   			 {
-  	 	  			  	$dname[]=$d['name'];
-  	 	 			 }
-  	 	   			// print_r($dname);
+  	 				$doctorname=Doctors::find()->select('name')->where(['userId'=>$doctorcountary[$k]])->all();
+  	 				foreach($doctorname as $d)
+  	 				{
+  	 					$dname[]=$d['name'];
+  	 				}
   	 		}
+  	 		
   	 		}
   	 	  // exit();
   	 	}
@@ -861,5 +857,260 @@ public function behaviors()
   	   			'dname'=>$dname,
   	   			'doctorcountary'=>$doctorcountary,
     	]);
+   }
+   public function actionAdminreports()
+   {
+   			$model = new NursingHomes();
+   			$model->scenario = 'adminreports';
+   			$doctorcountary =array();
+   			$patientary =array();
+   			$dname =array();
+   			$dcname = array();
+   			$pname =array();
+   			$count = array();
+   			$nursinghomename = array();
+   			$nursingcountary = array();
+   			if($model->load(Yii::$app->request->get()))
+   			{
+   			//print_r($model->requestType);exit;
+   			if($model->ntype == 1)
+   			{
+   				$doctorId=DoctorNghPatient::find()->select('doctorId')->distinct()->where("nugrsingId ='$model->name' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType = '$model->requestType' AND doctor_ngh_patient.patientRequestStatus = 'COMPLETED'")->all();
+   				
+   				foreach ($doctorId as $did)
+   				{
+   					$doctorcountary[]=$did->doctorId;
+   				}
+   				//print_r($doctorcountary);exit();
+   				for($i=0;$i<count($doctorcountary);$i++)
+   				{
+   					$patient=DoctorNghPatient::find()->select('patientId')->distinct()->where("nugrsingId ='$model->name' AND doctorId='$doctorcountary[$i]' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType = '$model->requestType' AND doctor_ngh_patient.patientRequestStatus = 'COMPLETED'")->all();
+   					 foreach ($patient as $pid)
+   					{
+   						$id = $pid->patientId;
+   						$doctorId=DoctorNghPatient::find()->select('doctorId')->distinct()->where("nugrsingId ='$model->name' AND patientId ='$id' AND doctorId='$doctorcountary[$i]' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType = '$model->requestType' AND doctor_ngh_patient.patientRequestStatus = 'COMPLETED'")->Asarray()->one();
+   						//$dcname[] = $doctorId;
+   						$doctorname=User::find()->select('username')->where(['id'=>$doctorId])->one();
+   						$dname[]=$doctorname['username'];
+   						$patientname = Patients::find()->select('firstName,lastName')->where(['patientId'=>$id])->Asarray()->one();
+   						$pname[]=$patientname['firstName'].' '.$patientname['lastName'];
+   						 $docid = implode("", $doctorId);
+   						 $count[] = DoctorNghPatient::find()->select('patientId')->where("nugrsingId ='$model->name' AND doctorId ='$docid' AND patientId ='$id' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType = '$model->requestType' AND doctor_ngh_patient.patientRequestStatus = 'COMPLETED'")->count();
+   						
+   					}  
+   					
+   				}
+   			}
+   			else if($model->ntype == 2) {   				
+   				$nursingid=DoctorNghPatient::find()->select('nugrsingId')->distinct()->where("doctorId ='$model->name' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType = '$model->requestType' AND doctor_ngh_patient.patientRequestStatus = 'COMPLETED'")->all();
+   			    foreach ($nursingid as $did)
+   				{
+   					$nursingcountary[]=$did->nugrsingId;
+   				}
+   				for($i=0;$i<count($nursingcountary);$i++)
+   				{
+   					$patient=DoctorNghPatient::find()->select('patientId')->distinct()->where("doctorId ='$model->name' AND nugrsingId='$nursingcountary[$i]' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType = '$model->requestType' AND doctor_ngh_patient.patientRequestStatus = 'COMPLETED'")->all();
+   					foreach ($patient as $pid)
+   					{
+   						$id = $pid->patientId;
+   						$nurid = DoctorNghPatient::find()->select('nugrsingId')->distinct()->where("doctorId ='$model->name' AND patientId ='$id' AND nugrsingId='$nursingcountary[$i]' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType = '$model->requestType' AND doctor_ngh_patient.patientRequestStatus = 'COMPLETED'")->Asarray()->one();	
+   						$doctorname = User::find()->select('username')->where(['id'=>$nurid])->one();
+   						$dname[]= $doctorname['username'];
+   						$patientname = Patients::find()->select('firstName,lastName')->where(['patientId'=>$id])->Asarray()->one();
+   						$pname[]=$patientname['firstName'].' '.$patientname['lastName'];
+   						$docid = implode("", $nurid);
+   						$count[] = DoctorNghPatient::find()->select('patientId')->where("doctorId ='$model->name' AND nugrsingId ='$docid' AND patientId ='$id' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType = '$model->requestType' AND doctor_ngh_patient.patientRequestStatus = 'COMPLETED'")->count();  						
+   					}
+   				}
+   				//print_r($pname);exit;
+   			}
+   				
+   			}
+   			return $this->render('adminreports',[
+   					'model'=>$model,
+   					'dname'=>$dname,
+   					'pname'=>$pname,
+   					'count'=>$count
+   					
+   					
+   			]);
+   }
+   public function actionReportnames()
+   {
+   	 
+   		/* if($type == 1)
+   		{   
+   			$option = array();
+   			$names = array();
+   			$nursinghomes = ArrayHelper::map(User::find()->select('id,username')->where('role > 1 AND role = 3')->Asarray()->all(),'id','username');
+   			//print_r(count($nursinghomes));exit;
+   			foreach($nursinghomes as $key=>$value)
+   			{
+   				echo "<option value='".$key."'>$value</option>";
+   			}
+   			
+   			
+   		}
+   		else if($type == 2){
+   			$option = array();
+   			$names = array();
+   			$nursinghomes = ArrayHelper::map(User::find()->select('id,username')->where('role > 1 AND role = 2')->Asarray()->all(),'id','username');
+   			//print_r(count($nursinghomes));exit;
+   			foreach($nursinghomes as $key=>$value)
+   			{
+   				echo "<option value='".$key."'>$value</option>";
+   			}
+   			
+   		} */
+   	$out = [];
+   	if (isset($_POST['depdrop_parents'])) {
+   		$parents = $_POST['depdrop_parents'];
+   		if ($parents != null) {
+   			$type = $parents[0];
+   			if($type == 1)
+   			{
+   			$nursinghomes = User::find()->select('id,username')->where('role = 3')->Asarray()->all();
+   			//print_r(count($nursinghomes));exit;
+   			for($k=0;$k<count($nursinghomes); $k++)
+    		{
+    			$out[$k]['id'] = $nursinghomes[$k]['id'];
+    			$out[$k]['name'] = $nursinghomes[$k]['username'];
+    		}
+   			}
+   			else if($type == 2)
+   			{
+   				$nursinghomes = User::find()->select('id,username')->where('role = 2')->Asarray()->all();
+   				//print_r(count($nursinghomes));exit;
+   				for($k=0;$k<count($nursinghomes); $k++)
+   				{
+   					$out[$k]['id'] = $nursinghomes[$k]['id'];
+   					$out[$k]['name'] = $nursinghomes[$k]['username'];
+   				}
+   			}
+   			//print_r($out);exit;
+   			echo Json::encode(['output'=>$out, 'selected'=>0]);    			
+   			return;
+   		}   		
+   	}
+   	echo Json::encode(['output'=>'', 'selected'=>'']);
+   	 
+   	 }
+   public function actionExcel($type,$name,$fromdate,$todate,$consultation)
+   {
+   		$model = new NursingHomes();
+   		$model->ntype=$type;
+   		$model->name=$name;
+   		$model->fromdate =$fromdate; 
+   		$model->todate =$todate;
+   		$model->requestType =$consultation;
+   		$doctorcountary =array();
+   		$patientary =array();
+   		$dname =array();   	
+   		$pname =array();
+   		$count = array();
+   		if($model->ntype == 1)
+   		{
+   			$doctorId=DoctorNghPatient::find()->select('doctorId')->distinct()->where("nugrsingId ='$model->name' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType = '$model->requestType' AND doctor_ngh_patient.patientRequestStatus = 'COMPLETED'")->all();
+   				
+   			foreach ($doctorId as $did)
+   			{
+   				$doctorcountary[]=$did->doctorId;
+   			}
+   			//print_r($doctorcountary);exit();
+   			for($i=0;$i<count($doctorcountary);$i++)
+   			{
+   				$patient=DoctorNghPatient::find()->select('patientId')->distinct()->where("nugrsingId ='$model->name' AND doctorId='$doctorcountary[$i]' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType = '$model->requestType' AND doctor_ngh_patient.patientRequestStatus = 'COMPLETED'")->all();
+   				foreach ($patient as $pid)
+   				{
+   					$id = $pid->patientId;
+   					$doctorId=DoctorNghPatient::find()->select('doctorId')->distinct()->where("nugrsingId ='$model->name' AND patientId ='$id' AND doctorId='$doctorcountary[$i]' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType = '$model->requestType' AND doctor_ngh_patient.patientRequestStatus = 'COMPLETED'")->Asarray()->one();
+   					//$dcname[] = $doctorId;
+   					$doctorname=Doctors::find()->select('name')->where(['userId'=>$doctorId])->one();
+   					$dname[]=$doctorname['name'];
+   					$patientname = Patients::find()->select('firstName,lastName')->where(['patientId'=>$id])->Asarray()->one();
+   					$pname[]=$patientname['firstName'].' '.$patientname['lastName'];
+   					$docid = implode("", $doctorId);
+   					$count[] = DoctorNghPatient::find()->select('patientId')->where("nugrsingId ='$model->name' AND doctorId ='$docid' AND patientId ='$id' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType = '$model->requestType' AND doctor_ngh_patient.patientRequestStatus = 'COMPLETED'")->count();
+   						
+   				}
+   		
+   			}
+   			//print_r($count);exit;
+   			$data = '<table border="1" width="100%">
+        <thead>
+            <tr>
+   				<th>S.No</th>
+    			<th >Doctor Name</th>
+   				<th >Patient Name</th>
+				<th >Count</th>
+            </tr>
+        </thead>';
+   			$sno = 0;
+   			for($i=0;$i<count($pname);$i++)
+   			{
+   				
+   				$sno = $sno+1;
+   				$data.=' <tr>
+    				<td>'.$sno.'</td>
+    				<td>'.$dname[$i].'</td>
+    				<td>'.$pname[$i].'</td>
+    				<td>'.$count[$i].'</td>
+    				</tr>';
+   				
+   			}
+   			$data.='</table>';   			
+   			header("Content-type: application/vnd.ms-excel");
+    		header('Content-Disposition: attachment; filename="AdminReports_export_' . date('d.m.Y') . '.xls"');
+    	echo $data;
+   		}
+   		else if($model->ntype == 2)
+   		{
+   			$nursingid=DoctorNghPatient::find()->select('nugrsingId')->distinct()->where("doctorId ='$model->name' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType = '$model->requestType' AND doctor_ngh_patient.patientRequestStatus = 'COMPLETED'")->all();
+   			foreach ($nursingid as $did)
+   			{
+   				$nursingcountary[]=$did->nugrsingId;
+   			}
+   			for($i=0;$i<count($nursingcountary);$i++)
+   			{
+   				$patient=DoctorNghPatient::find()->select('patientId')->distinct()->where("doctorId ='$model->name' AND nugrsingId='$nursingcountary[$i]' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType = '$model->requestType' AND doctor_ngh_patient.patientRequestStatus = 'COMPLETED'")->all();
+   				foreach ($patient as $pid)
+   				{
+   					$id = $pid->patientId;
+   					$nurid = DoctorNghPatient::find()->select('nugrsingId')->distinct()->where("doctorId ='$model->name' AND patientId ='$id' AND nugrsingId='$nursingcountary[$i]' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType = '$model->requestType' AND doctor_ngh_patient.patientRequestStatus = 'COMPLETED'")->Asarray()->one();
+   					$doctorname = User::find()->select('username')->where(['id'=>$nurid])->one();
+   					$dname[]= $doctorname['username'];
+   					$patientname = Patients::find()->select('firstName,lastName')->where(['patientId'=>$id])->Asarray()->one();
+   					$pname[]=$patientname['firstName'].' '.$patientname['lastName'];
+   					$docid = implode("", $nurid);
+   					$count[] = DoctorNghPatient::find()->select('patientId')->where("doctorId ='$model->name' AND nugrsingId ='$docid' AND patientId ='$id' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType = '$model->requestType' AND doctor_ngh_patient.patientRequestStatus = 'COMPLETED'")->count();
+   				}
+   			}
+   			//print_r($pname);exit;
+   			$data = '<table border="1" width="100%">
+        <thead>
+              <tr >
+   				<th>S.No</th>
+    			<th>NursingHome Name</th>
+   				<th>Patient Name</th>
+				<th>Count</th>
+            </tr>
+        </thead>';
+   			$sno = 0;
+   			for($i=0;$i<count($pname);$i++)
+   			{
+   					
+   				$sno = $sno+1;
+   				$data.=' <tr>
+    				<td>'.$sno.'</td>
+    				<td>'.$dname[$i].'</td>
+    				<td>'.$pname[$i].'</td>
+    				<td>'.$count[$i].'</td>
+    				</tr>';   					
+   			}
+   			$data.='</table>';
+   			header("Content-type: application/vnd.ms-excel");
+    		header('Content-Disposition: attachment; filename="AdminReports_export_' . date('d.m.Y') . '.xls"');
+    		echo $data;
+   		}
    }
 }
