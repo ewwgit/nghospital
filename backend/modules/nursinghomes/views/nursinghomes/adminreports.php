@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][]=$this->title;
 		
 			<div class="row">
 				<div class="col-md-2">
-				  Type:<?= $form->field($model, 'ntype')->dropDownList(['Prompt'=>'Select Type','1'=>'NursingHomes','2'=>'Doctors'])->label(false);?>
+				  Type:<?= $form->field($model, 'ntype')->dropDownList(['1'=>'Nursinghomes','2'=>'Doctors'],['prompt'=>'Select Type'])->label(false);?>
    
 				</div>
 				<div class="col-md-2">
@@ -45,7 +45,9 @@ $this->params['breadcrumbs'][]=$this->title;
     <?php ActiveForm::end();
     
     if($model->ntype == 1){
-    
+    	//print_r($pname);exit;
+    if($pname !=[] && $dname != [] && $count != [])
+    {
    ?><table class="table table-striped table-bordered" border=0>
    	<tr >
    		<th style="width:20%;padding-left:15px">S.NO</th>
@@ -80,7 +82,17 @@ $this->params['breadcrumbs'][]=$this->title;
     Html::a( Html::img('images/excel-icon.png',['width' => '100px','height' => '100px']),['/nursinghomes/nursinghomes/excel','type'=>$model->ntype,'name'=>$model->name,'fromdate'=>$model->fromdate,'todate'=>$model->todate,'consultation'=>$model->requestType]) ?>
    
    <?php }
+    else {
+    	?>
+    	<div class="col-md-12 col-lg-12 col-sm-12">
+    	<?php echo "Records Not Found";?>
+    	</div>
+    	<?php 
+    }
+    }
    else if($model->ntype == 2){
+   	if($pname !=[] && $dname != [] && $count != [])
+   	{
    	?><table class="table table-striped table-bordered" border=0>
    	   	<tr >
    	   		<th style="width:20%;padding-left:15px">S.NO</th>
@@ -115,7 +127,14 @@ $this->params['breadcrumbs'][]=$this->title;
   
    	    <?php 
    }
-      
+  else {
+    	?>
+    	<div class="col-md-12 col-lg-12 col-sm-12">
+    	<?php echo "Records Not Found";?>
+    	</div>
+    	<?php 
+    }
+    }   
    ?>
     
 			
@@ -133,7 +152,7 @@ $(function () {
 	    var fromdate = $('#nursinghomes-fromdate').val();
 	    var todate = $('#nursinghomes-todate').val();
 	    var consultation = $('#nursinghomes-requesttype').val();
-	    if(type != null && name != null && fromdate !=null && todate !=null && consultation != null){
+	    if(type != 'Prompt' && name != null && fromdate !='' && todate !='' && consultation != ''){
 	    var url = '<?php echo Yii::$app->urlManager->createUrl(['/nursinghomes/nursinghomes/adminreports']);?>';					
 		var newurl = url+'&type='+type+'&name='+name+'&fromdate='+fromdate+'&todate='+todate+'&consultation='+consultation;
 	    window.location =newurl;
