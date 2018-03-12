@@ -858,10 +858,15 @@ public function behaviors()
   	   			'doctorcountary'=>$doctorcountary,
     	]);
    }
-   public function actionAdminreports()
+   public function actionAdminreports($type='',$name='',$fromdate ='',$todate ='',$consultation='')
    {
    			$model = new NursingHomes();
    			$model->scenario = 'adminreports';
+   			$model->ntype=$type;
+   			$model->name=$name;
+   			$model->fromdate =$fromdate;
+   			$model->todate =$todate;
+   			$model->requestType =$consultation;
    			$doctorcountary =array();
    			$patientary =array();
    			$dname =array();
@@ -870,8 +875,7 @@ public function behaviors()
    			$count = array();
    			$nursinghomename = array();
    			$nursingcountary = array();
-   			if($model->load(Yii::$app->request->get()))
-   			{
+   			
    			//print_r($model->requestType);exit;
    			if($model->ntype == 1)
    			{
@@ -923,7 +927,6 @@ public function behaviors()
    					}
    				}
    				//print_r($pname);exit;
-   			}
    				
    			}
    			return $this->render('adminreports',[

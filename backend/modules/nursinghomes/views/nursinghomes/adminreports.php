@@ -11,7 +11,7 @@ use kartik\depdrop\DepDrop;
 $this->title = 'Reports';
 $this->params['breadcrumbs'][]=$this->title;
 ?>
-<?php $form = ActiveForm::begin(['options'=>['enctype' =>'multipart/form-data'],'method' => 'get']); ?>
+<?php $form = ActiveForm::begin(['options'=>['enctype' =>'multipart/form-data']]); ?>
 
 <div class="doctors-index">
 	<div class="box box-primary">
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][]=$this->title;
 				Consultation Status:<?= $form->field($model, 'requestType')->dropDownList(['Ip Consultation'=>'Ip Consultation','Op Consultation'=>'Op Consultation','Review Consultation'=>'Review Consultation'],['prompt'=>'Select Type'])->label(false);?>	</div>
 				</div>
 				<div class=" form-group col-md-6" style="paddin-top:10px;">
-    				<button type="submit" class="btn btn-primary">Search</button> </div>
+    				<button type="submit" id='reportsearch' class="btn btn-primary">Search</button> </div>
 
     <?php ActiveForm::end();
     
@@ -122,3 +122,23 @@ $this->params['breadcrumbs'][]=$this->title;
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(function () {
+	$('#reportsearch').click(function(){
+	    var type = $('#nursinghomes-ntype').val();
+	    var name = $('#nursinghomes-name').val();
+	    var fromdate = $('#nursinghomes-fromdate').val();
+	    var todate = $('#nursinghomes-todate').val();
+	    var consultation = $('#nursinghomes-requesttype').val();
+	    if(type != null && name != null && fromdate !=null && todate !=null && consultation != null){
+	    var url = '<?php echo Yii::$app->urlManager->createUrl(['/nursinghomes/nursinghomes/adminreports']);?>';					
+		var newurl = url+'&type='+type+'&name='+name+'&fromdate='+fromdate+'&todate='+todate+'&consultation='+consultation;
+	    window.location =newurl;
+	    }
+	});
+});
+
+</script>
