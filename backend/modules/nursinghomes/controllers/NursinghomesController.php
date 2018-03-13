@@ -861,7 +861,7 @@ public function behaviors()
    public function actionAdminreports($type='',$name='',$fromdate ='',$todate ='',$consultation='')
    {
    			$model = new NursingHomes();
-   			$model->scenario = 'adminreports';
+   			//$model->scenario = 'adminreports';
    			$model->ntype=$type;
    			$model->name=$name;
    			$model->fromdate =$fromdate;

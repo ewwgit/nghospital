@@ -20,27 +20,32 @@ $this->params['breadcrumbs'][]=$this->title;
 			<div class="row">
 				<div class="col-md-2">
 				  Type:<?= $form->field($model, 'ntype')->dropDownList(['1'=>'Nursinghomes','2'=>'Doctors'],['prompt'=>'Select Type'])->label(false);?>
-   
+   					<p id="ntype" style="color:red;"></p>
 				</div>
 				<div class="col-md-2">
 				Name: <?php echo $form->field($model, 'name')->widget(DepDrop::classname(),[
     'pluginOptions'=>[
         'depends'=>['nursinghomes-ntype'],
         'placeholder'=>'Select names',
-        'url'=>Url::to(['/nursinghomes/nursinghomes/reportnames'])]])->label(false);?>  
+        'url'=>Url::to(['/nursinghomes/nursinghomes/reportnames'])]])->label(false);?> 
+        <p id="name" style="color:red;"></p> 
 				</div>
 				<div class="col-md-3">
 				From Date:<?= $form->field($model, 'fromdate')->widget ( DatePicker::classname (), [ 'options' => [ 'placeholder' => 'Enter Date Of Birth ...' ],'pluginOptions' => [ 'autoclose' => true , 'format' => 'yyyy-mm-dd'] ] )->label(false); ?>
+				<p id="fromdate" style="color:red;"></p>
 				</div>
 				<div class="col-md-3">
 				To Date:<?= $form->field($model, 'todate')->widget ( DatePicker::classname (), [ 'options' => [ 'placeholder' => 'Enter Date Of Birth ...' ],'pluginOptions' => [ 'autoclose' => true , 'format' => 'yyyy-mm-dd'] ] )->label(false); ?>
-				
+				<p id="todate" style="color:red;"></p>
 				</div>
 				<div class="col-md-2">
-				Consultation Status:<?= $form->field($model, 'requestType')->dropDownList(['Ip Consultation'=>'Ip Consultation','Op Consultation'=>'Op Consultation','Review Consultation'=>'Review Consultation'],['prompt'=>'Select Type'])->label(false);?>	</div>
+				Consultation Status:<?= $form->field($model, 'requestType')->dropDownList(['Ip Consultation'=>'Ip Consultation','Op Consultation'=>'Op Consultation','Review Consultation'=>'Review Consultation'],['prompt'=>'Select Type'])->label(false);?>	
+				<p id="requestType" style="color:red;"></p></div>
+				
 				</div>
-				<div class=" form-group col-md-6" style="paddin-top:10px;">
-    				<button type="submit" id='reportsearch' class="btn btn-primary">Search</button> </div>
+				
+					<div class=" form-group col-md-6" style="paddin-top:10px;">
+    				<button type="button" id='reportsearch' class="btn btn-primary">Search</button> </div>
 
     <?php ActiveForm::end();
     
@@ -146,8 +151,9 @@ $this->params['breadcrumbs'][]=$this->title;
 <script type="text/javascript">
 
 $(function () {
-	$('#reportsearch').click(function(){
-	    var type = $('#nursinghomes-ntype').val();
+	$('#reportsearch').on('click',function(){
+	validate();	   
+	    var type = $('#nursinghomes-ntype').val();		   
 	    var name = $('#nursinghomes-name').val();
 	    var fromdate = $('#nursinghomes-fromdate').val();
 	    var todate = $('#nursinghomes-todate').val();
@@ -158,6 +164,58 @@ $(function () {
 	    window.location =newurl;
 	    }
 	});
+	function validate()
+	{
+		var type = document.getElementById("nursinghomes-ntype").value;
+		var name = document.getElementById("nursinghomes-name").value;
+		var fromdate = document.getElementById("nursinghomes-fromdate").value;
+		var todate = document.getElementById("nursinghomes-todate").value;
+		var consultation = document.getElementById("nursinghomes-requesttype").value;
+		if(type == '' )
+		{
+			document.getElementById('ntype').innerHTML="Ntype Cannot Be Blank";			
+		}
+		else
+		{
+			document.getElementById("ntype").style.display = "none";
+		}
+		if(name == '' )
+		{
+			document.getElementById('name').innerHTML="Name Cannot Be Blank";
+			
+		}
+		else
+		{
+			document.getElementById("name").style.display = "none";
+		}
+		if(fromdate == '' )
+		{
+			document.getElementById('fromdate').innerHTML="From Date Cannot Be Blank";
+			
+		}
+		else
+		{
+			document.getElementById("fromdate").style.display = "none";
+		}
+		if(todate == '' )
+		{
+			document.getElementById('todate').innerHTML="To Date Cannot Be Blank";
+			
+		}
+		else
+		{
+			document.getElementById("todate").style.display = "none";
+		}
+		if(consultation == '' )
+		{
+			document.getElementById('requestType').innerHTML="Request Type Cannot Be Blank";
+			
+		}
+		else
+		{
+			document.getElementById("requestType").style.display = "none";
+		}
+	}
 });
 
 </script>
