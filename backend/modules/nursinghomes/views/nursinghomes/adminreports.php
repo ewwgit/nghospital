@@ -19,15 +19,22 @@ $this->params['breadcrumbs'][]=$this->title;
 		
 			<div class="row">
 				<div class="col-md-2">
-				  Type:<?= $form->field($model, 'ntype')->dropDownList(['1'=>'Nursinghomes','2'=>'Doctors'],['prompt'=>'Select Type'])->label(false);?>
+				  Type:<?= $form->field($model, 'ntype')->dropDownList(['1'=>'Nursinghomes','2'=>'Doctors'],[
+    								
+    				'prompt'=>'Select Type',
+    				'onchange'=>'
+             		$.get( "'.Url::toRoute('/nursinghomes/nursinghomes/reportnames').'", { type: $(this).val() } )
+                            .done(function( data )
+                  			 {
+                              $( "#nursinghomes-name" ).html( data );
+    							//console.log(data);
+                            });
+      
+    		 '])->label(false);?>
    					<p id="ntype" style="color:red;"></p>
 				</div>
 				<div class="col-md-2">
-				Name: <?php echo $form->field($model, 'name')->widget(DepDrop::classname(),[
-    'pluginOptions'=>[
-        'depends'=>['nursinghomes-ntype'],
-        'placeholder'=>'Select names',
-        'url'=>Url::to(['/nursinghomes/nursinghomes/reportnames'])]])->label(false);?> 
+				Name: <?php echo $form->field($model, 'name')->dropDownList($nursinghomes,['Select Names'])->label(false);?> 
         <p id="name" style="color:red;"></p> 
 				</div>
 				<div class="col-md-3">
@@ -48,7 +55,9 @@ $this->params['breadcrumbs'][]=$this->title;
     				<button type="button" id='reportsearch' class="btn btn-primary">Search</button> </div>
 
     <?php ActiveForm::end();
-    
+    ?>
+    <div id='reportstable'>
+    <?php 
     if($model->ntype == 1){
     	//print_r($pname);exit;
     if($pname !=[] && $dname != [] && $count != [])
@@ -98,7 +107,7 @@ $this->params['breadcrumbs'][]=$this->title;
    else if($model->ntype == 2){
    	if($pname !=[] && $dname != [] && $count != [])
    	{
-   	?><table class="table table-striped table-bordered" border=0>
+   	?><table class="table table-striped table-bordered"  border=0>
    	   	<tr >
    	   		<th style="width:20%;padding-left:15px">S.NO</th>
    	   		
@@ -139,83 +148,105 @@ $this->params['breadcrumbs'][]=$this->title;
     	</div>
     	<?php 
     }
-    }   
+    }  
+    
    ?>
     
 			
 		</div>
 	</div>
 </div>
-
+</div>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript">
 
 $(function () {
 	$('#reportsearch').on('click',function(){
-	validate();	   
-	    var type = $('#nursinghomes-ntype').val();		   
-	    var name = $('#nursinghomes-name').val();
-	    var fromdate = $('#nursinghomes-fromdate').val();
-	    var todate = $('#nursinghomes-todate').val();
-	    var consultation = $('#nursinghomes-requesttype').val();
-	    if(type != 'Prompt' && name != null && fromdate !='' && todate !='' && consultation != ''){
-	    var url = '<?php echo Yii::$app->urlManager->createUrl(['/nursinghomes/nursinghomes/adminreports']);?>';					
-		var newurl = url+'&type='+type+'&name='+name+'&fromdate='+fromdate+'&todate='+todate+'&consultation='+consultation;
-	    window.location =newurl;
-	    }
-	});
-	function validate()
-	{
-		var type = document.getElementById("nursinghomes-ntype").value;
-		var name = document.getElementById("nursinghomes-name").value;
-		var fromdate = document.getElementById("nursinghomes-fromdate").value;
-		var todate = document.getElementById("nursinghomes-todate").value;
-		var consultation = document.getElementById("nursinghomes-requesttype").value;
-		if(type == '' )
+		 var type = $('#nursinghomes-ntype').val();		   
+		 var name = document.getElementById("nursinghomes-name").value;
+		 var fromdate = $('#nursinghomes-fromdate').val();
+		 var todate = $('#nursinghomes-todate').val();		    
+		 var consultation = $('#nursinghomes-requesttype').val();
+		 var today = new Date();
+		 var dd = today.getDate();
+		 var mm = today.getMonth()+1; //January is 0!
+
+		 var yyyy = today.getFullYear();
+		 if(dd<10){
+		     dd='0'+dd;
+		 } 
+		 if(mm<10){
+		     mm='0'+mm;
+		 } 
+		 var today = yyyy+'-'+mm+'-'+dd;
+		console.log(today);
+		if(type == '')
 		{
 			document.getElementById('ntype').innerHTML="Ntype Cannot Be Blank";			
 		}
 		else
 		{
-			document.getElementById("ntype").style.display = "none";
+			document.getElementById("ntype").innerHTML = "";
 		}
-		if(name == '' )
+		if(name == '')
 		{
 			document.getElementById('name').innerHTML="Name Cannot Be Blank";
 			
 		}
 		else
 		{
-			document.getElementById("name").style.display = "none";
+			document.getElementById("name").innerHTML = "";
 		}
-		if(fromdate == '' )
+		if(fromdate == '')
 		{
 			document.getElementById('fromdate').innerHTML="From Date Cannot Be Blank";
 			
 		}
+		else if(fromdate > today)
+		{
+			document.getElementById("fromdate").innerHTML = "From Date must Be current date or less than current date";
+		}
 		else
 		{
-			document.getElementById("fromdate").style.display = "none";
+			document.getElementById("fromdate").innerHTML = "";
 		}
-		if(todate == '' )
+		if(todate == '')
 		{
 			document.getElementById('todate').innerHTML="To Date Cannot Be Blank";
 			
 		}
+		else if(todate < fromdate)
+		{
+			document.getElementById('todate').innerHTML="Todate Must Be After From Date";
+		}
+		else if(todate > today)
+		{
+			document.getElementById("todate").innerHTML = "to Date must Be current date or greater than current date";
+		}
 		else
 		{
-			document.getElementById("todate").style.display = "none";
-		}
-		if(consultation == '' )
+			document.getElementById("todate").innerHTML = "";
+		}			
+		if(consultation == '')
 		{
-			document.getElementById('requestType').innerHTML="Request Type Cannot Be Blank";
-			
+			document.getElementById('requestType').innerHTML="Request Type Cannot Be Blank";			
 		}
 		else
 		{
-			document.getElementById("requestType").style.display = "none";
+			document.getElementById("requestType").innerHTML = "";
 		}
-	}
+		
+		 if(type != '' && name != null && consultation != '' && (fromdate <= todate) && (todate >= fromdate) && (fromdate <= today) && (todate <= today)){
+			    var url = '<?php echo Yii::$app->urlManager->createUrl(['/nursinghomes/nursinghomes/adminreports']);?>';					
+				var newurl = url+'&type='+type+'&name='+name+'&fromdate='+fromdate+'&todate='+todate+'&consultation='+consultation;
+			    window.location =newurl;
+			    }
+		 else
+		 {
+			 document.getElementById("reportstable").innerHTML = "";
+		 }
+		
+			});
 });
 
 </script>

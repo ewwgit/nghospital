@@ -862,6 +862,7 @@ public function behaviors()
    {
    			$model = new NursingHomes();
    			//$model->scenario = 'adminreports';
+   			$nursinghomes = array('Select Name');
    			$model->ntype=$type;
    			$model->name=$name;
    			$model->fromdate =$fromdate;
@@ -879,6 +880,9 @@ public function behaviors()
    			//print_r($model->requestType);exit;
    			if($model->ntype == 1)
    			{
+   				$nursinghomes = ArrayHelper::map(User::find()->select('id,username')->where('role > 1 AND role = 3')->Asarray()->all(),'id','username');
+   				//print_r(count($nursinghomes));exit;
+   				
    				$doctorId=DoctorNghPatient::find()->select('doctorId')->distinct()->where("nugrsingId ='$model->name' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType = '$model->requestType' AND doctor_ngh_patient.patientRequestStatus = 'COMPLETED'")->all();
    				
    				foreach ($doctorId as $did)
@@ -905,7 +909,9 @@ public function behaviors()
    					
    				}
    			}
-   			else if($model->ntype == 2) {   				
+   			else if($model->ntype == 2) {  
+   				$nursinghomes = ArrayHelper::map(User::find()->select('id,username')->where('role > 1 AND role = 2')->Asarray()->all(),'id','username');
+   				
    				$nursingid=DoctorNghPatient::find()->select('nugrsingId')->distinct()->where("doctorId ='$model->name' AND (updatedDate >='$model->fromdate' AND  updatedDate <= '$model->todate') AND doctor_ngh_patient.RequestType = '$model->requestType' AND doctor_ngh_patient.patientRequestStatus = 'COMPLETED'")->all();
    			    foreach ($nursingid as $did)
    				{
@@ -933,15 +939,16 @@ public function behaviors()
    					'model'=>$model,
    					'dname'=>$dname,
    					'pname'=>$pname,
-   					'count'=>$count
+   					'count'=>$count,
+   					'nursinghomes'=>$nursinghomes
    					
    					
    			]);
    }
-   public function actionReportnames()
+   public function actionReportnames($type)
    {
    	 
-   		/* if($type == 1)
+   		 if($type == 1)
    		{   
    			$option = array();
    			$names = array();
@@ -964,8 +971,8 @@ public function behaviors()
    				echo "<option value='".$key."'>$value</option>";
    			}
    			
-   		} */
-   	$out = [];
+   		} 
+   	/* $out = [];
    	if (isset($_POST['depdrop_parents'])) {
    		$parents = $_POST['depdrop_parents'];
    		if ($parents != null) {
@@ -995,7 +1002,7 @@ public function behaviors()
    			return;
    		}   		
    	}
-   	echo Json::encode(['output'=>'', 'selected'=>'']);
+   	echo Json::encode(['output'=>'', 'selected'=>'']); */
    	 
    	 }
    public function actionExcel($type,$name,$fromdate,$todate,$consultation)
