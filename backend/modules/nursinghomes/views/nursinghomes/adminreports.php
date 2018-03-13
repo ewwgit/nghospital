@@ -167,6 +167,7 @@ $(function () {
 		 var fromdate = $('#nursinghomes-fromdate').val();
 		 var todate = $('#nursinghomes-todate').val();		    
 		 var consultation = $('#nursinghomes-requesttype').val();
+		// alert(name);
 		 var today = new Date();
 		 var dd = today.getDate();
 		 var mm = today.getMonth()+1; //January is 0!
@@ -188,10 +189,9 @@ $(function () {
 		{
 			document.getElementById("ntype").innerHTML = "";
 		}
-		if(name == '')
+		if(name == 0)
 		{
-			document.getElementById('name').innerHTML="Name Cannot Be Blank";
-			
+			document.getElementById('name').innerHTML="Name Cannot Be Blank";			
 		}
 		else
 		{
@@ -236,7 +236,7 @@ $(function () {
 			document.getElementById("requestType").innerHTML = "";
 		}
 		
-		 if(type != '' && name != null && consultation != '' && (fromdate <= todate) && (todate >= fromdate) && (fromdate <= today) && (todate <= today)){
+		 if(type != '' && name !== 0 && consultation != '' && (fromdate <= todate) && (todate >= fromdate) && (fromdate <= today) && (todate <= today)){
 			    var url = '<?php echo Yii::$app->urlManager->createUrl(['/nursinghomes/nursinghomes/adminreports']);?>';					
 				var newurl = url+'&type='+type+'&name='+name+'&fromdate='+fromdate+'&todate='+todate+'&consultation='+consultation;
 			    window.location =newurl;
